@@ -46,6 +46,7 @@ function applyLang(lang) {
 
   // Re-render calculator prices after lang switch
   renderCalc();
+  renderLeadChat();
 }
 
 function toggleLang() {
@@ -314,6 +315,152 @@ async function sendContact(e) {
   }
 }
 
+/* ── LEAD CHATBOT ─────────────────────────── */
+const CHAT_STEPS = ['type', 'budget', 'timeline'];
+const CHAT_OPTIONS = {
+  type: ['chat_type_site', 'chat_type_app', 'chat_type_ai', 'chat_type_3d', 'chat_type_unsure'],
+  budget: ['chat_budget_1', 'chat_budget_2', 'chat_budget_3', 'chat_budget_4'],
+  timeline: ['chat_timeline_now', 'chat_timeline_month', 'chat_timeline_later']
+};
+let leadChatOpen = false;
+let leadChatStep = 'type';
+let leadChatData = {};
+
+function escapeHtml(value) {
+  return String(value || '').replace(/[&<>"']/g, ch => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+  }[ch]));
+}
+
+function toggleLeadChat(force) {
+  const panel = document.getElementById('lead-chat-panel');
+  if (!panel) return;
+  leadChatOpen = typeof force === 'boolean' ? force : !leadChatOpen;
+  panel.classList.toggle('open', leadChatOpen);
+  panel.setAttribute('aria-hidden', String(!leadChatOpen));
+  if (leadChatOpen) renderLeadChat();
+}
+
+function initLeadChat() {
+  if (!document.getElementById('lead-chat')) return;
+  renderLeadChat();
+}
+
+function resetLeadChat() {
+  leadChatStep = 'type';
+  leadChatData = {};
+  renderLeadChat();
+}
+
+function addChatChoice(step, key) {
+  const t = T[currentLang];
+  leadChatData[step] = t[key] || key;
+  const idx = CHAT_STEPS.indexOf(step);
+  leadChatStep = CHAT_STEPS[idx + 1] || 'note';
+  renderLeadChat();
+}
+
+function setChatNote(e) {
+  e.preventDefault();
+  const note = document.getElementById('chat-note');
+  leadChatData.note = note ? note.value.trim() : '';
+  leadChatStep = 'contact';
+  renderLeadChat();
+}
+
+function chatQuestionKey(step) {
+  return ({ type: 'chat_q_type', budget: 'chat_q_budget', timeline: 'chat_q_timeline' })[step];
+}
+
+function renderChatHistory(t) {
+  const parts = [`<div class="chat-msg bot">${t.chat_intro}</div>`];
+  CHAT_STEPS.forEach(step => {
+    if (leadChatData[step]) {
+      parts.push(`<div class="chat-msg bot">${t[chatQuestionKey(step)]}</div>`);
+      parts.push(`<div class="chat-msg user">${escapeHtml(leadChatData[step])}</div>`);
+    }
+  });
+  if (leadChatData.note) {
+    parts.push(`<div class="chat-msg bot">${t.chat_q_note}</div>`);
+    parts.push(`<div class="chat-msg user">${escapeHtml(leadChatData.note)}</div>`);
+  }
+  return parts.join('');
+}
+
+function renderLeadChat() {
+  const body = document.getElementById('lead-chat-body');
+  if (!body || !T[currentLang]) return;
+  const t = T[currentLang];
+  let html = renderChatHistory(t);
+
+  if (CHAT_STEPS.includes(leadChatStep)) {
+    html += `<div class="chat-msg bot">${t[chatQuestionKey(leadChatStep)]}</div>`;
+    html += '<div class="chat-options">';
+    CHAT_OPTIONS[leadChatStep].forEach(key => {
+      html += `<button class="chat-option" type="button" onclick="addChatChoice('${leadChatStep}','${key}')">${t[key]}</button>`;
+    });
+    html += '</div>';
+  } else if (leadChatStep === 'note') {
+    html += `
+      <div class="chat-msg bot">${t.chat_q_note}</div>
+      <form class="chat-form" onsubmit="setChatNote(event)">
+        <textarea id="chat-note" class="form-input" rows="3" placeholder="${t.chat_note_placeholder}" required></textarea>
+        <button class="form-btn" type="submit">${t.chat_next}</button>
+      </form>
+    `;
+  } else if (leadChatStep === 'contact') {
+    html += `
+      <div class="chat-msg bot">${t.chat_q_contact}</div>
+      <form class="chat-form" onsubmit="sendLeadChat(event)">
+        <input id="chat-name" class="form-input" type="text" placeholder="${t.chat_name_placeholder}" required>
+        <input id="chat-contact" class="form-input" type="text" placeholder="${t.chat_contact_placeholder}" required>
+        <button class="form-btn" type="submit">${t.chat_send}</button>
+        <div class="form-error" id="chat-error"></div>
+        <p class="chat-small">${t.chat_privacy}</p>
+      </form>
+    `;
+  } else if (leadChatStep === 'done') {
+    html += `
+      <div class="chat-msg bot">${t.chat_success}</div>
+      <button class="chat-option" type="button" onclick="resetLeadChat()">${t.chat_reset}</button>
+    `;
+  }
+  body.innerHTML = html;
+  body.scrollTop = body.scrollHeight;
+}
+
+async function sendLeadChat(e) {
+  e.preventDefault();
+  const t = T[currentLang];
+  const name = document.getElementById('chat-name').value.trim();
+  const contact = document.getElementById('chat-contact').value.trim();
+  const errEl = document.getElementById('chat-error');
+  if (errEl) errEl.style.display = 'none';
+  try {
+    if (!window.emailjs) throw new Error('EmailJS is not loaded');
+    const message = [
+      `${currentLang === 'ru' ? 'Тип проекта' : 'Project type'}: ${leadChatData.type || '-'}`,
+      `${currentLang === 'ru' ? 'Бюджет' : 'Budget'}: ${leadChatData.budget || '-'}`,
+      `${currentLang === 'ru' ? 'Старт' : 'Timeline'}: ${leadChatData.timeline || '-'}`,
+      `${currentLang === 'ru' ? 'Задача' : 'Task'}: ${leadChatData.note || '-'}`
+    ].join('\n');
+    await emailjs.send(EJ_SERVICE, EJ_TMPL, {
+      subject: currentLang === 'ru' ? 'Бриф из чат-бота' : 'Chatbot Brief',
+      name,
+      phone: contact,
+      email: contact.includes('@') ? contact : '',
+      message
+    });
+    leadChatStep = 'done';
+    renderLeadChat();
+  } catch {
+    if (errEl) {
+      errEl.style.display = 'block';
+      errEl.textContent = t.chat_error;
+    }
+  }
+}
+
 /* ── MOUSE PARALLAX ───────────────────────── */
 function initParallax() {
   document.addEventListener('mousemove', e => {
@@ -335,6 +482,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initFaq();
   initCounters();
   initTilt();
+  initLeadChat();
   renderCalc();
   applyLang(currentLang);
   document.querySelectorAll('.nav-links a').forEach(a => {
