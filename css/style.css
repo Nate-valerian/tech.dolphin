@@ -335,6 +335,18 @@ img, video { display: block; }
   animation: fadeUp .6s ease .5s both;
 }
 .callback-title { font-size: 13px; font-weight: 600; color: #7AAF87; margin-bottom: 16px; text-align: center; }
+.form-promise {
+  color: #8FA9B8;
+  font-size: 12px;
+  line-height: 1.55;
+  text-align: center;
+  margin: -6px auto 16px;
+  max-width: 390px;
+}
+.contact-promise {
+  color: #9DB8C5;
+  margin: -2px auto 0;
+}
 .callback-form form { display: flex; flex-direction: column; gap: 12px; }
 .form-input {
   background: rgba(255,255,255,.05); border: 1px solid rgba(14,165,233,.2);

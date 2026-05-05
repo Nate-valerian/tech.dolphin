@@ -142,6 +142,7 @@
 
       <div class="callback-form">
         <div class="callback-title" data-i18n="cb_title">📞 Перезвоним вам бесплатно</div>
+        <p class="form-promise" data-i18n="cb_promise">Оставьте телефон — мы напишем или перезвоним в течение 2 часов и подскажем ближайший шаг.</p>
         <form id="cb-form" onsubmit="sendCallback(event)">
           <input id="cb-name"  class="form-input" type="text" data-i18n="cb_name"  placeholder="Ваше имя"    required>
           <input id="cb-phone" class="form-input" type="tel"  data-i18n="cb_phone" placeholder="Ваш телефон" required>
@@ -358,7 +359,7 @@
 
     <!-- DOM — featured, spans 2 cols -->
     <div class="pcard span2" data-cat="mobile ai">
-      <video class="pcard-img tall" autoplay muted loop playsinline preload="metadata" poster="assets/dom-sessions.jpg">
+      <video class="pcard-img tall" autoplay muted loop playsinline preload="none" poster="assets/dom-sessions.jpg">
         <source src="assets/dom_video.mp4" type="video/mp4">
         <img class="pcard-img tall" src="assets/dom-sessions.jpg" alt="DOM App">
       </video>
@@ -619,6 +620,7 @@
       </div>
       <input id="ct-email" class="form-input" type="email" data-i18n="ct_email" placeholder="Email">
       <textarea id="ct-message" class="form-input" rows="4" data-i18n="ct_message" placeholder="Опишите ваш проект"></textarea>
+      <p class="form-promise contact-promise" data-i18n="ct_promise">Ответим в течение 2 часов: зададим пару уточняющих вопросов, предложим формат работы и примерный бюджет.</p>
       <button type="submit" class="form-btn" data-i18n="ct_submit">Отправить заявку →</button>
       <div class="form-error" id="ct-error"></div>
       <p class="form-consent"><span data-i18n="ct_consent">Нажимая кнопку, вы соглашаетесь с</span> <a href="#privacy" data-i18n="ct_privacy">политикой конфиденциальности</a></p>
