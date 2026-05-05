@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Разработка сайтов, приложений и AI продуктов | Tech Dolphin</title>
+<meta name="description" content="Создаём сайты, мобильные приложения, AI продукты под ключ по всей России.">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Tech Dolphin — Разработка сайтов, приложений и AI продуктов">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://techdolphin.ru">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- PROGRESS BAR -->
+<div id="progress-bar"></div>
+
+<!-- AURORA -->
+<div class="aurora"><div class="aurora-1"></div><div class="aurora-2"></div></div>
+
+<!-- LEFT NAV -->
+<div id="left-nav">
+  <div class="lnav-line-bg"></div>
+  <div id="nav-progress-line"></div>
+  <div class="lnav-item active" data-section="hero">   <div class="lnav-num">01</div><span class="lnav-label" data-i18n="lnav_home">Главная</span></div>
+  <div class="lnav-item" data-section="about">         <div class="lnav-num">02</div><span class="lnav-label" data-i18n="lnav_about">О нас</span></div>
+  <div class="lnav-item" data-section="services">      <div class="lnav-num">03</div><span class="lnav-label" data-i18n="lnav_services">Услуги</span></div>
+  <div class="lnav-item" data-section="projects">      <div class="lnav-num">04</div><span class="lnav-label" data-i18n="lnav_projects">Работы</span></div>
+  <div class="lnav-item" data-section="stack">         <div class="lnav-num">05</div><span class="lnav-label" data-i18n="lnav_stack">Технологии</span></div>
+  <div class="lnav-item" data-section="why">           <div class="lnav-num">06</div><span class="lnav-label" data-i18n="lnav_why">Почему мы</span></div>
+  <div class="lnav-item" data-section="calc">          <div class="lnav-num">07</div><span class="lnav-label" data-i18n="lnav_calc">Цены</span></div>
+  <div class="lnav-item" data-section="faq">           <div class="lnav-num">08</div><span class="lnav-label" data-i18n="lnav_faq">Вопросы</span></div>
+  <div class="lnav-item" data-section="how">           <div class="lnav-num">09</div><span class="lnav-label" data-i18n="lnav_how">Процесс</span></div>
+  <div class="lnav-item" data-section="contact">       <div class="lnav-num">10</div><span class="lnav-label" data-i18n="lnav_contact">Контакт</span></div>
+</div>
+
+<!-- COOKIE -->
+<div id="cookie-banner">
+  <p><span data-i18n="cookie_text">🍪 Мы используем файлы cookie.</span> <a href="#privacy" data-i18n="cookie_link">политикой конфиденциальности</a>.</p>
+  <button id="cookie-btn" data-i18n="cookie_btn">Принять</button>
+</div>
+
+<!-- TOP NAV -->
+<nav class="nav">
+  <div class="nav-logo"><img src="assets/logo.png" alt="Tech Dolphin"></div>
+  <div class="nav-links" id="primary-nav">
+    <a href="#hero"        data-i18n="lnav_home">Главная</a>
+    <a href="#about"       data-i18n="nav_about">О нас</a>
+    <a href="#services"    data-i18n="nav_services">Услуги</a>
+    <a href="#projects"    data-i18n="nav_projects">Работы</a>
+    <a href="projects.html" data-i18n="nav_projects_page" style="color:var(--cyan);">Проекты</a>
+    <a href="#why"         data-i18n="nav_why">Почему мы</a>
+    <a href="#faq"         data-i18n="nav_faq">FAQ</a>
+    <a href="#contact"     data-i18n="nav_contact">Контакт</a>
+  </div>
+  <button id="lang-toggle" onclick="toggleLang()">EN</button>
+  <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Меню" aria-controls="primary-nav" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="tel:+79653932841" class="nav-cta" style="background:none;border:1px solid rgba(34,211,238,.4);color:#6B4EFF;margin-right:6px;" data-i18n="nav_call">📞 Позвонить</a>
+  <a href="#contact" class="nav-cta" data-i18n="nav_cta">Обсудить проект →</a>
+</nav>
+
+<!-- ═══════════════════════════════════════════ HERO -->
+<section id="hero">
+  <div class="particles">
+    <div class="particle" style="left:10%;width:3px;height:3px;animation-duration:8s;animation-delay:0s"></div>
+    <div class="particle" style="left:25%;width:2px;height:2px;animation-duration:12s;animation-delay:2s"></div>
+    <div class="particle" style="left:40%;width:4px;height:4px;animation-duration:9s;animation-delay:4s"></div>
+    <div class="particle" style="left:60%;width:2px;height:2px;animation-duration:11s;animation-delay:1s"></div>
+    <div class="particle" style="left:75%;width:3px;height:3px;animation-duration:7s;animation-delay:3s"></div>
+    <div class="particle" style="left:88%;width:2px;height:2px;animation-duration:10s;animation-delay:5s"></div>
+  </div>
+
+  <div class="hero-layout">
+
+    <!-- LEFT SIDE — DOM app video -->
+    <div class="hero-side">
+      <video class="hero-side-video" autoplay muted loop playsinline preload="metadata" poster="assets/dom-sessions.jpg">
+        <source src="assets/dom_video.mp4" type="video/mp4">
+        <img src="assets/dom-sessions.jpg" alt="DOM App" class="hero-side-video">
+      </video>
+    </div>
+
+    <!-- CENTER — main content -->
+    <div class="hero-inner">
+      <!-- Logo video -->
+      <video class="hero-logo-video" autoplay muted loop playsinline preload="metadata">
+        <source src="assets/logo_video.mp4" type="video/mp4">
+        <img src="assets/logo.png" alt="Tech Dolphin" class="hero-logo-video">
+      </video>
+
+      <div class="badges-row">
+        <div class="badge"><div class="badge-dot"></div><span data-i18n="badge1">Принимаем новые проекты</span></div>
+        <div class="badge" style="background:rgba(107,78,255,.1);border-color:rgba(107,78,255,.3);color:#0EA5E9;" data-i18n="badge2">В 3 раза быстрее</div>
+        <div class="badge" style="background:rgba(107,78,255,.08);border-color:rgba(107,78,255,.25);color:#6B4EFF;" data-i18n="badge3">Премиум без переплат</div>
+      </div>
+
+      <h1 class="hero-title">
+        <span class="hero-line" data-i18n="hero_t1">Premium websites, powerful apps,</span>
+        <span class="hero-line grad" data-i18n="hero_t2">and smart AI systems —</span>
+        <span class="hero-line hero-line-soft"><span class="soft" data-i18n="hero_t3">delivered 3x faster</span> <span data-i18n="hero_t4">and 30% below market prices.</span></span>
+      </h1>
+
+      <p class="hero-sub" data-i18n="hero_sub">Проектируем, разрабатываем и доводим до запуска — без лишней бюрократии.</p>
+
+      <div class="hero-btns">
+        <a href="#contact" class="btn-main" data-i18n="hero_btn1">Обсудить проект</a>
+        <a href="#projects" class="btn-sec" data-i18n="hero_btn2">Посмотреть работы</a>
+      </div>
+
+      <div class="callback-form">
+        <div class="callback-title" data-i18n="cb_title">📞 Перезвоним вам бесплатно</div>
+        <form id="cb-form" onsubmit="sendCallback(event)">
+          <input id="cb-name"  class="form-input" type="text" data-i18n="cb_name"  placeholder="Ваше имя"    required>
+          <input id="cb-phone" class="form-input" type="tel"  data-i18n="cb_phone" placeholder="Ваш телефон" required>
+          <button type="submit" class="form-btn" data-i18n="cb_btn">Перезвоните мне →</button>
+          <div class="form-error" id="cb-error"></div>
+          <p class="form-consent"><span data-i18n="cb_consent">Нажимая кнопку, вы соглашаетесь с</span> <a href="#privacy" data-i18n="cb_privacy">политикой конфиденциальности</a></p>
+        </form>
+        <div class="form-success" id="cb-success" data-i18n="cb_success">✅ Спасибо! Мы перезвоним вам в ближайшее время.</div>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-pill"><div class="num"><span class="count-num" data-target="5">5</span>+</div><div class="lbl" data-i18n="stat1">Лет опыта</div></div>
+        <div class="stat-pill"><div class="num"><span class="count-num" data-target="30">30</span>+</div><div class="lbl" data-i18n="stat2">Готовых проектов</div></div>
+        <div class="stat-pill"><div class="num">7</div><div class="lbl" data-i18n="stat3">Направлений</div></div>
+        <div class="stat-pill"><div class="num">∞</div><div class="lbl" data-i18n="stat4">Идея</div></div>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE — logo video loop -->
+    <div class="hero-side">
+      <video class="hero-side-video" autoplay muted loop playsinline preload="metadata" poster="assets/logo.png" style="opacity:.7;">
+        <source src="assets/logo_video.mp4" type="video/mp4">
+        <img src="assets/logo.png" alt="Tech Dolphin" class="hero-side-video">
+      </video>
+    </div>
+
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="tick-item"><span data-i18n="tick1">Мобильные приложения</span><span>✦</span></span>
+    <span class="tick-item"><span data-i18n="tick2">Сайты и интернет-магазины</span><span>✦</span></span>
+    <span class="tick-item"><span data-i18n="tick3">Умные AI продукты</span><span>✦</span></span>
+    <span class="tick-item"><span data-i18n="tick4">Голосовые помощники</span><span>✦</span></span>
+    <span class="tick-item"><span data-i18n="tick5">Видео и фото контент</span><span>✦</span></span>
+    <span class="tick-item"><span data-i18n="tick6">Банковские приложения</span><span>✦</span></span>
+    <span class="tick-item"><span data-i18n="tick7">Медицинские платформы</span><span>✦</span></span>
+    <span class="tick-item"><span data-i18n="tick8">3D и иммерсивный опыт</span><span>✦</span></span>
+    <!-- duplicate for seamless loop -->
+    <span class="tick-item"><span data-i18n="tick1">Мобильные приложения</span><span>✦</span></span>
+    <span class="tick-item"><span data-i18n="tick2">Сайты и интернет-магазины</span><span>✦</span></span>
+    <span class="tick-item"><span data-i18n="tick3">Умные AI продукты</span><span>✦</span></span>
+    <span class="tick-item"><span data-i18n="tick4">Голосовые помощники</span><span>✦</span></span>
+    <span class="tick-item"><span data-i18n="tick5">Видео и фото контент</span><span>✦</span></span>
+    <span class="tick-item"><span data-i18n="tick6">Банковские приложения</span><span>✦</span></span>
+    <span class="tick-item"><span data-i18n="tick7">Медицинские платформы</span><span>✦</span></span>
+    <span class="tick-item"><span data-i18n="tick8">3D и иммерсивный опыт</span><span>✦</span></span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ ABOUT -->
+<section class="section" id="about">
+  <div class="section-label" data-i18n="about_label">О нас</div>
+  <h2 class="section-title"><span data-i18n="about_title">Кто мы и</span> <em data-i18n="about_title_em">чем занимаемся</em></h2>
+
+  <div class="about-grid">
+    <div class="about-text-card">
+      <p data-i18n="about_p1">Мы собираем небольшие <strong>senior-команды</strong> под конкретную задачу: сайт, приложение, AI-ассистент или платформу.</p>
+      <p data-i18n="about_p2">Берём на себя <strong>архитектуру, дизайн, разработку и запуск</strong> — без лишней бюрократии и раздутых агентских процессов.</p>
+      <p data-i18n="about_p3">Вы приходите с идеей или задачей. Мы переводим её в понятный план, сроки, стоимость и готовый цифровой продукт.</p>
+      <div class="about-promo" data-i18n="about_promo">Premium websites, powerful apps, and smart AI systems, delivered faster and 30% below market prices.</div>
+      <div class="about-tags">
+        <span class="chip">React</span><span class="chip">JavaScript</span>
+        <span class="chip">Java</span><span class="chip">Python</span>
+        <span class="chip">React Native</span><span class="chip">Next.js</span>
+        <span class="chip">FastAPI</span><span class="chip">PostgreSQL</span>
+        <span class="chip">Voice AI</span><span class="chip">Unreal Engine</span>
+        <span class="chip">Docker / AWS</span><span class="chip">Figma</span>
+        <span class="chip">WebSocket</span><span class="chip">Expo Router</span>
+        <span class="chip">3D Projection</span><span class="chip">API Design</span>
+        <span class="chip">Smart Video & Image Production</span><span class="chip">OpenAI API</span>
+        <span class="chip">GraphQL</span><span class="chip">MongoDB</span>
+        <span class="chip">Firebase / Supabase</span><span class="chip">CI/CD</span>
+      </div>
+    </div>
+
+    <div class="about-exp-card">
+      <div class="exp-big">5+</div>
+      <div class="exp-label" data-i18n="exp_label">Лет международного опыта</div>
+      <div class="exp-desc"  data-i18n="exp_desc">Работаем с клиентами из разных стран и отраслей.</div>
+      <div class="exp-list">
+        <div class="exp-row" data-i18n="exp1">Создаём и запускаем мобильные приложения</div>
+        <div class="exp-row" data-i18n="exp2">Строим умные системы с AI</div>
+        <div class="exp-row" data-i18n="exp3">Разрабатываем сайты и платформы</div>
+        <div class="exp-row" data-i18n="exp4">Делаем 3D и иммерсивные проекты</div>
+        <div class="exp-row" data-i18n="exp5">Работаем с e-commerce, банками, медициной</div>
+        <div class="exp-row" data-i18n="exp6">Создаём видео, фото и визуальный контент</div>
+        <div class="exp-row" data-i18n="exp_scope_frontend">Frontend</div>
+        <div class="exp-row" data-i18n="exp_scope_backend">Backend</div>
+        <div class="exp-row" data-i18n="exp_scope_ai">AI</div>
+        <div class="exp-row" data-i18n="exp_scope_databases">Databases</div>
+        <div class="exp-row" data-i18n="exp_scope_cloud">Cloud / DevOps</div>
+        <div class="exp-row" data-i18n="exp_scope_infra">Production Infrastructure</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ SERVICES -->
+<div class="services-wrap" id="services">
+  <div class="services-inner">
+    <div class="section-label" data-i18n="svc_label">Что мы делаем</div>
+    <h2 class="section-title"><span data-i18n="svc_title">Наши</span> <em data-i18n="svc_title_em">услуги</em></h2>
+    <p class="section-sub" data-i18n="svc_sub">Всё что нужно для вашего продукта — в одном месте.</p>
+
+    <div class="svc-grid">
+      <div class="svc-card">
+        <div class="svc-icon">🧠</div>
+        <div class="svc-name" data-i18n="svc1_name">Умные продукты с AI</div>
+        <div class="svc-items">
+          <div class="svc-item" data-i18n="svc1_1">Чат-боты, которые отвечают как люди</div>
+          <div class="svc-item" data-i18n="svc1_2">Голосовые помощники для бизнеса</div>
+          <div class="svc-item" data-i18n="svc1_3">Автоматизация рутинных задач</div>
+          <div class="svc-item" data-i18n="svc1_4">AI персонажи и цифровые аватары</div>
+          <div class="svc-item" data-i18n="svc1_5">Умный поиск и рекомендации</div>
+        </div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-icon">📱</div>
+        <div class="svc-name" data-i18n="svc2_name">Мобильные приложения</div>
+        <div class="svc-items">
+          <div class="svc-item" data-i18n="svc2_1">Приложения для iPhone и Android</div>
+          <div class="svc-item" data-i18n="svc2_2">Публикация в App Store и Google Play</div>
+          <div class="svc-item" data-i18n="svc2_3">Чат, звонки и уведомления</div>
+          <div class="svc-item" data-i18n="svc2_4">Красивый и удобный дизайн</div>
+          <div class="svc-item" data-i18n="svc2_5">Работает быстро на любом телефоне</div>
+        </div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-icon">🌐</div>
+        <div class="svc-name" data-i18n="svc3_name">Сайты и платформы</div>
+        <div class="svc-items">
+          <div class="svc-item" data-i18n="svc3_1">Сайты-визитки и лендинги</div>
+          <div class="svc-item" data-i18n="svc3_2">Интернет-магазины</div>
+          <div class="svc-item" data-i18n="svc3_3">Личные кабинеты и панели управления</div>
+          <div class="svc-item" data-i18n="svc3_4">Сложные платформы и сервисы</div>
+          <div class="svc-item" data-i18n="svc3_5">Быстрый хостинг и запуск</div>
+        </div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-icon">🎬</div>
+        <div class="svc-name" data-i18n="svc4_name">Видео и визуальный контент</div>
+        <div class="svc-items">
+          <div class="svc-item" data-i18n="svc4_1">Кинематографические видео и ролики</div>
+          <div class="svc-item" data-i18n="svc4_2">Цифровые персонажи и аватары</div>
+          <div class="svc-item" data-i18n="svc4_3">Рекламные ролики и презентации</div>
+          <div class="svc-item" data-i18n="svc4_4">Визуальные истории</div>
+          <div class="svc-item" data-i18n="svc4_5">Интерактивные видеосистемы</div>
+        </div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-icon">🏦</div>
+        <div class="svc-name" data-i18n="svc5_name">Бизнес-платформы</div>
+        <div class="svc-items">
+          <div class="svc-item" data-i18n="svc5_1">Интернет-магазины и маркетплейсы</div>
+          <div class="svc-item" data-i18n="svc5_2">Банковские и финансовые приложения</div>
+          <div class="svc-item" data-i18n="svc5_3">Медицинские сервисы и запись к врачу</div>
+          <div class="svc-item" data-i18n="svc5_4">Стриминг и кино-платформы</div>
+          <div class="svc-item" data-i18n="svc5_5">Системы управления для компаний</div>
+        </div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-icon">🎮</div>
+        <div class="svc-name" data-i18n="svc6_name">3D и иммерсивный опыт</div>
+        <div class="svc-items">
+          <div class="svc-item" data-i18n="svc6_1">Трёхмерные интерактивные сцены</div>
+          <div class="svc-item" data-i18n="svc6_2">Проекции на большие экраны и купол</div>
+          <div class="svc-item" data-i18n="svc6_3">Виртуальные пространства и туры</div>
+          <div class="svc-item" data-i18n="svc6_4">Визуальные шоу и инсталляции</div>
+          <div class="svc-item" data-i18n="svc6_5">Захватывающий опыт для зрителей</div>
+        </div>
+      </div>
+
+      <div class="svc-card wide">
+        <div class="svc-icon">🎭</div>
+        <div class="svc-name" data-i18n="svc7_name">Цифровые шоу и иммерсивный контент</div>
+        <div class="svc-items">
+          <div class="svc-item" data-i18n="svc7_1">AI персонажи, которые говорят и реагируют вживую</div>
+          <div class="svc-item" data-i18n="svc7_2">270°–360° video space — like being inside</div>
+          <div class="svc-item" data-i18n="svc7_3">Интерактивные проекции и шоу</div>
+          <div class="svc-item" data-i18n="svc7_4">Синхронизация голоса и картинки</div>
+          <div class="svc-item" data-i18n="svc7_5">Медитации и ритуальные цифровые пространства</div>
+          <div class="svc-item" data-i18n="svc7_6">Цифровые нарративы</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PROJECTS -->
+<section class="section" id="projects">
+  <div class="section-label" data-i18n="proj_label">Наши работы</div>
+  <h2 class="section-title"><span data-i18n="proj_title">Что мы</span> <em data-i18n="proj_title_em">уже сделали</em></h2>
+  <p class="section-sub" data-i18n="proj_sub">Реальные проекты — от мобильных приложений до веб-платформ.</p>
+
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin:36px 0 12px;align-items:center;">
+    <div class="proj-tabs" style="margin:0;flex:1;">
+      <button class="ptab active" onclick="filterProj('all',this)"    data-i18n="tab_all">Все работы</button>
+      <button class="ptab"        onclick="filterProj('mobile',this)" data-i18n="tab_mobile">📱 Мобильные</button>
+      <button class="ptab"        onclick="filterProj('web',this)"    data-i18n="tab_web">🌐 Веб</button>
+      <button class="ptab"        onclick="filterProj('ai',this)"     data-i18n="tab_ai">🤖 AI</button>
+    </div>
+    <a href="projects.html" class="proj-view-all" data-i18n="view_all">Смотреть все проекты →</a>
+  </div>
+
+  <div class="proj-grid">
+
+    <!-- DOM — featured, spans 2 cols -->
+    <div class="pcard span2" data-cat="mobile ai">
+      <video class="pcard-img tall" autoplay muted loop playsinline preload="metadata" poster="assets/dom-sessions.jpg">
+        <source src="assets/dom_video.mp4" type="video/mp4">
+        <img class="pcard-img tall" src="assets/dom-sessions.jpg" alt="DOM App">
+      </video>
+      <div class="pcard-body">
+        <span class="pcard-tag" data-i18n="home_dom_tag">Мобильное приложение · AI</span>
+        <div class="pcard-name" data-i18n="home_dom_name">DOM — Приложение для внутренней практики</div>
+        <div class="pcard-desc" data-i18n="home_dom_desc">Мобильное приложение с голосовыми AI-проводниками, медитациями, чайными ритуалами и священными путешествиями. React Native · FastAPI · PostgreSQL · Voice AI.</div>
+        <div class="pcard-chips">
+          <span class="pcard-chip">iOS & Android</span>
+          <span class="pcard-chip" data-i18n="home_voice_ai">Голосовой AI</span>
+          <span class="pcard-chip">React Native</span>
+          <span class="pcard-chip">App Store</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOM Sessions -->
+    <div class="pcard" data-cat="mobile ai">
+      <img class="pcard-img tall" src="assets/dom-sessions.jpg" alt="DOM Sessions" loading="lazy" decoding="async">
+      <div class="pcard-body">
+        <span class="pcard-tag" data-i18n="home_dom_sessions_tag">DOM · Сессии</span>
+        <div class="pcard-name" data-i18n="home_dom_sessions_name">DOM — Сессии и ритуалы</div>
+        <div class="pcard-desc" data-i18n="home_dom_sessions_desc">Библиотека медитаций, чайные церемонии и практики с иммерсивным контентом.</div>
+        <div class="pcard-chips">
+          <span class="pcard-chip" data-i18n="home_meditations">Медитации</span><span class="pcard-chip" data-i18n="home_rituals">Ритуалы</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOM Login -->
+    <div class="pcard" data-cat="mobile ai">
+      <img class="pcard-img" src="assets/dom-login.jpg" alt="DOM Login" loading="lazy" decoding="async">
+      <div class="pcard-body">
+        <span class="pcard-tag" data-i18n="home_dom_login_tag">DOM · Auth</span>
+        <div class="pcard-name" data-i18n="home_dom_login_name">DOM — Вход и профиль</div>
+        <div class="pcard-desc" data-i18n="home_dom_login_desc">Авторизация через Apple, Google или email. Защищённый доступ к личному пространству.</div>
+        <div class="pcard-chips">
+          <span class="pcard-chip">Apple Auth</span><span class="pcard-chip">Google Auth</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOM Journey -->
+    <div class="pcard" data-cat="mobile ai">
+      <img class="pcard-img" src="assets/dom-journey.jpg" alt="DOM Journey" loading="lazy" decoding="async">
+      <div class="pcard-body">
+        <span class="pcard-tag" data-i18n="home_dom_journey_tag">DOM · Путешествия</span>
+        <div class="pcard-name" data-i18n="home_dom_journey_name">DOM — Священные путешествия</div>
+        <div class="pcard-desc" data-i18n="home_dom_journey_desc">Виртуальные путешествия через 3D-проекции — Греция, Италия, Пхукет и другие направления.</div>
+        <div class="pcard-chips">
+          <span class="pcard-chip">3D Projection</span><span class="pcard-chip">Journey</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Movie App -->
+    <div class="pcard" data-cat="web">
+      <img class="pcard-img" src="assets/movie-app.jpg" alt="Movie App" loading="lazy" decoding="async">
+      <div class="pcard-body">
+        <span class="pcard-tag" data-i18n="movie_tag">Веб-платформа</span>
+        <div class="pcard-name">Movie App</div>
+        <div class="pcard-desc" data-i18n="home_movie_desc">Платформа для поиска, фильтрации и сохранения фильмов. Watchlist, рейтинги, жанры.</div>
+        <div class="pcard-chips">
+          <span class="pcard-chip">React.js</span><span class="pcard-chip">REST API</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Travel -->
+    <div class="pcard" data-cat="web">
+      <img class="pcard-img" src="assets/travel-advisor.jpg" alt="Travel Advisor" loading="lazy" decoding="async">
+      <div class="pcard-body">
+        <span class="pcard-tag" data-i18n="travel_tag">Веб · Карты</span>
+        <div class="pcard-name">Travel Advisor</div>
+        <div class="pcard-desc" data-i18n="home_travel_desc">Поиск ресторанов и достопримечательностей с интерактивными картами и геолокацией.</div>
+        <div class="pcard-chips">
+          <span class="pcard-chip">Google Maps</span><span class="pcard-chip" data-i18n="home_geolocation">Геолокация</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Realtor -->
+    <div class="pcard" data-cat="web">
+      <img class="pcard-img" src="assets/realtor.jpg" alt="Realtor" loading="lazy" decoding="async">
+      <div class="pcard-body">
+        <span class="pcard-tag" data-i18n="re_tag">Веб · Недвижимость</span>
+        <div class="pcard-name">Realtor Platform</div>
+        <div class="pcard-desc" data-i18n="home_re_desc">Каталог объектов недвижимости с фото, фильтрами по цене и площади.</div>
+        <div class="pcard-chips">
+          <span class="pcard-chip">React.js</span><span class="pcard-chip" data-i18n="home_catalog">Каталог</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI Assistant -->
+    <div class="pcard" data-cat="ai">
+      <img class="pcard-img" src="assets/ai-business-assistant.png" alt="AI Assistant" loading="lazy" decoding="async">
+      <div class="pcard-body">
+        <span class="pcard-tag" data-i18n="ai_tag">AI · Personal & Business</span>
+        <div class="pcard-name" data-i18n="ai_name">AI Assistant — your smart friend</div>
+        <div class="pcard-desc" data-i18n="ai_desc">Personal AI assistant for life and business. Advises, reminds, analyzes and supports — like a friend.</div>
+        <div class="pcard-chips">
+          <span class="pcard-chip">Voice AI</span><span class="pcard-chip">Automation</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fitness — spans 2 -->
+    <div class="pcard span2" data-cat="web">
+      <img class="pcard-img" src="assets/fitness-club.jpg" alt="Fitness Club" loading="lazy" decoding="async" style="height:220px;">
+      <div class="pcard-body">
+        <span class="pcard-tag" data-i18n="home_gym_tag">Веб-приложение · Фитнес</span>
+        <div class="pcard-name">Fitness Club</div>
+        <div class="pcard-desc" data-i18n="home_gym_desc">Фитнес-приложение с персонализированными тренировками и базой упражнений. Live на Netlify.</div>
+        <div class="pcard-chips">
+          <span class="pcard-chip">React.js</span><span class="pcard-chip">Live · Netlify</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ STACK -->
+<section class="section" id="stack">
+  <div class="section-label" data-i18n="stack_label">Tech Stack</div>
+  <h2 class="section-title"><span data-i18n="stack_title">На чём мы</span> <em data-i18n="stack_title_em">это делаем</em></h2>
+  <p class="section-sub" data-i18n="stack_sub">Современные инструменты — ваш продукт работает быстро, надёжно и не устареет.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:48px;">
+    <span class="chip">React</span><span class="chip">JavaScript</span>
+    <span class="chip">Java</span><span class="chip">Python</span>
+    <span class="chip">React Native</span><span class="chip">Next.js</span>
+    <span class="chip">FastAPI</span><span class="chip">PostgreSQL</span>
+    <span class="chip">Voice AI</span><span class="chip">Unreal Engine</span>
+    <span class="chip">Docker / AWS</span><span class="chip">Figma</span>
+    <span class="chip">WebSocket</span><span class="chip">Expo Router</span>
+    <span class="chip">3D Projection</span><span class="chip">API Design</span>
+    <span class="chip">Smart Video & Image Production</span><span class="chip">OpenAI API</span>
+    <span class="chip">GraphQL</span><span class="chip">MongoDB</span>
+    <span class="chip">Firebase / Supabase</span><span class="chip">CI/CD</span>
+    <span class="chip">Kubernetes</span><span class="chip">Nginx</span>
+    <span class="chip">TypeScript</span><span class="chip">Node.js</span>
+    <span class="chip">Redis</span><span class="chip">React.js</span>
+    <span class="chip">Stripe Payments</span><span class="chip">App Store / Play</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ WHY -->
+<div class="why-wrap" id="why">
+  <div class="why-inner">
+    <div class="section-label" data-i18n="why_label">Почему мы</div>
+    <h2 class="section-title"><span data-i18n="why_title">Почему выбирают</span> <em data-i18n="why_title_em">нас</em></h2>
+    <div class="why-grid">
+      <div class="why-card"><div class="why-num">01</div><div class="why-title" data-i18n="why1_t">Senior-подход без хаоса</div><div class="why-desc" data-i18n="why1_d">Сразу думаем об архитектуре, дизайне, скорости и запуске — не просто собираем красивые экраны.</div></div>
+      <div class="why-card"><div class="why-num">02</div><div class="why-title" data-i18n="why2_t">Быстрый запуск без бюрократии</div><div class="why-desc" data-i18n="why2_d">Работаем компактно, показываем прогресс по этапам и не растягиваем проект лишними согласованиями.</div></div>
+      <div class="why-card"><div class="why-num">03</div><div class="why-title" data-i18n="why3_t">Прозрачная смета до старта</div><div class="why-desc" data-i18n="why3_d">До разработки фиксируем объём, сроки и ориентир по бюджету. Без неприятных сюрпризов в середине проекта.</div></div>
+      <div class="why-card"><div class="why-num">04</div><div class="why-title" data-i18n="why4_t">Поддержка после релиза</div><div class="why-desc" data-i18n="why4_d">После запуска остаёмся рядом: помогаем с обновлениями, улучшениями и развитием продукта.</div></div>
+      <div class="why-card"><div class="why-num">05</div><div class="why-title" data-i18n="why5_t">Красиво и понятно</div><div class="why-desc" data-i18n="why5_d">Делаем не только чтобы работало — но и чтобы было красиво.</div></div>
+      <div class="why-card"><div class="why-num">06</div><div class="why-title" data-i18n="why6_t">Всегда на связи</div><div class="why-desc" data-i18n="why6_d">Отвечаем быстро, объясняем понятно, без жаргона.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ CALCULATOR -->
+<section class="section" id="calc" style="max-width:900px;">
+  <div class="section-label" data-i18n="calc_label">Калькулятор стоимости</div>
+  <h2 class="section-title"><span data-i18n="calc_title">Узнайте стоимость</span> <em data-i18n="calc_title_em">вашего проекта</em></h2>
+  <p class="section-sub" data-i18n="calc_sub">Выберите что вам нужно — и сразу увидите примерную цену.</p>
+  <div id="calc-grid" class="calc-grid" style="margin-top:40px;"></div>
+  <div class="calc-result" id="calc-result">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;">
+      <div>
+        <div style="font-size:13px;color:#7AAF87;margin-bottom:8px;" data-i18n="calc_result_label">Примерная стоимость:</div>
+        <div id="calc-price" style="font-size:clamp(28px,4vw,44px);font-weight:800;background:linear-gradient(135deg,#0EA5E9,#6B4EFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-family:inherit;"></div>
+        <div id="calc-result-note" style="font-size:13px;color:#3D6B4A;margin-top:8px;" data-i18n="calc_result_note">Премиальное качество и умная стоимость</div>
+      </div>
+      <a href="#contact" id="calc-cta" style="display:inline-flex;align-items:center;background:linear-gradient(135deg,#0EA5E9,#6B4EFF);color:#fff;font-size:14px;font-weight:700;padding:14px 32px;border-radius:100px;text-decoration:none;box-shadow:0 8px 24px rgba(14,165,233,.3);white-space:nowrap;" data-i18n="calc_cta">Обсудить проект →</a>
+    </div>
+    <div id="calc-disc" style="margin-top:16px;font-size:13px;color:#3D6B4A;" data-i18n="calc_disc">* Точная цена после бесплатного созвона.</div>
+  </div>
+  <div class="calc-empty" id="calc-empty" data-i18n="calc_empty">👆 Выберите услуги чтобы узнать стоимость</div>
+</section>
+
+<!-- ═══════════════════════════════════════════ FAQ -->
+<div id="faq" style="padding:100px 20px;background:#040D1C;border-top:1px solid rgba(14,165,233,.08);">
+  <div style="max-width:800px;margin:0 auto;">
+    <div class="section-label" data-i18n="faq_label">Частые вопросы</div>
+    <h2 class="section-title"><span data-i18n="faq_title">Всё что вы хотели</span> <em data-i18n="faq_title_em">спросить</em></h2>
+    <div style="display:flex;flex-direction:column;gap:3px;margin-top:50px;">
+      <div class="faq-item"><div class="faq-q"><span class="faq-q-text" data-i18n="faq1_q">Сколько стоит сделать сайт?</span><span class="faq-icon">+</span></div><div class="faq-a" data-i18n="faq1_a"></div></div>
+      <div class="faq-item"><div class="faq-q"><span class="faq-q-text" data-i18n="faq2_q">Как долго делается проект?</span><span class="faq-icon">+</span></div><div class="faq-a" data-i18n="faq2_a"></div></div>
+      <div class="faq-item"><div class="faq-q"><span class="faq-q-text" data-i18n="faq3_q">Нужно ли разбираться в технологиях?</span><span class="faq-icon">+</span></div><div class="faq-a" data-i18n="faq3_a"></div></div>
+      <div class="faq-item"><div class="faq-q"><span class="faq-q-text" data-i18n="faq4_q">Почему ваша стоимость выгоднее агентств?</span><span class="faq-icon">+</span></div><div class="faq-a" data-i18n="faq4_a"></div></div>
+      <div class="faq-item"><div class="faq-q"><span class="faq-q-text" data-i18n="faq5_q">Что такое AI продукт?</span><span class="faq-icon">+</span></div><div class="faq-a" data-i18n="faq5_a"></div></div>
+      <div class="faq-item"><div class="faq-q"><span class="faq-q-text" data-i18n="faq6_q">Работаете с клиентами из других городов?</span><span class="faq-icon">+</span></div><div class="faq-a" data-i18n="faq6_a"></div></div>
+      <div class="faq-item"><div class="faq-q"><span class="faq-q-text" data-i18n="faq7_q">Что будет после сдачи проекта?</span><span class="faq-icon">+</span></div><div class="faq-a" data-i18n="faq7_a"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ HOW -->
+<div id="how" style="padding:100px 20px;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-label" data-i18n="how_label">Как мы работаем</div>
+    <h2 class="section-title"><span data-i18n="how_title">Просто и</span> <em data-i18n="how_title_em">понятно</em></h2>
+    <p class="section-sub" style="margin-bottom:60px;" data-i18n="how_sub">От первого звонка до готового продукта — пять простых шагов.</p>
+
+    <div class="how-step">
+      <div class="how-icon">📞</div>
+      <div style="flex:1;"><div class="how-title-row"><span class="how-name" data-i18n="how1_n">Вы оставляете заявку</span><span class="how-time" data-i18n="how1_t">В течение 2 часов</span></div><div class="how-desc" data-i18n="how1_d">Заполняете форму или звоните нам.</div></div>
+      <div class="how-num">01</div>
+    </div>
+    <div class="how-connector"></div>
+    <div class="how-step">
+      <div class="how-icon" style="background:linear-gradient(135deg,#6B4EFF,#0EA5E9);">💬</div>
+      <div style="flex:1;"><div class="how-title-row"><span class="how-name" data-i18n="how2_n">Созвон и обсуждение</span><span class="how-time" style="background:rgba(107,78,255,.15);border-color:rgba(107,78,255,.3);color:#A78BFA;" data-i18n="how2_t">За 1 день</span></div><div class="how-desc" data-i18n="how2_d">Созваниваемся, выслушиваем идею.</div></div>
+      <div class="how-num">02</div>
+    </div>
+    <div class="how-connector"></div>
+    <div class="how-step">
+      <div class="how-icon" style="background:linear-gradient(135deg,#0EA5E9,#86EFAC);">📋</div>
+      <div style="flex:1;"><div class="how-title-row"><span class="how-name" data-i18n="how3_n">План и цена</span><span class="how-time" style="background:rgba(134,239,172,.1);border-color:rgba(134,239,172,.3);color:#86EFAC;" data-i18n="how3_t">За 1–2 дня</span></div><div class="how-desc" data-i18n="how3_d">Чёткий план и финальная цена.</div></div>
+      <div class="how-num">03</div>
+    </div>
+    <div class="how-connector"></div>
+    <div class="how-step">
+      <div class="how-icon" style="background:linear-gradient(135deg,#6B4EFF,#86EFAC);">🚀</div>
+      <div style="flex:1;"><div class="how-title-row"><span class="how-name" data-i18n="how4_n">Разработка</span><span class="how-time" style="background:rgba(107,78,255,.15);border-color:rgba(107,78,255,.3);color:#A78BFA;" data-i18n="how4_t">От 2 недель</span></div><div class="how-desc" data-i18n="how4_d">Регулярно показываем прогресс.</div></div>
+      <div class="how-num">04</div>
+    </div>
+    <div class="how-connector"></div>
+    <div class="how-step last">
+      <div class="how-icon" style="background:linear-gradient(135deg,#10B981,#0EA5E9);">✅</div>
+      <div style="flex:1;"><div class="how-title-row"><span class="how-name" data-i18n="how5_n">Сдача продукта</span><span class="how-time" style="background:rgba(134,239,172,.12);border-color:rgba(134,239,172,.3);color:#86EFAC;" data-i18n="how5_t">🎉 Готово!</span></div><div class="how-desc" data-i18n="how5_d">Передаём и остаёмся на связи.</div></div>
+      <div class="how-num">05</div>
+    </div>
+
+    <div style="text-align:center;margin-top:50px;">
+      <a href="#contact" class="btn-main" data-i18n="how_cta">Начать прямо сейчас →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ CONTACT -->
+<section id="contact">
+  <div class="contact-card">
+    <div class="contact-glow"></div>
+    <div class="section-label" data-i18n="contact_label">Написать нам</div>
+    <h2 class="section-title" style="font-size:clamp(26px,4vw,42px);">
+      <span data-i18n="contact_title">Есть идея?</span><br><em data-i18n="contact_title_em">Давайте обсудим</em>
+    </h2>
+    <p class="section-sub" style="margin:16px auto 32px;text-align:center;" data-i18n="contact_sub">Расскажите, что хотите сделать. Мы оценим задачу, предложим план и честно скажем, с чего лучше начать.</p>
+
+    <form id="ct-form" class="contact-form" onsubmit="sendContact(event)">
+      <div class="contact-form-row">
+        <input id="ct-name"  class="form-input" type="text"  data-i18n="ct_name"  placeholder="Ваше имя"  required>
+        <input id="ct-phone" class="form-input" type="tel"   data-i18n="ct_phone" placeholder="Телефон"    required>
+      </div>
+      <input id="ct-email" class="form-input" type="email" data-i18n="ct_email" placeholder="Email">
+      <textarea id="ct-message" class="form-input" rows="4" data-i18n="ct_message" placeholder="Опишите ваш проект"></textarea>
+      <button type="submit" class="form-btn" data-i18n="ct_submit">Отправить заявку →</button>
+      <div class="form-error" id="ct-error"></div>
+      <p class="form-consent"><span data-i18n="ct_consent">Нажимая кнопку, вы соглашаетесь с</span> <a href="#privacy" data-i18n="ct_privacy">политикой конфиденциальности</a></p>
+    </form>
+    <div class="form-success" id="ct-success" data-i18n="ct_success">✅ Заявка отправлена!</div>
+
+    <div class="contact-links">
+      <a href="tel:+79653932841" class="contact-link" style="background:rgba(107,78,255,.15);border-color:rgba(107,78,255,.4);color:#0EA5E9;font-weight:700;">📞 +7 (965) 393-28-41</a>
+      <a href="https://max.ru/+79653932841" target="_blank" rel="noopener noreferrer" class="contact-link" style="background:rgba(14,165,233,.15);border-color:rgba(14,165,233,.3);color:#0EA5E9;font-weight:700;">💬 MAX</a>
+      <a href="https://t.me/+79653932841" target="_blank" rel="noopener noreferrer" class="contact-link" style="opacity:.6;">Telegram*</a>
+      <a href="https://wa.me/79653932841" target="_blank" rel="noopener noreferrer" class="contact-link" style="opacity:.6;">WhatsApp*</a>
+      <a href="mailto:m.moleva@mail.ru" class="contact-link">✉️ m.moleva@mail.ru</a>
+    </div>
+    <p style="font-size:11px;color:#3D6B4A;margin-top:16px;" data-i18n="ct_note">* Telegram и WhatsApp могут работать нестабильно на территории России</p>
+  </div>
+</section>
+
+<!-- PRIVACY -->
+<div id="privacy" style="background:#061522;border-top:1px solid rgba(14,165,233,.1);padding:80px 20px;">
+  <div style="max-width:800px;margin:0 auto;">
+    <div class="section-label" data-i18n="privacy_label">Документы</div>
+    <h2 style="font-size:clamp(22px,3vw,34px);font-weight:800;color:#E8F5EC;margin-bottom:32px;" data-i18n="privacy_title">Политика конфиденциальности</h2>
+    <div style="font-size:15px;color:#7AAF87;line-height:1.9;">
+      <p style="margin-bottom:16px;" data-i18n="privacy_p1"><strong style="color:#E8F5EC;">1. Общие положения.</strong> ИП Молева Марианна Владимировна (ИНН 502984920107, ОГРНИП 321508100437464).</p>
+      <p style="margin-bottom:16px;" data-i18n="privacy_p2"><strong style="color:#E8F5EC;">2. Какие данные мы собираем.</strong> Имя, телефон, email — только при добровольном заполнении форм.</p>
+      <p style="margin-bottom:16px;" data-i18n="privacy_p3"><strong style="color:#E8F5EC;">3. Цель сбора данных.</strong> Исключительно для связи с вами. Не передаём третьим лицам.</p>
+      <p style="margin-bottom:16px;" data-i18n="privacy_p4"><strong style="color:#E8F5EC;">4. Защита данных.</strong> В соответствии с ФЗ №152 «О персональных данных».</p>
+      <p style="margin-bottom:16px;" data-i18n="privacy_p5"><strong style="color:#E8F5EC;">5. Cookie.</strong> Можно отключить в настройках браузера.</p>
+      <p data-i18n="privacy_p6"><strong style="color:#E8F5EC;">6. Контакты.</strong> <a href="mailto:m.moleva@mail.ru" style="color:#0EA5E9;">m.moleva@mail.ru</a> · <a href="tel:+79653932841" style="color:#0EA5E9;">+7 (965) 393-28-41</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- CITIES -->
+<div class="cities-wrap">
+  <div class="cities-label" id="cities-label">Работаем по всей России</div>
+  <div class="cities-list">
+    <span class="city-tag" data-i18n="city_moscow">Москва</span><span class="city-tag" data-i18n="city_spb">Санкт-Петербург</span>
+    <span class="city-tag" data-i18n="city_novosibirsk">Новосибирск</span><span class="city-tag" data-i18n="city_ekaterinburg">Екатеринбург</span>
+    <span class="city-tag" data-i18n="city_kazan">Казань</span><span class="city-tag" data-i18n="city_nizhny">Нижний Новгород</span>
+    <span class="city-tag" data-i18n="city_chelyabinsk">Челябинск</span><span class="city-tag" data-i18n="city_samara">Самара</span>
+    <span class="city-tag" data-i18n="city_omsk">Омск</span><span class="city-tag" data-i18n="city_rostov">Ростов-на-Дону</span>
+    <span class="city-tag" data-i18n="city_ufa">Уфа</span><span class="city-tag" data-i18n="city_krasnoyarsk">Красноярск</span>
+    <span class="city-tag" data-i18n="city_perm">Пермь</span><span class="city-tag" data-i18n="city_voronezh">Воронеж</span>
+    <span class="city-tag" data-i18n="city_volgograd">Волгоград</span><span class="city-tag" data-i18n="city_all_russia">и вся Россия</span>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo"><img src="assets/logo.png" alt="Tech Dolphin"></div>
+  <div class="footer-copy" data-i18n="footer_copy">© 2025 Tech Dolphin</div>
+  <div class="footer-links">
+    <a href="#about"    data-i18n="nav_about">О нас</a>
+    <a href="#services" data-i18n="nav_services">Услуги</a>
+    <a href="#projects" data-i18n="nav_projects">Работы</a>
+    <a href="#contact"  data-i18n="nav_contact">Контакт</a>
+    <a href="projects.html" data-i18n="view_all">Все проекты</a>
+  </div>
+  <a href="tel:+79653932841" style="display:inline-flex;align-items:center;gap:8px;background:rgba(107,78,255,.15);border:1px solid rgba(107,78,255,.3);color:#0EA5E9;font-size:13px;font-weight:600;padding:10px 20px;border-radius:100px;">📞 +7 (965) 393-28-41</a>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
+
