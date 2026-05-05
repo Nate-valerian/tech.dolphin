@@ -5,6 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Наши проекты | Tech Dolphin</title>
 <meta name="description" content="Реальные проекты Tech Dolphin — мобильные приложения, веб-платформы, AI продукты.">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Наши проекты | Tech Dolphin">
+<meta property="og:description" content="Кейсы Tech Dolphin: мобильные приложения, веб-платформы, AI продукты и иммерсивный контент.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://techdolphin.ru/projects.html">
+<meta property="og:image" content="https://techdolphin.ru/assets/logo.png">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Проекты Tech Dolphin">
+<meta name="twitter:description" content="Реальные продукты: мобильные приложения, веб-платформы и AI решения.">
+<meta name="twitter:image" content="https://techdolphin.ru/assets/logo.png">
+<meta name="theme-color" content="#020B18">
+<link rel="canonical" href="https://techdolphin.ru/projects.html">
+<link rel="icon" href="assets/logo.png">
+<link rel="apple-touch-icon" href="assets/logo.png">
+<link rel="manifest" href="site.webmanifest">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
@@ -71,8 +87,8 @@
 </div>
 
 <!-- FILTER TABS -->
-<div style="max-width:1100px;margin:0 auto 48px;padding:0 20px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
-  <div class="proj-tabs" style="margin:0;flex:1;">
+<div class="projects-filterbar">
+  <div class="proj-tabs projects-filtertabs">
     <button class="ptab active" onclick="filterProj('all',this)"    data-i18n="tab_all">Все работы</button>
     <button class="ptab"        onclick="filterProj('mobile',this)" data-i18n="tab_mobile">📱 Мобильные</button>
     <button class="ptab"        onclick="filterProj('web',this)"    data-i18n="tab_web">🌐 Веб</button>
@@ -81,7 +97,7 @@
 </div>
 
 <!-- ═══════════════════ PROJECT 01: DOM ════════════════════ -->
-<div style="max-width:1100px;margin:0 auto 80px;padding:0 20px;" data-cat="mobile ai">
+<div class="project-section project-section-featured" data-cat="mobile ai">
 
   <div class="proj-section-hdr">
     <span class="proj-section-num">01</span>
@@ -107,6 +123,24 @@
         <span class="video-chip">Voice AI</span>
         <span class="video-chip">App Store</span>
       </div>
+    </div>
+  </div>
+
+  <div class="case-proof-grid">
+    <div class="case-proof-item">
+      <span data-i18n="dom_proof1_label">Фокус</span>
+      <strong data-i18n="dom_proof1_value">Личный мобильный опыт</strong>
+      <p data-i18n="dom_proof1_desc">Путь пользователя собран вокруг практик, профиля и регулярного возвращения в приложение.</p>
+    </div>
+    <div class="case-proof-item">
+      <span data-i18n="dom_proof2_label">AI слой</span>
+      <strong data-i18n="dom_proof2_value">Голосовые проводники</strong>
+      <p data-i18n="dom_proof2_desc">Архитектура поддерживает сценарии общения, медитации и персональные подсказки.</p>
+    </div>
+    <div class="case-proof-item">
+      <span data-i18n="dom_proof3_label">Контент</span>
+      <strong data-i18n="dom_proof3_value">Ритуалы и путешествия</strong>
+      <p data-i18n="dom_proof3_desc">Система разделов готова к росту библиотеки сессий, церемоний и иммерсивных маршрутов.</p>
     </div>
   </div>
 
@@ -137,7 +171,7 @@
 </div>
 
 <!-- ═══════════════════ OTHER PROJECTS ═════════════════════ -->
-<div style="max-width:1100px;margin:0 auto 80px;padding:0 20px;">
+<div class="project-section">
 
   <div class="proj-section-hdr">
     <span class="proj-section-num" data-i18n="other_num">02 — 05</span>
@@ -147,11 +181,15 @@
   <div class="proj-grid">
 
     <div class="pcard span2" data-cat="web">
-      <img class="pcard-img" src="assets/movie-app.jpg" alt="Movie App" loading="lazy" decoding="async" style="height:240px;">
+      <img class="pcard-img pcard-img-feature" src="assets/movie-app.jpg" alt="Movie App" loading="lazy" decoding="async">
       <div class="pcard-body">
         <span class="pcard-tag" data-i18n="movie_tag">Веб-платформа</span>
         <div class="pcard-name" data-i18n="movie_name">Movie App</div>
         <div class="pcard-desc" data-i18n="movie_desc">Платформа для поиска, фильтрации и сохранения фильмов. Watchlist, рейтинги, жанры.</div>
+        <div class="pcard-facts">
+          <span data-i18n="movie_fact1">Каталог и поиск</span>
+          <span data-i18n="movie_fact2">Watchlist логика</span>
+        </div>
         <div class="pcard-chips">
           <span class="pcard-chip">React.js</span>
           <span class="pcard-chip">REST API</span>
@@ -166,6 +204,10 @@
         <span class="pcard-tag" data-i18n="travel_tag">Веб · Карты</span>
         <div class="pcard-name" data-i18n="travel_name">Travel Advisor</div>
         <div class="pcard-desc" data-i18n="travel_desc">Поиск ресторанов и мест с интерактивными картами и геолокацией.</div>
+        <div class="pcard-facts">
+          <span data-i18n="travel_fact1">Карты и рейтинг</span>
+          <span data-i18n="travel_fact2">Места рядом</span>
+        </div>
         <div class="pcard-chips">
           <span class="pcard-chip">Google Maps API</span>
           <span class="pcard-chip" data-i18n="chip_geolocation">Геолокация</span>
@@ -179,6 +221,10 @@
         <span class="pcard-tag" data-i18n="re_tag">Веб · Недвижимость</span>
         <div class="pcard-name" data-i18n="re_name">Realtor Platform</div>
         <div class="pcard-desc" data-i18n="re_desc">Каталог объектов с фото, фильтрами по цене и площади.</div>
+        <div class="pcard-facts">
+          <span data-i18n="re_fact1">Фильтры объектов</span>
+          <span data-i18n="re_fact2">Карточки недвижимости</span>
+        </div>
         <div class="pcard-chips">
           <span class="pcard-chip">React.js</span>
           <span class="pcard-chip" data-i18n="chip_catalog">Каталог</span>
@@ -192,6 +238,10 @@
         <span class="pcard-tag" data-i18n="gym_tag">Веб · Фитнес</span>
         <div class="pcard-name" data-i18n="gym_name">Fitness Club</div>
         <div class="pcard-desc" data-i18n="gym_desc">Фитнес-приложение с тренировками и базой упражнений. Live на Netlify.</div>
+        <div class="pcard-facts">
+          <span data-i18n="gym_fact1">База упражнений</span>
+          <span data-i18n="gym_fact2">Готовый деплой</span>
+        </div>
         <div class="pcard-chips">
           <span class="pcard-chip">React.js</span>
           <span class="pcard-chip">Live · Netlify</span>
@@ -205,6 +255,10 @@
         <span class="pcard-tag" data-i18n="ai_tag">AI · Личное &amp; Бизнес</span>
         <div class="pcard-name" data-i18n="ai_name">AI Ассистент — ваш умный друг</div>
         <div class="pcard-desc" data-i18n="ai_desc">Персональный AI-помощник для жизни и бизнеса. Советует, напоминает, анализирует и поддерживает — как друг.</div>
+        <div class="pcard-facts">
+          <span data-i18n="ai_fact1">Голосовой сценарий</span>
+          <span data-i18n="ai_fact2">Автоматизация рутины</span>
+        </div>
         <div class="pcard-chips">
           <span class="pcard-chip">Voice AI</span>
           <span class="pcard-chip">GPT-4</span>
@@ -218,7 +272,7 @@
 
 <!-- CTA -->
 <div class="cta-banner">
-  <div style="max-width:600px;margin:0 auto;">
+  <div class="cta-banner-inner">
     <h2><span data-i18n="cta_t1">Хотите такой же</span> <em data-i18n="cta_em">продукт?</em></h2>
     <p data-i18n="cta_sub">Расскажите об идее — мы обсудим, спланируем и сделаем.</p>
     <a href="index.html#contact" class="btn-main" data-i18n="cta_btn">Обсудить проект →</a>

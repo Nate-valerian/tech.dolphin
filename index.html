@@ -7,10 +7,39 @@
 <meta name="description" content="Создаём сайты, мобильные приложения, AI продукты под ключ по всей России.">
 <meta name="robots" content="index, follow">
 <meta property="og:title" content="Tech Dolphin — Разработка сайтов, приложений и AI продуктов">
+<meta property="og:description" content="Проектируем и запускаем сайты, приложения и AI продукты быстрее, понятнее и без раздутых агентских процессов.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://techdolphin.ru">
+<meta property="og:image" content="https://techdolphin.ru/assets/logo.png">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tech Dolphin — сайты, приложения и AI продукты">
+<meta name="twitter:description" content="Премиальная разработка сайтов, приложений и AI продуктов под ключ.">
+<meta name="twitter:image" content="https://techdolphin.ru/assets/logo.png">
+<meta name="theme-color" content="#020B18">
 <link rel="canonical" href="https://techdolphin.ru">
+<link rel="icon" href="assets/logo.png">
+<link rel="apple-touch-icon" href="assets/logo.png">
+<link rel="manifest" href="site.webmanifest">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Tech Dolphin",
+  "url": "https://techdolphin.ru",
+  "logo": "https://techdolphin.ru/assets/logo.png",
+  "telephone": "+79653932841",
+  "email": "m.moleva@mail.ru",
+  "areaServed": "RU",
+  "description": "Website, mobile app and AI product development.",
+  "sameAs": [
+    "https://t.me/+79653932841",
+    "https://wa.me/79653932841"
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -315,8 +344,8 @@
   <h2 class="section-title"><span data-i18n="proj_title">Что мы</span> <em data-i18n="proj_title_em">уже сделали</em></h2>
   <p class="section-sub" data-i18n="proj_sub">Реальные проекты — от мобильных приложений до веб-платформ.</p>
 
-  <div style="display:flex;flex-wrap:wrap;gap:8px;margin:36px 0 12px;align-items:center;">
-    <div class="proj-tabs" style="margin:0;flex:1;">
+  <div class="home-projects-toolbar">
+    <div class="proj-tabs home-projects-tabs">
       <button class="ptab active" onclick="filterProj('all',this)"    data-i18n="tab_all">Все работы</button>
       <button class="ptab"        onclick="filterProj('mobile',this)" data-i18n="tab_mobile">📱 Мобильные</button>
       <button class="ptab"        onclick="filterProj('web',this)"    data-i18n="tab_web">🌐 Веб</button>
@@ -439,7 +468,7 @@
 
     <!-- Fitness — spans 2 -->
     <div class="pcard span2" data-cat="web">
-      <img class="pcard-img" src="assets/fitness-club.jpg" alt="Fitness Club" loading="lazy" decoding="async" style="height:220px;">
+      <img class="pcard-img pcard-img-wide" src="assets/fitness-club.jpg" alt="Fitness Club" loading="lazy" decoding="async">
       <div class="pcard-body">
         <span class="pcard-tag" data-i18n="home_gym_tag">Веб-приложение · Фитнес</span>
         <div class="pcard-name">Fitness Club</div>

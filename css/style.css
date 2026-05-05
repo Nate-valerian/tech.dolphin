@@ -472,6 +472,17 @@ img, video { display: block; }
 .svc-item::before { content: ''; flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%; background: var(--violet); margin-top: 7px; }
 
 /* ── PROJECTS ── */
+.home-projects-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 36px 0 12px;
+  align-items: center;
+}
+.home-projects-tabs {
+  margin: 0;
+  flex: 1;
+}
 .proj-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
 .ptab {
   background: var(--card2); border: 1px solid var(--border);
@@ -500,6 +511,7 @@ img, video { display: block; }
 .pcard:hover { border-color: rgba(14,165,233,.45); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(14,165,233,.12); }
 .pcard-img { width: 100%; height: 220px; object-fit: cover; object-position: top; flex-shrink: 0; }
 .pcard-img.tall { height: 280px; }
+.pcard-img-wide { height: 220px; }
 .pcard-body { padding: 22px 24px 26px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
 .pcard-tag {
   display: inline-block; background: var(--csft); border: 1px solid rgba(14,165,233,.25);
@@ -730,6 +742,29 @@ footer { border-top: 1px solid var(--border); padding: 32px 24px; max-width: 110
   background: radial-gradient(circle, rgba(107,78,255,.15) 0%, transparent 65%);
   pointer-events: none;
 }
+.projects-filterbar,
+.project-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.projects-filterbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 48px;
+}
+.projects-filtertabs {
+  margin: 0;
+  flex: 1;
+}
+.project-section {
+  margin-bottom: 80px;
+}
+.project-section-featured {
+  scroll-margin-top: 120px;
+}
 .proj-section-hdr {
   display: flex; align-items: center; gap: 16px;
   padding-bottom: 20px; border-bottom: 1px solid var(--border);
@@ -764,6 +799,59 @@ footer { border-top: 1px solid var(--border); padding: 32px 24px; max-width: 110
 .video-desc  { font-size: 15px; color: var(--muted2); line-height: 1.75; }
 .video-chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .video-chip  { background: rgba(255,255,255,.06); border: 1px solid var(--border); color: var(--muted2); font-size: 12px; font-weight: 500; padding: 5px 14px; border-radius: 100px; }
+.case-proof-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 18px 0 24px;
+}
+.case-proof-item {
+  background: linear-gradient(145deg, rgba(10,30,48,.86), rgba(6,21,34,.92));
+  border: 1px solid rgba(14,165,233,.16);
+  border-radius: var(--r);
+  padding: 20px;
+}
+.case-proof-item span {
+  display: block;
+  color: var(--cyan);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.case-proof-item strong {
+  display: block;
+  color: var(--white);
+  font-size: 16px;
+  line-height: 1.35;
+  margin-bottom: 8px;
+}
+.case-proof-item p {
+  color: var(--muted2);
+  font-size: 13px;
+  line-height: 1.65;
+}
+.pcard-img-feature {
+  height: 240px;
+}
+.pcard-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0 0;
+}
+.pcard-facts span {
+  display: inline-flex;
+  align-items: center;
+  color: #BFD7E8;
+  background: rgba(14,165,233,.08);
+  border: 1px solid rgba(14,165,233,.18);
+  border-radius: 100px;
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 700;
+}
 /* Screenshot grid */
 .screen-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
 .screen-card {
@@ -784,11 +872,13 @@ footer { border-top: 1px solid var(--border); padding: 32px 24px; max-width: 110
 .cta-banner h2    { font-size: clamp(24px,3vw,38px); font-weight: 800; margin-bottom: 12px; }
 .cta-banner h2 em { font-style: normal; background: linear-gradient(135deg,var(--violet),var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .cta-banner p     { font-size: 16px; color: var(--muted2); max-width: 480px; margin: 0 auto 32px; }
+.cta-banner-inner { max-width: 600px; margin: 0 auto; }
 /* Responsive projects page */
 @media(max-width:900px) {
   .video-feature          { grid-template-columns: 1fr; }
   .video-feature video,
   .video-feature img      { height: 300px; }
+  .case-proof-grid        { grid-template-columns: 1fr; }
   .screen-grid            { grid-template-columns: repeat(2,1fr); }
 }
 @media(max-width:600px) {
