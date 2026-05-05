@@ -162,7 +162,9 @@ img, video { display: block; }
   box-shadow: 0 16px 48px rgba(0,0,0,.22);
 }
 .nav-logo { flex: 0 0 auto; display: flex; align-items: center; margin-right: 4px; }
-.nav-logo img {
+.nav-logo a { display: flex; align-items: center; }
+.nav-logo img,
+.nav-logo video {
   height: 36px; width: 36px; object-fit: cover;
   border-radius: 50%; border: 1.5px solid rgba(14,165,233,.3);
 }

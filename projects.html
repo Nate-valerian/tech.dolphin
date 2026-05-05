@@ -40,7 +40,14 @@
 
 <!-- TOP NAV -->
 <nav class="nav">
-  <div class="nav-logo"><a href="index.html"><img src="assets/logo.png" alt="Tech Dolphin"></a></div>
+  <div class="nav-logo">
+    <a href="index.html" aria-label="Tech Dolphin">
+      <video autoplay muted loop playsinline preload="metadata" poster="assets/logo.png">
+        <source src="assets/logo_video.mp4" type="video/mp4">
+        <img src="assets/logo.png" alt="Tech Dolphin">
+      </video>
+    </a>
+  </div>
   <div class="nav-links" id="primary-nav">
     <a href="index.html#hero"     data-i18n="lnav_home">Главная</a>
     <a href="index.html#about"    data-i18n="nav_about">О нас</a>
