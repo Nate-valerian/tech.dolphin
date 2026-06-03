@@ -274,6 +274,30 @@ function initTilt() {
 const EJ_PUBLIC  = '87_f2ZcU4pQ0LZlpc';
 const EJ_SERVICE = 'service_8xs6t0i';
 const EJ_TMPL    = 'template_u3fwuan';
+const EJ_TO_EMAIL = 'm.moleva@mail.ru';
+
+async function sendLeadEmail(templateParams) {
+  if (!window.emailjs) throw new Error('EmailJS is not loaded');
+  const leadEmail = templateParams.email || '';
+  const message = leadEmail
+    ? `Email: ${leadEmail}\n\n${templateParams.message || ''}`.trim()
+    : templateParams.message;
+
+  try {
+    return await emailjs.send(EJ_SERVICE, EJ_TMPL, {
+      ...templateParams,
+      email: EJ_TO_EMAIL,
+      lead_email: leadEmail,
+      reply_to: leadEmail || EJ_TO_EMAIL,
+      message
+    }, {
+      publicKey: EJ_PUBLIC
+    });
+  } catch (error) {
+    console.error('EmailJS submission failed:', error);
+    throw error;
+  }
+}
 
 async function sendCallback(e) {
   e.preventDefault();
@@ -282,8 +306,7 @@ async function sendCallback(e) {
   const errEl = document.getElementById('cb-error');
   if (errEl) errEl.style.display = 'none';
   try {
-    if (!window.emailjs) throw new Error('EmailJS is not loaded');
-    await emailjs.send(EJ_SERVICE, EJ_TMPL, {
+    await sendLeadEmail({
       subject: currentLang === 'ru' ? 'Заявка на обратный звонок' : 'Callback Request',
       name, phone, message: currentLang === 'ru' ? 'Перезвоните мне' : 'Please call me back'
     });
@@ -303,8 +326,7 @@ async function sendContact(e) {
   const errEl   = document.getElementById('ct-error');
   if (errEl) errEl.style.display = 'none';
   try {
-    if (!window.emailjs) throw new Error('EmailJS is not loaded');
-    await emailjs.send(EJ_SERVICE, EJ_TMPL, {
+    await sendLeadEmail({
       subject: currentLang === 'ru' ? 'Новая заявка с сайта' : 'New Request from Website',
       name, phone, email, message
     });
@@ -437,14 +459,13 @@ async function sendLeadChat(e) {
   const errEl = document.getElementById('chat-error');
   if (errEl) errEl.style.display = 'none';
   try {
-    if (!window.emailjs) throw new Error('EmailJS is not loaded');
     const message = [
       `${currentLang === 'ru' ? 'Тип проекта' : 'Project type'}: ${leadChatData.type || '-'}`,
       `${currentLang === 'ru' ? 'Бюджет' : 'Budget'}: ${leadChatData.budget || '-'}`,
       `${currentLang === 'ru' ? 'Старт' : 'Timeline'}: ${leadChatData.timeline || '-'}`,
       `${currentLang === 'ru' ? 'Задача' : 'Task'}: ${leadChatData.note || '-'}`
     ].join('\n');
-    await emailjs.send(EJ_SERVICE, EJ_TMPL, {
+    await sendLeadEmail({
       subject: currentLang === 'ru' ? 'Бриф из чат-бота' : 'Chatbot Brief',
       name,
       phone: contact,
