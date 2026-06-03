@@ -274,37 +274,109 @@ function initTilt() {
 const EJ_PUBLIC  = '87_f2ZcU4pQ0LZlpc';
 const EJ_SERVICE = 'service_8xs6t0i';
 const EJ_TMPL    = 'template_u3fwuan';
-const EJ_TO_EMAIL = 'm.moleva@mail.ru';
+const EJ_TO_EMAILS = ['n.nate1544@gmail.com', 'm.moleva@mail.ru'];
+const EJ_ENDPOINT = 'https://api.emailjs.com/api/v1.0/email/send';
 
 async function sendLeadEmail(templateParams) {
-  if (!window.emailjs) throw new Error('EmailJS is not loaded');
   const leadEmail = templateParams.email || '';
   const message = leadEmail
     ? `Email: ${leadEmail}\n\n${templateParams.message || ''}`.trim()
     : templateParams.message;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 15000);
 
   try {
-    return await emailjs.send(EJ_SERVICE, EJ_TMPL, {
-      ...templateParams,
-      email: EJ_TO_EMAIL,
-      lead_email: leadEmail,
-      reply_to: leadEmail || EJ_TO_EMAIL,
-      message
-    }, {
-      publicKey: EJ_PUBLIC
-    });
+    return await Promise.all(EJ_TO_EMAILS.map(async recipient => {
+      const response = await fetch(EJ_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          service_id: EJ_SERVICE,
+          template_id: EJ_TMPL,
+          user_id: EJ_PUBLIC,
+          template_params: {
+            ...templateParams,
+            email: recipient,
+            lead_email: leadEmail,
+            reply_to: leadEmail || recipient,
+            message
+          }
+        }),
+        signal: controller.signal
+      });
+
+      if (!response.ok) {
+        const error = new Error(await response.text() || `EmailJS request failed (${response.status})`);
+        error.status = response.status;
+        throw error;
+      }
+
+      return response;
+    }));
   } catch (error) {
     console.error('EmailJS submission failed:', error);
     throw error;
+  } finally {
+    clearTimeout(timeout);
   }
+}
+
+function beginFormSubmit(form, errEl) {
+  if (!form || form.dataset.submitting === 'true') return false;
+  form.dataset.submitting = 'true';
+  const button = form.querySelector('button[type="submit"]');
+  if (button) button.disabled = true;
+  if (errEl) errEl.style.display = 'none';
+  return true;
+}
+
+function endFormSubmit(form) {
+  if (!form) return;
+  delete form.dataset.submitting;
+  const button = form.querySelector('button[type="submit"]');
+  if (button) button.disabled = false;
+}
+
+function showLeadError(errEl, error, fallback) {
+  if (!errEl) return;
+  const status = Number(error && error.status);
+  let message = fallback;
+
+  if (status === 429) {
+    message = currentLang === 'ru'
+      ? 'Слишком много попыток. Подождите несколько секунд и попробуйте ещё раз.'
+      : 'Too many attempts. Wait a few seconds and try again.';
+  } else if (status === 412) {
+    message = currentLang === 'ru'
+      ? 'Ошибка почтового сервиса (412). Напишите нам напрямую.'
+      : 'Email service error (412). Please contact us directly.';
+  } else if (status === 422) {
+    message = currentLang === 'ru'
+      ? 'Ошибка настройки формы (422). Напишите нам напрямую.'
+      : 'Form configuration error (422). Please contact us directly.';
+  } else if (status) {
+    message = `${fallback} (${status})`;
+  } else if (error && error.name === 'AbortError') {
+    message = currentLang === 'ru'
+      ? 'Почтовый сервис не ответил вовремя. Попробуйте ещё раз.'
+      : 'The email service took too long to respond. Please try again.';
+  } else if (error instanceof TypeError) {
+    message = currentLang === 'ru'
+      ? 'Не удалось подключиться к почтовому сервису. Проверьте сеть или блокировщик рекламы.'
+      : 'Could not connect to the email service. Check your network or ad blocker.';
+  }
+
+  errEl.style.display = 'block';
+  errEl.textContent = message;
 }
 
 async function sendCallback(e) {
   e.preventDefault();
+  const form = e.currentTarget || e.target;
   const name  = document.getElementById('cb-name').value;
   const phone = document.getElementById('cb-phone').value;
   const errEl = document.getElementById('cb-error');
-  if (errEl) errEl.style.display = 'none';
+  if (!beginFormSubmit(form, errEl)) return;
   try {
     await sendLeadEmail({
       subject: currentLang === 'ru' ? 'Заявка на обратный звонок' : 'Callback Request',
@@ -312,19 +384,21 @@ async function sendCallback(e) {
     });
     document.getElementById('cb-form').style.display = 'none';
     document.getElementById('cb-success').style.display = 'block';
-  } catch {
-    if (errEl) { errEl.style.display = 'block'; errEl.textContent = currentLang === 'ru' ? 'Ошибка. Попробуйте ещё раз.' : 'Error. Please try again.'; }
+  } catch (error) {
+    endFormSubmit(form);
+    showLeadError(errEl, error, currentLang === 'ru' ? 'Ошибка. Попробуйте ещё раз.' : 'Error. Please try again.');
   }
 }
 
 async function sendContact(e) {
   e.preventDefault();
+  const form = e.currentTarget || e.target;
   const name    = document.getElementById('ct-name').value;
   const phone   = document.getElementById('ct-phone').value;
   const email   = document.getElementById('ct-email').value;
   const message = document.getElementById('ct-message').value;
   const errEl   = document.getElementById('ct-error');
-  if (errEl) errEl.style.display = 'none';
+  if (!beginFormSubmit(form, errEl)) return;
   try {
     await sendLeadEmail({
       subject: currentLang === 'ru' ? 'Новая заявка с сайта' : 'New Request from Website',
@@ -332,8 +406,9 @@ async function sendContact(e) {
     });
     document.getElementById('ct-form').style.display = 'none';
     document.getElementById('ct-success').style.display = 'block';
-  } catch {
-    if (errEl) { errEl.style.display = 'block'; errEl.textContent = currentLang === 'ru' ? 'Ошибка. Попробуйте ещё раз.' : 'Error. Please try again.'; }
+  } catch (error) {
+    endFormSubmit(form);
+    showLeadError(errEl, error, currentLang === 'ru' ? 'Ошибка. Попробуйте ещё раз.' : 'Error. Please try again.');
   }
 }
 
@@ -453,11 +528,12 @@ function renderLeadChat() {
 
 async function sendLeadChat(e) {
   e.preventDefault();
+  const form = e.currentTarget || e.target;
   const t = T[currentLang];
   const name = document.getElementById('chat-name').value.trim();
   const contact = document.getElementById('chat-contact').value.trim();
   const errEl = document.getElementById('chat-error');
-  if (errEl) errEl.style.display = 'none';
+  if (!beginFormSubmit(form, errEl)) return;
   try {
     const message = [
       `${currentLang === 'ru' ? 'Тип проекта' : 'Project type'}: ${leadChatData.type || '-'}`,
@@ -474,11 +550,9 @@ async function sendLeadChat(e) {
     });
     leadChatStep = 'done';
     renderLeadChat();
-  } catch {
-    if (errEl) {
-      errEl.style.display = 'block';
-      errEl.textContent = t.chat_error;
-    }
+  } catch (error) {
+    endFormSubmit(form);
+    showLeadError(errEl, error, t.chat_error);
   }
 }
 
@@ -496,7 +570,6 @@ function initParallax() {
 
 /* ── INIT ─────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
-  if (window.emailjs) emailjs.init(EJ_PUBLIC);
   initProgress();
   initLeftNav();
   initCookie();

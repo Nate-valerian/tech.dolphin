@@ -363,6 +363,7 @@ img, video { display: block; }
   cursor: pointer; font-family: inherit; transition: all .25s;
 }
 .form-btn:hover { transform: scale(1.02); }
+.form-btn:disabled { cursor: wait; opacity: .7; transform: none; }
 .form-consent { font-size: 11px; color: #3D6B4A; text-align: center; }
 .form-consent a { color: #0EA5E9; }
 .form-success { display: none; text-align: center; color: #86EFAC; font-size: 14px; font-weight: 600; padding: 12px 0; }
