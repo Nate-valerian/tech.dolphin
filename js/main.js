@@ -275,49 +275,40 @@ const EJ_PUBLIC  = '87_f2ZcU4pQ0LZlpc';
 const EJ_SERVICE = 'service_8xs6t0i';
 const EJ_TMPL    = 'template_u3fwuan';
 const EJ_TO_EMAILS = ['n.nate1544@gmail.com', 'm.moleva@mail.ru'];
-const EJ_ENDPOINT = 'https://api.emailjs.com/api/v1.0/email/send';
 
 async function sendLeadEmail(templateParams) {
+  if (!window.emailjs) throw new Error('EmailJS is not loaded');
   const leadEmail = templateParams.email || '';
   const message = leadEmail
     ? `Email: ${leadEmail}\n\n${templateParams.message || ''}`.trim()
     : templateParams.message;
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 15000);
+  let timeoutId;
+  const sendTimeout = new Promise((_, reject) => {
+    timeoutId = setTimeout(() => {
+      const error = new Error('EmailJS request timed out');
+      error.name = 'AbortError';
+      reject(error);
+    }, 15000);
+  });
 
   try {
-    return await Promise.all(EJ_TO_EMAILS.map(async recipient => {
-      const response = await fetch(EJ_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          service_id: EJ_SERVICE,
-          template_id: EJ_TMPL,
-          user_id: EJ_PUBLIC,
-          template_params: {
-            ...templateParams,
-            email: recipient,
-            lead_email: leadEmail,
-            reply_to: leadEmail || recipient,
-            message
-          }
-        }),
-        signal: controller.signal
-      });
-
-      if (!response.ok) {
-        const error = new Error(await response.text() || `EmailJS request failed (${response.status})`);
-        error.status = response.status;
-        throw error;
-      }
-
-      return response;
-    }));
+    return await Promise.race([
+      Promise.all(EJ_TO_EMAILS.map(recipient => emailjs.send(EJ_SERVICE, EJ_TMPL, {
+        ...templateParams,
+        email: recipient,
+        lead_email: leadEmail,
+        reply_to: leadEmail || recipient,
+        message
+      }, {
+        publicKey: EJ_PUBLIC
+      }))),
+      sendTimeout
+    ]);
   } catch (error) {
     console.error('EmailJS submission failed:', error);
     throw error;
   } finally {
-    clearTimeout(timeout);
+    clearTimeout(timeoutId);
   }
 }
 
@@ -570,6 +561,7 @@ function initParallax() {
 
 /* ── INIT ─────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
+  if (window.emailjs) emailjs.init({ publicKey: EJ_PUBLIC });
   initProgress();
   initLeftNav();
   initCookie();
