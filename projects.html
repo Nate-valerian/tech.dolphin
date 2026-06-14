@@ -57,12 +57,23 @@
     <a href="index.html#why"      data-i18n="nav_why">Почему мы</a>
     <a href="index.html#faq"      data-i18n="nav_faq">FAQ</a>
     <a href="index.html#contact"  data-i18n="nav_contact">Контакт</a>
+    <div class="nav-mobile-contacts" aria-label="Быстрые контакты">
+      <a href="https://max.ru/+79653932841" target="_blank" rel="noopener noreferrer">MAX</a>
+      <a href="https://t.me/+79653932841" target="_blank" rel="noopener noreferrer"><svg class="nav-telegram-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l16.02-6.17c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71l-4.16-3.07-2.01 1.93c-.23.23-.42.42-.84.42z"/></svg> Telegram</a>
+      <a href="tel:+79653932841" data-i18n="nav_call">📞 Позвонить</a>
+    </div>
   </div>
   <button id="lang-toggle" onclick="toggleLang()">EN</button>
   <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Меню" aria-controls="primary-nav" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
-  <a href="index.html" class="nav-cta" style="background:none;border:1px solid rgba(14,165,233,.3);color:var(--cyan);margin-right:6px;" data-i18n="back_home">← Главная</a>
+  <div class="nav-contact-actions" aria-label="Быстрые контакты">
+    <a href="https://max.ru/+79653932841" target="_blank" rel="noopener noreferrer" class="nav-contact-link nav-contact-max" aria-label="Написать в MAX" title="MAX">MAX</a>
+    <a href="https://t.me/+79653932841" target="_blank" rel="noopener noreferrer" class="nav-contact-link nav-contact-telegram" aria-label="Написать в Telegram" title="Telegram">
+      <svg class="nav-telegram-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l16.02-6.17c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71l-4.16-3.07-2.01 1.93c-.23.23-.42.42-.84.42z"/></svg>
+    </a>
+    <a href="tel:+79653932841" class="nav-contact-link nav-contact-call" aria-label="Позвонить напрямую" title="Позвонить">☎</a>
+  </div>
   <a href="index.html#contact" class="nav-cta" data-i18n="nav_cta">Обсудить проект →</a>
 </nav>
 
