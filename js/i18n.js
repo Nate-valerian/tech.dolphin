@@ -309,7 +309,7 @@ const T = {
     privacy_p2: '<strong style="color:#E8F5EC;">2. Какие данные мы собираем.</strong> Имя, телефон, email — только при добровольном заполнении форм.',
     privacy_p3: '<strong style="color:#E8F5EC;">3. Цель сбора данных.</strong> Исключительно для связи с вами. Не передаём третьим лицам.',
     privacy_p4: '<strong style="color:#E8F5EC;">4. Защита данных.</strong> В соответствии с ФЗ №152 «О персональных данных».',
-    privacy_p5: '<strong style="color:#E8F5EC;">5. Cookie.</strong> Можно отключить в настройках браузера.',
+    privacy_p5: '<strong style="color:#E8F5EC;">5. Cookie и аналитика.</strong> Сайт может использовать сервисы веб-аналитики, включая Яндекс Метрику, чтобы понимать посещаемость, клики, время на сайте и события форм. Cookie можно отключить в настройках браузера.',
     privacy_p6: '<strong style="color:#E8F5EC;">6. Контакты.</strong> <a href="mailto:m.moleva@mail.ru" style="color:#0EA5E9;">m.moleva@mail.ru</a> · <a href="tel:+79653932841" style="color:#0EA5E9;">+7 (965) 393-28-41</a>',
   },
 
@@ -603,7 +603,7 @@ const T = {
     privacy_p2: '<strong style="color:#E8F5EC;">2. Data we collect.</strong> Name, phone and email — only when you voluntarily submit a form.',
     privacy_p3: '<strong style="color:#E8F5EC;">3. Purpose of data collection.</strong> Only to contact you. We do not share it with third parties.',
     privacy_p4: '<strong style="color:#E8F5EC;">4. Data protection.</strong> Processed in accordance with Russian Federal Law No. 152-FZ on personal data.',
-    privacy_p5: '<strong style="color:#E8F5EC;">5. Cookies.</strong> You can disable cookies in your browser settings.',
+    privacy_p5: '<strong style="color:#E8F5EC;">5. Cookies and analytics.</strong> The site may use web analytics services, including Yandex Metrica, to understand visits, clicks, time on site, and form events. You can disable cookies in your browser settings.',
     privacy_p6: '<strong style="color:#E8F5EC;">6. Contacts.</strong> <a href="mailto:m.moleva@mail.ru" style="color:#0EA5E9;">m.moleva@mail.ru</a> · <a href="tel:+79653932841" style="color:#0EA5E9;">+7 (965) 393-28-41</a>',
   }
 };

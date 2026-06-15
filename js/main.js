@@ -373,9 +373,13 @@ async function sendCallback(e) {
       subject: currentLang === 'ru' ? 'Заявка на обратный звонок' : 'Callback Request',
       name, phone, message: currentLang === 'ru' ? 'Перезвоните мне' : 'Please call me back'
     });
+    window.techDolphinAnalytics?.trackLeadResult('cb-form', 'success');
     document.getElementById('cb-form').style.display = 'none';
     document.getElementById('cb-success').style.display = 'block';
   } catch (error) {
+    window.techDolphinAnalytics?.trackLeadResult('cb-form', 'error', {
+      error_status: error && (error.status || error.code || error.name || 'unknown')
+    });
     endFormSubmit(form);
     showLeadError(errEl, error, currentLang === 'ru' ? 'Ошибка. Попробуйте ещё раз.' : 'Error. Please try again.');
   }
@@ -395,9 +399,13 @@ async function sendContact(e) {
       subject: currentLang === 'ru' ? 'Новая заявка с сайта' : 'New Request from Website',
       name, phone, email, message
     });
+    window.techDolphinAnalytics?.trackLeadResult('ct-form', 'success');
     document.getElementById('ct-form').style.display = 'none';
     document.getElementById('ct-success').style.display = 'block';
   } catch (error) {
+    window.techDolphinAnalytics?.trackLeadResult('ct-form', 'error', {
+      error_status: error && (error.status || error.code || error.name || 'unknown')
+    });
     endFormSubmit(form);
     showLeadError(errEl, error, currentLang === 'ru' ? 'Ошибка. Попробуйте ещё раз.' : 'Error. Please try again.');
   }
