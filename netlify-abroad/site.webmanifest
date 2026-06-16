@@ -1,0 +1,15 @@
+{
+  "name": "Tech Dolphin",
+  "short_name": "Tech Dolphin",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020B18",
+  "theme_color": "#020B18",
+  "icons": [
+    {
+      "src": "assets/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
