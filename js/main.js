@@ -86,7 +86,7 @@ function initProgress() {
 }
 
 /* ── LEFT NAV ─────────────────────────────── */
-const NAV_SECTIONS = ['hero','about','services','projects','stack','why','calc','faq','how','contact'];
+const NAV_SECTIONS = ['hero','about','services','projects','calc','stack','why','faq','how','contact'];
 
 function initLeftNav() {
   const items = document.querySelectorAll('.lnav-item');
