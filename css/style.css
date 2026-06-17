@@ -239,6 +239,19 @@ img, video { display: block; }
   .nav { padding: 8px 12px; }
   .nav-logo { margin-right: auto; }
   .nav-hamburger { display: flex; }
+  /* Remove transform + backdrop-filter from nav when menu is open so that the
+     fixed overlay (nav-links) is positioned relative to the viewport, not the nav pill */
+  .nav.menu-open {
+    transform: none;
+    left: 16px; right: 16px; width: auto;
+    -webkit-backdrop-filter: none; backdrop-filter: none;
+  }
+  .nav.menu-open::before {
+    content: ''; position: absolute; inset: 0;
+    border-radius: 100px;
+    -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px);
+    pointer-events: none;
+  }
   .nav-links { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(2,11,24,.97); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); z-index: 999; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 80px 20px 40px; }
   .nav-links.open { display: flex; }
   .nav-links a { font-size: 18px; font-weight: 600; padding: 14px 32px; width: 100%; max-width: 320px; text-align: center; border-radius: 14px; }

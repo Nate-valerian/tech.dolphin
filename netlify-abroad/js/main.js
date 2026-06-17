@@ -133,15 +133,18 @@ async function initGeoLanguage() {
 function toggleMobileMenu() {
   const links = document.querySelector('.nav-links');
   const btn   = document.getElementById('nav-hamburger');
+  const nav   = document.querySelector('.nav');
   if (!links || !btn) return;
   const isOpen = links.classList.toggle('open');
   btn.classList.toggle('open', isOpen);
   btn.setAttribute('aria-expanded', String(isOpen));
   document.body.style.overflow = isOpen ? 'hidden' : '';
+  if (nav) nav.classList.toggle('menu-open', isOpen);
 }
 function closeMobileMenu() {
   const links = document.querySelector('.nav-links');
   const btn   = document.getElementById('nav-hamburger');
+  const nav   = document.querySelector('.nav');
   if (!links) return;
   links.classList.remove('open');
   if (btn) {
@@ -149,6 +152,7 @@ function closeMobileMenu() {
     btn.setAttribute('aria-expanded', 'false');
   }
   document.body.style.overflow = '';
+  if (nav) nav.classList.remove('menu-open');
 }
 
 /* ── SCROLL PROGRESS ──────────────────────── */
