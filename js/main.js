@@ -60,6 +60,26 @@ function toggleLang() {
   applyLang(currentLang === 'ru' ? 'en' : 'ru');
 }
 
+function _lockBodyScroll() {
+  // iOS Safari resets scroll when overflow:hidden is applied to body.
+  // Fix: pin body with position:fixed at the current scroll offset.
+  const scrollY = window.scrollY;
+  document.body.style.overflow  = 'hidden';
+  document.body.style.position  = 'fixed';
+  document.body.style.top       = `-${scrollY}px`;
+  document.body.style.width     = '100%';
+  document.body.dataset.scrollY = scrollY;
+}
+function _unlockBodyScroll() {
+  const scrollY = parseInt(document.body.dataset.scrollY || '0', 10);
+  document.body.style.overflow = '';
+  document.body.style.position = '';
+  document.body.style.top      = '';
+  document.body.style.width    = '';
+  delete document.body.dataset.scrollY;
+  window.scrollTo(0, scrollY);
+}
+
 function toggleMobileMenu() {
   const links = document.querySelector('.nav-links');
   const btn   = document.getElementById('nav-hamburger');
@@ -68,19 +88,22 @@ function toggleMobileMenu() {
   const isOpen = links.classList.toggle('open');
   btn.classList.toggle('open', isOpen);
   btn.setAttribute('aria-expanded', String(isOpen));
-  document.body.style.overflow = isOpen ? 'hidden' : '';
   if (nav) nav.classList.toggle('menu-open', isOpen);
 
   if (isOpen) {
+    _lockBodyScroll();
     // Move nav-links to <body> so position:fixed is relative to viewport,
     // not the transformed .nav pill (transform creates a new containing block).
     links._returnParent = links.parentNode;
     links._returnNext   = links.nextSibling;
     document.body.appendChild(links);
-  } else if (links._returnParent) {
-    links._returnParent.insertBefore(links, links._returnNext || null);
-    delete links._returnParent;
-    delete links._returnNext;
+  } else {
+    _unlockBodyScroll();
+    if (links._returnParent) {
+      links._returnParent.insertBefore(links, links._returnNext || null);
+      delete links._returnParent;
+      delete links._returnNext;
+    }
   }
 }
 function closeMobileMenu() {
@@ -93,7 +116,7 @@ function closeMobileMenu() {
     btn.classList.remove('open');
     btn.setAttribute('aria-expanded', 'false');
   }
-  document.body.style.overflow = '';
+  _unlockBodyScroll();
   if (nav) nav.classList.remove('menu-open');
 
   if (links._returnParent) {
