@@ -123,6 +123,11 @@ const T = {
     exp_scope_databases: 'Databases',
     exp_scope_cloud: 'Cloud / DevOps',
     exp_scope_infra: 'Production Infrastructure',
+    eng_focus_label:   'Технологии в деталях',
+    eng_backend_title: 'Backend',
+    eng_frontend_title:'Frontend',
+    eng_mobile_title:  'Mobile',
+    eng_ai_title:      'AI и интеграции',
 
     /* SERVICES */
     svc_label:    'Что мы делаем',
@@ -433,6 +438,11 @@ const T = {
     exp_scope_databases: 'Databases',
     exp_scope_cloud: 'Cloud / DevOps',
     exp_scope_infra: 'Production Infrastructure',
+    eng_focus_label:   'Engineering Focus',
+    eng_backend_title: 'Backend',
+    eng_frontend_title:'Frontend',
+    eng_mobile_title:  'Mobile',
+    eng_ai_title:      'AI & Integrations',
 
     svc_label:    'What We Do',
     svc_title:    'Our',

@@ -70,6 +70,18 @@ function toggleMobileMenu() {
   btn.setAttribute('aria-expanded', String(isOpen));
   document.body.style.overflow = isOpen ? 'hidden' : '';
   if (nav) nav.classList.toggle('menu-open', isOpen);
+
+  if (isOpen) {
+    // Move nav-links to <body> so position:fixed is relative to viewport,
+    // not the transformed .nav pill (transform creates a new containing block).
+    links._returnParent = links.parentNode;
+    links._returnNext   = links.nextSibling;
+    document.body.appendChild(links);
+  } else if (links._returnParent) {
+    links._returnParent.insertBefore(links, links._returnNext || null);
+    delete links._returnParent;
+    delete links._returnNext;
+  }
 }
 function closeMobileMenu() {
   const links = document.querySelector('.nav-links');
@@ -83,6 +95,12 @@ function closeMobileMenu() {
   }
   document.body.style.overflow = '';
   if (nav) nav.classList.remove('menu-open');
+
+  if (links._returnParent) {
+    links._returnParent.insertBefore(links, links._returnNext || null);
+    delete links._returnParent;
+    delete links._returnNext;
+  }
 }
 
 /* ── SCROLL PROGRESS ──────────────────────── */
