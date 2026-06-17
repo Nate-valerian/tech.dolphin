@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Цены и условия | Tech Dolphin</title>
+<meta name="description" content="Калькулятор стоимости сайтов, приложений и AI продуктов. Узнайте цену вашего проекта.">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Цены | Tech Dolphin">
+<meta property="og:description" content="Калькулятор стоимости сайтов, приложений и AI продуктов.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://techdolphin.ru/pricing.html">
+<meta property="og:image" content="https://techdolphin.ru/assets/logo.png">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Цены | Tech Dolphin">
+<meta name="twitter:description" content="Калькулятор стоимости сайтов, приложений и AI продуктов.">
+<meta name="twitter:image" content="https://techdolphin.ru/assets/logo.png">
+<meta name="theme-color" content="#020B18">
+<link rel="canonical" href="https://techdolphin.ru/pricing.html">
+<link rel="icon" href="assets/logo.png">
+<link rel="apple-touch-icon" href="assets/logo.png">
+<link rel="manifest" href="site.webmanifest">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=20260614-2">
+</head>
+<body>
+
+<!-- PROGRESS BAR -->
+<div id="progress-bar"></div>
+
+<!-- AURORA -->
+<div class="aurora"><div class="aurora-1"></div><div class="aurora-2"></div></div>
+
+<!-- COOKIE -->
+<div id="cookie-banner">
+  <p><span data-i18n="cookie_text">🍪 Мы используем файлы cookie.</span> <a href="contact.html#privacy" data-i18n="cookie_link">политикой конфиденциальности</a>.</p>
+  <button id="cookie-btn" data-i18n="cookie_btn">Принять</button>
+</div>
+
+<!-- TOP NAV -->
+<nav class="nav">
+  <div class="nav-logo">
+    <a href="index.html" aria-label="Tech Dolphin">
+      <video autoplay muted loop playsinline preload="metadata" poster="assets/logo.png">
+        <source src="assets/logo.video.mp4" type="video/mp4">
+        <img src="assets/logo.png" alt="Tech Dolphin">
+      </video>
+    </a>
+  </div>
+  <div class="nav-links" id="primary-nav">
+    <a href="index.html"      data-i18n="lnav_home">Главная</a>
+    <a href="projects.html"   data-i18n="nav_projects_page">Проекты</a>
+    <a href="pricing.html"    data-i18n="lnav_calc" class="active-page">Цены</a>
+    <a href="faq.html"        data-i18n="nav_faq">FAQ</a>
+    <a href="contact.html"    data-i18n="nav_contact">Контакт</a>
+    <div class="nav-mobile-contacts" aria-label="Быстрые контакты">
+      <a href="https://max.ru/+79653932841" target="_blank" rel="noopener noreferrer">MAX</a>
+      <a href="https://t.me/+79653932841" target="_blank" rel="noopener noreferrer"><svg class="nav-telegram-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l16.02-6.17c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71l-4.16-3.07-2.01 1.93c-.23.23-.42.42-.84.42z"/></svg> Telegram</a>
+      <a href="tel:+79653932841" data-i18n="nav_call">📞 Позвонить</a>
+    </div>
+  </div>
+  <button id="lang-toggle" onclick="toggleLang()">EN</button>
+  <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Меню" aria-controls="primary-nav" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-contact-actions" aria-label="Быстрые контакты">
+    <a href="https://max.ru/+79653932841" target="_blank" rel="noopener noreferrer" class="nav-contact-link nav-contact-max" aria-label="Написать в MAX" title="MAX">MAX</a>
+    <a href="https://t.me/+79653932841" target="_blank" rel="noopener noreferrer" class="nav-contact-link nav-contact-telegram" aria-label="Написать в Telegram" title="Telegram">
+      <svg class="nav-telegram-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l16.02-6.17c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71l-4.16-3.07-2.01 1.93c-.23.23-.42.42-.84.42z"/></svg>
+    </a>
+    <a href="tel:+79653932841" class="nav-contact-link nav-contact-call" aria-label="Позвонить напрямую" title="Позвонить">☎</a>
+  </div>
+  <a href="contact.html" class="nav-cta" data-i18n="nav_cta">Обсудить проект →</a>
+</nav>
+
+<!-- ═══════════════════════════════════════════ WHY -->
+<div class="why-wrap" id="why" style="padding-top:120px;">
+  <div class="why-inner">
+    <div class="section-label" data-i18n="why_label">Почему мы</div>
+    <h2 class="section-title"><span data-i18n="why_title">Почему выбирают</span> <em data-i18n="why_title_em">нас</em></h2>
+    <div class="why-grid">
+      <div class="why-card"><div class="why-num">01</div><div class="why-title" data-i18n="why1_t">Senior-подход без хаоса</div><div class="why-desc" data-i18n="why1_d">Сразу думаем об архитектуре, дизайне, скорости и запуске — не просто собираем красивые экраны.</div></div>
+      <div class="why-card"><div class="why-num">02</div><div class="why-title" data-i18n="why2_t">Быстрый запуск без бюрократии</div><div class="why-desc" data-i18n="why2_d">Работаем компактно, показываем прогресс по этапам и не растягиваем проект лишними согласованиями.</div></div>
+      <div class="why-card"><div class="why-num">03</div><div class="why-title" data-i18n="why3_t">Прозрачная смета до старта</div><div class="why-desc" data-i18n="why3_d">До разработки фиксируем объём, сроки и ориентир по бюджету. Без неприятных сюрпризов в середине проекта.</div></div>
+      <div class="why-card"><div class="why-num">04</div><div class="why-title" data-i18n="why4_t">Поддержка после релиза</div><div class="why-desc" data-i18n="why4_d">После запуска остаёмся рядом: помогаем с обновлениями, улучшениями и развитием продукта.</div></div>
+      <div class="why-card"><div class="why-num">05</div><div class="why-title" data-i18n="why5_t">Красиво и понятно</div><div class="why-desc" data-i18n="why5_d">Делаем не только чтобы работало — но и чтобы было красиво.</div></div>
+      <div class="why-card"><div class="why-num">06</div><div class="why-title" data-i18n="why6_t">Всегда на связи</div><div class="why-desc" data-i18n="why6_d">Отвечаем быстро, объясняем понятно, без жаргона.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ CALCULATOR -->
+<section class="section" id="calc" style="max-width:900px;">
+  <div class="section-label" data-i18n="calc_label">Калькулятор стоимости</div>
+  <h2 class="section-title"><span data-i18n="calc_title">Узнайте стоимость</span> <em data-i18n="calc_title_em">вашего проекта</em></h2>
+  <p class="section-sub" data-i18n="calc_sub">Выберите что вам нужно — и сразу увидите примерную цену.</p>
+  <div id="calc-grid" class="calc-grid" style="margin-top:40px;"></div>
+  <div class="calc-result" id="calc-result">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;">
+      <div>
+        <div style="font-size:13px;color:#7AAF87;margin-bottom:8px;" data-i18n="calc_result_label">Примерная стоимость:</div>
+        <div id="calc-price" style="font-size:clamp(28px,4vw,44px);font-weight:800;background:linear-gradient(135deg,#0EA5E9,#6B4EFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-family:inherit;"></div>
+        <div id="calc-result-note" style="font-size:13px;color:#3D6B4A;margin-top:8px;" data-i18n="calc_result_note">Премиальное качество и умная стоимость</div>
+      </div>
+      <a href="contact.html" id="calc-cta" style="display:inline-flex;align-items:center;background:linear-gradient(135deg,#0EA5E9,#6B4EFF);color:#fff;font-size:14px;font-weight:700;padding:14px 32px;border-radius:100px;text-decoration:none;box-shadow:0 8px 24px rgba(14,165,233,.3);white-space:nowrap;" data-i18n="calc_cta">Обсудить проект →</a>
+    </div>
+    <div id="calc-disc" style="margin-top:16px;font-size:13px;color:#3D6B4A;" data-i18n="calc_disc">* Точная цена после бесплатного созвона.</div>
+  </div>
+  <div class="calc-empty" id="calc-empty" data-i18n="calc_empty">👆 Выберите услуги чтобы узнать стоимость</div>
+</section>
+
+<!-- ═══════════════════════════════════════════ HOW -->
+<div id="how" style="padding:100px 20px;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-label" data-i18n="how_label">Как мы работаем</div>
+    <h2 class="section-title"><span data-i18n="how_title">Просто и</span> <em data-i18n="how_title_em">понятно</em></h2>
+    <p class="section-sub" style="margin-bottom:60px;" data-i18n="how_sub">От первого звонка до готового продукта — пять простых шагов.</p>
+
+    <div class="how-step">
+      <div class="how-icon">📞</div>
+      <div style="flex:1;"><div class="how-title-row"><span class="how-name" data-i18n="how1_n">Вы оставляете заявку</span><span class="how-time" data-i18n="how1_t">В течение 2 часов</span></div><div class="how-desc" data-i18n="how1_d">Заполняете форму или звоните нам.</div></div>
+      <div class="how-num">01</div>
+    </div>
+    <div class="how-connector"></div>
+    <div class="how-step">
+      <div class="how-icon" style="background:linear-gradient(135deg,#6B4EFF,#0EA5E9);">💬</div>
+      <div style="flex:1;"><div class="how-title-row"><span class="how-name" data-i18n="how2_n">Созвон и обсуждение</span><span class="how-time" style="background:rgba(107,78,255,.15);border-color:rgba(107,78,255,.3);color:#A78BFA;" data-i18n="how2_t">За 1 день</span></div><div class="how-desc" data-i18n="how2_d">Созваниваемся, выслушиваем идею.</div></div>
+      <div class="how-num">02</div>
+    </div>
+    <div class="how-connector"></div>
+    <div class="how-step">
+      <div class="how-icon" style="background:linear-gradient(135deg,#0EA5E9,#86EFAC);">📋</div>
+      <div style="flex:1;"><div class="how-title-row"><span class="how-name" data-i18n="how3_n">План и цена</span><span class="how-time" style="background:rgba(134,239,172,.1);border-color:rgba(134,239,172,.3);color:#86EFAC;" data-i18n="how3_t">За 1–2 дня</span></div><div class="how-desc" data-i18n="how3_d">Чёткий план и финальная цена.</div></div>
+      <div class="how-num">03</div>
+    </div>
+    <div class="how-connector"></div>
+    <div class="how-step">
+      <div class="how-icon" style="background:linear-gradient(135deg,#6B4EFF,#86EFAC);">🚀</div>
+      <div style="flex:1;"><div class="how-title-row"><span class="how-name" data-i18n="how4_n">Разработка</span><span class="how-time" style="background:rgba(107,78,255,.15);border-color:rgba(107,78,255,.3);color:#A78BFA;" data-i18n="how4_t">От 2 недель</span></div><div class="how-desc" data-i18n="how4_d">Регулярно показываем прогресс.</div></div>
+      <div class="how-num">04</div>
+    </div>
+    <div class="how-connector"></div>
+    <div class="how-step last">
+      <div class="how-icon" style="background:linear-gradient(135deg,#10B981,#0EA5E9);">✅</div>
+      <div style="flex:1;"><div class="how-title-row"><span class="how-name" data-i18n="how5_n">Сдача продукта</span><span class="how-time" style="background:rgba(134,239,172,.12);border-color:rgba(134,239,172,.3);color:#86EFAC;" data-i18n="how5_t">🎉 Готово!</span></div><div class="how-desc" data-i18n="how5_d">Передаём и остаёмся на связи.</div></div>
+      <div class="how-num">05</div>
+    </div>
+
+    <div style="text-align:center;margin-top:50px;">
+      <a href="contact.html" class="btn-main" data-i18n="how_cta">Начать прямо сейчас →</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo"><img src="assets/logo.png" alt="Tech Dolphin"></div>
+  <div class="footer-copy" data-i18n="footer_copy">© 2025 Tech Dolphin</div>
+  <div class="footer-links">
+    <a href="index.html"    data-i18n="lnav_home">Главная</a>
+    <a href="projects.html" data-i18n="nav_projects_page">Проекты</a>
+    <a href="pricing.html"  data-i18n="lnav_calc">Цены</a>
+    <a href="faq.html"      data-i18n="nav_faq">FAQ</a>
+    <a href="contact.html"  data-i18n="nav_contact">Контакт</a>
+  </div>
+  <a href="tel:+79653932841" style="display:inline-flex;align-items:center;gap:8px;background:rgba(107,78,255,.15);border:1px solid rgba(107,78,255,.3);color:#0EA5E9;font-size:13px;font-weight:600;padding:10px 20px;border-radius:100px;">📞 +7 (965) 393-28-41</a>
+</footer>
+
+<!-- LEAD CHATBOT -->
+<div class="lead-chat" id="lead-chat" aria-live="polite">
+  <button class="lead-chat-toggle" id="lead-chat-toggle" type="button" onclick="toggleLeadChat()" aria-label="Chat">
+    <span class="lead-chat-dot"></span>
+    <span data-i18n="chat_toggle">Быстрый бриф</span>
+  </button>
+  <div class="lead-chat-panel" id="lead-chat-panel" aria-hidden="true">
+    <div class="lead-chat-head">
+      <div>
+        <div class="lead-chat-kicker" data-i18n="chat_kicker">Tech Dolphin</div>
+        <div class="lead-chat-title" data-i18n="chat_title">Подберём формат проекта</div>
+      </div>
+      <button class="lead-chat-close" type="button" onclick="toggleLeadChat(false)" aria-label="Close">×</button>
+    </div>
+    <div class="lead-chat-body" id="lead-chat-body"></div>
+  </div>
+</div>
+
+<!-- SCRIPTS -->
+<script>
+  window.TechDolphinAnalyticsConfig = { yandexMetricaId: 109873573 };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="js/analytics.js?v=20260615-1"></script>
+<script src="js/i18n.js?v=20260614-2"></script>
+<script src="js/main.js?v=20260614-2"></script>
+<noscript><div><img src="https://mc.yandex.ru/watch/109873573" style="position:absolute; left:-9999px;" alt=""></div></noscript>
+</body>
+</html>

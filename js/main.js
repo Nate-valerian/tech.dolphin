@@ -14,12 +14,19 @@ function applyLang(lang) {
   const t = T[lang];
 
   // Update per-page meta
-  const isProjectsPage = window.location.pathname.endsWith('projects.html');
-  document.title = isProjectsPage ? t.meta_projects_title : t.meta_home_title;
+  const path = window.location.pathname;
+  const pageKey = path.endsWith('projects.html') ? 'projects'
+                : path.endsWith('pricing.html')  ? 'pricing'
+                : path.endsWith('faq.html')      ? 'faq'
+                : path.endsWith('contact.html')  ? 'contact'
+                : 'home';
+  const titleKey = 'meta_' + pageKey + '_title';
+  const descKey  = 'meta_' + pageKey + '_desc';
+  if (t[titleKey]) document.title = t[titleKey];
   const metaDesc = document.querySelector('meta[name="description"]');
-  if (metaDesc) metaDesc.content = isProjectsPage ? t.meta_projects_desc : t.meta_home_desc;
+  if (metaDesc && t[descKey]) metaDesc.content = t[descKey];
   const ogTitle = document.querySelector('meta[property="og:title"]');
-  if (ogTitle) ogTitle.content = isProjectsPage ? t.meta_projects_title : t.meta_home_og_title;
+  if (ogTitle && t[titleKey]) ogTitle.content = t[titleKey];
 
   // Apply all data-i18n elements
   document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -90,7 +97,8 @@ function initProgress() {
 }
 
 /* ── LEFT NAV ─────────────────────────────── */
-const NAV_SECTIONS = ['hero','about','services','projects','calc','stack','why','faq','how','contact'];
+const ALL_NAV_SECTIONS = ['hero','about','services','projects','calc','stack','why','faq','how','contact'];
+let NAV_SECTIONS = ALL_NAV_SECTIONS;
 
 function initLeftNav() {
   const items = document.querySelectorAll('.lnav-item');
@@ -573,6 +581,7 @@ function initParallax() {
 
 /* ── INIT ─────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
+  NAV_SECTIONS = ALL_NAV_SECTIONS.filter(id => !!document.getElementById(id));
   if (window.emailjs) emailjs.init({ publicKey: EJ_PUBLIC });
   initProgress();
   initLeftNav();
