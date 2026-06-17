@@ -1120,6 +1120,10 @@ footer { border-top: 1px solid var(--border); padding: 32px 24px; max-width: 110
   .svc-name { font-size: 20px; }
   .svc-item { font-size: 16px; line-height: 1.6; }
   .svc-icon { width: 52px; height: 52px; font-size: 24px; margin-bottom: 18px; }
+  .home-projects-toolbar { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .home-projects-tabs { flex: none; width: 100%; }
+  .home-projects-tabs .ptab { flex: 1; text-align: center; }
+  .proj-view-all { align-self: flex-end; }
 }
 
 /* ── PROJECTS PAGE ───────────────────────── */
