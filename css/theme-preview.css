@@ -1,0 +1,422 @@
+/* Temporary Tech Dolphin live-server background preview: true white. */
+:root {
+  color-scheme: light;
+}
+
+body {
+  --bg: #ffffff;
+  --card: rgba(255, 255, 255, .98);
+  --card2: rgba(248, 250, 252, .98);
+  --border: rgba(15, 23, 42, .16);
+  --white: #0F172A;
+  --muted: #64748B;
+  --muted2: #334155;
+  --green: #15803D;
+  --cyan: #0284C7;
+  --violet: #0284C7;
+  --csft: rgba(2, 132, 199, .11);
+  --vsft: rgba(2, 132, 199, .10);
+  background: #FFFFFF !important;
+  animation: none !important;
+  color: var(--white) !important;
+}
+
+.aurora { opacity: .18 !important; }
+.aurora-1 { background: radial-gradient(ellipse, rgba(14, 165, 233, .06) 0%, transparent 72%) !important; }
+.aurora-2 { background: radial-gradient(ellipse, rgba(134, 239, 172, .06) 0%, transparent 72%) !important; }
+
+.nav {
+  background: rgba(255, 255, 255, .92) !important;
+  border-color: var(--border) !important;
+  box-shadow: 0 18px 54px rgba(15, 23, 42, .10);
+}
+
+.nav-links a:hover,
+.nav-links a.active-page,
+#lang-toggle,
+.nav-contact-link,
+.nav-contact-max,
+.nav-mobile-contacts a,
+.ptab,
+.proj-view-all,
+.chip,
+.video-chip,
+.pcard-tag,
+.media-badge,
+.section-label {
+  background: rgba(14, 165, 233, .09) !important;
+  border-color: rgba(2, 132, 199, .24) !important;
+  color: #0369A1 !important;
+}
+
+#progress-bar,
+#nav-progress-line,
+.how-connector {
+  background: linear-gradient(90deg, #0284C7, #0EA5E9) !important;
+}
+
+.project-card,
+.pcard,
+.about-text-card,
+.exp-card,
+.svc-card,
+.why-card,
+.calc-card,
+.faq-item,
+.how-step,
+.contact-card,
+.cta-banner,
+.proj-video-card,
+.proj-mini,
+.media-reel-card,
+.screen-card,
+.domstudio-feature,
+.lead-chat-window,
+#cookie-banner {
+  background: var(--card) !important;
+  border-color: var(--border) !important;
+  box-shadow: 0 18px 54px rgba(15, 23, 42, .08);
+}
+
+.services-wrap,
+.cities-wrap,
+.ticker-wrap {
+  background: transparent !important;
+}
+
+.pcard-media,
+.domstudio-showcase-panel,
+.domstudio-shot--before,
+.stat-pill,
+.lead-chat-trigger,
+.contact-link,
+.form-input,
+.proj-video-media {
+  background: var(--card2) !important;
+  border-color: var(--border) !important;
+}
+
+.about-exp-card,
+.svc-card,
+.about-eng-focus,
+.case-proof-item,
+.media-reel,
+.calc-result,
+.price-banner {
+  background: linear-gradient(145deg, rgba(255, 255, 255, .98), rgba(241, 248, 252, .98)) !important;
+  border-color: rgba(15, 23, 42, .16) !important;
+  box-shadow: 0 18px 54px rgba(15, 23, 42, .08) !important;
+}
+
+.about-eng-focus {
+  border-color: rgba(2, 132, 199, .20) !important;
+}
+
+.about-eng-col-title {
+  color: #0F172A !important;
+  border-bottom-color: rgba(2, 132, 199, .20) !important;
+}
+
+.about-eng-col-items,
+.faq-a,
+.calc-empty,
+.price-banner p {
+  color: #475569 !important;
+}
+
+.case-proof-item span,
+.about-eng-label,
+.calc-mark {
+  color: #0284C7 !important;
+}
+
+.case-proof-item strong,
+.price-banner h3 {
+  color: #0F172A !important;
+}
+
+.case-proof-item p {
+  color: #475569 !important;
+}
+
+.svc-icon {
+  background: linear-gradient(145deg, #E0F2FE, #F1F8FC) !important;
+  border-color: rgba(2, 132, 199, .22) !important;
+  color: #0284C7 !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .8);
+}
+
+.calc-card {
+  border-width: 1px !important;
+}
+
+.calc-card:hover,
+.calc-card.selected {
+  border-color: rgba(2, 132, 199, .42) !important;
+  background: linear-gradient(145deg, #FFFFFF, #F1F8FC) !important;
+  box-shadow: 0 20px 55px rgba(2, 132, 199, .14) !important;
+}
+
+.calc-card [style*="color:#E8F5EC"],
+.calc-card [style*="color: #E8F5EC"] {
+  color: #0F172A !important;
+}
+
+.calc-card [style*="color:#7AAF87"],
+.calc-card [style*="color: #7AAF87"] {
+  color: #3F6B4D !important;
+}
+
+.calc-card [style*="color:#0EA5E9"],
+.calc-card [style*="color: #0EA5E9"] {
+  color: #0284C7 !important;
+}
+
+.calc-tier {
+  background: #F1F8FC !important;
+  border-color: rgba(2, 132, 199, .16) !important;
+}
+
+.calc-check {
+  background: #E0F2FE !important;
+  border-color: rgba(2, 132, 199, .28) !important;
+}
+
+.calc-card.selected .calc-check {
+  background: #0284C7 !important;
+  border-color: #0284C7 !important;
+}
+
+.price-banner h3 span,
+.tick-item span,
+.proj-section-num {
+  color: #0284C7 !important;
+}
+
+.tick-item {
+  color: #334155 !important;
+}
+
+.exp-row::before,
+.svc-item::before,
+.video-badge-dot {
+  background: #0284C7 !important;
+}
+
+.nav-cta,
+.btn-main,
+.form-btn,
+#cookie-btn,
+#calc-cta,
+.ptab.active,
+.chat-msg.user {
+  background: linear-gradient(135deg, #0284C7, #0EA5E9) !important;
+  border-color: #0284C7 !important;
+  color: #fff !important;
+}
+
+.nav-cta:hover,
+.btn-main:hover,
+.form-btn:hover,
+#cookie-btn:hover {
+  background: linear-gradient(135deg, #0369A1, #0284C7) !important;
+}
+
+#calc-price,
+.exp-big,
+.why-num,
+.cta-banner h2 em,
+.page-hero-grad {
+  color: #0284C7 !important;
+  -webkit-text-fill-color: initial !important;
+}
+
+.svc-card,
+.pcard,
+.why-card,
+.calc-card,
+.faq-item,
+.how-step,
+.about-text-card,
+.about-exp-card,
+.about-eng-focus,
+.case-proof-item,
+.proj-mini,
+.screen-card,
+.media-reel-card,
+.domstudio-feature,
+.contact-card,
+.cta-banner,
+.price-banner {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform .28s ease,
+    border-color .28s ease,
+    box-shadow .28s ease,
+    background .28s ease;
+}
+
+.svc-card::before,
+.pcard::after,
+.why-card::before,
+.calc-card::before,
+.faq-item::before,
+.how-step::before,
+.about-text-card::before,
+.about-exp-card::before,
+.about-eng-focus::before,
+.case-proof-item::before,
+.proj-mini::before,
+.screen-card::before,
+.media-reel-card::before,
+.domstudio-feature::before,
+.contact-card::before,
+.cta-banner::before,
+.price-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 -65%;
+  width: 48%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent 0%, rgba(2, 132, 199, .08) 42%, rgba(14, 165, 233, .16) 50%, rgba(2, 132, 199, .08) 58%, transparent 100%);
+  transform: skewX(-14deg);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.svc-card:hover,
+.pcard:hover,
+.why-card:hover,
+.calc-card:hover,
+.faq-item:hover,
+.how-step:hover,
+.about-text-card:hover,
+.about-exp-card:hover,
+.about-eng-focus:hover,
+.case-proof-item:hover,
+.proj-mini:hover,
+.screen-card:hover,
+.media-reel-card:hover,
+.domstudio-feature:hover,
+.contact-card:hover,
+.cta-banner:hover,
+.price-banner:hover {
+  transform: translateY(-5px) !important;
+  border-color: rgba(2, 132, 199, .38) !important;
+  box-shadow: 0 24px 70px rgba(2, 132, 199, .16), 0 12px 34px rgba(15, 23, 42, .08) !important;
+}
+
+.svc-card:hover::before,
+.pcard:hover::after,
+.why-card:hover::before,
+.calc-card:hover::before,
+.faq-item:hover::before,
+.how-step:hover::before,
+.about-text-card:hover::before,
+.about-exp-card:hover::before,
+.about-eng-focus:hover::before,
+.case-proof-item:hover::before,
+.proj-mini:hover::before,
+.screen-card:hover::before,
+.media-reel-card:hover::before,
+.domstudio-feature:hover::before,
+.contact-card:hover::before,
+.cta-banner:hover::before,
+.price-banner:hover::before {
+  opacity: 1;
+  animation: cardSweep 1.9s ease forwards;
+}
+
+@keyframes cardSweep {
+  from { left: -65%; }
+  to { left: 120%; }
+}
+
+.pcard-name,
+.proj-section-title,
+.video-title,
+.screen-card-name,
+.media-reel-body strong,
+.page-hero-title,
+.hero-title,
+.section-title,
+.svc-name,
+.why-title,
+.faq-q-text,
+.how-name,
+.exp-label,
+.lead-chat-title {
+  color: var(--white) !important;
+  -webkit-text-fill-color: initial !important;
+}
+
+.lead-chat-toggle {
+  background: linear-gradient(145deg, #FFFFFF, #F1F8FC) !important;
+  border-color: rgba(2, 132, 199, .26) !important;
+  color: #0F172A !important;
+  box-shadow: 0 16px 42px rgba(15, 23, 42, .12) !important;
+}
+
+.lead-chat-panel {
+  background: rgba(255, 255, 255, .98) !important;
+  border-color: rgba(15, 23, 42, .16) !important;
+  box-shadow: 0 22px 64px rgba(15, 23, 42, .14) !important;
+}
+
+.lead-chat-head {
+  background: linear-gradient(135deg, rgba(2, 132, 199, .09), rgba(14, 165, 233, .06)) !important;
+  border-bottom-color: rgba(15, 23, 42, .10) !important;
+}
+
+.lead-chat-close {
+  background: rgba(15, 23, 42, .04) !important;
+  border-color: rgba(15, 23, 42, .12) !important;
+  color: #475569 !important;
+}
+
+.chat-msg.bot {
+  background: #F1F5F9 !important;
+  color: #334155 !important;
+}
+
+.chat-option {
+  background: #F1F8FC !important;
+  border-color: rgba(2, 132, 199, .20) !important;
+  color: #0369A1 !important;
+}
+
+.chat-small {
+  color: #64748B !important;
+}
+
+.pcard-desc,
+.video-desc,
+.screen-card-desc,
+.media-reel-body span,
+.page-hero-sub,
+.section-sub,
+.svc-item,
+.why-desc,
+.exp-desc,
+.tick-item {
+  color: var(--muted2) !important;
+}
+
+.page-hero-grad,
+.hero-title em,
+.section-title em {
+  color: var(--cyan) !important;
+  -webkit-text-fill-color: initial !important;
+}
+
+.hero-title,
+.section-title,
+.page-hero-title,
+.exp-big,
+.why-num,
+.cta-banner h2 em,
+#calc-price {
+  background: none !important;
+}
