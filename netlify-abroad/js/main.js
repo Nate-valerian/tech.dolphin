@@ -36,10 +36,10 @@ function getManualLang() {
   return validLang(storageGet(localStorage, LANG_STORAGE_KEY));
 }
 
-let currentLang = 'en';
+let currentLang = getManualLang() || 'en';
 
 function applyLang(lang, options = {}) {
-  lang = 'en';
+  if (!T[lang]) lang = 'en';
   currentLang = lang;
   if (options.persist) {
     storageSet(localStorage, LANG_STORAGE_KEY, lang);
@@ -93,7 +93,7 @@ function applyLang(lang, options = {}) {
 }
 
 function toggleLang() {
-  applyLang('en', { persist: true });
+  applyLang(currentLang === 'ru' ? 'en' : 'ru', { persist: true });
 }
 
 function fetchWithTimeout(url, timeoutMs = 2500) {
@@ -134,7 +134,9 @@ async function detectGeoLang() {
 }
 
 async function initGeoLanguage() {
-  applyLang('en');
+  if (getManualLang()) return;
+  const lang = await detectGeoLang();
+  applyLang(lang);
 }
 
 function _lockBodyScroll() {
