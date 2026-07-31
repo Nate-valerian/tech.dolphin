@@ -45,6 +45,16 @@ These let you answer:
 - Did EmailJS successfully send the lead?
 - Which form failed, if the email service or network blocked it?
 
+## Event parameters
+
+`callback_form_success` and `contact_form_success` include a `fast_submit`
+boolean: `true` if the form was submitted under 1.5s after page load, which
+usually means a scripted bot (a human filling the form by hand, even with
+autofill, rarely clicks submit that fast). This is observational only --
+those sends still go through normally -- so you can segment on it in
+Yandex Metrica to see how much of your "successful" lead volume is
+suspect, without risking a real lead being silently dropped.
+
 ## Files
 
 - `js/analytics.js` loads Yandex Metrica and tracks contact actions.
