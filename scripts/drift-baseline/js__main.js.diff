@@ -1,0 +1,185 @@
+diff --git a/js/main.js b/netlify-abroad/js/main.js
+index db9e71c..f01819b 100644
+--- a/js/main.js
++++ b/netlify-abroad/js/main.js
+@@ -3,12 +3,48 @@
+    ═══════════════════════════════════════════ */
+ 
+ /* ── LANGUAGE ─────────────────────────────── */
+-let currentLang = localStorage.getItem('td_lang') || 'ru';
++const LANG_STORAGE_KEY = 'td_lang';
++const LANG_MANUAL_KEY = 'td_lang_manual';
++const LANG_GEO_SESSION_KEY = 'td_geo_lang';
++const GEO_COUNTRY_ENDPOINTS = [
++  'https://ipapi.co/country/',
++  'https://get.geojs.io/v1/ip/country.json'
++];
++
++function storageGet(storage, key) {
++  try {
++    return storage.getItem(key);
++  } catch (error) {
++    return null;
++  }
++}
++
++function storageSet(storage, key, value) {
++  try {
++    storage.setItem(key, value);
++  } catch (error) {
++    // Ignore storage failures in private browsing or locked-down browsers.
++  }
++}
++
++function validLang(lang) {
++  return T[lang] ? lang : null;
++}
+ 
+-function applyLang(lang) {
+-  if (!T[lang]) lang = 'ru';
++function getManualLang() {
++  if (storageGet(localStorage, LANG_MANUAL_KEY) !== 'true') return null;
++  return validLang(storageGet(localStorage, LANG_STORAGE_KEY));
++}
++
++let currentLang = getManualLang() || 'en';
++
++function applyLang(lang, options = {}) {
++  if (!T[lang]) lang = 'en';
+   currentLang = lang;
+-  localStorage.setItem('td_lang', lang);
++  if (options.persist) {
++    storageSet(localStorage, LANG_STORAGE_KEY, lang);
++    storageSet(localStorage, LANG_MANUAL_KEY, 'true');
++  }
+   document.documentElement.lang = lang;
+ 
+   const t = T[lang];
+@@ -22,11 +58,11 @@ function applyLang(lang) {
+                 : 'home';
+   const titleKey = 'meta_' + pageKey + '_title';
+   const descKey  = 'meta_' + pageKey + '_desc';
+-  if (t[titleKey]) document.title = t[titleKey];
++  document.title = t[titleKey] || t.meta_home_title;
+   const metaDesc = document.querySelector('meta[name="description"]');
+-  if (metaDesc && t[descKey]) metaDesc.content = t[descKey];
++  if (metaDesc) metaDesc.content = t[descKey] || t.meta_home_desc;
+   const ogTitle = document.querySelector('meta[property="og:title"]');
+-  if (ogTitle && t[titleKey]) ogTitle.content = t[titleKey];
++  if (ogTitle) ogTitle.content = pageKey === 'home' ? t.meta_home_og_title : (t[titleKey] || t.meta_home_og_title);
+ 
+   // Apply all data-i18n elements
+   document.querySelectorAll('[data-i18n]').forEach(el => {
+@@ -57,7 +93,50 @@ function applyLang(lang) {
+ }
+ 
+ function toggleLang() {
+-  applyLang(currentLang === 'ru' ? 'en' : 'ru');
++  applyLang(currentLang === 'ru' ? 'en' : 'ru', { persist: true });
++}
++
++function fetchWithTimeout(url, timeoutMs = 2500) {
++  const controller = new AbortController();
++  const timeout = setTimeout(() => controller.abort(), timeoutMs);
++  return fetch(url, {
++    cache: 'no-store',
++    signal: controller.signal
++  }).finally(() => clearTimeout(timeout));
++}
++
++async function fetchCountryCode() {
++  for (const endpoint of GEO_COUNTRY_ENDPOINTS) {
++    try {
++      const response = await fetchWithTimeout(endpoint);
++      if (!response.ok) continue;
++      if (endpoint.includes('geojs.io')) {
++        const data = await response.json();
++        if (data && data.country) return String(data.country).toUpperCase();
++      } else {
++        const text = await response.text();
++        if (text) return text.trim().slice(0, 2).toUpperCase();
++      }
++    } catch (error) {
++      // Try the next provider, then fall back to English.
++    }
++  }
++  return '';
++}
++
++async function detectGeoLang() {
++  const cached = validLang(storageGet(sessionStorage, LANG_GEO_SESSION_KEY));
++  if (cached) return cached;
++  const country = await fetchCountryCode();
++  const lang = country === 'RU' ? 'ru' : 'en';
++  storageSet(sessionStorage, LANG_GEO_SESSION_KEY, lang);
++  return lang;
++}
++
++async function initGeoLanguage() {
++  if (getManualLang()) return;
++  const lang = await detectGeoLang();
++  applyLang(lang);
+ }
+ 
+ function _lockBodyScroll() {
+@@ -138,8 +217,7 @@ function initProgress() {
+ }
+ 
+ /* ── LEFT NAV ─────────────────────────────── */
+-const ALL_NAV_SECTIONS = ['hero','about','services','projects','calc','stack','why','faq','how','contact'];
+-let NAV_SECTIONS = ALL_NAV_SECTIONS;
++const NAV_SECTIONS = ['hero','about','services','projects','stack','why','calc','faq','how','contact'];
+ 
+ function initLeftNav() {
+   const items = document.querySelectorAll('.lnav-item');
+@@ -212,16 +290,18 @@ function filterProj(cat, btn) {
+ 
+ /* ── CALCULATOR ───────────────────────────── */
+ const CALC_SERVICES = [
+-  { icon:'WEB', nKey:'c1n', dKey:'c1d', min:30000,   max:150000,  id:'c1' },
+-  { icon:'SHOP', nKey:'c2n', dKey:'c2d', min:150000,  max:500000,  id:'c2' },
+-  { icon:'APP', nKey:'c3n', dKey:'c3d', min:300000,  max:800000,  id:'c3' },
+-  { icon:'AI', nKey:'c4n', dKey:'c4d', min:50000,   max:600000,  id:'c4', tiersKey:'c4tiers' },
+-  { icon:'3D', nKey:'c5n', dKey:'c5d', min:150000,  max:400000,  id:'c5' },
+-  { icon:'SYS', nKey:'c6n', dKey:'c6d', min:700000,  max:5000000, id:'c6' },
++  { icon:'WEB', nKey:'c1n', dKey:'c1d', min:1200,  max:4500,   id:'c1' },
++  { icon:'SHOP', nKey:'c2n', dKey:'c2d', min:4500,  max:12000,  id:'c2' },
++  { icon:'APP', nKey:'c3n', dKey:'c3d', min:9000,  max:25000,  id:'c3' },
++  { icon:'AI', nKey:'c4n', dKey:'c4d', min:2500,   max:18000,  id:'c4', tiersKey:'c4tiers' },
++  { icon:'3D', nKey:'c5n', dKey:'c5d', min:3500,   max:12000,  id:'c5' },
++  { icon:'SYS', nKey:'c6n', dKey:'c6d', min:20000, max:90000,  id:'c6' },
+ ];
+ const selectedCalc = new Set();
+ 
+-function fmt(n) { return n.toLocaleString('ru-RU') + ' ₽'; }
++function fmt(n) {
++  return n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
++}
+ 
+ function renderCalcTiers(s, t) {
+   const tiers = s.tiersKey ? t[s.tiersKey] : null;
+@@ -327,7 +407,7 @@ function initTilt() {
+ const EJ_PUBLIC  = '87_f2ZcU4pQ0LZlpc';
+ const EJ_SERVICE = 'service_8xs6t0i';
+ const EJ_TMPL    = 'template_u3fwuan';
+-const EJ_TO_EMAILS = ['n.nate1544@gmail.com', 'm.moleva@mail.ru'];
++const EJ_TO_EMAILS = ['n.nate1544@gmail.com'];
+ 
+ async function sendLeadEmail(templateParams) {
+   if (!window.emailjs) throw new Error('EmailJS is not loaded');
+@@ -643,7 +723,6 @@ function initParallax() {
+ 
+ /* ── INIT ─────────────────────────────────── */
+ document.addEventListener('DOMContentLoaded', () => {
+-  NAV_SECTIONS = ALL_NAV_SECTIONS.filter(id => !!document.getElementById(id));
+   if (window.emailjs) emailjs.init({ publicKey: EJ_PUBLIC });
+   initProgress();
+   initLeftNav();
+@@ -654,6 +733,7 @@ document.addEventListener('DOMContentLoaded', () => {
+   initLeadChat();
+   renderCalc();
+   applyLang(currentLang);
++  initGeoLanguage();
+   document.querySelectorAll('.nav-links a').forEach(a => {
+     a.addEventListener('click', closeMobileMenu);
+   });

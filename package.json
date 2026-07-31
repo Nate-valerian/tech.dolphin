@@ -2,6 +2,8 @@
   "private": true,
   "scripts": {
     "test": "playwright test",
+    "pretest": "node scripts/check-drift.js",
+    "check-drift": "node scripts/check-drift.js",
     "package": "node scripts/package-deploy.js"
   },
   "devDependencies": {
