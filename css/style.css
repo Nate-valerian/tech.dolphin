@@ -445,6 +445,10 @@ img, video { display: block; }
   margin: -2px auto 0;
 }
 .callback-form form { display: flex; flex-direction: column; gap: 12px; }
+.hp-field {
+  position: absolute; left: -9999px; top: -9999px;
+  width: 1px; height: 1px; opacity: 0; overflow: hidden;
+}
 .form-input {
   background: rgba(255,255,255,.05); border: 1px solid rgba(14,165,233,.2);
   border-radius: 100px; padding: 12px 20px; color: #E8F5EC;

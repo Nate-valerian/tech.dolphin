@@ -365,6 +365,11 @@ async function sendLeadEmail(templateParams) {
   }
 }
 
+function isHoneypotTripped(form) {
+  const hp = form && form.querySelector('.hp-field');
+  return !!(hp && hp.value.trim());
+}
+
 function beginFormSubmit(form, errEl) {
   if (!form || form.dataset.submitting === 'true') return false;
   form.dataset.submitting = 'true';
@@ -420,6 +425,11 @@ async function sendCallback(e) {
   const name  = document.getElementById('cb-name').value;
   const phone = document.getElementById('cb-phone').value;
   const errEl = document.getElementById('cb-error');
+  if (isHoneypotTripped(form)) {
+    form.style.display = 'none';
+    document.getElementById('cb-success').style.display = 'block';
+    return;
+  }
   if (!beginFormSubmit(form, errEl)) return;
   try {
     await sendLeadEmail({
@@ -446,6 +456,11 @@ async function sendContact(e) {
   const email   = document.getElementById('ct-email').value;
   const message = document.getElementById('ct-message').value;
   const errEl   = document.getElementById('ct-error');
+  if (isHoneypotTripped(form)) {
+    form.style.display = 'none';
+    document.getElementById('ct-success').style.display = 'block';
+    return;
+  }
   if (!beginFormSubmit(form, errEl)) return;
   try {
     await sendLeadEmail({
@@ -561,6 +576,7 @@ function renderLeadChat() {
     html += `
       <div class="chat-msg bot">${t.chat_q_contact}</div>
       <form class="chat-form" onsubmit="sendLeadChat(event)">
+        <input type="text" name="hp_website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
         <input id="chat-name" class="form-input" type="text" placeholder="${t.chat_name_placeholder}" required>
         <input id="chat-contact" class="form-input" type="text" placeholder="${t.chat_contact_placeholder}" required>
         <button class="form-btn" type="submit">${t.chat_send}</button>
@@ -585,6 +601,11 @@ async function sendLeadChat(e) {
   const name = document.getElementById('chat-name').value.trim();
   const contact = document.getElementById('chat-contact').value.trim();
   const errEl = document.getElementById('chat-error');
+  if (isHoneypotTripped(form)) {
+    leadChatStep = 'done';
+    renderLeadChat();
+    return;
+  }
   if (!beginFormSubmit(form, errEl)) return;
   try {
     const message = [

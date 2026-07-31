@@ -161,6 +161,7 @@
         <div class="callback-title" data-i18n="cb_title">📞 Перезвоним вам бесплатно</div>
         <p class="form-promise" data-i18n="cb_promise">Оставьте телефон — мы напишем или перезвоним в течение 2 часов и подскажем ближайший шаг.</p>
         <form id="cb-form" onsubmit="sendCallback(event)">
+          <input type="text" name="hp_website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
           <input id="cb-name"  class="form-input" type="text" data-i18n="cb_name"  placeholder="Ваше имя"    required>
           <input id="cb-phone" class="form-input" type="tel"  data-i18n="cb_phone" placeholder="Ваш телефон" required>
           <button type="submit" class="form-btn" data-i18n="cb_btn">Перезвоните мне →</button>
