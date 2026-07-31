@@ -50,12 +50,19 @@ function applyLang(lang, options = {}) {
   const t = T[lang];
 
   // Update per-page meta
-  const isProjectsPage = window.location.pathname.endsWith('projects.html');
-  document.title = isProjectsPage ? t.meta_projects_title : t.meta_home_title;
+  const path = window.location.pathname;
+  const pageKey = path.endsWith('projects.html') ? 'projects'
+                : path.endsWith('pricing.html')  ? 'pricing'
+                : path.endsWith('faq.html')      ? 'faq'
+                : path.endsWith('contact.html')  ? 'contact'
+                : 'home';
+  const titleKey = 'meta_' + pageKey + '_title';
+  const descKey  = 'meta_' + pageKey + '_desc';
+  document.title = t[titleKey] || t.meta_home_title;
   const metaDesc = document.querySelector('meta[name="description"]');
-  if (metaDesc) metaDesc.content = isProjectsPage ? t.meta_projects_desc : t.meta_home_desc;
+  if (metaDesc) metaDesc.content = t[descKey] || t.meta_home_desc;
   const ogTitle = document.querySelector('meta[property="og:title"]');
-  if (ogTitle) ogTitle.content = isProjectsPage ? t.meta_projects_title : t.meta_home_og_title;
+  if (ogTitle) ogTitle.content = pageKey === 'home' ? t.meta_home_og_title : (t[titleKey] || t.meta_home_og_title);
 
   // Apply all data-i18n elements
   document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -130,6 +137,26 @@ async function initGeoLanguage() {
   applyLang('en');
 }
 
+function _lockBodyScroll() {
+  // iOS Safari resets scroll when overflow:hidden is applied to body.
+  // Fix: pin body with position:fixed at the current scroll offset.
+  const scrollY = window.scrollY;
+  document.body.style.overflow  = 'hidden';
+  document.body.style.position  = 'fixed';
+  document.body.style.top       = `-${scrollY}px`;
+  document.body.style.width     = '100%';
+  document.body.dataset.scrollY = scrollY;
+}
+function _unlockBodyScroll() {
+  const scrollY = parseInt(document.body.dataset.scrollY || '0', 10);
+  document.body.style.overflow = '';
+  document.body.style.position = '';
+  document.body.style.top      = '';
+  document.body.style.width    = '';
+  delete document.body.dataset.scrollY;
+  window.scrollTo(0, scrollY);
+}
+
 function toggleMobileMenu() {
   const links = document.querySelector('.nav-links');
   const btn   = document.getElementById('nav-hamburger');
@@ -138,8 +165,23 @@ function toggleMobileMenu() {
   const isOpen = links.classList.toggle('open');
   btn.classList.toggle('open', isOpen);
   btn.setAttribute('aria-expanded', String(isOpen));
-  document.body.style.overflow = isOpen ? 'hidden' : '';
   if (nav) nav.classList.toggle('menu-open', isOpen);
+
+  if (isOpen) {
+    _lockBodyScroll();
+    // Move nav-links to <body> so position:fixed is relative to viewport,
+    // not the transformed .nav pill (transform creates a new containing block).
+    links._returnParent = links.parentNode;
+    links._returnNext   = links.nextSibling;
+    document.body.appendChild(links);
+  } else {
+    _unlockBodyScroll();
+    if (links._returnParent) {
+      links._returnParent.insertBefore(links, links._returnNext || null);
+      delete links._returnParent;
+      delete links._returnNext;
+    }
+  }
 }
 function closeMobileMenu() {
   const links = document.querySelector('.nav-links');
@@ -151,8 +193,14 @@ function closeMobileMenu() {
     btn.classList.remove('open');
     btn.setAttribute('aria-expanded', 'false');
   }
-  document.body.style.overflow = '';
+  _unlockBodyScroll();
   if (nav) nav.classList.remove('menu-open');
+
+  if (links._returnParent) {
+    links._returnParent.insertBefore(links, links._returnNext || null);
+    delete links._returnParent;
+    delete links._returnNext;
+  }
 }
 
 /* ── SCROLL PROGRESS ──────────────────────── */
@@ -395,6 +443,11 @@ async function sendLeadEmail(templateParams) {
   }
 }
 
+function isHoneypotTripped(form) {
+  const hp = form && form.querySelector('.hp-field');
+  return !!(hp && hp.value.trim());
+}
+
 function beginFormSubmit(form, errEl) {
   if (!form || form.dataset.submitting === 'true') return false;
   form.dataset.submitting = 'true';
@@ -450,6 +503,11 @@ async function sendCallback(e) {
   const name  = document.getElementById('cb-name').value;
   const phone = document.getElementById('cb-phone').value;
   const errEl = document.getElementById('cb-error');
+  if (isHoneypotTripped(form)) {
+    form.style.display = 'none';
+    document.getElementById('cb-success').style.display = 'block';
+    return;
+  }
   if (!beginFormSubmit(form, errEl)) return;
   try {
     await sendLeadEmail({
@@ -476,6 +534,11 @@ async function sendContact(e) {
   const email   = document.getElementById('ct-email').value;
   const message = document.getElementById('ct-message').value;
   const errEl   = document.getElementById('ct-error');
+  if (isHoneypotTripped(form)) {
+    form.style.display = 'none';
+    document.getElementById('ct-success').style.display = 'block';
+    return;
+  }
   if (!beginFormSubmit(form, errEl)) return;
   try {
     await sendLeadEmail({
@@ -591,6 +654,7 @@ function renderLeadChat() {
     html += `
       <div class="chat-msg bot">${t.chat_q_contact}</div>
       <form class="chat-form" onsubmit="sendLeadChat(event)">
+        <input type="text" name="hp_website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
         <input id="chat-name" class="form-input" type="text" placeholder="${t.chat_name_placeholder}" required>
         <input id="chat-contact" class="form-input" type="text" placeholder="${t.chat_contact_placeholder}" required>
         <button class="form-btn" type="submit">${t.chat_send}</button>
@@ -615,6 +679,11 @@ async function sendLeadChat(e) {
   const name = document.getElementById('chat-name').value.trim();
   const contact = document.getElementById('chat-contact').value.trim();
   const errEl = document.getElementById('chat-error');
+  if (isHoneypotTripped(form)) {
+    leadChatStep = 'done';
+    renderLeadChat();
+    return;
+  }
   if (!beginFormSubmit(form, errEl)) return;
   try {
     const message = [

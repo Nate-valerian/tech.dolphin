@@ -25,7 +25,7 @@
 <link rel="apple-touch-icon" href="assets/logo.png">
 <link rel="manifest" href="site.webmanifest">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=20260616-abroad-1">
+<link rel="stylesheet" href="css/style.css?v=20260731-abroad-1">
 </head>
 <body>
 
@@ -37,7 +37,7 @@
 
 <!-- COOKIE -->
 <div id="cookie-banner">
-  <p><span data-i18n="cookie_text">🍪 Мы используем файлы cookie.</span> <a href="index.html#privacy" data-i18n="cookie_link">политикой конфиденциальности</a>.</p>
+  <p><span data-i18n="cookie_text">🍪 Мы используем файлы cookie.</span> <a href="contact.html#privacy" data-i18n="cookie_link">политикой конфиденциальности</a>.</p>
   <button id="cookie-btn" data-i18n="cookie_btn">Принять</button>
 </div>
 
@@ -52,24 +52,22 @@
     </a>
   </div>
   <div class="nav-links" id="primary-nav">
-    <a href="index.html#hero"     data-i18n="lnav_home">Главная</a>
-    <a href="index.html#about"    data-i18n="nav_about">О нас</a>
-    <a href="index.html#services" data-i18n="nav_services">Услуги</a>
-    <a href="index.html#projects" data-i18n="nav_projects">Работы</a>
+    <a href="index.html"    data-i18n="lnav_home">Главная</a>
     <a href="projects.html" class="active-page" data-i18n="nav_projects_page">Проекты</a>
-    <a href="index.html#why"      data-i18n="nav_why">Почему мы</a>
-    <a href="index.html#faq"      data-i18n="nav_faq">FAQ</a>
-    <a href="index.html#contact"  data-i18n="nav_contact">Контакт</a>
+    <a href="pricing.html"  data-i18n="lnav_calc">Цены</a>
+    <a href="faq.html"      data-i18n="nav_faq">FAQ</a>
+    <a href="contact.html"  data-i18n="nav_contact">Контакт</a>
     <div class="nav-mobile-contacts" aria-label="Быстрые контакты">
       <a href="tel:+19725598555">📞 USA Phone: +1 972 559 8555</a>
       <a href="https://wa.me/19725598555" target="_blank" rel="noopener noreferrer"><img class="contact-icon" src="assets/whatsapp.svg" alt="" aria-hidden="true"> WhatsApp USA</a>
       <a href="sms:+19725598555">💬 USA SMS</a>
       <a href="https://wa.me/905438762750" target="_blank" rel="noopener noreferrer"><img class="contact-icon" src="assets/whatsapp.svg" alt="" aria-hidden="true"> WhatsApp Turkiye: +90 543 876 2750</a>
       <a href="mailto:n.nate1544@gmail.com" data-i18n="nav_call">✉️ Email Us</a>
+      <button type="button" class="nav-close-btn" onclick="closeMobileMenu()" aria-label="Close menu">&#x2715; Close</button>
     </div>
   </div>
   <button id="lang-toggle" onclick="toggleLang()" style="display:none">EN</button>
-  <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Меню" aria-controls="primary-nav" aria-expanded="false">
+  <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Menu" aria-controls="primary-nav" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
   <div class="nav-contact-actions" aria-label="Быстрые контакты">
@@ -78,7 +76,7 @@
     <a href="sms:+19725598555" class="nav-contact-link nav-contact-call" aria-label="SMS USA" title="💬 USA SMS">💬</a>
     <a href="https://wa.me/905438762750" target="_blank" rel="noopener noreferrer" class="nav-contact-link nav-contact-call" aria-label="WhatsApp Turkiye" title="WhatsApp Turkiye"><img class="contact-icon" src="assets/whatsapp.svg" alt="" aria-hidden="true"></a>
   </div>
-  <a href="index.html#contact" class="nav-cta" data-i18n="nav_cta">Обсудить проект →</a>
+  <a href="contact.html" class="nav-cta" data-i18n="nav_cta">Обсудить проект →</a>
 </nav>
 
 <!-- HERO -->
@@ -123,8 +121,8 @@
 
   <div class="proj-section-hdr">
     <span class="proj-section-num">01</span>
-    <span class="proj-section-title" data-i18n="domstudio_section">DomStudio � AI product photo studio</span>
-    <span class="proj-section-badge" data-i18n="domstudio_tag">SaaS � Marketplace � AI</span>
+    <span class="proj-section-title" data-i18n="domstudio_section">DomStudio — AI product photo studio</span>
+    <span class="proj-section-badge" data-i18n="domstudio_tag">SaaS — Marketplace — AI</span>
   </div>
 
   <div class="video-feature domstudio-feature">
@@ -137,11 +135,11 @@
         <video autoplay muted loop playsinline preload="metadata" poster="assets/example-perfume-product.webp">
           <source src="assets/perfume-product-5s.mp4" type="video/mp4">
         </video>
-        <figcaption data-i18n="domstudio_after_label">After � video</figcaption>
+        <figcaption data-i18n="domstudio_after_label">After — video</figcaption>
       </figure>
     </div>
     <div class="video-feature-info">
-      <div class="video-badge"><div class="video-badge-dot"></div><span data-i18n="domstudio_status">Live product � 2026</span></div>
+      <div class="video-badge"><div class="video-badge-dot"></div><span data-i18n="domstudio_status">Live product — 2026</span></div>
       <div class="video-title" data-i18n="domstudio_title">DomStudio</div>
       <div class="video-desc" data-i18n="domstudio_desc">An independent AI platform for sellers: turn one product photo into marketplace, catalog, lifestyle, creative and social visuals, then write sales copy with AdPilot AI.</div>
       <div class="video-chips">
@@ -423,10 +421,11 @@
   <div class="footer-logo"><a href="index.html"><img src="assets/logo.png" alt="Tech Dolphin"></a></div>
   <div class="footer-copy" data-i18n="footer_copy">© 2025 Tech Dolphin</div>
   <div class="footer-links">
-    <a href="index.html#about"    data-i18n="nav_about">О нас</a>
-    <a href="index.html#services" data-i18n="nav_services">Услуги</a>
-    <a href="index.html#contact"  data-i18n="nav_contact">Контакт</a>
-    <a href="index.html"          data-i18n="back_home">← Главная</a>
+    <a href="index.html"    data-i18n="lnav_home">Главная</a>
+    <a href="projects.html" data-i18n="nav_projects_page">Проекты</a>
+    <a href="pricing.html"  data-i18n="lnav_calc">Цены</a>
+    <a href="faq.html"      data-i18n="nav_faq">FAQ</a>
+    <a href="contact.html"  data-i18n="nav_contact">Контакт</a>
   </div>
 </footer>
 
@@ -456,8 +455,8 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="js/analytics.js?v=20260615-1"></script>
-<script src="js/i18n.js?v=20260617-1"></script>
-<script src="js/main.js?v=20260616-abroad-1"></script>
+<script src="js/i18n.js?v=20260731-abroad-1"></script>
+<script src="js/main.js?v=20260731-abroad-1"></script>
 <noscript><div><img src="https://mc.yandex.ru/watch/109873573" style="position:absolute; left:-9999px;" alt=""></div></noscript>
 
 <script>

@@ -52,6 +52,12 @@ const T = {
     meta_home_og_title: 'Tech Dolphin — Разработка сайтов, приложений и AI продуктов',
     meta_projects_title: 'Наши проекты | Tech Dolphin',
     meta_projects_desc: 'Реальные проекты Tech Dolphin — мобильные приложения, веб-платформы, AI продукты.',
+    meta_pricing_title: 'Цены и калькулятор | Tech Dolphin',
+    meta_pricing_desc: 'Узнайте стоимость сайта, приложения или AI продукта.',
+    meta_faq_title: 'Вопросы и ответы | Tech Dolphin',
+    meta_faq_desc: 'Ответы на частые вопросы о разработке сайтов, приложений и AI продуктов.',
+    meta_contact_title: 'Контакт | Tech Dolphin',
+    meta_contact_desc: 'Свяжитесь с Tech Dolphin — обсудим ваш проект и предложим план.',
 
     /* LEFT NAV */
     lnav_home:    'Главная',
@@ -363,6 +369,12 @@ const T = {
     meta_home_og_title: 'Tech Dolphin — Website, App and AI Product Development',
     meta_projects_title: 'Our Projects | Tech Dolphin',
     meta_projects_desc: 'Real Tech Dolphin projects — mobile apps, web platforms and AI products.',
+    meta_pricing_title: 'Pricing & Estimator | Tech Dolphin',
+    meta_pricing_desc: 'Estimate the cost of your website, app, or AI product.',
+    meta_faq_title: 'FAQ | Tech Dolphin',
+    meta_faq_desc: 'Answers to common questions about website, app, and AI product development.',
+    meta_contact_title: 'Contact | Tech Dolphin',
+    meta_contact_desc: "Get in touch with Tech Dolphin — let's discuss your project and next steps.",
 
     lnav_home:    'Home',
     lnav_about:   'About',
