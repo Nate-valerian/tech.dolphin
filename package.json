@@ -1,7 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "test": "playwright test"
+    "test": "playwright test",
+    "package": "node scripts/package-deploy.js"
   },
   "devDependencies": {
     "@playwright/test": "^1.60.0"
