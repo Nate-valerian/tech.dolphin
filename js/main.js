@@ -167,11 +167,39 @@ function initLeftNav() {
 function initCookie() {
   const banner = document.getElementById('cookie-banner');
   if (!banner) return;
-  if (localStorage.getItem('cookieAccepted')) banner.style.display = 'none';
+
+  if (localStorage.getItem('cookieAccepted')) {
+    banner.style.display = 'none';
+    return;
+  }
+
+  // The banner can be tall enough on narrow viewports to sit on top of the
+  // lead-chat launcher (it reflows to 2-3 lines below ~1023px). Its height
+  // varies with viewport width, text wrapping, and web-font load timing, so
+  // watch its actual rendered size instead of guessing fixed breakpoints or
+  // computing it once before fonts finish loading.
+  const chat = document.querySelector('.lead-chat');
+  function clearChatLauncher() {
+    if (!chat) return;
+    const overlap = window.innerWidth <= 1023;
+    chat.style.bottom = overlap ? `${banner.offsetHeight + 32}px` : '';
+  }
+  let observer;
+  if (chat && window.ResizeObserver) {
+    observer = new ResizeObserver(clearChatLauncher);
+    observer.observe(banner);
+  } else {
+    clearChatLauncher();
+    window.addEventListener('resize', clearChatLauncher);
+  }
+
   const btn = document.getElementById('cookie-btn');
   if (btn) btn.addEventListener('click', () => {
     localStorage.setItem('cookieAccepted', 'true');
     banner.style.display = 'none';
+    if (chat) chat.style.bottom = '';
+    if (observer) observer.disconnect();
+    window.removeEventListener('resize', clearChatLauncher);
   });
 }
 

@@ -1,5 +1,5 @@
 diff --git a/js/main.js b/netlify-abroad/js/main.js
-index 50f4ddb..299c837 100644
+index 7dd1854..4214bdd 100644
 --- a/js/main.js
 +++ b/netlify-abroad/js/main.js
 @@ -3,12 +3,48 @@
@@ -132,7 +132,7 @@ index 50f4ddb..299c837 100644
  
  function initLeftNav() {
    const items = document.querySelectorAll('.lnav-item');
-@@ -212,16 +290,18 @@ function filterProj(cat, btn) {
+@@ -240,16 +318,18 @@ function filterProj(cat, btn) {
  
  /* ── CALCULATOR ───────────────────────────── */
  const CALC_SERVICES = [
@@ -158,7 +158,7 @@ index 50f4ddb..299c837 100644
  
  function renderCalcTiers(s, t) {
    const tiers = s.tiersKey ? t[s.tiersKey] : null;
-@@ -327,7 +407,7 @@ function initTilt() {
+@@ -355,7 +435,7 @@ function initTilt() {
  const EJ_PUBLIC  = '87_f2ZcU4pQ0LZlpc';
  const EJ_SERVICE = 'service_8xs6t0i';
  const EJ_TMPL    = 'template_u3fwuan';
@@ -167,7 +167,7 @@ index 50f4ddb..299c837 100644
  
  async function sendLeadEmail(templateParams) {
    if (!window.emailjs) throw new Error('EmailJS is not loaded');
-@@ -659,7 +739,6 @@ function initParallax() {
+@@ -687,7 +767,6 @@ function initParallax() {
  
  /* ── INIT ─────────────────────────────────── */
  document.addEventListener('DOMContentLoaded', () => {
@@ -175,7 +175,7 @@ index 50f4ddb..299c837 100644
    if (window.emailjs) emailjs.init({ publicKey: EJ_PUBLIC });
    initProgress();
    initLeftNav();
-@@ -670,6 +749,7 @@ document.addEventListener('DOMContentLoaded', () => {
+@@ -698,6 +777,7 @@ document.addEventListener('DOMContentLoaded', () => {
    initLeadChat();
    renderCalc();
    applyLang(currentLang);
