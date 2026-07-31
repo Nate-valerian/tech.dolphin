@@ -370,6 +370,18 @@ function isHoneypotTripped(form) {
   return !!(hp && hp.value.trim());
 }
 
+/* Scripted submissions tend to fire right after the form becomes
+   available; real visitors -- even with autofill -- take a beat to
+   click submit. This is too unreliable to silently block on (autofill
+   can legitimately clear it), so it's only ever used to flag a send in
+   analytics, never to withhold one. */
+const MIN_FORM_FILL_MS = 1500;
+const PAGE_LOAD_TS = Date.now();
+
+function isSubmittedTooFast(sinceTs) {
+  return Date.now() - sinceTs < MIN_FORM_FILL_MS;
+}
+
 function beginFormSubmit(form, errEl) {
   if (!form || form.dataset.submitting === 'true') return false;
   form.dataset.submitting = 'true';
@@ -436,7 +448,9 @@ async function sendCallback(e) {
       subject: currentLang === 'ru' ? 'Заявка на обратный звонок' : 'Callback Request',
       name, phone, message: currentLang === 'ru' ? 'Перезвоните мне' : 'Please call me back'
     });
-    window.techDolphinAnalytics?.trackLeadResult('cb-form', 'success');
+    window.techDolphinAnalytics?.trackLeadResult('cb-form', 'success', {
+      fast_submit: isSubmittedTooFast(PAGE_LOAD_TS)
+    });
     document.getElementById('cb-form').style.display = 'none';
     document.getElementById('cb-success').style.display = 'block';
   } catch (error) {
@@ -467,7 +481,9 @@ async function sendContact(e) {
       subject: currentLang === 'ru' ? 'Новая заявка с сайта' : 'New Request from Website',
       name, phone, email, message
     });
-    window.techDolphinAnalytics?.trackLeadResult('ct-form', 'success');
+    window.techDolphinAnalytics?.trackLeadResult('ct-form', 'success', {
+      fast_submit: isSubmittedTooFast(PAGE_LOAD_TS)
+    });
     document.getElementById('ct-form').style.display = 'none';
     document.getElementById('ct-success').style.display = 'block';
   } catch (error) {
