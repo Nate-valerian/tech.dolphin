@@ -702,6 +702,12 @@ img, video { display: block; }
   }
 }
 
+/* 3 tiles in a 2-column grid leaves an empty cell -- span the last one
+   full-width instead of leaving a gap. */
+.hero-media-grid .hero-side-video:nth-child(3):last-child {
+  grid-column: 1 / -1;
+}
+
 /* ── TICKER ── */
 .ticker-wrap { overflow: hidden; padding: 16px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 .ticker { display: flex; width: max-content; animation: tick 30s linear infinite; }
