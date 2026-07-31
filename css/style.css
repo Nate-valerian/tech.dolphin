@@ -1812,17 +1812,17 @@ body {
 
 .calc-card [style*="color:#E8F5EC"],
 .calc-card [style*="color: #E8F5EC"] {
-  color: #0F172A;
+  color: #0F172A !important;
 }
 
 .calc-card [style*="color:#7AAF87"],
 .calc-card [style*="color: #7AAF87"] {
-  color: #3F6B4D;
+  color: #3F6B4D !important;
 }
 
 .calc-card [style*="color:#0EA5E9"],
 .calc-card [style*="color: #0EA5E9"] {
-  color: #0284C7;
+  color: #0284C7 !important;
 }
 
 .calc-tier {
