@@ -1,5 +1,126 @@
 # Changelog
 
+## 2026-08-01 — Follow-up audit, fixes, and deploy-zip bug
+
+A second full review turned up 6 weaknesses, fixed one by one, plus 3 more
+issues reported directly and fixed the same way. All 9 commits are on `main`
+but **not yet pushed to `origin/main`** and not yet deployed — the rebuilt
+deploy zip is sitting at the repo root ready for manual upload to spaceweb.
+
+1. **`511459b`** — Activate geo-language detection on netlify-abroad
+   `applyLang()` hardcoded its `lang` argument to `'en'` regardless of what
+   was passed in, `toggleLang()` always passed `'en'`, and
+   `initGeoLanguage()` called `applyLang('en')` outright — so the IP-geo
+   detector (`fetchCountryCode`/`detectGeoLang`, hitting `ipapi.co` and
+   `geojs.io`) and the manual-override persistence (`getManualLang`,
+   `LANG_MANUAL_KEY`) were fully wired up but never influenced anything.
+   Every visitor got English, and the site made two geo-IP network calls
+   per pageview for nothing. Now `applyLang()` respects its argument,
+   `toggleLang()` toggles and persists the manual choice, and
+   `initGeoLanguage()` only runs the geo lookup when no manual override is
+   stored.
+
+2. **`9e6b11e`** — Add drift-detection check between techdolphin.ru and
+   netlify-abroad
+   The two site copies share no build step — every fix has to be
+   hand-ported to both `main.js`/`i18n.js`/`analytics.js`/`style.css`,
+   which is exactly how the mobile-nav z-index bug, the honeypot gap, and
+   the light-theme pricing regression (2026-07-31 items 5–9) each missed
+   one side for a full audit cycle. `scripts/check-drift.js` snapshots
+   `git diff --no-index` between each forked pair and fails if the current
+   diff no longer matches the snapshot, so a one-sided edit gets flagged
+   for review instead of shipping unnoticed. Wired into `pretest`; `npm run
+   check-drift -- --update` accepts an intentional, already-ported change.
+
+3. **`f6a98b5`** — Compress oversized media assets shipped to visitors
+   Checked every video/image's actual pixel dimensions and bitrate against
+   the CSS box it renders into before touching anything, frame-sampling
+   before/after to confirm no visible quality loss. `logo.video.mp4` (nav
+   logo, displayed at 36–110px) was 1112×834 @ 60fps/7Mbps — cut to 168KB
+   from 4.3MB. `dom-short-01.mp4` 988KB→264KB, `domspace.mp4` 4.5MB→1.4MB,
+   `perfume-product-5s.mp4` 2.4MB→104KB, `dom-space-web.png` 1.6MB→244KB.
+   `ai-business-assistant.png` had no alpha channel (confirmed via ffprobe)
+   so it was the wrong format for a photo; converted to `.jpg` at the same
+   resolution, 260KB→68KB, updating the 4 `<img>` references across both
+   site copies. Skipped `dom_video.mp4` and `logo_video.mp4` — re-encoding
+   didn't beat their existing size.
+
+4. **`20a319b`** + **`d4f504f`** — Flag suspiciously fast lead-form
+   submissions in analytics
+   The honeypot only catches bots that fill in a hidden field; a scripted
+   submit that skips the fill-in delay entirely gets through it. Added a
+   `fast_submit` boolean (submitted under 1.5s after page load) to
+   `trackLeadResult` on the callback and contact forms, on both site
+   copies — analytics-only, never blocking. A first pass tried silently
+   blocking fast submissions like the honeypot does, but that risked
+   discarding real leads from browser autofill with no error shown to
+   anyone; reverted to flag-only before committing. Left the chatbot form
+   alone — it was never wired into analytics (no `id`, no goal mapping)
+   and adding that is a separate decision. `ANALYTICS.md` documents the
+   new parameter.
+
+5. **`3d53877`** — Add preconnect hints for Google Fonts
+   Neither `fonts.googleapis.com` nor `fonts.gstatic.com` (the CSS host and
+   the actual font-file host it points to) were discovered until the
+   browser parsed the `<link>` tag. Added `rel="preconnect"` for both
+   across all 10 pages (5 per site copy) so the connection handshake
+   happens in parallel instead of adding to the critical path.
+
+6. **`fd5a6cf`** — Fix duplicate video tile in the hero media grid
+   Reported directly: the desktop 2×2 hero-media-grid on both site copies
+   played `dom-short-01.mp4` in two of its four tiles — a copy-paste
+   leftover, visibly the same clip looping twice side by side. Removed the
+   duplicate, leaving the 3 distinct clips, and had the CSS grid span the
+   third tile full-width instead of leaving an empty cell in the last row.
+   Found and fixed the identical duplicate in netlify-abroad's separate
+   "DOM Immersive Media" project card (root has no equivalent section),
+   replacing the repeated clip with `dom_video.mp4` so its 3-column grid
+   keeps 3 distinct clips. Verified both breakpoints with Playwright
+   screenshots before and after.
+
+7. **`bf14140`** — Fix mangled em-dash text and cookie banner covering the
+   chat launcher
+   `index.html` and `projects.html` had literal U+FFFD replacement-character
+   corruption in visible text (e.g. "DomStudio � AI product photo studio")
+   — the same encoding damage the 2026-07-31 entry says was fixed
+   elsewhere, but this instance was missed. One of the five spots
+   (`domstudio_after_label`) has no i18n translation at all, so it was
+   permanently visible, not just a pre-JS flash. Restored proper em/mid
+   dashes matching the actual `i18n.js` translations. Separately, the fixed
+   cookie banner (up to 700px wide, centered) renders tall enough on
+   narrow-to-tablet viewports to sit directly on top of the lead-chat
+   launcher until dismissed. Its height varies with viewport width, text
+   wrapping, and web-font load timing, so a fixed pixel offset per
+   breakpoint kept being wrong at some width or another; switched to a
+   `ResizeObserver` on the banner that keeps the launcher's clearance in
+   sync with its actual rendered height. Verified across 14 viewport
+   widths (320–1440px) with no overlap at any of them.
+
+8. **`2c00494`** — Fix deploy zip silently dropping 11 hidden-attribute
+   asset files
+   Every previous deploy zip (including the one rebuilt earlier this
+   session) was missing 11 files under `assets/` — `dom_video.mp4`,
+   `logo.video.mp4`, `logo_video.mp4`, `logo.png`, and 7 more, all
+   referenced by the live site — even though `dist/` had all 26 correctly.
+   Root cause: those 11 files carry the Windows Hidden attribute, and
+   `Compress-Archive` honors `-Force` for items passed to it directly but
+   not for hidden files it discovers on its own while recursing into a
+   piped-in folder — so the existing `Get-ChildItem -Force |
+   Compress-Archive` fix (from the 2026-07-31 robots.txt/site.webmanifest
+   incident) only covered `dist/`'s top level, not files nested inside
+   `assets/`. `build()` now strips the Hidden attribute recursively across
+   all of `dist/` right after copying. Also replaced the
+   `REQUIRED_FILES`-only zip check with a full recursive diff against
+   `dist/`'s actual contents — `REQUIRED_FILES` never listed a single asset
+   path, which is exactly why this went undetected through however many
+   prior deploys. If those 11 files aren't already live on techdolphin.ru,
+   this is why.
+
+   Also rebuilt `dist/`/the deploy zip twice over the course of this
+   session (once mid-session, once after the fix above) since it had
+   already gone stale relative to source by the time each rebuild
+   happened — same class of problem as 2026-07-31 item 6.
+
 ## 2026-07-31 — Site audit and fixes
 
 A full review of the project turned up 8 issues, fixed one by one below, plus two
