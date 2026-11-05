@@ -3,7 +3,7 @@ window.TechDolphinRegion = Object.freeze({
   "id": "international",
   "domain": "https://nate-web3.com",
   "language": "en",
-  "geoLanguage": true,
+  "geoLanguage": false,
   "currency": "USD",
   "locale": "en-US",
   "prices": [

@@ -2,6 +2,7 @@ const fs=require('fs');
 const path=require('path');
 const crypto=require('crypto');
 const {SITES,PAGES,translateMarkup}=require('./render-content');
+const {localizeProjectMedia}=require('./project-media');
 const ROOT=path.resolve(__dirname,'..');
 const read=file=>fs.readFileSync(path.join(ROOT,file),'utf8').replace(/\r\n/g,'\n');
 const hash=bytes=>crypto.createHash('sha256').update(bytes).digest('hex');
@@ -70,7 +71,7 @@ function createOutputs(){
    }
    const scripts=['region.js','storage.js','i18n.js','analytics.js','main.js'].map(file=>'<script src="js/'+file+'?v='+version('js/'+file)+'"></script>').join('\n')+'\n<script async src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>';
    const values={...vars,HEAD:head,NAV_LINKS:menus(name),CONTENT:read('src/templates/pages/'+name),LEFT_NAV:page==='home'?component('left-nav'):'',SCRIPTS:scripts};
-   const html=translateMarkup(expand(layout,values),defaultT);
+   const html=translateMarkup(localizeProjectMedia(expand(layout,values),site),defaultT);
    put(directory+name,html);
    const key=directory+name,digest=hash(Buffer.from(html));const old=dates[key];dates[key]={hash:digest,date:old?.hash===digest?old.date:date()};
   }

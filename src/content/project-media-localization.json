@@ -1,0 +1,20 @@
+[
+  {
+    "asset": "assets/dom-sessions-en.webp",
+    "source": "dom-sessions.jpg",
+    "tool": "image_gen.imagegen (built-in)",
+    "prompt": "Use case: text-localization. Edit target: attached DOM Sessions mobile screenshot. Produce ONE separate localized screenshot for an English portfolio, same portrait aspect ratio and framing. Replace all Russian lettering with natural English. Preserve the original forest photo, tea photo, dark burgundy card, warm cream background, rounded rectangles, icon positions, typography hierarchy, status bar, and overall design. No device mockup, no border, no other new elements. Exact replacement text from top to bottom: \"SESSIONS\", \"Choose your practice\", \"Meditation library\", \"Healing · Stress relief · Energy · Daily\", \"Tea ceremonies\", \"Solo · Group · Grounding rituals\", \"Practices\", badge \"NEW\", \"Sandra · Immersive 270° · Breathwork · Chakras\". Bottom navigation labels: \"Home\", \"Sessions\", \"Ritual\", \"Journey\", \"Profile\". Fit longer English text cleanly with modest size adjustments. There must be no Cyrillic lettering anywhere. Keep everything except the lettering unchanged."
+  },
+  {
+    "asset": "assets/dom-login-en.webp",
+    "source": "dom-login.jpg",
+    "tool": "image_gen.imagegen (built-in)",
+    "prompt": "Use case: text-localization. Edit target: attached DOM login mobile screenshot. Produce ONE English localized screenshot with identical portrait aspect ratio and full framing. Preserve the black/charcoal background, muted gold buttons, moon artwork in the logo, all rounded cards, icons, layout, contrast, and visual hierarchy. Change only text. Change the logo's Cyrillic word to Latin \"DOM\", with the moon remaining its central O, and the subtitle to \"WOMEN'S SPACE\". Top navigation: \"(tabs)\" and \"Profile\". Main text from top to bottom: \"Sign in\", \"Enter your email and password to access your space.\", fields \"Email address\" and \"Password\", link \"Forgot password?\", button \"Continue\", line \"New here?\", button \"Create account\", button \"Continue with Apple\", button \"Continue with Google\". All words must be accurate and readable. No Cyrillic letters anywhere. Do not invent any UI features or change the design."
+  },
+  {
+    "asset": "assets/dom-journey-en.webp",
+    "source": "dom-journey.jpg",
+    "tool": "image_gen.imagegen (built-in)",
+    "prompt": "Use case: text-localization. Edit target: attached DOM Journey mobile screenshot. Produce ONE English localized screenshot with the same portrait aspect ratio and full framing. Preserve cream, dark gray and muted gold colors, rounded destination cards, country emoji/icons, bottom navigation, spacing and original design. Replace all Russian lettering with English. Top small text remains \"DOM · TEA HOUSE · SACRED JOURNEYS\"; large title remains \"JOURNEY\". Subtitle: \"Explore the spirit of a place\". Section: \"How it works\". Paragraph: \"Visit DOM Tea House and travel together through immersive projections — to anywhere in the world, over a cup of tea.\" Step cards: \"Visit\" / \"Settle into a private space for two.\" and \"Choose a country\" / \"Pick a destination from our journey menu.\" Small row: \"2026 · 6 DESTINATIONS\" and \"TAP TO EXPLORE ↓\". First destination: \"GREECE\", \"Cradle of civilization\", chips \"Crete\", \"Rhodes\". Second: \"ITALY\", \"Timeless beauty, ancient light\", chips \"Rome\", \"Venice\". If any third destination text shows at the bottom, translate it to \"THAILAND\", \"Phuket\", \"Bangkok\". Bottom navigation labels \"Home\", \"Sessions\", \"Ritual\", \"Journey\", \"Profile\". Fit English copy cleanly and keep it legible with modest size adjustments only. No Cyrillic lettering anywhere. No added device frame or new features."
+  }
+]

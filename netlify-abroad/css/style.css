@@ -1380,6 +1380,12 @@ footer { border-top: 1px solid var(--border); padding: 32px 24px; max-width: 110
 .screen-card img,
 .screen-card video { width: 100%; height: 260px; object-fit: cover; object-position: top; display: block; }
 .screen-card-body  { padding: 16px 18px; }
+:is(.hero-media-grid, .hero-side, .pcard, .screen-card, .video-feature, .page-hero-side, .media-reel-card) img.localized-project-preview {
+  object-fit: contain;
+  object-position: center;
+  background: var(--card2);
+}
+.screen-card img.localized-project-preview { height: min(440px, 110vw); }
 .screen-card-name  { font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
 .screen-card-desc  { font-size: 13px; color: var(--muted2); line-height: 1.5; }
 /* CTA banner on projects page */

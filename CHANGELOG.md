@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-11-06 — Show international projects in English
+
+Localized the Russian text embedded in the DOM sessions, sign-in, and journey
+screenshots. The international homepage and Projects page now use those English
+previews, including video posters and fallbacks. Russian interface recordings
+are replaced with an English interface preview or the existing English DOM
+Space website screenshot. Text-free immersive and product videos remain.
+Preview images fit their cards without cropping away interface content.
+
+The international site now defaults to English without geo-IP switching;
+explicit manual language choices remain available. Original Russian portfolio
+media stays in the Russian site. The built-in imagegen prompts and resulting
+asset paths are recorded in `src/content/project-media-localization.json`.
+
+Validation: all 40 tests pass, including English project media on both portfolio
+pages, English defaults for Russian visitors, manual language persistence, and
+original media on the Russian site. Desktop and mobile previews were visually
+reviewed; the full interface screenshots fit without horizontal overflow.
+
 ## 2026-11-05 — Publish the international site to Netlify
 
 Published source commit `7f6157d` to the existing `nate-web3` production site at

@@ -147,7 +147,33 @@
     "directory": "netlify-abroad",
     "domain": "https://nate-web3.com",
     "language": "en",
-    "geoLanguage": true,
+    "geoLanguage": false,
+    "projectMedia": {
+      "images": {
+        "assets/dom-sessions.jpg": {
+          "src": "assets/dom-sessions-en.webp",
+          "alt": "DOM sessions and practices — English interface preview"
+        },
+        "assets/dom-login.jpg": {
+          "src": "assets/dom-login-en.webp",
+          "alt": "DOM sign-in and profile — English interface preview"
+        },
+        "assets/dom-journey.jpg": {
+          "src": "assets/dom-journey-en.webp",
+          "alt": "DOM journeys and destinations — English interface preview"
+        }
+      },
+      "videoPreviews": {
+        "assets/dom_video.mp4": {
+          "src": "assets/dom-sessions-en.webp",
+          "alt": "DOM sessions and practices — English interface preview"
+        },
+        "assets/domspace.mp4": {
+          "src": "assets/dom-space-web.png",
+          "alt": "DOM Space website — English interface preview"
+        }
+      }
+    },
     "currency": "USD",
     "locale": "en-US",
     "analyticsId": 0,

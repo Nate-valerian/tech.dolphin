@@ -9,7 +9,10 @@ Both public sites are generated static files. Change the shared source and run t
 - `src/js/` and `src/styles/site.css`: common behavior and design.
 - `src/i18n/common.json`: common Russian and English wording.
 - `config/regions.json`: domains, business identity, contacts, prices, currency, defaults, and region-specific translations.
+- `config/regions.json` → `projectMedia`: approved international image/poster replacements and English previews used in place of recordings with Russian interface text. The build applies them to both the homepage and the Projects page; the Russian site keeps its original media.
 - `assets/`: canonical public media, copied to the international output by the build.
+
+The international site defaults to English without geo-IP switching. Visitors can still select Russian manually. English DOM screenshot assets are localized presentation previews, generated with the built-in imagegen tool and saved as `assets/dom-{sessions,login,journey}-en.webp`. The exact localization prompts and source images are recorded in `src/content/project-media-localization.json`.
 
 Run `npm run build` to generate both sites and content-based cache versions. Run `npm run check` to reject output drift, missing translations, inconsistent operator/currency/contact settings, missing assets, or structural errors. Run `npm test` for browser and packaging regressions; email and analytics services are mocked.
 
