@@ -16,7 +16,7 @@
 <meta name="twitter:title" content="Цены | Tech Dolphin">
 <meta name="twitter:description" content="Калькулятор стоимости сайтов, приложений и AI продуктов.">
 <meta name="twitter:image" content="https://techdolphin.ru/assets/logo.png">
-<meta name="theme-color" content="#020B18">
+<meta name="theme-color" content="#F6F5F1">
 <link rel="canonical" href="https://techdolphin.ru/pricing.html">
 <link rel="alternate" hreflang="ru" href="https://techdolphin.ru/pricing.html">
 <link rel="alternate" hreflang="en" href="https://nate-web3.netlify.app/pricing.html">
@@ -27,7 +27,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=20260731-1">
+<link rel="stylesheet" href="css/style.css?v=20261105-palette">
 </head>
 <body>
 
@@ -89,13 +89,13 @@
   <div class="calc-result" id="calc-result">
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;">
       <div>
-        <div style="font-size:13px;color:#7AAF87;margin-bottom:8px;" data-i18n="calc_result_label">Примерная стоимость:</div>
-        <div id="calc-price" style="font-size:clamp(28px,4vw,44px);font-weight:800;background:linear-gradient(135deg,#0EA5E9,#0284C7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-family:inherit;"></div>
-        <div id="calc-result-note" style="font-size:13px;color:#3D6B4A;margin-top:8px;" data-i18n="calc_result_note">Премиальное качество и умная стоимость</div>
+        <div style="font-size:13px;color:var(--muted2);margin-bottom:8px;" data-i18n="calc_result_label">Примерная стоимость:</div>
+        <div id="calc-price" style="font-size:clamp(28px,4vw,44px);font-weight:800;color:var(--cyan);font-family:inherit;"></div>
+        <div id="calc-result-note" style="font-size:13px;color:var(--muted);margin-top:8px;" data-i18n="calc_result_note">Премиальное качество и умная стоимость</div>
       </div>
-      <a href="contact.html" id="calc-cta" style="display:inline-flex;align-items:center;background:linear-gradient(135deg,#0EA5E9,#0284C7);color:#fff;font-size:14px;font-weight:700;padding:14px 32px;border-radius:100px;text-decoration:none;box-shadow:0 8px 24px rgba(14,165,233,.3);white-space:nowrap;" data-i18n="calc_cta">Обсудить проект →</a>
+      <a href="contact.html" id="calc-cta" style="display:inline-flex;align-items:center;background:var(--cyan);color:#fff;font-size:14px;font-weight:700;padding:14px 32px;border-radius:100px;text-decoration:none;box-shadow:none;white-space:nowrap;" data-i18n="calc_cta">Обсудить проект →</a>
     </div>
-    <div id="calc-disc" style="margin-top:16px;font-size:13px;color:#3D6B4A;" data-i18n="calc_disc">* Точная цена после бесплатного созвона.</div>
+    <div id="calc-disc" style="margin-top:16px;font-size:13px;color:var(--muted);" data-i18n="calc_disc">* Точная цена после бесплатного созвона.</div>
   </div>
   <div class="calc-empty" id="calc-empty" data-i18n="calc_empty">👆 Выберите услуги чтобы узнать стоимость</div>
 </section>
@@ -130,26 +130,26 @@
     </div>
     <div class="how-connector"></div>
     <div class="how-step">
-      <div class="how-icon" style="background:linear-gradient(135deg,#0284C7,#0EA5E9);">💬</div>
-      <div style="flex:1;"><div class="how-title-row"><span class="how-name" data-i18n="how2_n">Созвон и обсуждение</span><span class="how-time" style="background:rgba(2,132,199,.15);border-color:rgba(2,132,199,.3);color:#0284C7;" data-i18n="how2_t">За 1 день</span></div><div class="how-desc" data-i18n="how2_d">Созваниваемся, выслушиваем идею.</div></div>
+      <div class="how-icon">💬</div>
+      <div style="flex:1;"><div class="how-title-row"><span class="how-name" data-i18n="how2_n">Созвон и обсуждение</span><span class="how-time" style="background:var(--csft);border-color:var(--accent-border);color:var(--cyan);" data-i18n="how2_t">За 1 день</span></div><div class="how-desc" data-i18n="how2_d">Созваниваемся, выслушиваем идею.</div></div>
       <div class="how-num">02</div>
     </div>
     <div class="how-connector"></div>
     <div class="how-step">
-      <div class="how-icon" style="background:linear-gradient(135deg,#0EA5E9,#86EFAC);">📋</div>
-      <div style="flex:1;"><div class="how-title-row"><span class="how-name" data-i18n="how3_n">План и цена</span><span class="how-time" style="background:rgba(134,239,172,.1);border-color:rgba(134,239,172,.3);color:#86EFAC;" data-i18n="how3_t">За 1–2 дня</span></div><div class="how-desc" data-i18n="how3_d">Чёткий план и финальная цена.</div></div>
+      <div class="how-icon">📋</div>
+      <div style="flex:1;"><div class="how-title-row"><span class="how-name" data-i18n="how3_n">План и цена</span><span class="how-time" style="background:var(--csft);border-color:var(--accent-border);color:var(--cyan);" data-i18n="how3_t">За 1–2 дня</span></div><div class="how-desc" data-i18n="how3_d">Чёткий план и финальная цена.</div></div>
       <div class="how-num">03</div>
     </div>
     <div class="how-connector"></div>
     <div class="how-step">
-      <div class="how-icon" style="background:linear-gradient(135deg,#0284C7,#86EFAC);">🚀</div>
-      <div style="flex:1;"><div class="how-title-row"><span class="how-name" data-i18n="how4_n">Разработка</span><span class="how-time" style="background:rgba(2,132,199,.15);border-color:rgba(2,132,199,.3);color:#0284C7;" data-i18n="how4_t">От 2 недель</span></div><div class="how-desc" data-i18n="how4_d">Регулярно показываем прогресс.</div></div>
+      <div class="how-icon">🚀</div>
+      <div style="flex:1;"><div class="how-title-row"><span class="how-name" data-i18n="how4_n">Разработка</span><span class="how-time" style="background:var(--csft);border-color:var(--accent-border);color:var(--cyan);" data-i18n="how4_t">От 2 недель</span></div><div class="how-desc" data-i18n="how4_d">Регулярно показываем прогресс.</div></div>
       <div class="how-num">04</div>
     </div>
     <div class="how-connector"></div>
     <div class="how-step last">
-      <div class="how-icon" style="background:linear-gradient(135deg,#10B981,#0EA5E9);">✅</div>
-      <div style="flex:1;"><div class="how-title-row"><span class="how-name" data-i18n="how5_n">Сдача продукта</span><span class="how-time" style="background:rgba(134,239,172,.12);border-color:rgba(134,239,172,.3);color:#86EFAC;" data-i18n="how5_t">🎉 Готово!</span></div><div class="how-desc" data-i18n="how5_d">Передаём и остаёмся на связи.</div></div>
+      <div class="how-icon">✅</div>
+      <div style="flex:1;"><div class="how-title-row"><span class="how-name" data-i18n="how5_n">Сдача продукта</span><span class="how-time" style="background:var(--csft);border-color:var(--accent-border);color:var(--cyan);" data-i18n="how5_t">🎉 Готово!</span></div><div class="how-desc" data-i18n="how5_d">Передаём и остаёмся на связи.</div></div>
       <div class="how-num">05</div>
     </div>
 
@@ -170,7 +170,7 @@
     <a href="faq.html"      data-i18n="nav_faq">FAQ</a>
     <a href="contact.html"  data-i18n="nav_contact">Контакт</a>
   </div>
-  <a href="tel:+79653932841" style="display:inline-flex;align-items:center;gap:8px;background:rgba(2,132,199,.15);border:1px solid rgba(2,132,199,.3);color:#0EA5E9;font-size:13px;font-weight:600;padding:10px 20px;border-radius:100px;">📞 +7 (965) 393-28-41</a>
+  <a href="tel:+79653932841" style="display:inline-flex;align-items:center;gap:8px;background:var(--csft);border:1px solid var(--accent-border);color:var(--cyan);font-size:13px;font-weight:600;padding:10px 20px;border-radius:100px;">📞 +7 (965) 393-28-41</a>
 </footer>
 
 <!-- LEAD CHATBOT -->
@@ -197,8 +197,8 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="js/analytics.js?v=20260615-1"></script>
-<script src="js/i18n.js?v=20260617-1"></script>
-<script src="js/main.js?v=20260617-1"></script>
+<script src="js/i18n.js?v=20261105-palette"></script>
+<script src="js/main.js?v=20261105-palette"></script>
 <noscript><div><img src="https://mc.yandex.ru/watch/109873573" style="position:absolute; left:-9999px;" alt=""></div></noscript>
 </body>
 </html>

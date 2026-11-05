@@ -354,13 +354,13 @@ function renderCalc() {
       <div style="display:flex;justify-content:space-between;align-items:flex-start;">
         <div>
           <div class="calc-mark">${s.icon}</div>
-          <div style="font-size:16px;font-weight:700;color:#E8F5EC;margin-bottom:6px;">${t[s.nKey]}</div>
-          <div style="font-size:13px;color:#7AAF87;">${t[s.dKey]}</div>
+          <div style="font-size:16px;font-weight:700;color:var(--white);margin-bottom:6px;">${t[s.nKey]}</div>
+          <div style="font-size:13px;color:var(--muted2);">${t[s.dKey]}</div>
           ${renderCalcTiers(s, t)}
         </div>
-        <div class="calc-check"${selectedCalc.has(s.id) ? ' style="background:#0EA5E9;border-color:#0EA5E9;color:#fff;"' : ''}>✓</div>
+        <div class="calc-check">✓</div>
       </div>
-      <div style="margin-top:16px;font-size:15px;font-weight:700;color:#0EA5E9;">${t.calc_from} ${fmt(s.min)}</div>
+      <div style="margin-top:16px;font-size:15px;font-weight:700;color:var(--cyan);">${t.calc_from} ${fmt(s.min)}</div>
     </div>
   `).join('');
   updateCalcResult();

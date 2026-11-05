@@ -1,5 +1,5 @@
 diff --git a/js/main.js b/netlify-abroad/js/main.js
-index 7dd1854..4214bdd 100644
+index e72550f..aba0710 100644
 --- a/js/main.js
 +++ b/netlify-abroad/js/main.js
 @@ -3,12 +3,48 @@

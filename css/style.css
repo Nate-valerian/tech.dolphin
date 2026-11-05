@@ -4,18 +4,24 @@
 
 /* ── TOKENS ── */
 :root {
-  --bg:     #020B18;
-  --card:   #061522;
-  --card2:  #0A1E30;
-  --border: rgba(255,255,255,.07);
-  --violet: #0284C7;
-  --vsft:   rgba(2,132,199,.1);
-  --cyan:   #0EA5E9;
-  --csft:   rgba(14,165,233,.1);
-  --green:  #059669;
-  --white:  #F0F2FF;
-  --muted:  #5B6080;
-  --muted2: #8B93B8;
+  color-scheme: light;
+  --bg:     #F6F5F1;
+  --card:   #FFFFFF;
+  --card2:  #EFEFEA;
+  --border: #D9DFDB;
+  --cyan:   #2A5F6B;
+  --violet: var(--cyan);
+  --csft:   #E7EFEE;
+  --vsft:   var(--csft);
+  --green:  #4E7061;
+  --white:  #1F2D34;
+  --muted:  #5F6C74;
+  --muted2: #4F5F67;
+  --accent-hover: #204B55;
+  --accent-border: #B7CBCB;
+  --on-accent: #FFFFFF;
+  --shadow-card: 0 4px 18px rgba(31,45,52,.035);
+  --shadow-hover: 0 10px 28px rgba(31,45,52,.07);
   --r:      20px;
   --r-lg:   28px;
   --r-xl:   36px;
@@ -31,16 +37,13 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   text-rendering: geometricPrecision;
-  background: linear-gradient(-45deg,#020B18,#040D1C,#061020,#020B18);
-  background-size: 400% 400%;
-  animation: gradientWave 36s ease infinite;
 }
 a { text-decoration: none; color: inherit; }
 button { font-family: inherit; }
 img, video { display: block; }
-::selection { background: rgba(14,165,233,.28); color: #fff; }
+::selection { background: #C7DBDA; color: var(--white); }
 :focus-visible {
-  outline: 2px solid rgba(134,239,172,.9);
+  outline: 2px solid var(--cyan);
   outline-offset: 4px;
 }
 
@@ -1655,427 +1658,131 @@ footer { border-top: 1px solid var(--border); padding: 32px 24px; max-width: 110
   }
 }
 
-/* ── LIGHT THEME (default) ───────────────────
-   Folded in from theme-preview.css, which had been loaded as a
-   second stylesheet on every page despite its "temporary" comment. */
-:root {
-  color-scheme: light;
-}
-
-body {
-  --bg: #ffffff;
-  --card: rgba(255, 255, 255, .98);
-  --card2: rgba(248, 250, 252, .98);
-  --border: rgba(15, 23, 42, .16);
-  --white: #0F172A;
-  --muted: #64748B;
-  --muted2: #334155;
-  --green: #15803D;
-  --cyan: #0284C7;
-  --violet: #0284C7;
-  --csft: rgba(2, 132, 199, .11);
-  --vsft: rgba(2, 132, 199, .10);
-  background: #FFFFFF;
-  animation: none;
-  color: var(--white);
-}
-
-.aurora { opacity: .18; }
-.aurora-1 { background: radial-gradient(ellipse, rgba(14, 165, 233, .06) 0%, transparent 72%); }
-.aurora-2 { background: radial-gradient(ellipse, rgba(134, 239, 172, .06) 0%, transparent 72%); }
+/* ── DEFAULT PALETTE ───────────────────────
+   Warm stone, charcoal and ocean blue. Components share the tokens above;
+   emphasis comes from contrast rather than colored glows or gradients. */
+.aurora, .particles, .page-hero-glow, .contact-glow { display: none; }
 
 .nav {
-  background: rgba(255, 255, 255, .92);
+  background: rgba(255,255,255,.95);
   border-color: var(--border);
-  box-shadow: 0 18px 54px rgba(15, 23, 42, .10);
+  box-shadow: 0 6px 24px rgba(31,45,52,.05);
 }
+.nav-logo img, .nav-logo video { border-color: var(--accent-border); }
+.nav-links a:hover, .nav-links a.active-page { background: var(--csft); color: var(--cyan); }
 
-.nav-links a:hover,
-.nav-links a.active-page,
-#lang-toggle,
-.nav-contact-link,
-.nav-contact-max,
-.nav-mobile-contacts a,
-.ptab,
-.proj-view-all,
-.chip,
-.video-chip,
-.pcard-tag,
-.media-badge,
-.section-label {
-  background: rgba(14, 165, 233, .09);
-  border-color: rgba(2, 132, 199, .24);
-  color: #0369A1;
-}
-
-#progress-bar,
-#nav-progress-line,
-.how-connector {
-  background: linear-gradient(90deg, #0284C7, #0EA5E9);
-}
-
-.project-card,
-.pcard,
-.about-text-card,
-.exp-card,
-.svc-card,
-.why-card,
-.calc-card,
-.faq-item,
-.how-step,
-.contact-card,
-.cta-banner,
-.proj-video-card,
-.proj-mini,
-.media-reel-card,
-.screen-card,
-.domstudio-feature,
-.lead-chat-window,
-#cookie-banner {
+#lang-toggle, .nav-contact-link, .nav-contact-max, .nav-contact-telegram,
+.nav-contact-call, .nav-contact-whatsapp, .nav-mobile-contacts a, .nav-close-btn {
   background: var(--card);
-  border-color: var(--border);
-  box-shadow: 0 18px 54px rgba(15, 23, 42, .08);
-}
-
-.services-wrap,
-.cities-wrap,
-.ticker-wrap {
-  background: transparent;
-}
-
-.pcard-media,
-.domstudio-showcase-panel,
-.domstudio-shot--before,
-.stat-pill,
-.lead-chat-trigger,
-.contact-link,
-.form-input,
-.proj-video-media {
-  background: var(--card2);
-  border-color: var(--border);
-}
-
-.about-exp-card,
-.svc-card,
-.about-eng-focus,
-.case-proof-item,
-.media-reel,
-.calc-result,
-.price-banner {
-  background: linear-gradient(145deg, rgba(255, 255, 255, .98), rgba(241, 248, 252, .98));
-  border-color: rgba(15, 23, 42, .16);
-  box-shadow: 0 18px 54px rgba(15, 23, 42, .08);
-}
-
-.about-eng-focus {
-  border-color: rgba(2, 132, 199, .20);
-}
-
-.about-eng-col-title {
-  color: #0F172A;
-  border-bottom-color: rgba(2, 132, 199, .20);
-}
-
-.about-eng-col-items,
-.faq-a,
-.calc-empty,
-.price-banner p {
-  color: #475569;
-}
-
-.case-proof-item span,
-.about-eng-label,
-.calc-mark {
-  color: #0284C7;
-}
-
-.case-proof-item strong,
-.price-banner h3 {
-  color: #0F172A;
-}
-
-.case-proof-item p {
-  color: #475569;
-}
-
-.svc-icon {
-  background: linear-gradient(145deg, #E0F2FE, #F1F8FC);
-  border-color: rgba(2, 132, 199, .22);
-  color: #0284C7;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .8);
-}
-
-.calc-card {
-  border-width: 1px;
-}
-
-.calc-card:hover,
-.calc-card.selected {
-  border-color: rgba(2, 132, 199, .42);
-  background: linear-gradient(145deg, #FFFFFF, #F1F8FC);
-  box-shadow: 0 20px 55px rgba(2, 132, 199, .14);
-}
-
-.calc-card [style*="color:#E8F5EC"],
-.calc-card [style*="color: #E8F5EC"] {
-  color: #0F172A !important;
-}
-
-.calc-card [style*="color:#7AAF87"],
-.calc-card [style*="color: #7AAF87"] {
-  color: #3F6B4D !important;
-}
-
-.calc-card [style*="color:#0EA5E9"],
-.calc-card [style*="color: #0EA5E9"] {
-  color: #0284C7 !important;
-}
-
-.calc-tier {
-  background: #F1F8FC;
-  border-color: rgba(2, 132, 199, .16);
-}
-
-.calc-check {
-  background: #E0F2FE;
-  border-color: rgba(2, 132, 199, .28);
-}
-
-.calc-card.selected .calc-check {
-  background: #0284C7;
-  border-color: #0284C7;
-}
-
-.price-banner h3 span,
-.tick-item span,
-.proj-section-num {
-  color: #0284C7;
-}
-
-.tick-item {
-  color: #334155;
-}
-
-.exp-row::before,
-.svc-item::before,
-.video-badge-dot {
-  background: #0284C7;
-}
-
-.nav-cta,
-.btn-main,
-.form-btn,
-#cookie-btn,
-#calc-cta,
-.ptab.active,
-.chat-msg.user {
-  background: linear-gradient(135deg, #0284C7, #0EA5E9);
-  border-color: #0284C7;
-  color: #fff;
-}
-
-.nav-cta:hover,
-.btn-main:hover,
-.form-btn:hover,
-#cookie-btn:hover {
-  background: linear-gradient(135deg, #0369A1, #0284C7);
-}
-
-#calc-price,
-.exp-big,
-.why-num,
-.cta-banner h2 em,
-.page-hero-grad {
-  color: #0284C7;
-  -webkit-text-fill-color: initial;
-}
-
-.svc-card,
-.pcard,
-.why-card,
-.calc-card,
-.faq-item,
-.how-step,
-.about-text-card,
-.about-exp-card,
-.about-eng-focus,
-.case-proof-item,
-.proj-mini,
-.screen-card,
-.media-reel-card,
-.domstudio-feature,
-.contact-card,
-.cta-banner,
-.price-banner {
-  position: relative;
-  overflow: hidden;
-  transition:
-    transform .28s ease,
-    border-color .28s ease,
-    box-shadow .28s ease,
-    background .28s ease;
-}
-
-.svc-card::before,
-.pcard::after,
-.why-card::before,
-.calc-card::before,
-.faq-item::before,
-.how-step::before,
-.about-text-card::before,
-.about-exp-card::before,
-.about-eng-focus::before,
-.case-proof-item::before,
-.proj-mini::before,
-.screen-card::before,
-.media-reel-card::before,
-.domstudio-feature::before,
-.contact-card::before,
-.cta-banner::before,
-.price-banner::before {
-  content: "";
-  position: absolute;
-  inset: 0 auto 0 -65%;
-  width: 48%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, transparent 0%, rgba(2, 132, 199, .08) 42%, rgba(14, 165, 233, .16) 50%, rgba(2, 132, 199, .08) 58%, transparent 100%);
-  transform: skewX(-14deg);
-  opacity: 0;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.svc-card:hover,
-.pcard:hover,
-.why-card:hover,
-.calc-card:hover,
-.faq-item:hover,
-.how-step:hover,
-.about-text-card:hover,
-.about-exp-card:hover,
-.about-eng-focus:hover,
-.case-proof-item:hover,
-.proj-mini:hover,
-.screen-card:hover,
-.media-reel-card:hover,
-.domstudio-feature:hover,
-.contact-card:hover,
-.cta-banner:hover,
-.price-banner:hover {
-  transform: translateY(-5px);
-  border-color: rgba(2, 132, 199, .38);
-  box-shadow: 0 24px 70px rgba(2, 132, 199, .16), 0 12px 34px rgba(15, 23, 42, .08);
-}
-
-.svc-card:hover::before,
-.pcard:hover::after,
-.why-card:hover::before,
-.calc-card:hover::before,
-.faq-item:hover::before,
-.how-step:hover::before,
-.about-text-card:hover::before,
-.about-exp-card:hover::before,
-.about-eng-focus:hover::before,
-.case-proof-item:hover::before,
-.proj-mini:hover::before,
-.screen-card:hover::before,
-.media-reel-card:hover::before,
-.domstudio-feature:hover::before,
-.contact-card:hover::before,
-.cta-banner:hover::before,
-.price-banner:hover::before {
-  opacity: 1;
-  animation: cardSweep 1.9s ease forwards;
-}
-
-@keyframes cardSweep {
-  from { left: -65%; }
-  to { left: 120%; }
-}
-
-.pcard-name,
-.proj-section-title,
-.video-title,
-.screen-card-name,
-.media-reel-body strong,
-.page-hero-title,
-.hero-title,
-.section-title,
-.svc-name,
-.why-title,
-.faq-q-text,
-.how-name,
-.exp-label,
-.lead-chat-title {
-  color: var(--white);
-  -webkit-text-fill-color: initial;
-}
-
-.lead-chat-toggle {
-  background: linear-gradient(145deg, #FFFFFF, #F1F8FC);
-  border-color: rgba(2, 132, 199, .26);
-  color: #0F172A;
-  box-shadow: 0 16px 42px rgba(15, 23, 42, .12);
-}
-
-.lead-chat-panel {
-  background: rgba(255, 255, 255, .98);
-  border-color: rgba(15, 23, 42, .16);
-  box-shadow: 0 22px 64px rgba(15, 23, 42, .14);
-}
-
-.lead-chat-head {
-  background: linear-gradient(135deg, rgba(2, 132, 199, .09), rgba(14, 165, 233, .06));
-  border-bottom-color: rgba(15, 23, 42, .10);
-}
-
-.lead-chat-close {
-  background: rgba(15, 23, 42, .04);
-  border-color: rgba(15, 23, 42, .12);
-  color: #475569;
-}
-
-.chat-msg.bot {
-  background: #F1F5F9;
-  color: #334155;
-}
-
-.chat-option {
-  background: #F1F8FC;
-  border-color: rgba(2, 132, 199, .20);
-  color: #0369A1;
-}
-
-.chat-small {
-  color: #64748B;
-}
-
-.pcard-desc,
-.video-desc,
-.screen-card-desc,
-.media-reel-body span,
-.page-hero-sub,
-.section-sub,
-.svc-item,
-.why-desc,
-.exp-desc,
-.tick-item {
-  color: var(--muted2);
-}
-
-.page-hero-grad,
-.hero-title em,
-.section-title em {
+  border-color: var(--accent-border);
   color: var(--cyan);
-  -webkit-text-fill-color: initial;
+}
+#lang-toggle:hover, .nav-contact-link:hover, .nav-mobile-contacts a:hover, .nav-close-btn:hover {
+  background: var(--csft); border-color: var(--cyan); color: var(--accent-hover);
+}
+#progress-bar, #nav-progress-line, .how-connector { background: var(--cyan); box-shadow: none; }
+.lnav-line-bg { background: var(--border); }
+.lnav-num { color: var(--muted); }
+.lnav-item::before { background: var(--card2); border-color: var(--accent-border); }
+.lnav-item.active::before, .lnav-item:hover::before { background: var(--cyan); border-color: var(--cyan); box-shadow: none; }
+.lnav-item.active .lnav-num, .lnav-item:hover .lnav-num { color: var(--cyan); }
+.lnav-item.active .lnav-label, .lnav-item:hover .lnav-label { color: var(--muted2); }
+
+.ptab, .chip, .video-chip, .pcard-tag, .city-tag {
+  background: var(--card); border-color: var(--border); color: var(--muted2);
+}
+.proj-view-all, .media-badge, .section-label, .proj-section-badge,
+.video-badge, .calc-mark, .pcard-facts span, .chat-option {
+  background: var(--csft); border-color: var(--accent-border); color: var(--cyan);
+}
+.ptab:hover, .chip:hover, .proj-view-all:hover, .contact-link:hover, .chat-option:hover {
+  background: var(--csft); border-color: var(--accent-border); color: var(--accent-hover);
 }
 
-.hero-title,
-.section-title,
-.page-hero-title,
-.exp-big,
-.why-num,
-.cta-banner h2 em,
-#calc-price {
-  background: none;
+.project-card, .pcard, .about-text-card, .about-exp-card, .exp-card, .svc-card,
+.why-card, .calc-card, .faq-item, .how-step, .contact-card, .cta-banner,
+.proj-video-card, .proj-mini, .video-feature, .media-reel, .media-reel-card,
+.screen-card, .domstudio-feature, .about-eng-focus, .case-proof-item,
+.callback-form, .calc-result, .price-banner {
+  background: var(--card); border-color: var(--border); box-shadow: var(--shadow-card);
+}
+.svc-card:hover, .pcard:hover, .why-card:hover, .calc-card:hover, .faq-item:hover,
+.how-step:hover, .about-text-card:hover, .about-exp-card:hover, .about-eng-focus:hover,
+.case-proof-item:hover, .proj-mini:hover, .screen-card:hover, .media-reel-card:hover,
+.domstudio-feature:hover, .contact-card:hover, .cta-banner:hover, .price-banner:hover {
+  border-color: var(--accent-border); box-shadow: var(--shadow-hover);
+}
+
+/* Neutral surfaces have no moving shine or pulsing glow. */
+.svc-card::before, .pcard::after, .why-card::before, .stat-pill::before,
+.about-text-card::before, .about-exp-card::before { display: none; }
+.stat-pill, .badge-dot, .video-badge-dot { animation: none; }
+.services-wrap, .cities-wrap { background: var(--card2); }
+.ticker-wrap { background: var(--card); border-color: var(--border); }
+
+.pcard-media, .domstudio-showcase-panel, .domstudio-shot--before, .stat-pill,
+.contact-link, .form-input, .proj-video-media, .calc-tier, .chat-msg.bot {
+  background: var(--card2); border-color: var(--border);
+}
+.stat-pill { box-shadow: none; }
+.about-highlight, .svc-icon, .how-icon {
+  background: var(--csft); border-color: var(--accent-border); color: var(--cyan); box-shadow: none;
+}
+.media-reel-head, .about-eng-col-title { border-color: var(--border); }
+.media-reel-grid, .domstudio-before-after { background: var(--border); }
+.pcard-tag-green { background: var(--csft); border-color: var(--accent-border); color: var(--green); }
+.how-step.last { border-color: var(--border); }
+.calc-card { border-width: 1px; }
+.calc-card.selected { background: var(--csft); border-color: var(--cyan); box-shadow: none; }
+.calc-check { background: var(--card); border-color: var(--accent-border); }
+.calc-card.selected .calc-check { background: var(--cyan); border-color: var(--cyan); color: var(--on-accent); }
+
+.nav-cta, .btn-main, .form-btn, #cookie-btn, #calc-cta, .ptab.active, .chat-msg.user {
+  background: var(--cyan); border-color: var(--cyan); color: var(--on-accent); box-shadow: none;
+}
+.btn-main { box-shadow: 0 3px 8px rgba(31,45,52,.08); }
+.nav-cta:hover, .btn-main:hover, .form-btn:hover, #cookie-btn:hover, #calc-cta:hover, .ptab.active:hover {
+  background: var(--accent-hover); border-color: var(--accent-hover); color: var(--on-accent); box-shadow: none;
+}
+.btn-sec { background: var(--card); border-color: var(--border); color: var(--white); }
+.btn-sec:hover { background: var(--csft); border-color: var(--accent-border); color: var(--cyan); }
+
+.pcard-name, .proj-section-title, .video-title, .screen-card-name, .media-reel-body strong,
+.page-hero-title, .hero-title, .section-title, .svc-name, .why-title, .faq-q-text,
+.how-name, .exp-label, .lead-chat-title, .about-eng-col-title, .case-proof-item strong, .price-banner h3 {
+  color: var(--white); -webkit-text-fill-color: currentColor;
+}
+.pcard-desc, .video-desc, .screen-card-desc, .media-reel-body span, .page-hero-sub,
+.section-sub, .svc-item, .why-desc, .exp-desc, .tick-item, .about-eng-col-items,
+.faq-a, .calc-empty, .price-banner p, .case-proof-item p, .how-desc, .callback-title,
+.form-promise, .contact-promise, #cookie-banner p, .chat-msg.bot { color: var(--muted2); }
+.form-consent, .chat-small, .cities-label, .city-tag { color: var(--muted); }
+.form-input { color: var(--white); }
+.form-input::placeholder { color: var(--muted); opacity: 1; }
+.form-input:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px var(--csft); }
+.form-success { color: var(--green); }
+.form-error { color: #A84438; }
+
+.page-hero-grad, .hero-title .grad, .hero-title em, .section-title em, #calc-price,
+.exp-big, .why-num, .cta-banner h2 em, .stat-pill .num {
+  background: none; color: var(--cyan); -webkit-text-fill-color: currentColor;
+}
+.case-proof-item span, .about-eng-label, .about-highlight, .price-banner h3 span,
+.tick-item span, .proj-section-num, .form-consent a, #cookie-banner a, .how-time { color: var(--cyan); }
+.how-time { background: var(--csft); border-color: var(--accent-border); }
+.how-num { color: var(--accent-border); }
+.exp-row::before, .svc-item::before, .video-badge-dot { background: var(--cyan); }
+.why-num { opacity: .6; }
+.hero-side-video, .page-hero-video, .hero-logo-video { border-color: var(--border); box-shadow: var(--shadow-card); }
+
+#cookie-banner, .lead-chat-toggle, .lead-chat-panel {
+  background: var(--card); border-color: var(--border); color: var(--white);
+  box-shadow: 0 8px 32px rgba(31,45,52,.08);
+}
+.lead-chat-head { background: var(--csft); border-color: var(--border); }
+.lead-chat-dot { background: var(--green); box-shadow: none; }
+.lead-chat-close { background: var(--card); border-color: var(--border); color: var(--muted2); }
+
+@media(max-width:1100px) {
+  .nav.menu-open::before, .nav-links { background: var(--bg); }
 }

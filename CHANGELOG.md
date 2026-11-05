@@ -1,5 +1,27 @@
 # Changelog
 
+## 2026-11-05 — Refine the site color palette
+
+Updated both the Russian site and `netlify-abroad/` with warm off-white
+backgrounds, charcoal text, white cards, and a muted ocean-blue accent.
+Replaced bright cyan gradients, colored glows, shimmer effects, and pulsing
+shadows with flat colors and softer neutral shadows.
+
+Applied the same palette to navigation, mobile menus, forms, pricing selections,
+chat, cookies, and privacy text in both languages. Replaced hardcoded inline
+colors with shared CSS tokens, refreshed browser theme colors, and bumped asset
+versions so returning visitors receive the new styles and translated markup.
+
+Validation: all 6 existing Playwright tests passed. Browser checks covered all
+10 pages at 390, 1024, and 1440px, including menu colors, selected pricing cards,
+typed form text, and translated privacy headings; no horizontal overflow or
+JavaScript errors were found. Primary button text contrast is 7.12:1; muted
+placeholder text against input backgrounds is 4.69:1. Desktop and mobile preview
+screenshots are saved under `test-results/color-review/` (ignored by Git).
+
+Prepared locally for review and deployment; this palette update has not been
+pushed or deployed.
+
 ## 2026-08-01 — Follow-up audit, fixes, and deploy-zip bug
 
 A second full review turned up 6 weaknesses, fixed one by one, plus 3 more

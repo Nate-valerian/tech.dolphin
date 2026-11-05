@@ -1,8 +1,8 @@
 diff --git a/css/style.css b/netlify-abroad/css/style.css
-index e879f44..ac38a4b 100644
+index 60b790c..f4613d1 100644
 --- a/css/style.css
 +++ b/netlify-abroad/css/style.css
-@@ -206,6 +206,13 @@ img, video { display: block; }
+@@ -209,6 +209,13 @@ img, video { display: block; }
    background: rgba(14,165,233,.18); border-color: rgba(14,165,233,.58);
    color: var(--white); transform: translateY(-1px);
  }
@@ -16,7 +16,7 @@ index e879f44..ac38a4b 100644
  .nav-contact-max {
    border-color: rgba(2,132,199,.4); background: rgba(2,132,199,.12);
    color: #0284C7;
-@@ -218,10 +225,6 @@ img, video { display: block; }
+@@ -221,10 +228,6 @@ img, video { display: block; }
    display: inline-block; width: 17px; height: 17px;
    fill: currentColor; flex: 0 0 auto;
  }
@@ -27,7 +27,7 @@ index e879f44..ac38a4b 100644
  .nav-contact-call {
    color: #F472B6; border-color: rgba(244,114,182,.36);
    background: rgba(244,114,182,.08); font-size: 15px;
-@@ -248,8 +251,6 @@ img, video { display: block; }
+@@ -251,8 +254,6 @@ img, video { display: block; }
    .nav { padding: 8px 12px; }
    .nav-logo { margin-right: auto; }
    .nav-hamburger { display: flex; }
@@ -36,7 +36,7 @@ index e879f44..ac38a4b 100644
    .nav.menu-open {
      transform: none;
      left: 16px; right: 16px; width: auto;
-@@ -261,7 +262,7 @@ img, video { display: block; }
+@@ -264,7 +265,7 @@ img, video { display: block; }
      -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px);
      pointer-events: none;
    }
@@ -45,7 +45,7 @@ index e879f44..ac38a4b 100644
    .nav-links.open { display: flex; }
    .nav-close-btn { display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; max-width: 160px; padding: 8px 16px; border: 1px solid rgba(2,132,199,.22); background: rgba(2,132,199,.08); border-radius: 10px; color: var(--cyan); font-size: 12px; font-weight: 600; cursor: pointer; transition: background .2s; align-self: center; }
    .nav-close-btn:hover { background: rgba(2,132,199,.14); }
-@@ -273,7 +274,6 @@ img, video { display: block; }
+@@ -276,7 +277,6 @@ img, video { display: block; }
    .nav-mobile-contacts a {
      border: 1px solid rgba(14,165,233,.3);
      background: rgba(14,165,233,.1); color: var(--cyan);
@@ -53,7 +53,7 @@ index e879f44..ac38a4b 100644
    }
  }
  
-@@ -752,36 +752,6 @@ img, video { display: block; }
+@@ -755,36 +755,6 @@ img, video { display: block; }
  .exp-list { display: flex; flex-direction: column; gap: 14px; margin-top: auto; }
  .exp-row { display: flex; align-items: center; gap: 12px; font-size: 15px; color: var(--muted2); }
  .exp-row::before { content: ''; flex-shrink: 0; width: 7px; height: 7px; border-radius: 50%; background: var(--violet); }
@@ -90,7 +90,7 @@ index e879f44..ac38a4b 100644
  
  /* ── SERVICES ── */
  .services-wrap { padding: 100px 20px; background: var(--card); }
-@@ -1134,14 +1104,6 @@ footer { border-top: 1px solid var(--border); padding: 32px 24px; max-width: 110
+@@ -1137,14 +1107,6 @@ footer { border-top: 1px solid var(--border); padding: 32px 24px; max-width: 110
    footer         { flex-direction: column; align-items: flex-start; }
    .how-step      { flex-direction: column; gap: 16px; padding: 28px 24px; }
    .pcard-video { height: 220px; }
@@ -105,14 +105,3 @@ index e879f44..ac38a4b 100644
  }
  
  /* ── PROJECTS PAGE ───────────────────────── */
-@@ -1656,8 +1618,8 @@ footer { border-top: 1px solid var(--border); padding: 32px 24px; max-width: 110
- }
- 
- /* ── LIGHT THEME (default) ───────────────────
--   Folded in from theme-preview.css, which had been loaded as a
--   second stylesheet on every page despite its "temporary" comment. */
-+   Ported from the Russian site's css/style.css, which folded in what had
-+   been a separately-loaded "temporary" light-theme override file. */
- :root {
-   color-scheme: light;
- }
