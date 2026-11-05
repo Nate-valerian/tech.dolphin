@@ -60,3 +60,13 @@ Brief steps preserve focus and Escape closes the brief.
 
 Validation: keyboard interactions, modal focus cycling, field labels, headings,
 and the existing smoke checks pass for both versions.
+
+## A7 — Connect pricing to the enquiry
+
+Fixed: selected services persist through navigation and appear as an editable
+summary and message prefill on Contact. The submitted enquiry includes its
+selected service names and regional starting estimate. Visitors can edit or
+clear selections; language changes preserve their extra requirements.
+
+Validation: service selection, navigation, message preservation, and clear
+behavior pass for both currencies.

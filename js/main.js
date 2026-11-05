@@ -57,6 +57,7 @@ function applyLang(lang) {
 
   // Re-render calculator prices after lang switch
   renderCalc();
+  renderEstimateSummary();
   renderLeadChat();
 }
 
@@ -269,7 +270,49 @@ const CALC_SERVICES = [
   { icon:'3D', nKey:'c5n', dKey:'c5d', min:150000,  max:400000,  id:'c5' },
   { icon:'SYS', nKey:'c6n', dKey:'c6d', min:700000,  max:5000000, id:'c6' },
 ];
+const ESTIMATE_STORAGE_KEY = 'td_estimate_ru';
 const selectedCalc = new Set();
+try {
+  const saved = JSON.parse(sessionStorage.getItem(ESTIMATE_STORAGE_KEY));
+  if (Array.isArray(saved?.services)) saved.services.forEach(id => { if (CALC_SERVICES.some(service => service.id === id)) selectedCalc.add(id); });
+} catch (_) {}
+
+function saveEstimate() {
+  try {
+    if (!selectedCalc.size) sessionStorage.removeItem(ESTIMATE_STORAGE_KEY);
+    else sessionStorage.setItem(ESTIMATE_STORAGE_KEY, JSON.stringify({ services:[...selectedCalc] }));
+  } catch (_) {}
+}
+
+function getEstimateText() {
+  if (!selectedCalc.size) return '';
+  const services = CALC_SERVICES.filter(service => selectedCalc.has(service.id));
+  return T[currentLang].estimate_title + ': ' + services.map(service => T[currentLang][service.nKey]).join(', ') + '\n' + T[currentLang].calc_from + ' ' + fmt(services.reduce((total, service) => total + service.min, 0));
+}
+
+function renderEstimateSummary() {
+  const summary = document.getElementById('estimate-summary');
+  if (!summary) return;
+  summary.hidden = !selectedCalc.size;
+  const text = getEstimateText();
+  const content = document.getElementById('estimate-details');
+  if (content) content.textContent = text;
+  const message = document.getElementById('ct-message');
+  if (message) {
+    const previous = message.dataset.estimatePrefill || '';
+    if (!message.value || message.value === previous) message.value = text;
+    else if (previous && message.value.startsWith(previous + '\n')) message.value = text + message.value.slice(previous.length);
+    message.dataset.estimatePrefill = text;
+  }
+}
+
+function clearEstimate() {
+  selectedCalc.clear();
+  saveEstimate();
+  renderCalc();
+  renderEstimateSummary();
+}
+
 
 function fmt(n) { return n.toLocaleString('ru-RU') + ' ₽'; }
 
@@ -317,6 +360,7 @@ function toggleCalc(id, el) {
 }
 
 function updateCalcResult() {
+  saveEstimate();
   const result = document.getElementById('calc-result');
   const empty  = document.getElementById('calc-empty');
   const priceEl = document.getElementById('calc-price');
@@ -535,7 +579,9 @@ async function sendContact(e) {
   const name    = document.getElementById('ct-name').value;
   const phone   = document.getElementById('ct-phone').value;
   const email   = document.getElementById('ct-email').value;
-  const message = document.getElementById('ct-message').value;
+  const enteredMessage = document.getElementById('ct-message').value;
+  const estimate = getEstimateText();
+  const message = estimate && !enteredMessage.includes(estimate) ? estimate + '\n\n' + enteredMessage : enteredMessage;
   const errEl   = document.getElementById('ct-error');
   if (isHoneypotTripped(form)) {
     form.style.display = 'none';

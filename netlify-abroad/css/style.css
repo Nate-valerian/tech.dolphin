@@ -1786,3 +1786,9 @@ main:focus { outline: none; }
 .calc-choice { position: absolute; opacity: 0; width: 1px; height: 1px; }
 .calc-card:has(.calc-choice:focus-visible) { outline: 2px solid var(--cyan); outline-offset: 4px; }
 .calc-card { display: block; }
+
+.estimate-summary { max-width: 500px; margin: 0 auto 24px; padding: 20px; background: var(--csft); border: 1px solid var(--accent-border); border-radius: 18px; text-align: left; }
+.estimate-summary h2 { font-size: 16px; margin-bottom: 10px; }
+#estimate-details { white-space: pre-line; font-size: 14px; color: var(--muted2); line-height: 1.7; }
+.estimate-actions { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 12px; font-size: 13px; color: var(--cyan); }
+.estimate-actions button { background: none; border: none; color: inherit; cursor: pointer; font: inherit; text-decoration: underline; }

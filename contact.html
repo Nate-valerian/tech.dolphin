@@ -93,6 +93,11 @@
     </h1>
     <p class="section-sub" style="margin:16px auto 32px;text-align:center;" data-i18n="contact_sub">Расскажите, что хотите сделать. Мы оценим задачу, предложим план и честно скажем, с чего лучше начать.</p>
 
+    <aside id="estimate-summary" class="estimate-summary" hidden aria-labelledby="estimate-title">
+      <h2 id="estimate-title" data-i18n="estimate_title">Your selected project</h2>
+      <p id="estimate-details"></p>
+      <div class="estimate-actions"><a href="pricing.html" data-i18n="estimate_edit">Edit services</a><button type="button" onclick="clearEstimate()" data-i18n="estimate_clear">Clear estimate</button></div>
+    </aside>
     <form id="ct-form" class="contact-form" onsubmit="sendContact(event)">
       <input type="text" name="hp_website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="contact-form-row">

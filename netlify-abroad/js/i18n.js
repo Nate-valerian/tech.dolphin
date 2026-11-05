@@ -5,6 +5,9 @@
 
 const T = {
   ru: {
+    estimate_title: 'Выбранный проект',
+    estimate_edit: 'Изменить услуги',
+    estimate_clear: 'Убрать расчёт',
     skip_to_content: 'Перейти к содержимому',
     form_sending: 'Отправляем…',
     /* NAV */
@@ -325,6 +328,9 @@ const T = {
   },
 
   en: {
+    estimate_title: 'Your selected project',
+    estimate_edit: 'Edit services',
+    estimate_clear: 'Clear estimate',
     skip_to_content: 'Skip to content',
     form_sending: 'Sending…',
     nav_about:   'About',

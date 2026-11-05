@@ -108,3 +108,15 @@ for(const site of ['', 'netlify-abroad']) {
   await page.keyboard.press('Escape');await expect(page.locator('#nav-hamburger')).toBeFocused();
  });
 }
+
+for(const site of ['', 'netlify-abroad']) {
+ test('A7: pricing choices become an editable enquiry summary '+site,async({page})=>{
+  await open(page,site,'pricing.html');await page.locator('#calc-c1').check();
+  await page.locator('#calc-cta').click();await expect(page.locator('#estimate-summary')).toBeVisible();
+  expect(await page.locator('#ct-message').inputValue()).toMatch(site ? /1,200/ : /30/);
+  const before=await page.locator('#ct-message').inputValue();await page.locator('#ct-message').fill(before+'\nMy additional requirement');
+  await page.evaluate(()=>toggleLang());expect(await page.locator('#ct-message').inputValue()).toContain('My additional requirement');
+  await page.locator('#estimate-summary button').click();await expect(page.locator('#estimate-summary')).toBeHidden();
+  await open(page,site,'pricing.html');await expect(page.locator('.calc-choice:checked')).toHaveCount(0);
+ });
+}
