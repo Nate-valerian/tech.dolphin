@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-11-05 — Publish the international site to Netlify
+
+Published source commit `7f6157d` to the existing `nate-web3` production site at
+https://nate-web3.com. Netlify confirmed deployment
+`6aece858651d13cf21fb847a` as ready and published at 23:34 Europe/Moscow.
+Deployment details: https://app.netlify.com/projects/nate-web3/deploys/6aece858651d13cf21fb847a.
+
+Live verification passed for all five pages and ten clean/trailing-slash aliases,
+including query preservation. SHA-256 hashes of the deployed stylesheet and all
+five JavaScript files match the checked international build. The source's 37
+tests had passed before publication.
+
 ## 2026-11-05 — Repair international URL aliases and translated metadata
 
 Clean URLs such as `/projects` previously caused the language script to replace
