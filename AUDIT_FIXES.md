@@ -31,3 +31,12 @@ draft. Closing, language changes, and navigation restore the draft. Submitted
 forms are not rebuilt while sending. A reset or confirmed send clears the draft.
 
 Validation: close/reopen, language switch, reload, and reset pass on both sites.
+
+## A4 — Repair mobile navigation
+
+Fixed: menu overlays fit the dynamic viewport, scroll on short screens, and
+wrap long contact labels. Crossing the desktop breakpoint closes and restores
+the menu. Scroll locking is guarded, and Escape outside a menu does not jump
+to the top.
+
+Validation: both sites pass 320px close/scroll and desktop resize regressions.

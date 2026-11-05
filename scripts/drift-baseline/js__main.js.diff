@@ -1,5 +1,5 @@
 diff --git a/js/main.js b/netlify-abroad/js/main.js
-index 7ef6e83..622d96b 100644
+index a4a29d7..b2e9eaa 100644
 --- a/js/main.js
 +++ b/netlify-abroad/js/main.js
 @@ -3,13 +3,49 @@
@@ -123,7 +123,7 @@ index 7ef6e83..622d96b 100644
  }
  
  function _lockBodyScroll() {
-@@ -142,8 +221,7 @@ function initProgress() {
+@@ -149,8 +228,7 @@ function initProgress() {
  }
  
  /* ── LEFT NAV ─────────────────────────────── */
@@ -133,7 +133,7 @@ index 7ef6e83..622d96b 100644
  
  function initLeftNav() {
    const items = document.querySelectorAll('.lnav-item');
-@@ -244,16 +322,18 @@ function filterProj(cat, btn) {
+@@ -251,16 +329,18 @@ function filterProj(cat, btn) {
  
  /* ── CALCULATOR ───────────────────────────── */
  const CALC_SERVICES = [
@@ -159,7 +159,7 @@ index 7ef6e83..622d96b 100644
  
  function renderCalcTiers(s, t) {
    const tiers = s.tiersKey ? t[s.tiersKey] : null;
-@@ -359,7 +439,7 @@ function initTilt() {
+@@ -366,7 +446,7 @@ function initTilt() {
  const EJ_PUBLIC  = '87_f2ZcU4pQ0LZlpc';
  const EJ_SERVICE = 'service_8xs6t0i';
  const EJ_TMPL    = 'template_u3fwuan';
@@ -168,7 +168,7 @@ index 7ef6e83..622d96b 100644
  
  const leadSubmissions = new Map();
  let emailQueue = Promise.resolve();
-@@ -547,7 +627,7 @@ let leadChatOpen = false;
+@@ -554,7 +634,7 @@ let leadChatOpen = false;
  let leadChatStep = 'type';
  let leadChatData = {};
  let leadChatSubmitting = false;
@@ -177,15 +177,15 @@ index 7ef6e83..622d96b 100644
  
  function saveLeadChatDraft() {
    const fields = { 'chat-note': 'note', 'chat-name': 'name', 'chat-contact': 'contact' };
-@@ -737,7 +817,6 @@ function initParallax() {
+@@ -744,7 +824,6 @@ function initParallax() {
  
  /* ── INIT ─────────────────────────────────── */
  document.addEventListener('DOMContentLoaded', () => {
 -  NAV_SECTIONS = ALL_NAV_SECTIONS.filter(id => !!document.getElementById(id));
    if (window.emailjs) emailjs.init({ publicKey: EJ_PUBLIC });
+   initMenuBreakpoint();
    initProgress();
-   initLeftNav();
-@@ -748,6 +827,7 @@ document.addEventListener('DOMContentLoaded', () => {
+@@ -756,6 +835,7 @@ document.addEventListener('DOMContentLoaded', () => {
    initLeadChat();
    renderCalc();
    applyLang(currentLang);

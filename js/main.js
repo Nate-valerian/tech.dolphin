@@ -65,6 +65,7 @@ function toggleLang() {
 }
 
 function _lockBodyScroll() {
+  if (document.body.dataset.scrollY !== undefined) return;
   // iOS Safari resets scroll when overflow:hidden is applied to body.
   // Fix: pin body with position:fixed at the current scroll offset.
   const scrollY = window.scrollY;
@@ -75,13 +76,14 @@ function _lockBodyScroll() {
   document.body.dataset.scrollY = scrollY;
 }
 function _unlockBodyScroll() {
+  if (document.body.dataset.scrollY === undefined) return;
   const scrollY = parseInt(document.body.dataset.scrollY || '0', 10);
   document.body.style.overflow = '';
   document.body.style.position = '';
   document.body.style.top      = '';
   document.body.style.width    = '';
   delete document.body.dataset.scrollY;
-  window.scrollTo(0, scrollY);
+  window.scrollTo({ top: scrollY, behavior: 'instant' });
 }
 
 function toggleMobileMenu() {
@@ -114,7 +116,7 @@ function closeMobileMenu() {
   const links = document.querySelector('.nav-links');
   const btn   = document.getElementById('nav-hamburger');
   const nav   = document.querySelector('.nav');
-  if (!links) return;
+  if (!links || !links.classList.contains('open')) return;
   links.classList.remove('open');
   if (btn) {
     btn.classList.remove('open');
@@ -128,6 +130,11 @@ function closeMobileMenu() {
     delete links._returnParent;
     delete links._returnNext;
   }
+}
+
+function initMenuBreakpoint() {
+  const mobile = window.matchMedia('(max-width: 1100px)');
+  mobile.addEventListener('change', event => { if (!event.matches) closeMobileMenu(); });
 }
 
 /* ── SCROLL PROGRESS ──────────────────────── */
@@ -739,6 +746,7 @@ function initParallax() {
 document.addEventListener('DOMContentLoaded', () => {
   NAV_SECTIONS = ALL_NAV_SECTIONS.filter(id => !!document.getElementById(id));
   if (window.emailjs) emailjs.init({ publicKey: EJ_PUBLIC });
+  initMenuBreakpoint();
   initProgress();
   initLeftNav();
   initCookie();

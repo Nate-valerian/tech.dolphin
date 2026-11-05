@@ -65,3 +65,20 @@ for(const site of ['', 'netlify-abroad']) {
   await page.evaluate(()=>resetLeadChat());await expect(page.locator('#chat-name')).toHaveCount(0);
  });
 }
+
+for(const site of ['', 'netlify-abroad']) {
+ test('A4: small menu scrolls and restores on desktop resize '+site,async({page})=>{
+  await page.setViewportSize({width:320,height:568});await open(page,site);
+  await page.locator('#nav-hamburger').click();
+  const links=page.locator('.nav-links');
+  expect(await links.evaluate(el=>getComputedStyle(el).overflowY)).toBe('auto');
+  await page.locator('.nav-close-btn').scrollIntoViewIfNeeded();await page.locator('.nav-close-btn').click();
+  await expect(links).not.toHaveClass(/open/);
+  await page.locator('#nav-hamburger').click();await page.setViewportSize({width:1440,height:900});
+  await expect(links).not.toHaveClass(/open/);
+  expect(await page.evaluate(()=>getComputedStyle(document.body).position)).not.toBe('fixed');
+  expect(await links.evaluate(el=>!!el.closest('.nav'))).toBe(true);
+  await page.evaluate(()=>scrollTo({top:1200,behavior:'instant'}));await page.keyboard.press('Escape');
+  expect(await page.evaluate(()=>scrollY)).toBeGreaterThan(1100);
+ });
+}
