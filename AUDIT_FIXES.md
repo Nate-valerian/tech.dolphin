@@ -13,3 +13,13 @@ a service endpoint and is not claimed by this frontend change.
 
 Validation: mocked delivery tests cover both site versions, rate spacing,
 duplicate calls, partial success, and total failure; no real emails are sent.
+
+## A2 — Regional details and language controls
+
+Fixed: international Russian content now consistently names Datvida LLC and
+uses USD budgets, matching its pricing, contacts, and scope. Restored the
+desktop language toggle and added a mobile language button on all ten pages.
+A late geo-IP response no longer overrides a manual language choice.
+
+Validation: both mobile language controls and international Russian identity
+and pricing regression checks passed.

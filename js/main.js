@@ -42,6 +42,9 @@ function applyLang(lang) {
   // Toggle button
   const btn = document.getElementById('lang-toggle');
   if (btn) btn.textContent = lang === 'ru' ? 'EN' : 'RU';
+  document.querySelectorAll('[data-lang-toggle]').forEach(control => {
+    control.textContent = lang === 'ru' ? 'English' : 'Русский';
+  });
 
   // Accessible labels
   const menuBtn = document.getElementById('nav-hamburger');

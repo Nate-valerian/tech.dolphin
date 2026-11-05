@@ -32,3 +32,20 @@ test('A1: partial delivery is success and complete failure remains retryable', a
  await expect(page.locator('#ct-error')).toBeVisible();
  await expect(page.locator('#ct-form button[type=submit]')).toBeEnabled();
 });
+
+for(const site of ['', 'netlify-abroad']) {
+ test('A2: language control is usable on mobile '+site,async({page})=>{
+  await page.setViewportSize({width:320,height:568});await open(page,site);await page.locator('#nav-hamburger').click();
+  await expect(page.locator('[data-lang-toggle]')).toBeVisible();
+  const previous=await page.locator('html').getAttribute('lang');await page.locator('[data-lang-toggle]').click();
+  await expect(page.locator('html')).not.toHaveAttribute('lang',previous);
+ });
+}
+test('A2: international identity and USD pricing survive Russian translation',async({page})=>{
+ await open(page,'netlify-abroad','contact.html');await page.evaluate(()=>applyLang('ru'));
+ await expect(page.locator('[data-i18n=privacy_p1]')).toContainText('Datvida LLC');
+ await expect(page.locator('#lang-toggle')).toBeVisible();
+ await open(page,'netlify-abroad','pricing.html');await page.evaluate(()=>{applyLang('ru');toggleLeadChat(true);leadChatStep='budget';renderLeadChat();});
+ await expect(page.locator('.calc-card').first()).toContainText('$1,200');
+ expect((await page.locator('.chat-options').innerText())).not.toContain('₽');
+});

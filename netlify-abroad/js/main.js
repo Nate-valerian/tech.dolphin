@@ -78,6 +78,9 @@ function applyLang(lang, options = {}) {
   // Toggle button
   const btn = document.getElementById('lang-toggle');
   if (btn) btn.textContent = lang === 'ru' ? 'EN' : 'RU';
+  document.querySelectorAll('[data-lang-toggle]').forEach(control => {
+    control.textContent = lang === 'ru' ? 'English' : 'Русский';
+  });
 
   // Accessible labels
   const menuBtn = document.getElementById('nav-hamburger');
@@ -136,7 +139,7 @@ async function detectGeoLang() {
 async function initGeoLanguage() {
   if (getManualLang()) return;
   const lang = await detectGeoLang();
-  applyLang(lang);
+  if (!getManualLang()) applyLang(lang);
 }
 
 function _lockBodyScroll() {

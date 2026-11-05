@@ -59,6 +59,7 @@
     <a href="pricing.html"  data-i18n="lnav_calc" class="active-page">Цены</a>
     <a href="faq.html"      data-i18n="nav_faq">FAQ</a>
     <a href="contact.html"  data-i18n="nav_contact">Контакт</a>
+    <button class="nav-language" type="button" data-lang-toggle onclick="toggleLang()">English / Русский</button>
     <div class="nav-mobile-contacts" aria-label="Быстрые контакты">
       <a href="tel:+19725598555">📞 USA Phone: +1 972 559 8555</a>
       <a href="https://wa.me/19725598555" target="_blank" rel="noopener noreferrer"><img class="contact-icon" src="assets/whatsapp.svg" alt="" aria-hidden="true"> WhatsApp USA</a>
@@ -68,7 +69,7 @@
       <button type="button" class="nav-close-btn" onclick="closeMobileMenu()" aria-label="Close menu">&#x2715; Close</button>
     </div>
   </div>
-  <button id="lang-toggle" onclick="toggleLang()" style="display:none">EN</button>
+  <button id="lang-toggle" onclick="toggleLang()">EN</button>
   <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Menu" aria-controls="primary-nav" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
