@@ -437,40 +437,49 @@ const EJ_SERVICE = 'service_8xs6t0i';
 const EJ_TMPL    = 'template_u3fwuan';
 const EJ_TO_EMAILS = ['n.nate1544@gmail.com'];
 
-async function sendLeadEmail(templateParams) {
-  if (!window.emailjs) throw new Error('EmailJS is not loaded');
-  const leadEmail = templateParams.email || '';
-  const message = leadEmail
-    ? `Email: ${leadEmail}\n\n${templateParams.message || ''}`.trim()
-    : templateParams.message;
-  let timeoutId;
-  const sendTimeout = new Promise((_, reject) => {
-    timeoutId = setTimeout(() => {
-      const error = new Error('EmailJS request timed out');
-      error.name = 'AbortError';
-      reject(error);
-    }, 15000);
-  });
+const leadSubmissions = new Map();
+let emailQueue = Promise.resolve();
+let lastEmailStarted = 0;
 
-  try {
-    return await Promise.race([
-      Promise.all(EJ_TO_EMAILS.map(recipient => emailjs.send(EJ_SERVICE, EJ_TMPL, {
-        ...templateParams,
-        email: recipient,
-        lead_email: leadEmail,
-        reply_to: leadEmail || recipient,
-        message
-      }, {
-        publicKey: EJ_PUBLIC
-      }))),
-      sendTimeout
-    ]);
-  } catch (error) {
-    console.error('EmailJS submission failed:', error);
-    throw error;
-  } finally {
-    clearTimeout(timeoutId);
-  }
+function queueLeadEmail(params) {
+  const send = emailQueue.then(async () => {
+    const delay = 1050 - (Date.now() - lastEmailStarted);
+    if (delay > 0) await new Promise(resolve => setTimeout(resolve, delay));
+    lastEmailStarted = Date.now();
+    return window.emailjs.send(EJ_SERVICE, EJ_TMPL, params, { publicKey: EJ_PUBLIC });
+  });
+  emailQueue = send.catch(() => {});
+  return send;
+}
+
+function sendLeadEmail(templateParams) {
+  if (!window.emailjs) return Promise.reject(new Error('EmailJS is not loaded'));
+  const key = JSON.stringify(templateParams);
+  if (leadSubmissions.has(key)) return leadSubmissions.get(key);
+
+  const delivery = (async () => {
+    const leadId = window.crypto?.randomUUID?.() || ('lead-' + Date.now() + '-' + Math.random().toString(36).slice(2));
+    const leadEmail = templateParams.email || '';
+    const message = leadEmail
+      ? ('Email: ' + leadEmail + '\n\n' + (templateParams.message || '')).trim()
+      : templateParams.message;
+    const deliveredTo = [];
+    let lastError;
+    for (const recipient of EJ_TO_EMAILS) {
+      try {
+        await queueLeadEmail({ ...templateParams, lead_id: leadId, email: recipient,
+          lead_email: leadEmail, reply_to: leadEmail || recipient, message });
+        deliveredTo.push(recipient);
+      } catch (error) { lastError = error; }
+    }
+    // One successful recipient means the business has the enquiry. Do not ask
+    // the visitor to repeat it because another notification failed.
+    if (!deliveredTo.length) throw lastError || new Error('No delivery recipient');
+    return { status: 200, leadId, deliveredCount: deliveredTo.length };
+  })();
+  leadSubmissions.set(key, delivery);
+  delivery.catch(() => leadSubmissions.delete(key));
+  return delivery;
 }
 
 function isHoneypotTripped(form) {

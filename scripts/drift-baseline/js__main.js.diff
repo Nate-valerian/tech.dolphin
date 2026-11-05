@@ -1,5 +1,5 @@
 diff --git a/js/main.js b/netlify-abroad/js/main.js
-index e72550f..aba0710 100644
+index 33abfb7..af56568 100644
 --- a/js/main.js
 +++ b/netlify-abroad/js/main.js
 @@ -3,12 +3,48 @@
@@ -165,9 +165,9 @@ index e72550f..aba0710 100644
 -const EJ_TO_EMAILS = ['n.nate1544@gmail.com', 'm.moleva@mail.ru'];
 +const EJ_TO_EMAILS = ['n.nate1544@gmail.com'];
  
- async function sendLeadEmail(templateParams) {
-   if (!window.emailjs) throw new Error('EmailJS is not loaded');
-@@ -687,7 +767,6 @@ function initParallax() {
+ const leadSubmissions = new Map();
+ let emailQueue = Promise.resolve();
+@@ -696,7 +776,6 @@ function initParallax() {
  
  /* ── INIT ─────────────────────────────────── */
  document.addEventListener('DOMContentLoaded', () => {
@@ -175,7 +175,7 @@ index e72550f..aba0710 100644
    if (window.emailjs) emailjs.init({ publicKey: EJ_PUBLIC });
    initProgress();
    initLeftNav();
-@@ -698,6 +777,7 @@ document.addEventListener('DOMContentLoaded', () => {
+@@ -707,6 +786,7 @@ document.addEventListener('DOMContentLoaded', () => {
    initLeadChat();
    renderCalc();
    applyLang(currentLang);
