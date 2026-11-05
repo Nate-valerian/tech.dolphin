@@ -1,5 +1,5 @@
 diff --git a/js/main.js b/netlify-abroad/js/main.js
-index 6601bfa..f000a87 100644
+index fd275f4..41f69b5 100644
 --- a/js/main.js
 +++ b/netlify-abroad/js/main.js
 @@ -3,13 +3,49 @@
@@ -166,7 +166,7 @@ index 6601bfa..f000a87 100644
  
  function renderCalcTiers(s, t) {
    const tiers = s.tiersKey ? t[s.tiersKey] : null;
-@@ -424,7 +504,7 @@ function initTilt() {
+@@ -425,7 +505,7 @@ function initTilt() {
  const EJ_PUBLIC  = '87_f2ZcU4pQ0LZlpc';
  const EJ_SERVICE = 'service_8xs6t0i';
  const EJ_TMPL    = 'template_u3fwuan';
@@ -175,7 +175,7 @@ index 6601bfa..f000a87 100644
  
  const leadSubmissions = new Map();
  let emailQueue = Promise.resolve();
-@@ -619,7 +699,7 @@ let leadChatOpen = false;
+@@ -621,7 +701,7 @@ let leadChatOpen = false;
  let leadChatStep = 'type';
  let leadChatData = {};
  let leadChatSubmitting = false;
@@ -184,7 +184,7 @@ index 6601bfa..f000a87 100644
  
  function saveLeadChatDraft() {
    const fields = { 'chat-note': 'note', 'chat-name': 'name', 'chat-contact': 'contact' };
-@@ -825,7 +905,6 @@ function initParallax() {
+@@ -835,7 +915,6 @@ function initParallax() {
  
  /* ── INIT ─────────────────────────────────── */
  document.addEventListener('DOMContentLoaded', () => {
@@ -192,7 +192,7 @@ index 6601bfa..f000a87 100644
    if (window.emailjs) emailjs.init({ publicKey: EJ_PUBLIC });
    initMenuBreakpoint();
    initProgress();
-@@ -837,6 +916,7 @@ document.addEventListener('DOMContentLoaded', () => {
+@@ -847,6 +926,7 @@ document.addEventListener('DOMContentLoaded', () => {
    initLeadChat();
    renderCalc();
    applyLang(currentLang);

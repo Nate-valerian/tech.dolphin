@@ -60,3 +60,12 @@ suspect, without risking a real lead being silently dropped.
 - `js/analytics.js` loads Yandex Metrica and tracks contact actions.
 - `js/main.js` reports form send success/failure.
 - `js/i18n.js` and `index.html` include updated privacy wording for analytics.
+
+## Enquiry journey goals
+
+Also configure `brief_open`, `brief_step`, `brief_form_start`,
+`brief_form_attempt`, `brief_form_success`, `brief_form_error`, and
+`estimate_select`. CTA links use `data-contact-cta`; form events are delegated
+so dynamically created brief forms are tracked. `fast_submit` is captured
+before delivery starts. Brief text and personal contact fields are not sent
+as event parameters.

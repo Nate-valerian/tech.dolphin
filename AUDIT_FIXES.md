@@ -70,3 +70,13 @@ clear selections; language changes preserve their extra requirements.
 
 Validation: service selection, navigation, message preservation, and clear
 behavior pass for both currencies.
+
+## A8 — Complete enquiry analytics
+
+Fixed: explicit CTA markers, delegated dynamic-form tracking, brief open/step/
+success/error goals, and estimator selections cover the enquiry path. Fast
+submission timing is captured before the network request. Typed brief contents
+and personal contact values are not included in analytics events.
+
+Validation: primary CTA and dynamic brief goals, plus a delayed delivery with
+a genuinely fast submission, pass with a mocked analytics counter.

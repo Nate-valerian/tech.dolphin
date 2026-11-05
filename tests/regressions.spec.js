@@ -120,3 +120,20 @@ for(const site of ['', 'netlify-abroad']) {
   await open(page,site,'pricing.html');await expect(page.locator('.calc-choice:checked')).toHaveCount(0);
  });
 }
+
+test('A8: contact CTA, dynamic brief and send-time flags are tracked',async({page})=>{
+ await page.addInitScript(()=>{
+  localStorage.setItem('td_analytics_consent','accepted');window.__goals=[];
+  window.ym=(...args)=>window.__goals.push(args);
+  let config={};Object.defineProperty(window,'TechDolphinAnalyticsConfig',{get:()=>config,set:value=>{config={...value,yandexMetricaId:123}}});
+ });
+ await open(page,'netlify-abroad','contact.html');
+ await page.locator('.nav-cta').evaluate(el=>{el.addEventListener('click',e=>e.preventDefault());el.click();});
+ expect(await page.evaluate(()=>window.__goals.some(a=>a[2]==='contact_cta_click'))).toBe(true);
+ await page.evaluate(()=>{toggleLeadChat(true);leadChatStep='contact';renderLeadChat();window.emailjs.send=()=>new Promise(resolve=>setTimeout(()=>resolve({status:200}),1700));});
+ await page.locator('#chat-name').fill('Audit');await page.locator('#chat-contact').fill('mock@example.test');
+ await page.locator('#chat-contact-form button[type=submit]').click();await expect(page.locator('#chat-contact-form')).toHaveCount(0);
+ const goals=await page.evaluate(()=>window.__goals.filter(a=>a[1]==='reachGoal'));
+ for(const name of ['brief_open','brief_form_start','brief_form_attempt','brief_form_success'])expect(goals.some(a=>a[2]===name)).toBe(true);
+ expect(goals.find(a=>a[2]==='brief_form_success')[3].fast_submit).toBe(true);
+});

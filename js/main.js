@@ -353,6 +353,7 @@ function renderCalc() {
 }
 
 function toggleCalc(id, el) {
+  window.techDolphinAnalytics?.track('estimateSelect', { service_id:id, selected:!selectedCalc.has(id) });
   const focused = document.activeElement === el;
   selectedCalc.has(id) ? selectedCalc.delete(id) : selectedCalc.add(id);
   renderCalc();
@@ -491,6 +492,7 @@ function isSubmittedTooFast(sinceTs) {
 function beginFormSubmit(form, errEl) {
   if (!form || form.dataset.submitting === 'true') return false;
   form.dataset.submitting = 'true';
+  form.dataset.fastSubmit = String(isSubmittedTooFast(PAGE_LOAD_TS));
   const button = form.querySelector('button[type="submit"]');
   if (button) {
     button.disabled = true;
@@ -560,7 +562,7 @@ async function sendCallback(e) {
       name, phone, message: currentLang === 'ru' ? 'Перезвоните мне' : 'Please call me back'
     });
     window.techDolphinAnalytics?.trackLeadResult('cb-form', 'success', {
-      fast_submit: isSubmittedTooFast(PAGE_LOAD_TS)
+      fast_submit: form.dataset.fastSubmit === 'true'
     });
     document.getElementById('cb-form').style.display = 'none';
     document.getElementById('cb-success').style.display = 'block';
@@ -595,7 +597,7 @@ async function sendContact(e) {
       name, phone, email, message
     });
     window.techDolphinAnalytics?.trackLeadResult('ct-form', 'success', {
-      fast_submit: isSubmittedTooFast(PAGE_LOAD_TS)
+      fast_submit: form.dataset.fastSubmit === 'true'
     });
     document.getElementById('ct-form').style.display = 'none';
     document.getElementById('ct-success').style.display = 'block';
@@ -653,7 +655,9 @@ function toggleLeadChat(force) {
   const panel = document.getElementById('lead-chat-panel');
   if (!panel) return;
   saveLeadChatDraft();
+  const wasOpen = leadChatOpen;
   leadChatOpen = typeof force === 'boolean' ? force : !leadChatOpen;
+  if (leadChatOpen && !wasOpen) window.techDolphinAnalytics?.track('briefOpen');
   panel.classList.toggle('open', leadChatOpen);
   document.getElementById('lead-chat').classList.toggle('is-open', leadChatOpen);
   updateLeadChatViewport();
@@ -690,6 +694,7 @@ function addChatChoice(step, key) {
   const t = T[currentLang];
   saveLeadChatDraft();
   leadChatData[step] = key;
+  window.techDolphinAnalytics?.track('briefStep', { step });
   const idx = CHAT_STEPS.indexOf(step);
   leadChatStep = CHAT_STEPS[idx + 1] || 'note';
   saveLeadChatDraft();
@@ -750,7 +755,7 @@ function renderLeadChat() {
   } else if (leadChatStep === 'contact') {
     html += `
       <div class="chat-msg bot">${t.chat_q_contact}</div>
-      <form class="chat-form" onsubmit="sendLeadChat(event)">
+      <form id="chat-contact-form" class="chat-form" onsubmit="sendLeadChat(event)">
         <input type="text" name="hp_website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="form-field"><label class="field-label" for="chat-name">${t.chat_name_placeholder}</label><input id="chat-name" class="form-input" type="text" value="${escapeHtml(leadChatData.name)}" placeholder="${t.chat_name_placeholder}" required></div>
         <div class="form-field"><label class="field-label" for="chat-contact">${t.chat_contact_placeholder}</label><input id="chat-contact" class="form-input" type="text" value="${escapeHtml(leadChatData.contact)}" placeholder="${t.chat_contact_placeholder}" required></div>
@@ -802,9 +807,14 @@ async function sendLeadChat(e) {
       email: contact.includes('@') ? contact : '',
       message
     });
+    window.techDolphinAnalytics?.trackLeadResult('chat-contact-form', 'success', { fast_submit:form.dataset.fastSubmit === 'true' });
+    leadChatSubmitting = false;
     leadChatStep = 'done';
+    leadChatData = {};
+    try { sessionStorage.removeItem(BRIEF_STORAGE_KEY); } catch (_) {}
     renderLeadChat();
   } catch (error) {
+    window.techDolphinAnalytics?.trackLeadResult('chat-contact-form', 'error', { error_status:error?.status || 'unknown' });
     leadChatSubmitting = false;
     endFormSubmit(form);
     showLeadError(errEl, error, t.chat_error);
