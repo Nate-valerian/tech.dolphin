@@ -30,6 +30,7 @@
 <link rel="stylesheet" href="css/style.css?v=20261105-palette">
 </head>
 <body>
+<a class="skip-link" href="#main-content" data-i18n="skip_to_content">Skip to content</a>
 
 <!-- PROGRESS BAR -->
 <div id="progress-bar"></div>
@@ -81,6 +82,7 @@
   </div>
   <a href="contact.html" class="nav-cta" data-i18n="nav_cta">Обсудить проект →</a>
 </nav>
+<main id="main-content" tabindex="-1">
 
 <!-- HERO -->
 <div class="page-hero">
@@ -420,6 +422,7 @@
 </div>
 
 <!-- FOOTER -->
+</main>
 <footer>
   <div class="footer-logo"><a href="index.html"><img src="assets/logo.png" alt="Tech Dolphin"></a></div>
   <div class="footer-copy" data-i18n="footer_copy">© 2025 Tech Dolphin</div>
@@ -438,11 +441,11 @@
     <span class="lead-chat-dot"></span>
     <span data-i18n="chat_toggle">Быстрый бриф</span>
   </button>
-  <div class="lead-chat-panel" id="lead-chat-panel" aria-hidden="true">
+  <div class="lead-chat-panel" id="lead-chat-panel" role="dialog" aria-labelledby="lead-chat-title" aria-hidden="true">
     <div class="lead-chat-head">
       <div>
         <div class="lead-chat-kicker" data-i18n="chat_kicker">Tech Dolphin</div>
-        <div class="lead-chat-title" data-i18n="chat_title">Подберём формат проекта</div>
+        <div class="lead-chat-title" id="lead-chat-title" data-i18n="chat_title">Подберём формат проекта</div>
       </div>
       <button class="lead-chat-close" type="button" onclick="toggleLeadChat(false)" aria-label="Close">×</button>
     </div>

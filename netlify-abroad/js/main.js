@@ -170,6 +170,7 @@ function toggleMobileMenu() {
   const btn   = document.getElementById('nav-hamburger');
   const nav   = document.querySelector('.nav');
   if (!links || !btn) return;
+  if (links.classList.contains('open')) { closeMobileMenu(); return; }
   const isOpen = links.classList.toggle('open');
   btn.classList.toggle('open', isOpen);
   btn.setAttribute('aria-expanded', String(isOpen));
@@ -181,7 +182,14 @@ function toggleMobileMenu() {
     // not the transformed .nav pill (transform creates a new containing block).
     links._returnParent = links.parentNode;
     links._returnNext   = links.nextSibling;
+    links._returnFocus = document.activeElement;
     document.body.appendChild(links);
+    links.setAttribute('role', 'dialog');
+    links.setAttribute('aria-modal', 'true');
+    links.setAttribute('aria-label', T[currentLang].menu_label);
+    links._background = [...document.body.children].filter(el => el !== links && !['SCRIPT','STYLE'].includes(el.tagName)).map(el => ({el, inert:el.inert}));
+    links._background.forEach(({el}) => { el.inert = true; });
+    links.querySelector('a,button')?.focus();
   } else {
     _unlockBodyScroll();
     if (links._returnParent) {
@@ -202,6 +210,10 @@ function closeMobileMenu() {
     btn.setAttribute('aria-expanded', 'false');
   }
   _unlockBodyScroll();
+  links._background?.forEach(({el,inert}) => { el.inert = inert; });
+  delete links._background;
+  links.removeAttribute('aria-modal');
+  links.removeAttribute('role');
   if (nav) nav.classList.remove('menu-open');
 
   if (links._returnParent) {
@@ -209,6 +221,9 @@ function closeMobileMenu() {
     delete links._returnParent;
     delete links._returnNext;
   }
+  const focus = links._returnFocus;
+  if (focus?.checkVisibility()) focus.focus({ preventScroll: true });
+  delete links._returnFocus;
 }
 
 function initMenuBreakpoint() {
@@ -295,20 +310,16 @@ function initCookie() {
 /* ── FAQ ──────────────────────────────────── */
 function initFaq() {
   document.querySelectorAll('.faq-item').forEach(item => {
-    const q    = item.querySelector('.faq-q');
-    const ans  = item.querySelector('.faq-a');
-    const icon = item.querySelector('.faq-icon');
-    if (!q || !ans || !icon) return;
+    const q = item.querySelector('.faq-q'), ans = item.querySelector('.faq-a');
+    if (!q || !ans) return;
     q.addEventListener('click', () => {
-      const isOpen = ans.style.display === 'block';
-      // close all
-      document.querySelectorAll('.faq-a').forEach(a => a.style.display = 'none');
-      document.querySelectorAll('.faq-icon').forEach(i => { i.textContent = '+'; i.style.transform = 'rotate(0deg)'; });
-      if (!isOpen) {
-        ans.style.display = 'block';
-        icon.textContent  = '×';
-        icon.style.transform = 'rotate(90deg)';
-      }
+      const expand = q.getAttribute('aria-expanded') !== 'true';
+      document.querySelectorAll('.faq-q').forEach(button => button.setAttribute('aria-expanded', 'false'));
+      document.querySelectorAll('.faq-a').forEach(panel => { panel.hidden = true; });
+      document.querySelectorAll('.faq-icon').forEach(icon => { icon.textContent = '+'; });
+      q.setAttribute('aria-expanded', String(expand));
+      ans.hidden = !expand;
+      item.querySelector('.faq-icon').textContent = expand ? '−' : '+';
     });
   });
 }
@@ -361,7 +372,8 @@ function renderCalc() {
   if (!grid) return;
   const t = T[currentLang];
   grid.innerHTML = CALC_SERVICES.map(s => `
-    <div class="calc-card${selectedCalc.has(s.id) ? ' selected' : ''}" onclick="toggleCalc('${s.id}',this)">
+    <label class="calc-card${selectedCalc.has(s.id) ? ' selected' : ''}">
+      <input class="calc-choice" id="calc-${s.id}" type="checkbox" aria-label="${escapeHtml(t[s.nKey])}" ${selectedCalc.has(s.id) ? 'checked' : ''} onchange="toggleCalc('${s.id}',this)">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;">
         <div>
           <div class="calc-mark">${s.icon}</div>
@@ -372,14 +384,16 @@ function renderCalc() {
         <div class="calc-check">✓</div>
       </div>
       <div style="margin-top:16px;font-size:15px;font-weight:700;color:var(--cyan);">${t.calc_from} ${fmt(s.min)}</div>
-    </div>
+    </label>
   `).join('');
   updateCalcResult();
 }
 
 function toggleCalc(id, el) {
+  const focused = document.activeElement === el;
   selectedCalc.has(id) ? selectedCalc.delete(id) : selectedCalc.add(id);
   renderCalc();
+  if (focused) document.getElementById('calc-' + id)?.focus({ preventScroll: true });
 }
 
 function updateCalcResult() {
@@ -514,7 +528,12 @@ function beginFormSubmit(form, errEl) {
   if (!form || form.dataset.submitting === 'true') return false;
   form.dataset.submitting = 'true';
   const button = form.querySelector('button[type="submit"]');
-  if (button) button.disabled = true;
+  if (button) {
+    button.disabled = true;
+    button.dataset.originalText = button.textContent;
+    button.textContent = T[currentLang].form_sending;
+    button.setAttribute('aria-busy', 'true');
+  }
   if (errEl) errEl.style.display = 'none';
   return true;
 }
@@ -523,7 +542,7 @@ function endFormSubmit(form) {
   if (!form) return;
   delete form.dataset.submitting;
   const button = form.querySelector('button[type="submit"]');
-  if (button) button.disabled = false;
+  if (button) { button.disabled = false; button.textContent = button.dataset.originalText || button.textContent; button.removeAttribute('aria-busy'); }
 }
 
 function showLeadError(errEl, error, fallback) {
@@ -673,7 +692,8 @@ function toggleLeadChat(force) {
   document.getElementById('lead-chat').classList.toggle('is-open', leadChatOpen);
   updateLeadChatViewport();
   panel.setAttribute('aria-hidden', String(!leadChatOpen));
-  if (leadChatOpen && !leadChatSubmitting) renderLeadChat();
+  if (leadChatOpen && !leadChatSubmitting) { renderLeadChat(); panel.querySelector('input:not(.hp-field),textarea,button')?.focus({preventScroll:true}); }
+  if (!leadChatOpen) document.getElementById('lead-chat-toggle')?.focus({preventScroll:true});
 }
 
 function updateLeadChatViewport() {
@@ -742,6 +762,8 @@ function renderLeadChat() {
   const body = document.getElementById('lead-chat-body');
   if (!body || !T[currentLang] || leadChatSubmitting) return;
   const t = T[currentLang];
+  const wasInside = body.contains(document.activeElement);
+  const focusedId = document.activeElement?.id;
   let html = renderChatHistory(t);
 
   if (CHAT_STEPS.includes(leadChatStep)) {
@@ -755,7 +777,7 @@ function renderLeadChat() {
     html += `
       <div class="chat-msg bot">${t.chat_q_note}</div>
       <form class="chat-form" onsubmit="setChatNote(event)">
-        <textarea id="chat-note" class="form-input" rows="3" placeholder="${t.chat_note_placeholder}" required>${escapeHtml(leadChatData.note || '')}</textarea>
+        <div class="form-field"><label class="field-label" for="chat-note">${t.chat_q_note}</label><textarea id="chat-note" class="form-input" rows="3" placeholder="${t.chat_note_placeholder}" required>${escapeHtml(leadChatData.note || '')}</textarea></div>
         <button class="form-btn" type="submit">${t.chat_next}</button>
       </form>
     `;
@@ -764,10 +786,10 @@ function renderLeadChat() {
       <div class="chat-msg bot">${t.chat_q_contact}</div>
       <form class="chat-form" onsubmit="sendLeadChat(event)">
         <input type="text" name="hp_website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <input id="chat-name" class="form-input" type="text" value="${escapeHtml(leadChatData.name)}" placeholder="${t.chat_name_placeholder}" required>
-        <input id="chat-contact" class="form-input" type="text" value="${escapeHtml(leadChatData.contact)}" placeholder="${t.chat_contact_placeholder}" required>
+        <div class="form-field"><label class="field-label" for="chat-name">${t.chat_name_placeholder}</label><input id="chat-name" class="form-input" type="text" value="${escapeHtml(leadChatData.name)}" placeholder="${t.chat_name_placeholder}" required></div>
+        <div class="form-field"><label class="field-label" for="chat-contact">${t.chat_contact_placeholder}</label><input id="chat-contact" class="form-input" type="text" value="${escapeHtml(leadChatData.contact)}" placeholder="${t.chat_contact_placeholder}" required></div>
         <button class="form-btn" type="submit">${t.chat_send}</button>
-        <div class="form-error" id="chat-error"></div>
+        <div class="form-error" role="alert" id="chat-error"></div>
         <p class="chat-small">${t.chat_privacy}</p>
       </form>
     `;
@@ -778,6 +800,7 @@ function renderLeadChat() {
     `;
   }
   body.innerHTML = html;
+  if (wasInside && leadChatOpen) (document.getElementById(focusedId) || body.querySelector('input:not(.hp-field),textarea,button'))?.focus({preventScroll:true});
   body.scrollTop = body.scrollHeight;
 }
 
@@ -852,6 +875,15 @@ document.addEventListener('DOMContentLoaded', () => {
     a.addEventListener('click', closeMobileMenu);
   });
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeMobileMenu();
+    const menu = document.querySelector('.nav-links.open');
+    if (e.key === 'Escape') {
+      if (leadChatOpen) toggleLeadChat(false); else closeMobileMenu();
+    }
+    if (e.key === 'Tab' && menu) {
+      const controls = [...menu.querySelectorAll('a[href],button')].filter(el => el.checkVisibility() && !el.disabled);
+      const first = controls[0], last = controls[controls.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
   });
 });

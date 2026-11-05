@@ -30,6 +30,7 @@
 <link rel="stylesheet" href="css/style.css?v=20261105-palette">
 </head>
 <body>
+<a class="skip-link" href="#main-content" data-i18n="skip_to_content">Skip to content</a>
 
 <!-- PROGRESS BAR -->
 <div id="progress-bar"></div>
@@ -81,20 +82,21 @@
   </div>
   <a href="contact.html" class="nav-cta" data-i18n="nav_cta">Обсудить проект →</a>
 </nav>
+<main id="main-content" tabindex="-1">
 
 <!-- ═══════════════════════════════════════════ FAQ -->
 <div id="faq" style="padding:120px 20px 100px;background:var(--card2);border-top:1px solid var(--csft);">
   <div style="max-width:800px;margin:0 auto;">
     <div class="section-label" data-i18n="faq_label">Частые вопросы</div>
-    <h2 class="section-title"><span data-i18n="faq_title">Всё что вы хотели</span> <em data-i18n="faq_title_em">спросить</em></h2>
+    <h1 class="section-title" id="page-title"><span data-i18n="faq_title">Всё что вы хотели</span> <em data-i18n="faq_title_em">спросить</em></h1>
     <div style="display:flex;flex-direction:column;gap:3px;margin-top:50px;">
-      <div class="faq-item"><div class="faq-q"><span class="faq-q-text" data-i18n="faq1_q">Сколько стоит сделать сайт?</span><span class="faq-icon">+</span></div><div class="faq-a" data-i18n="faq1_a"></div></div>
-      <div class="faq-item"><div class="faq-q"><span class="faq-q-text" data-i18n="faq2_q">Как долго делается проект?</span><span class="faq-icon">+</span></div><div class="faq-a" data-i18n="faq2_a"></div></div>
-      <div class="faq-item"><div class="faq-q"><span class="faq-q-text" data-i18n="faq3_q">Нужно ли разбираться в технологиях?</span><span class="faq-icon">+</span></div><div class="faq-a" data-i18n="faq3_a"></div></div>
-      <div class="faq-item"><div class="faq-q"><span class="faq-q-text" data-i18n="faq4_q">Почему ваша стоимость выгоднее агентств?</span><span class="faq-icon">+</span></div><div class="faq-a" data-i18n="faq4_a"></div></div>
-      <div class="faq-item"><div class="faq-q"><span class="faq-q-text" data-i18n="faq5_q">Что такое AI продукт?</span><span class="faq-icon">+</span></div><div class="faq-a" data-i18n="faq5_a"></div></div>
-      <div class="faq-item"><div class="faq-q"><span class="faq-q-text" data-i18n="faq6_q">Работаете с клиентами из других городов?</span><span class="faq-icon">+</span></div><div class="faq-a" data-i18n="faq6_a"></div></div>
-      <div class="faq-item"><div class="faq-q"><span class="faq-q-text" data-i18n="faq7_q">Что будет после сдачи проекта?</span><span class="faq-icon">+</span></div><div class="faq-a" data-i18n="faq7_a"></div></div>
+      <div class="faq-item"><button class="faq-q" type="button" id="faq-question-1" aria-expanded="false" aria-controls="faq-answer-1"><span class="faq-q-text" data-i18n="faq1_q">Сколько стоит сделать сайт?</span><span class="faq-icon">+</span></button><div class="faq-a" id="faq-answer-1" role="region" aria-labelledby="faq-question-1" hidden data-i18n="faq1_a"></div></div>
+      <div class="faq-item"><button class="faq-q" type="button" id="faq-question-2" aria-expanded="false" aria-controls="faq-answer-2"><span class="faq-q-text" data-i18n="faq2_q">Как долго делается проект?</span><span class="faq-icon">+</span></button><div class="faq-a" id="faq-answer-2" role="region" aria-labelledby="faq-question-2" hidden data-i18n="faq2_a"></div></div>
+      <div class="faq-item"><button class="faq-q" type="button" id="faq-question-3" aria-expanded="false" aria-controls="faq-answer-3"><span class="faq-q-text" data-i18n="faq3_q">Нужно ли разбираться в технологиях?</span><span class="faq-icon">+</span></button><div class="faq-a" id="faq-answer-3" role="region" aria-labelledby="faq-question-3" hidden data-i18n="faq3_a"></div></div>
+      <div class="faq-item"><button class="faq-q" type="button" id="faq-question-4" aria-expanded="false" aria-controls="faq-answer-4"><span class="faq-q-text" data-i18n="faq4_q">Почему ваша стоимость выгоднее агентств?</span><span class="faq-icon">+</span></button><div class="faq-a" id="faq-answer-4" role="region" aria-labelledby="faq-question-4" hidden data-i18n="faq4_a"></div></div>
+      <div class="faq-item"><button class="faq-q" type="button" id="faq-question-5" aria-expanded="false" aria-controls="faq-answer-5"><span class="faq-q-text" data-i18n="faq5_q">Что такое AI продукт?</span><span class="faq-icon">+</span></button><div class="faq-a" id="faq-answer-5" role="region" aria-labelledby="faq-question-5" hidden data-i18n="faq5_a"></div></div>
+      <div class="faq-item"><button class="faq-q" type="button" id="faq-question-6" aria-expanded="false" aria-controls="faq-answer-6"><span class="faq-q-text" data-i18n="faq6_q">Работаете с клиентами из других городов?</span><span class="faq-icon">+</span></button><div class="faq-a" id="faq-answer-6" role="region" aria-labelledby="faq-question-6" hidden data-i18n="faq6_a"></div></div>
+      <div class="faq-item"><button class="faq-q" type="button" id="faq-question-7" aria-expanded="false" aria-controls="faq-answer-7"><span class="faq-q-text" data-i18n="faq7_q">Что будет после сдачи проекта?</span><span class="faq-icon">+</span></button><div class="faq-a" id="faq-answer-7" role="region" aria-labelledby="faq-question-7" hidden data-i18n="faq7_a"></div></div>
     </div>
     <div style="text-align:center;margin-top:60px;">
       <a href="contact.html" class="btn-main" data-i18n="how_cta">Начать прямо сейчас →</a>
@@ -103,6 +105,7 @@
 </div>
 
 <!-- FOOTER -->
+</main>
 <footer>
   <div class="footer-logo"><a href="index.html"><img src="assets/logo.png" alt="Tech Dolphin"></a></div>
   <div class="footer-copy" data-i18n="footer_copy">© 2025 Tech Dolphin</div>
@@ -122,11 +125,11 @@
     <span class="lead-chat-dot"></span>
     <span data-i18n="chat_toggle">Быстрый бриф</span>
   </button>
-  <div class="lead-chat-panel" id="lead-chat-panel" aria-hidden="true">
+  <div class="lead-chat-panel" id="lead-chat-panel" role="dialog" aria-labelledby="lead-chat-title" aria-hidden="true">
     <div class="lead-chat-head">
       <div>
         <div class="lead-chat-kicker" data-i18n="chat_kicker">Tech Dolphin</div>
-        <div class="lead-chat-title" data-i18n="chat_title">Подберём формат проекта</div>
+        <div class="lead-chat-title" id="lead-chat-title" data-i18n="chat_title">Подберём формат проекта</div>
       </div>
       <button class="lead-chat-close" type="button" onclick="toggleLeadChat(false)" aria-label="Close">×</button>
     </div>

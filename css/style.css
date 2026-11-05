@@ -1811,3 +1811,16 @@ footer { border-top: 1px solid var(--border); padding: 32px 24px; max-width: 110
 @media(max-width:768px) {
  .lead-chat-panel { position: fixed; top: var(--chat-visible-top, 12px); bottom: auto; right: 12px; width: calc(100vw - 24px); }
 }
+
+/* Native controls and persistent labels support keyboard and assistive access. */
+.skip-link { position: fixed; z-index: 20000; left: 16px; top: 8px; padding: 12px 20px; background: var(--cyan); color: white; border-radius: 12px; transform: translateY(-160%); }
+.skip-link:focus { transform: none; }
+main:focus { outline: none; }
+.form-field { min-width: 0; display: flex; flex-direction: column; gap: 7px; }
+.field-label { font-size: 12px; font-weight: 600; color: var(--muted2); }
+.faq-q { width: 100%; border: 0; background: transparent; color: inherit; text-align: left; font: inherit; }
+.faq-a { display: block; }
+.faq-a[hidden] { display: none; }
+.calc-choice { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.calc-card:has(.calc-choice:focus-visible) { outline: 2px solid var(--cyan); outline-offset: 4px; }
+.calc-card { display: block; }

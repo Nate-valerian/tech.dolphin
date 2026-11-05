@@ -94,3 +94,17 @@ for(const site of ['', 'netlify-abroad']) {
   await page.locator('.lead-chat-close').click();await expect(page.locator('#lead-chat-panel')).toBeHidden();
  });
 }
+
+for(const site of ['', 'netlify-abroad']) {
+ test('A6: keyboard FAQ, pricing, labelled fields and modal focus '+site,async({page})=>{
+  await open(page,site,'faq.html');const question=page.locator('.faq-q').first();await question.focus();await page.keyboard.press('Enter');
+  await expect(question).toHaveAttribute('aria-expanded','true');await expect(page.locator('.faq-a').first()).toBeVisible();
+  await open(page,site,'pricing.html');const choice=page.locator('.calc-choice').first();await choice.focus();await page.keyboard.press('Space');
+  await expect(page.locator('.calc-choice').first()).toBeChecked();
+  await expect(page.locator('h1')).toHaveCount(1);await expect(page.locator('main')).toHaveCount(1);
+  await open(page,site,'contact.html');for(const id of ['ct-name','ct-phone','ct-email','ct-message']) expect(await page.locator('#'+id).evaluate(el=>el.labels.length)).toBe(1);
+  await page.setViewportSize({width:390,height:844});await page.locator('#nav-hamburger').click();
+  for(let i=0;i<18;i++){await page.keyboard.press('Tab');expect(await page.evaluate(()=>!!document.activeElement.closest('.nav-links'))).toBe(true);}
+  await page.keyboard.press('Escape');await expect(page.locator('#nav-hamburger')).toBeFocused();
+ });
+}

@@ -1,5 +1,5 @@
 diff --git a/js/main.js b/netlify-abroad/js/main.js
-index 5f1f7e4..45e4501 100644
+index 74e209c..3c6dcc1 100644
 --- a/js/main.js
 +++ b/netlify-abroad/js/main.js
 @@ -3,13 +3,49 @@
@@ -34,14 +34,14 @@ index 5f1f7e4..45e4501 100644
 +function validLang(lang) {
 +  return T[lang] ? lang : null;
 +}
- 
--function applyLang(lang) {
--  if (!T[lang]) lang = 'ru';
++
 +function getManualLang() {
 +  if (storageGet(localStorage, LANG_MANUAL_KEY) !== 'true') return null;
 +  return validLang(storageGet(localStorage, LANG_STORAGE_KEY));
 +}
-+
+ 
+-function applyLang(lang) {
+-  if (!T[lang]) lang = 'ru';
 +let currentLang = getManualLang() || 'en';
 +
 +function applyLang(lang, options = {}) {
@@ -123,7 +123,7 @@ index 5f1f7e4..45e4501 100644
  }
  
  function _lockBodyScroll() {
-@@ -149,8 +228,7 @@ function initProgress() {
+@@ -164,8 +243,7 @@ function initProgress() {
  }
  
  /* ── LEFT NAV ─────────────────────────────── */
@@ -133,7 +133,7 @@ index 5f1f7e4..45e4501 100644
  
  function initLeftNav() {
    const items = document.querySelectorAll('.lnav-item');
-@@ -251,16 +329,18 @@ function filterProj(cat, btn) {
+@@ -262,16 +340,18 @@ function filterProj(cat, btn) {
  
  /* ── CALCULATOR ───────────────────────────── */
  const CALC_SERVICES = [
@@ -159,7 +159,7 @@ index 5f1f7e4..45e4501 100644
  
  function renderCalcTiers(s, t) {
    const tiers = s.tiersKey ? t[s.tiersKey] : null;
-@@ -366,7 +446,7 @@ function initTilt() {
+@@ -380,7 +460,7 @@ function initTilt() {
  const EJ_PUBLIC  = '87_f2ZcU4pQ0LZlpc';
  const EJ_SERVICE = 'service_8xs6t0i';
  const EJ_TMPL    = 'template_u3fwuan';
@@ -168,7 +168,7 @@ index 5f1f7e4..45e4501 100644
  
  const leadSubmissions = new Map();
  let emailQueue = Promise.resolve();
-@@ -554,7 +634,7 @@ let leadChatOpen = false;
+@@ -573,7 +653,7 @@ let leadChatOpen = false;
  let leadChatStep = 'type';
  let leadChatData = {};
  let leadChatSubmitting = false;
@@ -177,7 +177,7 @@ index 5f1f7e4..45e4501 100644
  
  function saveLeadChatDraft() {
    const fields = { 'chat-note': 'note', 'chat-name': 'name', 'chat-contact': 'contact' };
-@@ -756,7 +836,6 @@ function initParallax() {
+@@ -779,7 +859,6 @@ function initParallax() {
  
  /* ── INIT ─────────────────────────────────── */
  document.addEventListener('DOMContentLoaded', () => {
@@ -185,7 +185,7 @@ index 5f1f7e4..45e4501 100644
    if (window.emailjs) emailjs.init({ publicKey: EJ_PUBLIC });
    initMenuBreakpoint();
    initProgress();
-@@ -768,6 +847,7 @@ document.addEventListener('DOMContentLoaded', () => {
+@@ -791,6 +870,7 @@ document.addEventListener('DOMContentLoaded', () => {
    initLeadChat();
    renderCalc();
    applyLang(currentLang);

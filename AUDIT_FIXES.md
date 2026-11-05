@@ -49,3 +49,14 @@ controls visible when the keyboard opens. The open sheet sits above the
 cookie notice, with an accessible close control.
 
 Validation: 320px-wide, 568px and 300px-high viewport checks pass on both sites.
+
+## A6 — Keyboard access and understandable forms
+
+Fixed: FAQ buttons expose expanded states, pricing uses native checkboxes,
+all enquiry fields have persistent labels, and sending/error/success feedback
+has accessible states. Added one main landmark, a skip link, and primary
+headings. Modal menus move/trap/restore focus and make the background inert.
+Brief steps preserve focus and Escape closes the brief.
+
+Validation: keyboard interactions, modal focus cycling, field labels, headings,
+and the existing smoke checks pass for both versions.

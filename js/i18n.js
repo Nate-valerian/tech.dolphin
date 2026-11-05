@@ -5,6 +5,8 @@
 
 const T = {
   ru: {
+    skip_to_content: 'Перейти к содержимому',
+    form_sending: 'Отправляем…',
     /* NAV */
     nav_about:   'О нас',
     nav_services:'Услуги',
@@ -328,6 +330,8 @@ const T = {
   },
 
   en: {
+    skip_to_content: 'Skip to content',
+    form_sending: 'Sending…',
     nav_about:   'About',
     nav_services:'Services',
     nav_projects:'Work',
