@@ -1,0 +1,42 @@
+{
+  "index.html": {
+    "hash": "c23ba7d1c51607cb5afb1bf9bd35bc105815235583ef839a9dfa15fac87f9ddb",
+    "date": "2026-11-05"
+  },
+  "projects.html": {
+    "hash": "1a22245b5b17306ab60874342058a6e18fa33133f04e3ca4ad2b84a198dd43b6",
+    "date": "2026-11-05"
+  },
+  "pricing.html": {
+    "hash": "0aab3c8fbbc32c274be756e281c82ee6dfa8d75aba131712e1ac5af6454e130c",
+    "date": "2026-11-05"
+  },
+  "faq.html": {
+    "hash": "f2b2c9e43e5e57d690335645de83895b425ef6ed520ccd38a99873432c0760fa",
+    "date": "2026-11-05"
+  },
+  "contact.html": {
+    "hash": "b70c185c85f041b7ef19ba7e74cfda554d53d5fa3efa3a7db30315fa7d547c32",
+    "date": "2026-11-05"
+  },
+  "netlify-abroad/index.html": {
+    "hash": "151d39c31a1f26d99017eb4b922bc39e5114eceb3886c2c706296fa56ee46238",
+    "date": "2026-11-05"
+  },
+  "netlify-abroad/projects.html": {
+    "hash": "bc286e9383ad4fc393b5fd07d8bced4fd893a849983334d24686fb71aaf38a59",
+    "date": "2026-11-05"
+  },
+  "netlify-abroad/pricing.html": {
+    "hash": "2d9a7df7edf21dd30a50ff27c010084beff3e8de57fed02d97be80a54fa3a39b",
+    "date": "2026-11-05"
+  },
+  "netlify-abroad/faq.html": {
+    "hash": "2e321f93b18857da0a27c74ef961ccb14956b1eef72403b9f2b38b8b9ae8b193",
+    "date": "2026-11-05"
+  },
+  "netlify-abroad/contact.html": {
+    "hash": "7c9b0eabc220121f23aedc323104b22739b48da6e96655b0c8a781d3d58439fa",
+    "date": "2026-11-05"
+  }
+}

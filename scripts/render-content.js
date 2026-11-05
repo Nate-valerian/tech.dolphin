@@ -40,6 +40,7 @@ function translateMarkup(html, translations) {
 }
 function renderSite(site) {
   const t=dictionary(site.directory)[site.language];
+  t.footer_copy=t.footer_copy.replace('{year}',new Intl.DateTimeFormat('en',{year:'numeric',timeZone:'Europe/Moscow'}).format(new Date()));
   for(const name of PAGES) {
     const file=path.join(ROOT,site.directory,name);
     let html=translateMarkup(fs.readFileSync(file,'utf8'),t);

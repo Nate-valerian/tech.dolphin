@@ -147,3 +147,13 @@ Removal of generated output is guarded to the expected project paths.
 
 Validation: a rebuilt archive passes the full hash check; regression cases
 reject missing hidden media, disguised names, modified bytes, and duplicates.
+
+## A16 — Current dates and grounded wording
+
+Fixed: the footer year is generated, and sitemaps use tracked content hashes
+so dates change when page content changes. Replaced unsupported 3x speed and
+two-hour response claims with clear process and next-step wording. Shortened
+the headline and removed comparative-price language from the process FAQ.
+
+Validation: translated content renders successfully; all translation keys pass;
+sitemap generation is repeatable without changing unchanged-page dates.

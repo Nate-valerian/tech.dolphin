@@ -1,5 +1,5 @@
 diff --git a/js/i18n.js b/netlify-abroad/js/i18n.js
-index 61ba285..39fec40 100644
+index fb557f0..ac325b4 100644
 --- a/js/i18n.js
 +++ b/netlify-abroad/js/i18n.js
 @@ -37,10 +37,10 @@ const T = {
@@ -76,9 +76,9 @@ index 61ba285..39fec40 100644
      cookie_btn:  'Принять',
  
      /* FOOTER */
--    footer_copy:   '© 2025 Tech Dolphin — Разработка сайтов, приложений и AI продуктов',
+-    footer_copy:   '© {year} Tech Dolphin — Разработка сайтов, приложений и AI продуктов',
 -    cities_label:  'Работаем по всей России',
-+    footer_copy:   '© 2025 Tech Dolphin by Datvida LLC — Сайты, приложения и AI-продукты',
++    footer_copy:   '© {year} Tech Dolphin by Datvida LLC — Сайты, приложения и AI-продукты',
 +    cities_label:  'Работаем по всему миру',
      city_moscow: 'Москва',
      city_spb: 'Санкт-Петербург',
@@ -145,21 +145,6 @@ index 61ba285..39fec40 100644
  
      lnav_home:    'Home',
      lnav_about:   'About',
-@@ -413,10 +408,10 @@ const T = {
-     badge1: 'Available for new projects',
-     badge2: '3x Faster',
-     badge3: 'Premium Value',
--    hero_t1: 'Premium websites, powerful apps,',
--    hero_t2: 'and smart AI systems —',
--    hero_t3: 'delivered 3x faster',
--    hero_t4: 'and built to help your business grow.',
-+    hero_t1: 'Premium websites, apps, and AI systems',
-+    hero_t2: 'built to launch fast, scale cleanly,',
-+    hero_t3: 'and feel polished from day one',
-+    hero_t4: 'with senior-level delivery and lean pricing.',
-     hero_sub: 'We build websites, apps, and AI systems that help your business respond, decide, and operate faster.',
-     hero_btn1: 'Start a Project',
-     hero_btn2: 'View Our Work',
 @@ -459,11 +454,6 @@ const T = {
      exp_scope_databases: 'Databases',
      exp_scope_cloud: 'Cloud / DevOps',
@@ -201,8 +186,8 @@ index 61ba285..39fec40 100644
      cookie_link: 'privacy policy',
      cookie_btn:  'Accept',
  
--    footer_copy:  '© 2025 Tech Dolphin — Website, App & AI Product Development',
-+    footer_copy:  '© 2025 Tech Dolphin by Datvida LLC — Website, App & AI Product Development',
+-    footer_copy:  '© {year} Tech Dolphin — Website, App & AI Product Development',
++    footer_copy:  '© {year} Tech Dolphin by Datvida LLC — Website, App & AI Product Development',
      cities_label: 'Working worldwide',
 -    city_moscow: 'Moscow',
 -    city_spb: 'Saint Petersburg',

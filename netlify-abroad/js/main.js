@@ -68,7 +68,7 @@ function applyLang(lang, options = {}) {
     if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
       el.placeholder = t[key];
     } else {
-      el.innerHTML = t[key];
+      el.innerHTML = String(t[key]).replace(/\{year\}/g, new Intl.DateTimeFormat('en', {year:'numeric', timeZone:'Europe/Moscow'}).format(new Date()));
     }
   });
 
