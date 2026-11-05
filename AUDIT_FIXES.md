@@ -119,3 +119,13 @@ reads/writes fall back to memory so essential interactions continue.
 Validation: both sites complete navigation, language changes, and a mocked
 enquiry with localStorage and sessionStorage getters throwing SecurityError.
 Persistence across reloads remains unavailable when the browser denies it.
+
+## A13 — Intentional media loading and motion
+
+Fixed: static navigation logos replace tiny looping videos. Content previews
+have controls, attach sources only when visible, and pause when off-screen or
+the tab is hidden. Reduced-motion and data-saving preferences disable automatic
+playback, and reduced motion also disables JavaScript tilt.
+
+Validation: hidden/off-screen sources stay unloaded, autoplay attributes are
+absent, and media/tilt respect reduced motion on both sites.

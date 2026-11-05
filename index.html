@@ -76,10 +76,7 @@
 <!-- TOP NAV -->
 <nav class="nav">
   <div class="nav-logo">
-    <video autoplay muted loop playsinline preload="metadata" poster="assets/logo.png" aria-label="Tech Dolphin">
-      <source src="assets/logo.video.mp4" type="video/mp4">
-      <img src="assets/logo.png" alt="Tech Dolphin">
-    </video>
+    <img src="assets/logo.png" alt="Tech Dolphin" width="36" height="36" decoding="async">
   </div>
   <div class="nav-links" id="primary-nav">
     <a href="index.html"   data-i18n="lnav_home" class="active-page">Главная</a>
@@ -125,12 +122,12 @@
 
     <!-- LEFT SIDE — DOM media videos -->
     <div class="hero-side hero-media-column">
-      <video class="hero-side-video" autoplay muted loop playsinline preload="metadata" poster="assets/dom-sessions.jpg">
-        <source src="assets/dom_video.mp4" type="video/mp4">
+      <video data-preview controls class="hero-side-video" muted loop playsinline preload="none" poster="assets/dom-sessions.jpg">
+        <source data-src="assets/dom_video.mp4" type="video/mp4">
         <img src="assets/dom-sessions.jpg" alt="DOM App" class="hero-side-video">
       </video>
-      <video class="hero-side-video" autoplay muted loop playsinline preload="metadata" poster="assets/dom-sessions.jpg">
-        <source src="assets/dom-short-01.mp4" type="video/mp4">
+      <video data-preview controls class="hero-side-video" muted loop playsinline preload="none" poster="assets/dom-sessions.jpg">
+        <source data-src="assets/dom-short-01.mp4" type="video/mp4">
         <img src="assets/dom-sessions.jpg" alt="DOM immersive video" class="hero-side-video">
       </video>
     </div>
@@ -138,8 +135,8 @@
     <!-- CENTER — main content -->
     <div class="hero-inner">
       <!-- Logo video -->
-      <video class="hero-logo-video" autoplay muted loop playsinline preload="metadata">
-        <source src="assets/logo_video.mp4" type="video/mp4">
+      <video data-preview controls class="hero-logo-video" muted loop playsinline preload="none">
+        <source data-src="assets/logo_video.mp4" type="video/mp4">
         <img src="assets/logo.png" alt="Tech Dolphin" class="hero-logo-video">
       </video>
 
@@ -186,16 +183,16 @@
 
     <!-- RIGHT SIDE — media grid -->
     <div class="hero-media-grid" aria-label="Tech Dolphin project visuals">
-      <video class="hero-side-video" autoplay muted loop playsinline preload="metadata" poster="assets/dom-sessions.jpg">
-        <source src="assets/dom_video.mp4" type="video/mp4">
+      <video data-preview controls class="hero-side-video" muted loop playsinline preload="none" poster="assets/dom-sessions.jpg">
+        <source data-src="assets/dom_video.mp4" type="video/mp4">
         <img src="assets/dom-sessions.jpg" alt="DOM App" class="hero-side-video">
       </video>
-      <video class="hero-side-video" autoplay muted loop playsinline preload="metadata" poster="assets/dom-sessions.jpg">
-        <source src="assets/dom-short-01.mp4" type="video/mp4">
+      <video data-preview controls class="hero-side-video" muted loop playsinline preload="none" poster="assets/dom-sessions.jpg">
+        <source data-src="assets/dom-short-01.mp4" type="video/mp4">
         <img src="assets/dom-sessions.jpg" alt="DOM Immersive Projection" class="hero-side-video">
       </video>
-      <video class="hero-side-video" autoplay muted loop playsinline preload="metadata" poster="assets/dom-sessions.jpg">
-        <source src="assets/domspace.mp4" type="video/mp4">
+      <video data-preview controls class="hero-side-video" muted loop playsinline preload="none" poster="assets/dom-sessions.jpg">
+        <source data-src="assets/domspace.mp4" type="video/mp4">
         <img src="assets/dom-sessions.jpg" alt="DOM Space" class="hero-side-video">
       </video>
     </div>
@@ -413,8 +410,8 @@
     <div class="pcard span2" data-cat="web ai">
       <div class="pcard-video-grid domstudio-card-grid">
         <img class="pcard-video" src="assets/example-perfume-catalog.webp" alt="DomStudio before product photo" loading="lazy" decoding="async">
-        <video class="pcard-video" autoplay muted loop playsinline preload="metadata" poster="assets/example-perfume-product.webp">
-          <source src="assets/perfume-product-5s.mp4" type="video/mp4">
+        <video data-preview controls class="pcard-video" muted loop playsinline preload="none" poster="assets/example-perfume-product.webp">
+          <source data-src="assets/perfume-product-5s.mp4" type="video/mp4">
         </video>
         <img class="pcard-video" src="assets/example-perfume-creative.webp" alt="DomStudio creative product visual" loading="lazy" decoding="async">
       </div>
@@ -432,8 +429,8 @@
     </div>
 <!-- DOM — featured, spans 2 cols -->
     <div class="pcard span2" data-cat="mobile ai">
-      <video class="pcard-img tall" autoplay muted loop playsinline preload="none" poster="assets/dom-sessions.jpg">
-        <source src="assets/dom_video.mp4" type="video/mp4">
+      <video data-preview controls class="pcard-img tall" muted loop playsinline preload="none" poster="assets/dom-sessions.jpg">
+        <source data-src="assets/dom_video.mp4" type="video/mp4">
         <img class="pcard-img tall" src="assets/dom-sessions.jpg" alt="DOM App">
       </video>
       <div class="pcard-body">

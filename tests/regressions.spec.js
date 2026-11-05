@@ -182,3 +182,14 @@ for(const site of ['', 'netlify-abroad']) {
   await expect(page.locator('#ct-success')).toBeVisible();expect(errors).toEqual([]);
  });
 }
+
+for(const site of ['', 'netlify-abroad']) {
+ test('A13: hidden previews stay unloaded and reduced motion pauses media '+site,async({page})=>{
+  await page.emulateMedia({reducedMotion:'reduce'});await page.setViewportSize({width:1440,height:900});await open(page,site);
+  expect(await page.locator('video[autoplay]').count()).toBe(0);
+  const hidden=await page.locator('video').evaluateAll(videos=>videos.filter(v=>!v.checkVisibility()).map(v=>v.currentSrc));expect(hidden.every(src=>!src)).toBe(true);
+  const lower=page.locator('.pcard video').first();if(await lower.count())expect(await lower.getAttribute('data-loaded')).toBeNull();
+  await page.locator('.svc-card').first().hover();expect(await page.locator('.svc-card').first().evaluate(el=>el.style.transform)).toBe('');
+  expect(await page.locator('video').evaluateAll(videos=>videos.every(v=>v.paused))).toBe(true);
+ });
+}

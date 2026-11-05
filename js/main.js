@@ -405,8 +405,11 @@ function initCounters() {
 
 /* ── 3D TILT ──────────────────────────────── */
 function initTilt() {
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   document.querySelectorAll('.svc-card, .pcard, .why-card, .stat-pill').forEach(card => {
+    reduced.addEventListener('change', () => { if (reduced.matches) card.style.transform = ''; });
     card.addEventListener('mousemove', e => {
+      if (reduced.matches) { card.style.transform = ''; return; }
       const r   = card.getBoundingClientRect();
       const rotX = ((e.clientY - r.top  - r.height/2) / (r.height/2)) * -5;
       const rotY = ((e.clientX - r.left - r.width /2) / (r.width /2)) *  5;
@@ -828,6 +831,40 @@ function initParallax() {
   });
 }
 
+function initPreviewMedia() {
+  const videos = [...document.querySelectorAll('video[data-preview]')];
+  const visible = new Set();
+  const policyPauses = new WeakSet();
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const saveData = !!navigator.connection?.saveData;
+  const pause = video => { if (!video.paused) { policyPauses.add(video); video.pause(); } };
+  const hydrate = video => {
+    if (video.dataset.loaded) return;
+    video.querySelectorAll('source[data-src]').forEach(source => { source.src = source.dataset.src; });
+    video.dataset.loaded = 'true'; video.load();
+  };
+  const sync = () => videos.forEach(video => {
+    if (visible.has(video) && !document.hidden) {
+      hydrate(video);
+      if (!reduced.matches && !saveData && video.dataset.userPaused !== 'true') video.play().catch(() => {});
+      else if (reduced.matches || saveData) pause(video);
+    } else pause(video);
+  });
+  videos.forEach(video => {
+    video.addEventListener('pause', () => { if (policyPauses.has(video)) policyPauses.delete(video); else video.dataset.userPaused = 'true'; });
+    video.addEventListener('play', () => { delete video.dataset.userPaused; });
+  });
+  if (window.IntersectionObserver) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting && entry.boundingClientRect.width > 0) visible.add(entry.target); else visible.delete(entry.target); });
+      sync();
+    }, { threshold: .15 });
+    videos.forEach(video => observer.observe(video));
+  } else videos.forEach(hydrate);
+  reduced.addEventListener('change', sync);
+  document.addEventListener('visibilitychange', sync);
+}
+
 /* ── INIT ─────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   NAV_SECTIONS = ALL_NAV_SECTIONS.filter(id => !!document.getElementById(id));
@@ -839,6 +876,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initFaq();
   initCounters();
   initTilt();
+  initPreviewMedia();
   initLeadChat();
   renderCalc();
   applyLang(currentLang);
