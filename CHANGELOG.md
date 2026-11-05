@@ -19,6 +19,13 @@ pages, English defaults for Russian visitors, manual language persistence, and
 original media on the Russian site. Desktop and mobile previews were visually
 reviewed; the full interface screenshots fit without horizontal overflow.
 
+Published source commit `6c36767` to https://nate-web3.com at 00:36
+Europe/Moscow on November 6. Production deploy `6aecf6d129fd43c2b44fa3c3`
+is ready. Live desktop/mobile checks passed on both portfolio pages with no
+missing resources, JavaScript errors, or automatic geo-IP language changes.
+The three English screenshots, stylesheet, and regional settings match the
+deployed build by SHA-256 hash.
+
 ## 2026-11-05 — Publish the international site to Netlify
 
 Published source commit `7f6157d` to the existing `nate-web3` production site at
