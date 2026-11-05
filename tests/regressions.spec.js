@@ -49,3 +49,19 @@ test('A2: international identity and USD pricing survive Russian translation',as
  await expect(page.locator('.calc-card').first()).toContainText('$1,200');
  expect((await page.locator('.chat-options').innerText())).not.toContain('₽');
 });
+
+for(const site of ['', 'netlify-abroad']) {
+ test('A3: draft survives close, language switch and reload '+site,async({page})=>{
+  await open(page,site);await page.evaluate(()=>{toggleLeadChat(true);leadChatStep='note';renderLeadChat();});
+  await page.locator('#chat-note').fill('A useful project brief');
+  await page.evaluate(()=>{toggleLeadChat(false);toggleLeadChat(true);});
+  await expect(page.locator('#chat-note')).toHaveValue('A useful project brief');
+  await page.locator('.chat-form button').click();
+  await page.locator('#chat-name').fill('Visitor');await page.locator('#chat-contact').fill('visitor@example.test');
+  await page.evaluate(()=>toggleLang());await expect(page.locator('#chat-contact')).toHaveValue('visitor@example.test');
+  await page.reload();await page.evaluate(()=>toggleLeadChat(true));
+  await expect(page.locator('#chat-name')).toHaveValue('Visitor');
+  await expect(page.locator('#chat-contact')).toHaveValue('visitor@example.test');
+  await page.evaluate(()=>resetLeadChat());await expect(page.locator('#chat-name')).toHaveCount(0);
+ });
+}

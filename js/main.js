@@ -7,6 +7,7 @@ let currentLang = localStorage.getItem('td_lang') || 'ru';
 
 function applyLang(lang) {
   if (!T[lang]) lang = 'ru';
+  saveLeadChatDraft();
   currentLang = lang;
   localStorage.setItem('td_lang', lang);
   document.documentElement.lang = lang;
@@ -545,6 +546,30 @@ const CHAT_OPTIONS = {
 let leadChatOpen = false;
 let leadChatStep = 'type';
 let leadChatData = {};
+let leadChatSubmitting = false;
+const BRIEF_STORAGE_KEY = 'td_brief_ru';
+
+function saveLeadChatDraft() {
+  const fields = { 'chat-note': 'note', 'chat-name': 'name', 'chat-contact': 'contact' };
+  Object.entries(fields).forEach(([id, key]) => {
+    const field = document.getElementById(id);
+    if (field) leadChatData[key] = field.value;
+  });
+  try { sessionStorage.setItem(BRIEF_STORAGE_KEY, JSON.stringify({ step: leadChatStep, data: leadChatData })); } catch (_) {}
+}
+
+function restoreLeadChatDraft() {
+  try {
+    const draft = JSON.parse(sessionStorage.getItem(BRIEF_STORAGE_KEY));
+    if (draft && [...CHAT_STEPS, 'note', 'contact', 'done'].includes(draft.step) && draft.data && typeof draft.data === 'object') {
+      leadChatStep = draft.step;
+      ['type','budget','timeline','note','name','contact'].forEach(key => {
+        if (typeof draft.data[key] === 'string') leadChatData[key] = draft.data[key].slice(0, 10000);
+      });
+    }
+  } catch (_) {}
+}
+
 
 function escapeHtml(value) {
   return String(value || '').replace(/[&<>"']/g, ch => ({
@@ -555,28 +580,34 @@ function escapeHtml(value) {
 function toggleLeadChat(force) {
   const panel = document.getElementById('lead-chat-panel');
   if (!panel) return;
+  saveLeadChatDraft();
   leadChatOpen = typeof force === 'boolean' ? force : !leadChatOpen;
   panel.classList.toggle('open', leadChatOpen);
   panel.setAttribute('aria-hidden', String(!leadChatOpen));
-  if (leadChatOpen) renderLeadChat();
+  if (leadChatOpen && !leadChatSubmitting) renderLeadChat();
 }
 
 function initLeadChat() {
   if (!document.getElementById('lead-chat')) return;
+  restoreLeadChatDraft();
+  document.getElementById('lead-chat-body').addEventListener('input', saveLeadChatDraft);
   renderLeadChat();
 }
 
 function resetLeadChat() {
   leadChatStep = 'type';
   leadChatData = {};
+  try { sessionStorage.removeItem(BRIEF_STORAGE_KEY); } catch (_) {}
   renderLeadChat();
 }
 
 function addChatChoice(step, key) {
   const t = T[currentLang];
-  leadChatData[step] = t[key] || key;
+  saveLeadChatDraft();
+  leadChatData[step] = key;
   const idx = CHAT_STEPS.indexOf(step);
   leadChatStep = CHAT_STEPS[idx + 1] || 'note';
+  saveLeadChatDraft();
   renderLeadChat();
 }
 
@@ -585,6 +616,7 @@ function setChatNote(e) {
   const note = document.getElementById('chat-note');
   leadChatData.note = note ? note.value.trim() : '';
   leadChatStep = 'contact';
+  saveLeadChatDraft();
   renderLeadChat();
 }
 
@@ -597,7 +629,7 @@ function renderChatHistory(t) {
   CHAT_STEPS.forEach(step => {
     if (leadChatData[step]) {
       parts.push(`<div class="chat-msg bot">${t[chatQuestionKey(step)]}</div>`);
-      parts.push(`<div class="chat-msg user">${escapeHtml(leadChatData[step])}</div>`);
+      parts.push(`<div class="chat-msg user">${escapeHtml(t[leadChatData[step]] || leadChatData[step])}</div>`);
     }
   });
   if (leadChatData.note) {
@@ -609,7 +641,7 @@ function renderChatHistory(t) {
 
 function renderLeadChat() {
   const body = document.getElementById('lead-chat-body');
-  if (!body || !T[currentLang]) return;
+  if (!body || !T[currentLang] || leadChatSubmitting) return;
   const t = T[currentLang];
   let html = renderChatHistory(t);
 
@@ -624,7 +656,7 @@ function renderLeadChat() {
     html += `
       <div class="chat-msg bot">${t.chat_q_note}</div>
       <form class="chat-form" onsubmit="setChatNote(event)">
-        <textarea id="chat-note" class="form-input" rows="3" placeholder="${t.chat_note_placeholder}" required></textarea>
+        <textarea id="chat-note" class="form-input" rows="3" placeholder="${t.chat_note_placeholder}" required>${escapeHtml(leadChatData.note || '')}</textarea>
         <button class="form-btn" type="submit">${t.chat_next}</button>
       </form>
     `;
@@ -633,8 +665,8 @@ function renderLeadChat() {
       <div class="chat-msg bot">${t.chat_q_contact}</div>
       <form class="chat-form" onsubmit="sendLeadChat(event)">
         <input type="text" name="hp_website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <input id="chat-name" class="form-input" type="text" placeholder="${t.chat_name_placeholder}" required>
-        <input id="chat-contact" class="form-input" type="text" placeholder="${t.chat_contact_placeholder}" required>
+        <input id="chat-name" class="form-input" type="text" value="${escapeHtml(leadChatData.name)}" placeholder="${t.chat_name_placeholder}" required>
+        <input id="chat-contact" class="form-input" type="text" value="${escapeHtml(leadChatData.contact)}" placeholder="${t.chat_contact_placeholder}" required>
         <button class="form-btn" type="submit">${t.chat_send}</button>
         <div class="form-error" id="chat-error"></div>
         <p class="chat-small">${t.chat_privacy}</p>
@@ -658,16 +690,21 @@ async function sendLeadChat(e) {
   const contact = document.getElementById('chat-contact').value.trim();
   const errEl = document.getElementById('chat-error');
   if (isHoneypotTripped(form)) {
+    leadChatSubmitting = false;
     leadChatStep = 'done';
+    leadChatData = {};
+    try { sessionStorage.removeItem(BRIEF_STORAGE_KEY); } catch (_) {}
     renderLeadChat();
     return;
   }
+  saveLeadChatDraft();
   if (!beginFormSubmit(form, errEl)) return;
+  leadChatSubmitting = true;
   try {
     const message = [
-      `${currentLang === 'ru' ? 'Тип проекта' : 'Project type'}: ${leadChatData.type || '-'}`,
-      `${currentLang === 'ru' ? 'Бюджет' : 'Budget'}: ${leadChatData.budget || '-'}`,
-      `${currentLang === 'ru' ? 'Старт' : 'Timeline'}: ${leadChatData.timeline || '-'}`,
+      `${currentLang === 'ru' ? 'Тип проекта' : 'Project type'}: ${t[leadChatData.type] || leadChatData.type || '-'}`,
+      `${currentLang === 'ru' ? 'Бюджет' : 'Budget'}: ${t[leadChatData.budget] || leadChatData.budget || '-'}`,
+      `${currentLang === 'ru' ? 'Старт' : 'Timeline'}: ${t[leadChatData.timeline] || leadChatData.timeline || '-'}`,
       `${currentLang === 'ru' ? 'Задача' : 'Task'}: ${leadChatData.note || '-'}`
     ].join('\n');
     await sendLeadEmail({
@@ -680,6 +717,7 @@ async function sendLeadChat(e) {
     leadChatStep = 'done';
     renderLeadChat();
   } catch (error) {
+    leadChatSubmitting = false;
     endFormSubmit(form);
     showLeadError(errEl, error, t.chat_error);
   }

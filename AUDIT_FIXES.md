@@ -23,3 +23,11 @@ A late geo-IP response no longer overrides a manual language choice.
 
 Validation: both mobile language controls and international Russian identity
 and pricing regression checks passed.
+
+## A3 — Preserve the project brief
+
+Fixed: retain note, name, contact, step, and choice keys in a regional session
+draft. Closing, language changes, and navigation restore the draft. Submitted
+forms are not rebuilt while sending. A reset or confirmed send clears the draft.
+
+Validation: close/reopen, language switch, reload, and reset pass on both sites.
