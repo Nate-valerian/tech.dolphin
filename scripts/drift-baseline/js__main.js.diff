@@ -1,5 +1,5 @@
 diff --git a/js/main.js b/netlify-abroad/js/main.js
-index b6b5e5c..8d4b658 100644
+index bae9366..b92be22 100644
 --- a/js/main.js
 +++ b/netlify-abroad/js/main.js
 @@ -3,13 +3,49 @@
@@ -69,9 +69,9 @@ index b6b5e5c..8d4b658 100644
 -  if (ogTitle && t[titleKey]) ogTitle.content = t[titleKey];
 +  if (ogTitle) ogTitle.content = pageKey === 'home' ? t.meta_home_og_title : (t[titleKey] || t.meta_home_og_title);
  
-   // Apply all data-i18n elements
-   document.querySelectorAll('[data-i18n]').forEach(el => {
-@@ -62,7 +98,50 @@ function applyLang(lang) {
+   const metaValues = {
+     'og:description': t[descKey], 'og:locale': lang === 'ru' ? 'ru_RU' : 'en_US',
+@@ -71,7 +107,50 @@ function applyLang(lang) {
  }
  
  function toggleLang() {
@@ -123,7 +123,7 @@ index b6b5e5c..8d4b658 100644
  }
  
  function _lockBodyScroll() {
-@@ -165,8 +244,7 @@ function initProgress() {
+@@ -174,8 +253,7 @@ function initProgress() {
  }
  
  /* ── LEFT NAV ─────────────────────────────── */
@@ -133,7 +133,7 @@ index b6b5e5c..8d4b658 100644
  
  function initLeftNav() {
    const items = document.querySelectorAll('.lnav-item');
-@@ -249,14 +327,14 @@ function filterProj(cat, btn) {
+@@ -258,14 +336,14 @@ function filterProj(cat, btn) {
  
  /* ── CALCULATOR ───────────────────────────── */
  const CALC_SERVICES = [
@@ -155,7 +155,7 @@ index b6b5e5c..8d4b658 100644
  const selectedCalc = new Set();
  try {
    const saved = JSON.parse(sessionStorage.getItem(ESTIMATE_STORAGE_KEY));
-@@ -300,7 +378,9 @@ function clearEstimate() {
+@@ -309,7 +387,9 @@ function clearEstimate() {
  }
  
  
@@ -166,7 +166,7 @@ index b6b5e5c..8d4b658 100644
  
  function renderCalcTiers(s, t) {
    const tiers = s.tiersKey ? t[s.tiersKey] : null;
-@@ -411,7 +491,7 @@ function initTilt() {
+@@ -420,7 +500,7 @@ function initTilt() {
  const EJ_PUBLIC  = '87_f2ZcU4pQ0LZlpc';
  const EJ_SERVICE = 'service_8xs6t0i';
  const EJ_TMPL    = 'template_u3fwuan';
@@ -175,7 +175,7 @@ index b6b5e5c..8d4b658 100644
  
  const leadSubmissions = new Map();
  let emailQueue = Promise.resolve();
-@@ -607,7 +687,7 @@ let leadChatOpen = false;
+@@ -616,7 +696,7 @@ let leadChatOpen = false;
  let leadChatStep = 'type';
  let leadChatData = {};
  let leadChatSubmitting = false;
@@ -184,7 +184,7 @@ index b6b5e5c..8d4b658 100644
  
  function saveLeadChatDraft() {
    const fields = { 'chat-note': 'note', 'chat-name': 'name', 'chat-contact': 'contact' };
-@@ -821,7 +901,6 @@ function initParallax() {
+@@ -830,7 +910,6 @@ function initParallax() {
  
  /* ── INIT ─────────────────────────────────── */
  document.addEventListener('DOMContentLoaded', () => {
@@ -192,7 +192,7 @@ index b6b5e5c..8d4b658 100644
    if (window.emailjs) emailjs.init({ publicKey: EJ_PUBLIC });
    initMenuBreakpoint();
    initProgress();
-@@ -833,6 +912,7 @@ document.addEventListener('DOMContentLoaded', () => {
+@@ -842,6 +921,7 @@ document.addEventListener('DOMContentLoaded', () => {
    initLeadChat();
    renderCalc();
    applyLang(currentLang);

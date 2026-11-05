@@ -65,6 +65,15 @@ function applyLang(lang, options = {}) {
   const ogTitle = document.querySelector('meta[property="og:title"]');
   if (ogTitle) ogTitle.content = pageKey === 'home' ? t.meta_home_og_title : (t[titleKey] || t.meta_home_og_title);
 
+  const metaValues = {
+    'og:description': t[descKey], 'og:locale': lang === 'ru' ? 'ru_RU' : 'en_US',
+    'twitter:title': t[titleKey], 'twitter:description': t[descKey]
+  };
+  Object.entries(metaValues).forEach(([name, value]) => {
+    const meta = document.querySelector('meta[property="' + name + '"],meta[name="' + name + '"]');
+    if (meta && value) meta.content = value;
+  });
+
   // Apply all data-i18n elements
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.dataset.i18n;

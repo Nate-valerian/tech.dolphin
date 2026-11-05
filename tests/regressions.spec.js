@@ -150,3 +150,15 @@ test('A9: analytics waits for permission and stops after withdrawal',async({page
  expect(await page.evaluate(()=>window.__commands.map(a=>a[1]))).toEqual(['destruct']);
  expect(await page.evaluate(()=>window.techDolphinAnalytics.isActive)).toBe(false);
 });
+
+for(const site of ['', 'netlify-abroad']) {
+ test('A10: initial content and translated metadata agree '+site,async({browser,page})=>{
+  const context=await browser.newContext({javaScriptEnabled:false});const plain=await context.newPage();await open(plain,site);
+  await expect(plain.locator('[data-i18n=hero_sub]')).toContainText(site?'We build':'Создаём');
+  const structured=JSON.parse(await plain.locator('script[type="application/ld+json"]').textContent());
+  expect(structured.url).toBe(site?'https://nate-web3.com':'https://techdolphin.ru');await context.close();
+  await open(page,site,'projects.html');await page.evaluate(()=>applyLang('en'));
+  expect(await page.locator('meta[property="og:description"]').getAttribute('content')).toMatch(/Real Tech Dolphin/);
+  expect(await page.locator('meta[name="twitter:title"]').getAttribute('content')).toBe(await page.title());
+ });
+}

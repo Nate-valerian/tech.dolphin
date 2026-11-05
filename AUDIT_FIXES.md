@@ -91,3 +91,14 @@ Banner and privacy wording now describe the actual behavior.
 
 Validation: fresh visit, declined reload, acceptance, and withdrawal passed
 with intercepted analytics requests; no production tracking was used.
+
+## A10 — Align domains, metadata, and initial language
+
+Fixed: the international canonical, hreflang, sitemap, structured data, and
+social assets use nate-web3.com. Both sites serve fully translated initial
+markup in their default language through a deterministic content renderer.
+Changing language also updates social descriptions, Twitter metadata, and
+Open Graph locale.
+
+Validation: JavaScript-disabled language and structured-data checks and
+runtime language/metadata checks pass for both site versions.
