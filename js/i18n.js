@@ -5,6 +5,8 @@
 
 const T = {
   ru: {
+    domstudio_before_label: 'До',
+    domstudio_after_label: 'После — видео',
     cookie_decline: 'Только необходимые',
     cookie_settings: 'Настройки cookie',
     estimate_title: 'Выбранный проект',
@@ -335,6 +337,8 @@ const T = {
   },
 
   en: {
+    domstudio_before_label: 'Before',
+    domstudio_after_label: 'After — video',
     cookie_decline: 'Essential only',
     cookie_settings: 'Cookie settings',
     estimate_title: 'Your selected project',

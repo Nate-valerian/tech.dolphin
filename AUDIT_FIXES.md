@@ -129,3 +129,11 @@ playback, and reduced motion also disables JavaScript tilt.
 
 Validation: hidden/off-screen sources stay unloaded, autoplay attributes are
 absent, and media/tilt respect reduced motion on both sites.
+
+## A14 — Complete visible translations
+
+Fixed: added the before/after project labels in Russian and English on both
+versions. Added a pretest translation check that validates every HTML binding
+and dictionary parity, including keys missing from both languages.
+
+Validation: all used keys and both dictionaries pass the completeness check.
