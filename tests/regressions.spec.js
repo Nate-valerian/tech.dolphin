@@ -162,3 +162,12 @@ for(const site of ['', 'netlify-abroad']) {
   expect(await page.locator('meta[name="twitter:title"]').getAttribute('content')).toBe(await page.title());
  });
 }
+
+test('A11: all Russian footer links fit a 320px viewport',async({page})=>{
+ await page.setViewportSize({width:320,height:568});
+ for(const site of ['', 'netlify-abroad'])for(const name of ['index.html','projects.html','pricing.html','faq.html','contact.html']){
+  await open(page,site,name);await page.evaluate(()=>applyLang('ru'));
+  const box=await page.locator('.footer-links').boundingBox();expect(box.x+box.width).toBeLessThanOrEqual(320);
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
+ }
+});

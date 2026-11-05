@@ -102,3 +102,10 @@ Open Graph locale.
 
 Validation: JavaScript-disabled language and structured-data checks and
 runtime language/metadata checks pass for both site versions.
+
+## A11 ? Fit narrow footer navigation
+
+Fixed: footer links wrap with sensible spacing within their available width.
+
+Validation: all ten pages in Russian fit a 320px viewport without horizontal
+overflow.

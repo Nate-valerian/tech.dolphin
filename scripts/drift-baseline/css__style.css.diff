@@ -1,5 +1,5 @@
 diff --git a/css/style.css b/netlify-abroad/css/style.css
-index 7212aaa..99d9a07 100644
+index 86370f9..52049dd 100644
 --- a/css/style.css
 +++ b/netlify-abroad/css/style.css
 @@ -209,6 +209,13 @@ img, video { display: block; }
