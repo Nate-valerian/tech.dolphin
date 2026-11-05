@@ -1,0 +1,5 @@
+# Netlify hosts the international version. The Russian site is packaged separately.
+[build]
+  base = "."
+  command = "npm run build:international"
+  publish = "dist-international"

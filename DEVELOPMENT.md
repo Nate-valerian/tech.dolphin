@@ -17,4 +17,8 @@ Sitemap dates follow changed page content, tracked in `config/content-dates.json
 
 Use `npm run package:all` for verified Russian and international deployment ZIPs. Packages include public files only and are checked by exact file name, length, and SHA-256 hash. Packaging does not publish either site.
 
+Netlify uses the root `netlify.toml`: base `.`, command `npm run build:international`, publish directory `dist-international`. The command rebuilds both regional outputs, checks them, then stages only the international public files. Staging runs in Node on Windows or Linux; it does not need the Windows ZIP tools. Never publish the repository root.
+
+For a manual Netlify upload, run `npm run package:international` on Windows and upload the resulting ZIP, or upload the contents of `dist-international` after `npm run build:international`. Both use the same public-file allowlist. These commands prepare files without deploying.
+
 The compatibility command `npm run check-drift -- --update` regenerates outputs from the canonical source. It no longer accepts arbitrary differences between hand-edited copies.

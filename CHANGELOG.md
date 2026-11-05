@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-11-05 — Correct the international Netlify publish output
+
+Added tracked Netlify settings that build and publish `dist-international`
+instead of the repository root. The portable Node staging command checks the
+generated sites and copies only international public files. Windows deployment
+ZIPs reuse that allowlist. Added a dedicated international packaging command
+and documented Git-based and manual Netlify workflows.
+
+Validation: the international build and four deployment/source regression
+tests pass, including a build with PowerShell unavailable and exact comparison
+of the staged international files. No site was published.
+
 ## 2026-11-05 — Complete the project audit fixes
 
 Addressed audit items A1–A17 in separate commits. Fixes cover enquiry delivery,

@@ -6,9 +6,11 @@
     "check-drift": "node scripts/check-drift.js",
     "package": "node scripts/package-deploy.js",
     "build": "node scripts/build.js",
+    "build:international": "node scripts/prepare-deploy.js --site international",
     "check-generated": "node scripts/build.js --check",
     "check": "node scripts/build.js --check && node scripts/check-site.js",
-    "package:all": "node scripts/package-deploy.js --all"
+    "package:all": "node scripts/package-deploy.js --all",
+    "package:international": "node scripts/package-deploy.js --site international"
   },
   "devDependencies": {
     "@playwright/test": "^1.60.0"
