@@ -590,12 +590,24 @@ function toggleLeadChat(force) {
   saveLeadChatDraft();
   leadChatOpen = typeof force === 'boolean' ? force : !leadChatOpen;
   panel.classList.toggle('open', leadChatOpen);
+  document.getElementById('lead-chat').classList.toggle('is-open', leadChatOpen);
+  updateLeadChatViewport();
   panel.setAttribute('aria-hidden', String(!leadChatOpen));
   if (leadChatOpen && !leadChatSubmitting) renderLeadChat();
 }
 
+function updateLeadChatViewport() {
+  const viewport = window.visualViewport;
+  document.documentElement.style.setProperty('--chat-visible-top', ((viewport?.offsetTop || 0) + 12) + 'px');
+  document.documentElement.style.setProperty('--chat-visible-height', Math.max(120, (viewport?.height || innerHeight) - 24) + 'px');
+}
+
 function initLeadChat() {
   if (!document.getElementById('lead-chat')) return;
+  updateLeadChatViewport();
+  window.addEventListener('resize', updateLeadChatViewport);
+  window.visualViewport?.addEventListener('resize', updateLeadChatViewport);
+  window.visualViewport?.addEventListener('scroll', updateLeadChatViewport);
   restoreLeadChatDraft();
   document.getElementById('lead-chat-body').addEventListener('input', saveLeadChatDraft);
   renderLeadChat();

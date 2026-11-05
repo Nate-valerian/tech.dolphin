@@ -82,3 +82,15 @@ for(const site of ['', 'netlify-abroad']) {
   expect(await page.evaluate(()=>scrollY)).toBeGreaterThan(1100);
  });
 }
+
+for(const site of ['', 'netlify-abroad']) {
+ test('A5: brief fits short and keyboard-sized viewports '+site,async({page})=>{
+  await page.setViewportSize({width:320,height:568});await open(page,site);await page.locator('#lead-chat-toggle').click();
+  for(const height of [568,300]) {
+   await page.setViewportSize({width:320,height});
+   await expect.poll(()=>page.locator('#lead-chat-panel').evaluate(el=>{const r=el.getBoundingClientRect();return r.top>=0 && r.bottom<=innerHeight;})).toBe(true);
+   const close=page.locator('.lead-chat-close');await expect(close).toBeInViewport();
+  }
+  await page.locator('.lead-chat-close').click();await expect(page.locator('#lead-chat-panel')).toBeHidden();
+ });
+}

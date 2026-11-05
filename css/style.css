@@ -1801,3 +1801,13 @@ footer { border-top: 1px solid var(--border); padding: 32px 24px; max-width: 110
  .nav-links > a, .nav-links > button { flex-shrink: 0; }
  .nav-mobile-contacts a { white-space: normal; overflow-wrap: anywhere; min-width: 0; font-size: 15px; line-height: 1.5; padding: 10px 16px; display: flex; align-items: center; justify-content: center; gap: 8px; }
 }
+
+/* The brief fits the visible viewport, including when a keyboard opens. */
+.lead-chat.is-open { z-index: 10000; }
+.lead-chat-panel { max-height: min(650px, var(--chat-visible-height, calc(100dvh - 24px))); }
+.lead-chat-panel.open { display: flex; flex-direction: column; }
+.lead-chat-head { flex: 0 0 auto; }
+.lead-chat-body { min-height: 0; max-height: none; overflow-y: auto; overscroll-behavior: contain; }
+@media(max-width:768px) {
+ .lead-chat-panel { position: fixed; top: var(--chat-visible-top, 12px); bottom: auto; right: 12px; width: calc(100vw - 24px); }
+}

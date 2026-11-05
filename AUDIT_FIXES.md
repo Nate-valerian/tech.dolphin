@@ -40,3 +40,12 @@ the menu. Scroll locking is guarded, and Escape outside a menu does not jump
 to the top.
 
 Validation: both sites pass 320px close/scroll and desktop resize regressions.
+
+## A5 — Fit the brief to short screens
+
+Fixed: mobile briefs use a sheet constrained to the visual viewport, with a
+fixed header and a scrolling body. Visual viewport resize/scroll updates keep
+controls visible when the keyboard opens. The open sheet sits above the
+cookie notice, with an accessible close control.
+
+Validation: 320px-wide, 568px and 300px-high viewport checks pass on both sites.
