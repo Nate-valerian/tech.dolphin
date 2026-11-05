@@ -1,8 +1,8 @@
 diff --git a/js/i18n.js b/netlify-abroad/js/i18n.js
-index 76a4c45..d91c60b 100644
+index 6f456a1..4a3a24c 100644
 --- a/js/i18n.js
 +++ b/netlify-abroad/js/i18n.js
-@@ -33,10 +33,10 @@ const T = {
+@@ -35,10 +35,10 @@ const T = {
      chat_type_3d: '3D / видео',
      chat_type_unsure: 'Пока не знаю',
      chat_q_budget: 'Какой бюджет комфортен?',
@@ -17,7 +17,7 @@ index 76a4c45..d91c60b 100644
      chat_q_timeline: 'Когда хотите стартовать?',
      chat_timeline_now: 'Сейчас',
      chat_timeline_month: 'В этом месяце',
-@@ -53,12 +53,12 @@ const T = {
+@@ -55,12 +55,12 @@ const T = {
      chat_error: 'Не получилось отправить. Попробуйте ещё раз или напишите нам напрямую.',
      chat_reset: 'Заполнить заново',
      meta_home_title: 'Разработка сайтов, приложений и AI продуктов | Tech Dolphin',
@@ -33,7 +33,7 @@ index 76a4c45..d91c60b 100644
      meta_faq_title: 'Вопросы и ответы | Tech Dolphin',
      meta_faq_desc: 'Ответы на частые вопросы о разработке сайтов, приложений и AI продуктов.',
      meta_contact_title: 'Контакт | Tech Dolphin',
-@@ -128,11 +128,6 @@ const T = {
+@@ -130,11 +130,6 @@ const T = {
      exp_scope_databases: 'Databases',
      exp_scope_cloud: 'Cloud / DevOps',
      exp_scope_infra: 'Production Infrastructure',
@@ -45,7 +45,7 @@ index 76a4c45..d91c60b 100644
  
      /* SERVICES */
      svc_label:    'Что мы делаем',
-@@ -254,7 +249,7 @@ const T = {
+@@ -256,7 +251,7 @@ const T = {
      faq_title:    'Всё что вы хотели',
      faq_title_em: 'спросить',
      faq1_q:'Сколько стоит сделать сайт или приложение?',
@@ -54,7 +54,7 @@ index 76a4c45..d91c60b 100644
      faq2_q:'Как долго делается проект?',
      faq2_a:'Простой сайт — от 1 недели. Мобильное приложение — от 3–4 недель. Сложная платформа — от 2 месяцев.',
      faq3_q:'Нужно ли мне разбираться в технологиях?',
-@@ -264,7 +259,7 @@ const T = {
+@@ -266,7 +261,7 @@ const T = {
      faq5_q:'Что такое AI продукт?',
      faq5_a:'Программа с искусственным интеллектом — чат-бот, голосовой помощник, система автоматизации.',
      faq6_q:'Работаете ли вы с клиентами из других городов?',
@@ -63,7 +63,7 @@ index 76a4c45..d91c60b 100644
      faq7_q:'Что будет после сдачи проекта?',
      faq7_a:'Остаёмся на связи. Поможем с поддержкой, обновлениями и любыми вопросами.',
  
-@@ -294,7 +289,7 @@ const T = {
+@@ -296,7 +291,7 @@ const T = {
      ct_success:  '✅ Заявка отправлена! Мы свяжемся с вами в ближайшее время.',
      ct_consent:  'Нажимая кнопку, вы соглашаетесь с',
      ct_privacy:  'политикой конфиденциальности',
@@ -71,8 +71,8 @@ index 76a4c45..d91c60b 100644
 +    ct_note:     'Свяжитесь с нами по телефону, WhatsApp, SMS или электронной почте.',
  
      /* COOKIE */
-     cookie_text: '🍪 Мы используем файлы cookie. Продолжая использование, вы соглашаетесь с нашей',
-@@ -302,8 +297,8 @@ const T = {
+     cookie_text: 'Хранилище нужно для настроек и черновиков. Разрешить необязательную аналитику? Подробнее — в',
+@@ -304,8 +299,8 @@ const T = {
      cookie_btn:  'Принять',
  
      /* FOOTER */
@@ -83,7 +83,7 @@ index 76a4c45..d91c60b 100644
      city_moscow: 'Москва',
      city_spb: 'Санкт-Петербург',
      city_novosibirsk: 'Новосибирск',
-@@ -324,12 +319,12 @@ const T = {
+@@ -326,12 +321,12 @@ const T = {
      /* PRIVACY */
      privacy_label: 'Документы',
      privacy_title: 'Политика конфиденциальности',
@@ -92,15 +92,14 @@ index 76a4c45..d91c60b 100644
      privacy_p2: '<strong style="color:var(--white);">2. Какие данные мы собираем.</strong> Имя, телефон, email — только при добровольном заполнении форм.',
      privacy_p3: '<strong style="color:var(--white);">3. Цель сбора данных.</strong> Исключительно для связи с вами. Не передаём третьим лицам.',
 -    privacy_p4: '<strong style="color:var(--white);">4. Защита данных.</strong> В соответствии с ФЗ №152 «О персональных данных».',
--    privacy_p5: '<strong style="color:var(--white);">5. Cookie и аналитика.</strong> Сайт может использовать сервисы веб-аналитики, включая Яндекс Метрику, чтобы понимать посещаемость, клики, время на сайте и события форм. Cookie можно отключить в настройках браузера.',
--    privacy_p6: '<strong style="color:var(--white);">6. Контакты.</strong> <a href="mailto:m.moleva@mail.ru" style="color:var(--cyan);">m.moleva@mail.ru</a> · <a href="tel:+79653932841" style="color:var(--cyan);">+7 (965) 393-28-41</a>',
 +    privacy_p4: '<strong style="color:var(--white);">4. Защита данных.</strong> Мы применяем разумные меры защиты переданных контактных данных и информации о проекте.',
-+    privacy_p5: '<strong style="color:var(--white);">5. Cookie и аналитика.</strong> Сайт может использовать сервисы веб-аналитики, включая базовую аналитику, чтобы понимать посещаемость, клики, время на сайте и события форм. Cookie можно отключить в настройках браузера.',
+     privacy_p5: '<strong style="color:var(--white);">5. Хранилище и аналитика.</strong> Настройки и черновики хранятся в браузере. Необязательная аналитика включается только с вашего разрешения. Изменить выбор можно через настройки cookie.',
+-    privacy_p6: '<strong style="color:var(--white);">6. Контакты.</strong> <a href="mailto:m.moleva@mail.ru" style="color:var(--cyan);">m.moleva@mail.ru</a> · <a href="tel:+79653932841" style="color:var(--cyan);">+7 (965) 393-28-41</a>',
 +    privacy_p6: '<strong style="color:var(--white);">6. Контакты.</strong> <a href="mailto:n.nate1544@gmail.com" style="color:var(--cyan);">n.nate1544@gmail.com</a> · <a href="tel:+19725598555" style="color:var(--cyan);">+1 972 559 8555</a>',
    },
  
    en: {
-@@ -346,7 +341,7 @@ const T = {
+@@ -350,7 +345,7 @@ const T = {
      nav_faq:     'FAQ',
      nav_how:     'Process',
      nav_contact: 'Contact',
@@ -109,7 +108,7 @@ index 76a4c45..d91c60b 100644
      nav_cta:     'Start a Project →',
      menu_label:  'Menu',
      chat_toggle: 'Quick Brief',
-@@ -360,10 +355,10 @@ const T = {
+@@ -364,10 +359,10 @@ const T = {
      chat_type_3d: '3D / video',
      chat_type_unsure: 'Not sure yet',
      chat_q_budget: 'What budget feels comfortable?',
@@ -124,7 +123,7 @@ index 76a4c45..d91c60b 100644
      chat_q_timeline: 'When do you want to start?',
      chat_timeline_now: 'Now',
      chat_timeline_month: 'This month',
-@@ -380,16 +375,16 @@ const T = {
+@@ -384,16 +379,16 @@ const T = {
      chat_error: 'Could not send it. Please try again or contact us directly.',
      chat_reset: 'Start again',
      meta_home_title: 'Website, App and AI Product Development | Tech Dolphin',
@@ -146,7 +145,7 @@ index 76a4c45..d91c60b 100644
  
      lnav_home:    'Home',
      lnav_about:   'About',
-@@ -405,10 +400,10 @@ const T = {
+@@ -409,10 +404,10 @@ const T = {
      badge1: 'Available for new projects',
      badge2: '3x Faster',
      badge3: 'Premium Value',
@@ -161,7 +160,7 @@ index 76a4c45..d91c60b 100644
      hero_sub: 'We build websites, apps, and AI systems that help your business respond, decide, and operate faster.',
      hero_btn1: 'Start a Project',
      hero_btn2: 'View Our Work',
-@@ -451,11 +446,6 @@ const T = {
+@@ -455,11 +450,6 @@ const T = {
      exp_scope_databases: 'Databases',
      exp_scope_cloud: 'Cloud / DevOps',
      exp_scope_infra: 'Production Infrastructure',
@@ -173,7 +172,7 @@ index 76a4c45..d91c60b 100644
  
      svc_label:    'What We Do',
      svc_title:    'Our',
-@@ -572,7 +562,7 @@ const T = {
+@@ -576,7 +566,7 @@ const T = {
      faq_title:    'Everything you wanted',
      faq_title_em: 'to ask',
      faq1_q:'How much does a website or app cost?',
@@ -182,7 +181,7 @@ index 76a4c45..d91c60b 100644
      faq2_q:'How long does a project take?',
      faq2_a:'A simple site — from 1 week. A mobile app — from 3–4 weeks. A complex platform — from 2 months.',
      faq3_q:'Do I need to understand technology?',
-@@ -582,7 +572,7 @@ const T = {
+@@ -586,7 +576,7 @@ const T = {
      faq5_q:'What is an AI product?',
      faq5_a:'Software with artificial intelligence — a chatbot, voice assistant, or automation system.',
      faq6_q:'Do you work with international clients?',
@@ -191,14 +190,14 @@ index 76a4c45..d91c60b 100644
      faq7_q:'What happens after the project is delivered?',
      faq7_a:'We stay in touch. We help with support, updates and any questions.',
  
-@@ -610,39 +600,39 @@ const T = {
+@@ -614,39 +604,39 @@ const T = {
      ct_success:  '✅ Request sent! We will get in touch shortly.',
      ct_consent:  'By clicking you agree to our',
      ct_privacy:  'privacy policy',
 -    ct_note:     '* Telegram and WhatsApp may be unstable in Russia',
 +    ct_note:     'International contacts: 📞 USA Phone, 🟢 WhatsApp USA, 💬 USA SMS, and 🟢 WhatsApp Turkiye.',
  
-     cookie_text: '🍪 We use cookies to improve your experience. By continuing you agree to our',
+     cookie_text: 'Storage keeps your settings and drafts. Allow optional analytics? Learn more in our',
      cookie_link: 'privacy policy',
      cookie_btn:  'Accept',
  
@@ -245,15 +244,14 @@ index 76a4c45..d91c60b 100644
      privacy_p2: '<strong style="color:var(--white);">2. Data we collect.</strong> Name, phone and email — only when you voluntarily submit a form.',
      privacy_p3: '<strong style="color:var(--white);">3. Purpose of data collection.</strong> Only to contact you. We do not share it with third parties.',
 -    privacy_p4: '<strong style="color:var(--white);">4. Data protection.</strong> Processed in accordance with Russian Federal Law No. 152-FZ on personal data.',
--    privacy_p5: '<strong style="color:var(--white);">5. Cookies and analytics.</strong> The site may use web analytics services, including Yandex Metrica, to understand visits, clicks, time on site, and form events. You can disable cookies in your browser settings.',
--    privacy_p6: '<strong style="color:var(--white);">6. Contacts.</strong> <a href="mailto:m.moleva@mail.ru" style="color:var(--cyan);">m.moleva@mail.ru</a> · <a href="tel:+79653932841" style="color:var(--cyan);">+7 (965) 393-28-41</a>',
 +    privacy_p4: '<strong style="color:var(--white);">4. Data protection.</strong> We use reasonable safeguards to protect submitted contact details and project information.',
-+    privacy_p5: '<strong style="color:var(--white);">5. Cookies and analytics.</strong> The site may use basic cookies and analytics to understand visits, clicks, time on site, and form events. You can disable cookies in your browser settings.',
+     privacy_p5: '<strong style="color:var(--white);">5. Storage and analytics.</strong> Settings and drafts are stored in your browser. Optional analytics runs only with your permission. You can change your choice in Cookie settings.',
+-    privacy_p6: '<strong style="color:var(--white);">6. Contacts.</strong> <a href="mailto:m.moleva@mail.ru" style="color:var(--cyan);">m.moleva@mail.ru</a> · <a href="tel:+79653932841" style="color:var(--cyan);">+7 (965) 393-28-41</a>',
 +    privacy_p6: '<strong style="color:var(--white);">6. Contacts.</strong> 📞 USA Phone: <a href="tel:+19725598555" style="color:var(--cyan);">+1 972 559 8555</a> · 🟢 WhatsApp USA: <a href="https://wa.me/19725598555" style="color:var(--cyan);">message us</a> · 💬 USA SMS: <a href="sms:+19725598555" style="color:var(--cyan);">text us</a> · 🟢 WhatsApp Turkiye: <a href="https://wa.me/905438762750" style="color:var(--cyan);">+90 543 876 2750</a> · <a href="mailto:n.nate1544@gmail.com" style="color:var(--cyan);">n.nate1544@gmail.com</a>',
    }
  };
  
-@@ -656,20 +646,6 @@ const T_PROJ = {
+@@ -660,20 +650,6 @@ const T_PROJ = {
      proj_page_t1:  'Реальные продукты',
      proj_page_t2:  'которые мы создали',
      proj_page_sub: 'От мобильных приложений до веб-платформ — каждый проект собран под конкретную задачу, аудиторию и сценарий использования.',
@@ -274,7 +272,7 @@ index 76a4c45..d91c60b 100644
      domstudio_section: 'DomStudio — AI-фотостудия товаров',
      domstudio_tag: 'SaaS · Маркетплейсы · AI',
      domstudio_status: 'Live продукт · 2026',
-@@ -746,20 +722,6 @@ const T_PROJ = {
+@@ -750,20 +726,6 @@ const T_PROJ = {
      proj_page_t1:  'Real Products',
      proj_page_t2:  'we have built',
      proj_page_sub: 'From mobile apps to web platforms — every project is shaped around a clear task, audience, and user scenario.',

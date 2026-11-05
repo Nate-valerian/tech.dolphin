@@ -69,3 +69,10 @@ Also configure `brief_open`, `brief_step`, `brief_form_start`,
 so dynamically created brief forms are tracked. `fast_submit` is captured
 before delivery starts. Brief text and personal contact fields are not sent
 as event parameters.
+
+## Permission
+
+The counter loads only when `td_analytics_consent` is `accepted`. Essential-only
+choice prevents loading. Footer Cookie settings lets visitors change their
+choice; withdrawal uses `ym(counterId, "destruct")` and blocks further goals.
+Existing `cookieAccepted` values are not treated as analytics permission.

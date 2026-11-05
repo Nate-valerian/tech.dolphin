@@ -137,3 +137,16 @@ test('A8: contact CTA, dynamic brief and send-time flags are tracked',async({pag
  for(const name of ['brief_open','brief_form_start','brief_form_attempt','brief_form_success'])expect(goals.some(a=>a[2]===name)).toBe(true);
  expect(goals.find(a=>a[2]==='brief_form_success')[3].fast_submit).toBe(true);
 });
+
+test('A9: analytics waits for permission and stops after withdrawal',async({page})=>{
+ const requests=[];page.on('request',request=>{if(request.url().includes('mc.yandex.ru'))requests.push(request.url());});
+ await open(page,'','contact.html');expect(requests).toHaveLength(0);
+ await page.locator('#cookie-decline').click();await page.reload();expect(requests).toHaveLength(0);
+ await page.locator('.cookie-settings').click();await page.locator('#cookie-btn').click();
+ await expect.poll(()=>requests.length).toBe(1);await expect.poll(()=>page.evaluate(()=>window.techDolphinAnalytics.isActive)).toBe(true);
+ await page.evaluate(()=>{window.__commands=[];window.ym=(...args)=>window.__commands.push(args)});
+ await page.locator('.cookie-settings').click();await page.locator('#cookie-decline').click();
+ await page.evaluate(()=>window.techDolphinAnalytics.track('contactCtaClick'));
+ expect(await page.evaluate(()=>window.__commands.map(a=>a[1]))).toEqual(['destruct']);
+ expect(await page.evaluate(()=>window.techDolphinAnalytics.isActive)).toBe(false);
+});

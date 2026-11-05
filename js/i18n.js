@@ -5,6 +5,8 @@
 
 const T = {
   ru: {
+    cookie_decline: 'Только необходимые',
+    cookie_settings: 'Настройки cookie',
     estimate_title: 'Выбранный проект',
     estimate_edit: 'Изменить услуги',
     estimate_clear: 'Убрать расчёт',
@@ -297,7 +299,7 @@ const T = {
     ct_note:     '* Telegram и WhatsApp могут работать нестабильно на территории России',
 
     /* COOKIE */
-    cookie_text: '🍪 Мы используем файлы cookie. Продолжая использование, вы соглашаетесь с нашей',
+    cookie_text: 'Хранилище нужно для настроек и черновиков. Разрешить необязательную аналитику? Подробнее — в',
     cookie_link: 'политикой конфиденциальности',
     cookie_btn:  'Принять',
 
@@ -328,11 +330,13 @@ const T = {
     privacy_p2: '<strong style="color:var(--white);">2. Какие данные мы собираем.</strong> Имя, телефон, email — только при добровольном заполнении форм.',
     privacy_p3: '<strong style="color:var(--white);">3. Цель сбора данных.</strong> Исключительно для связи с вами. Не передаём третьим лицам.',
     privacy_p4: '<strong style="color:var(--white);">4. Защита данных.</strong> В соответствии с ФЗ №152 «О персональных данных».',
-    privacy_p5: '<strong style="color:var(--white);">5. Cookie и аналитика.</strong> Сайт может использовать сервисы веб-аналитики, включая Яндекс Метрику, чтобы понимать посещаемость, клики, время на сайте и события форм. Cookie можно отключить в настройках браузера.',
+    privacy_p5: '<strong style="color:var(--white);">5. Хранилище и аналитика.</strong> Настройки и черновики хранятся в браузере. Необязательная аналитика включается только с вашего разрешения. Изменить выбор можно через настройки cookie.',
     privacy_p6: '<strong style="color:var(--white);">6. Контакты.</strong> <a href="mailto:m.moleva@mail.ru" style="color:var(--cyan);">m.moleva@mail.ru</a> · <a href="tel:+79653932841" style="color:var(--cyan);">+7 (965) 393-28-41</a>',
   },
 
   en: {
+    cookie_decline: 'Essential only',
+    cookie_settings: 'Cookie settings',
     estimate_title: 'Your selected project',
     estimate_edit: 'Edit services',
     estimate_clear: 'Clear estimate',
@@ -612,7 +616,7 @@ const T = {
     ct_privacy:  'privacy policy',
     ct_note:     '* Telegram and WhatsApp may be unstable in Russia',
 
-    cookie_text: '🍪 We use cookies to improve your experience. By continuing you agree to our',
+    cookie_text: 'Storage keeps your settings and drafts. Allow optional analytics? Learn more in our',
     cookie_link: 'privacy policy',
     cookie_btn:  'Accept',
 
@@ -641,7 +645,7 @@ const T = {
     privacy_p2: '<strong style="color:var(--white);">2. Data we collect.</strong> Name, phone and email — only when you voluntarily submit a form.',
     privacy_p3: '<strong style="color:var(--white);">3. Purpose of data collection.</strong> Only to contact you. We do not share it with third parties.',
     privacy_p4: '<strong style="color:var(--white);">4. Data protection.</strong> Processed in accordance with Russian Federal Law No. 152-FZ on personal data.',
-    privacy_p5: '<strong style="color:var(--white);">5. Cookies and analytics.</strong> The site may use web analytics services, including Yandex Metrica, to understand visits, clicks, time on site, and form events. You can disable cookies in your browser settings.',
+    privacy_p5: '<strong style="color:var(--white);">5. Storage and analytics.</strong> Settings and drafts are stored in your browser. Optional analytics runs only with your permission. You can change your choice in Cookie settings.',
     privacy_p6: '<strong style="color:var(--white);">6. Contacts.</strong> <a href="mailto:m.moleva@mail.ru" style="color:var(--cyan);">m.moleva@mail.ru</a> · <a href="tel:+79653932841" style="color:var(--cyan);">+7 (965) 393-28-41</a>',
   }
 };

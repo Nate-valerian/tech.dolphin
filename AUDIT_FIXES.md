@@ -80,3 +80,14 @@ and personal contact values are not included in analytics events.
 
 Validation: primary CTA and dynamic brief goals, plus a delayed delivery with
 a genuinely fast submission, pass with a mocked analytics counter.
+
+## A9 — Make analytics permission functional
+
+Fixed: optional analytics is neither loaded nor called before acceptance.
+Visitors can choose essential storage only, reopen settings in the footer,
+and withdraw permission. Withdrawal calls the documented Metrica destruct
+method and stops subsequent goals. Removed unconditional noscript beacons.
+Banner and privacy wording now describe the actual behavior.
+
+Validation: fresh visit, declined reload, acceptance, and withdrawal passed
+with intercepted analytics requests; no production tracking was used.

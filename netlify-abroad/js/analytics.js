@@ -2,6 +2,10 @@
   const config = window.TechDolphinAnalyticsConfig || {};
   const counterId = Number(config.yandexMetricaId);
   const isEnabled = Number.isFinite(counterId) && counterId > 0;
+  let consent = null;
+  try { consent = localStorage.getItem('td_analytics_consent'); } catch (_) {}
+  let counterActive = false;
+  let sdkReady = false;
   const goals = {
     callbackFormStart:'callback_form_start', callbackFormAttempt:'callback_form_attempt', callbackFormSuccess:'callback_form_success', callbackFormError:'callback_form_error',
     contactFormStart:'contact_form_start', contactFormAttempt:'contact_form_attempt', contactFormSuccess:'contact_form_success', contactFormError:'contact_form_error',
@@ -10,21 +14,37 @@
     emailClick:'email_click', phoneClick:'phone_click', maxClick:'max_click', telegramClick:'telegram_click', whatsappClick:'whatsapp_click', contactCtaClick:'contact_cta_click',
     ...(config.goals || {})
   };
+  function startCounter() {
+    if (consent !== 'accepted' || !isEnabled || counterActive) return;
+    window.ym(counterId, 'init', { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, referrer:document.referrer, url:location.href });
+    counterActive = true;
+  }
   function loadYandexMetrica() {
-    if (!isEnabled || window.ym) return;
+    if (consent !== 'accepted' || !isEnabled || counterActive) return;
+    const script = document.querySelector('script[data-td-metrica]');
+    if (window.ym && (!script || sdkReady)) { startCounter(); return; }
+    if (script) return;
     window.ym = function () { (window.ym.a = window.ym.a || []).push(arguments); };
     window.ym.l = Date.now();
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://mc.yandex.ru/metrika/tag.js?id=' + counterId;
-    document.head.appendChild(script);
-    window.ym(counterId, 'init', { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, referrer:document.referrer, url:location.href });
+    const tag = document.createElement('script');
+    tag.async = true;
+    tag.dataset.tdMetrica = 'true';
+    tag.src = 'https://mc.yandex.ru/metrika/tag.js?id=' + counterId;
+    tag.onload = () => { sdkReady = true; startCounter(); };
+    document.head.appendChild(tag);
+  }
+  function setConsent(choice) {
+    if (!['accepted','declined'].includes(choice)) return;
+    consent = choice;
+    try { localStorage.setItem('td_analytics_consent', choice); } catch (_) {}
+    if (choice === 'accepted') loadYandexMetrica();
+    else if (counterActive) { window.ym?.(counterId, 'destruct'); counterActive = false; }
   }
   function track(name, params = {}) {
     const target = goals[name] || name;
     const details = { page:location.pathname, ...params };
-    if (isEnabled && window.ym) window.ym(counterId, 'reachGoal', target, details);
-    if (config.debug) console.info('[analytics]', target, details);
+    if (consent === 'accepted' && counterActive && window.ym) window.ym(counterId, 'reachGoal', target, details);
+    if (consent === 'accepted' && config.debug) console.info('[analytics]', target, details);
   }
   function prefix(form) {
     return ({'cb-form':'callbackForm','ct-form':'contactForm','chat-contact-form':'chatForm'})[form?.id] || '';
@@ -56,7 +76,9 @@
     if (link.hasAttribute('data-contact-cta')) track('contactCtaClick', { source:link.id || (link.classList.contains('nav-cta') ? 'navigation' : 'page') });
   });
   window.techDolphinAnalytics = {
-    isEnabled, counterId:isEnabled ? counterId : null, track,
+    isEnabled, counterId:isEnabled ? counterId : null, track, setConsent,
+    get consent() { return consent; },
+    get isActive() { return counterActive; },
     trackLeadResult(formId, status, params) {
       const name = prefix({id:formId});
       if (name) track(name + (status === 'success' ? 'Success' : 'Error'), {form_id:formId,...params});

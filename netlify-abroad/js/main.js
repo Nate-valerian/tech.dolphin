@@ -269,43 +269,29 @@ function initLeftNav() {
 }
 
 /* ── COOKIE ───────────────────────────────── */
+function openCookieSettings() {
+  const banner = document.getElementById('cookie-banner');
+  if (banner) { banner.style.display = 'flex'; document.getElementById('cookie-btn')?.focus({preventScroll:true}); }
+}
+
 function initCookie() {
   const banner = document.getElementById('cookie-banner');
   if (!banner) return;
-
-  if (localStorage.getItem('cookieAccepted')) {
-    banner.style.display = 'none';
-    return;
-  }
-
-  // The banner can be tall enough on narrow viewports to sit on top of the
-  // lead-chat launcher (it reflows to 2-3 lines below ~1023px). Its height
-  // varies with viewport width, text wrapping, and web-font load timing, so
-  // watch its actual rendered size instead of guessing fixed breakpoints or
-  // computing it once before fonts finish loading.
+  if (['accepted','declined'].includes(window.techDolphinAnalytics?.consent)) banner.style.display = 'none';
   const chat = document.querySelector('.lead-chat');
   function clearChatLauncher() {
-    if (!chat) return;
-    const overlap = window.innerWidth <= 1023;
-    chat.style.bottom = overlap ? `${banner.offsetHeight + 32}px` : '';
+    if (chat) chat.style.bottom = innerWidth <= 1023 && banner.offsetHeight ? (banner.offsetHeight + 32) + 'px' : '';
   }
-  let observer;
-  if (chat && window.ResizeObserver) {
-    observer = new ResizeObserver(clearChatLauncher);
-    observer.observe(banner);
-  } else {
-    clearChatLauncher();
-    window.addEventListener('resize', clearChatLauncher);
-  }
-
-  const btn = document.getElementById('cookie-btn');
-  if (btn) btn.addEventListener('click', () => {
-    localStorage.setItem('cookieAccepted', 'true');
+  if (window.ResizeObserver) new ResizeObserver(clearChatLauncher).observe(banner);
+  window.addEventListener('resize', clearChatLauncher);
+  clearChatLauncher();
+  function choose(choice) {
+    window.techDolphinAnalytics?.setConsent(choice);
     banner.style.display = 'none';
-    if (chat) chat.style.bottom = '';
-    if (observer) observer.disconnect();
-    window.removeEventListener('resize', clearChatLauncher);
-  });
+    clearChatLauncher();
+  }
+  document.getElementById('cookie-btn')?.addEventListener('click', () => choose('accepted'));
+  document.getElementById('cookie-decline')?.addEventListener('click', () => choose('declined'));
 }
 
 /* ── FAQ ──────────────────────────────────── */
