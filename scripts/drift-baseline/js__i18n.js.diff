@@ -1,5 +1,5 @@
 diff --git a/js/i18n.js b/netlify-abroad/js/i18n.js
-index c37b113..28764ff 100644
+index 729ce98..bc78fbe 100644
 --- a/js/i18n.js
 +++ b/netlify-abroad/js/i18n.js
 @@ -52,8 +52,8 @@ const T = {
@@ -89,7 +89,7 @@ index c37b113..28764ff 100644
 -    hero_t1: 'Premium websites, powerful apps,',
 -    hero_t2: 'and smart AI systems —',
 -    hero_t3: 'delivered 3x faster',
--    hero_t4: 'and 30% below market prices.',
+-    hero_t4: 'and built to help your business grow.',
 +    hero_t1: 'Premium websites, apps, and AI systems',
 +    hero_t2: 'built to launch fast, scale cleanly,',
 +    hero_t3: 'and feel polished from day one',

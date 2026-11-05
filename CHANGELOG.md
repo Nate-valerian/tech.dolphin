@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-11-05 — Give the headline a more positive tone
+
+Replaced the 30%-below-market comparison with "and built to help your
+business grow" and matching Russian wording. Updated the About message in
+both site copies to emphasize a fast launch, thoughtful work, and business
+growth. Refreshed translation asset versions and the drift baseline.
+
+Verified both languages on both sites at desktop and mobile widths (8 browser
+checks), with no remaining discount comparison or horizontal overflow.
+
 ## 2026-11-05 — Refine the site color palette
 
 Updated both the Russian site and `netlify-abroad/` with warm off-white
