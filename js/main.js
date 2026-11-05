@@ -3,13 +3,13 @@
    ═══════════════════════════════════════════ */
 
 /* ── LANGUAGE ─────────────────────────────── */
-let currentLang = localStorage.getItem('td_lang') || 'ru';
+let currentLang = tdStorage.get('local', 'td_lang') || 'ru';
 
 function applyLang(lang) {
   if (!T[lang]) lang = 'ru';
   saveLeadChatDraft();
   currentLang = lang;
-  localStorage.setItem('td_lang', lang);
+  tdStorage.set('local', 'td_lang', lang);
   document.documentElement.lang = lang;
 
   const t = T[lang];
@@ -268,14 +268,14 @@ const CALC_SERVICES = [
 const ESTIMATE_STORAGE_KEY = 'td_estimate_ru';
 const selectedCalc = new Set();
 try {
-  const saved = JSON.parse(sessionStorage.getItem(ESTIMATE_STORAGE_KEY));
+  const saved = JSON.parse(tdStorage.get('session', ESTIMATE_STORAGE_KEY));
   if (Array.isArray(saved?.services)) saved.services.forEach(id => { if (CALC_SERVICES.some(service => service.id === id)) selectedCalc.add(id); });
 } catch (_) {}
 
 function saveEstimate() {
   try {
-    if (!selectedCalc.size) sessionStorage.removeItem(ESTIMATE_STORAGE_KEY);
-    else sessionStorage.setItem(ESTIMATE_STORAGE_KEY, JSON.stringify({ services:[...selectedCalc] }));
+    if (!selectedCalc.size) tdStorage.remove('session', ESTIMATE_STORAGE_KEY);
+    else tdStorage.set('session', ESTIMATE_STORAGE_KEY, JSON.stringify({ services:[...selectedCalc] }));
   } catch (_) {}
 }
 
@@ -624,12 +624,12 @@ function saveLeadChatDraft() {
     const field = document.getElementById(id);
     if (field) leadChatData[key] = field.value;
   });
-  try { sessionStorage.setItem(BRIEF_STORAGE_KEY, JSON.stringify({ step: leadChatStep, data: leadChatData })); } catch (_) {}
+  try { tdStorage.set('session', BRIEF_STORAGE_KEY, JSON.stringify({ step: leadChatStep, data: leadChatData })); } catch (_) {}
 }
 
 function restoreLeadChatDraft() {
   try {
-    const draft = JSON.parse(sessionStorage.getItem(BRIEF_STORAGE_KEY));
+    const draft = JSON.parse(tdStorage.get('session', BRIEF_STORAGE_KEY));
     if (draft && [...CHAT_STEPS, 'note', 'contact', 'done'].includes(draft.step) && draft.data && typeof draft.data === 'object') {
       leadChatStep = draft.step;
       ['type','budget','timeline','note','name','contact'].forEach(key => {
@@ -681,7 +681,7 @@ function initLeadChat() {
 function resetLeadChat() {
   leadChatStep = 'type';
   leadChatData = {};
-  try { sessionStorage.removeItem(BRIEF_STORAGE_KEY); } catch (_) {}
+  try { tdStorage.remove('session', BRIEF_STORAGE_KEY); } catch (_) {}
   renderLeadChat();
 }
 
@@ -781,7 +781,7 @@ async function sendLeadChat(e) {
     leadChatSubmitting = false;
     leadChatStep = 'done';
     leadChatData = {};
-    try { sessionStorage.removeItem(BRIEF_STORAGE_KEY); } catch (_) {}
+    try { tdStorage.remove('session', BRIEF_STORAGE_KEY); } catch (_) {}
     renderLeadChat();
     return;
   }
@@ -806,7 +806,7 @@ async function sendLeadChat(e) {
     leadChatSubmitting = false;
     leadChatStep = 'done';
     leadChatData = {};
-    try { sessionStorage.removeItem(BRIEF_STORAGE_KEY); } catch (_) {}
+    try { tdStorage.remove('session', BRIEF_STORAGE_KEY); } catch (_) {}
     renderLeadChat();
   } catch (error) {
     window.techDolphinAnalytics?.trackLeadResult('chat-contact-form', 'error', { error_status:error?.status || 'unknown' });

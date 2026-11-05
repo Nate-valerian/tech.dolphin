@@ -3,7 +3,7 @@
   const counterId = Number(config.yandexMetricaId);
   const isEnabled = Number.isFinite(counterId) && counterId > 0;
   let consent = null;
-  try { consent = localStorage.getItem('td_analytics_consent'); } catch (_) {}
+  try { consent = tdStorage.get('local', 'td_analytics_consent'); } catch (_) {}
   let counterActive = false;
   let sdkReady = false;
   const goals = {
@@ -36,7 +36,7 @@
   function setConsent(choice) {
     if (!['accepted','declined'].includes(choice)) return;
     consent = choice;
-    try { localStorage.setItem('td_analytics_consent', choice); } catch (_) {}
+    try { tdStorage.set('local', 'td_analytics_consent', choice); } catch (_) {}
     if (choice === 'accepted') loadYandexMetrica();
     else if (counterActive) { window.ym?.(counterId, 'destruct'); counterActive = false; }
   }

@@ -171,3 +171,14 @@ test('A11: all Russian footer links fit a 320px viewport',async({page})=>{
   expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
  }
 });
+
+for(const site of ['', 'netlify-abroad']) {
+ test('A12: denied storage does not prevent enquiries or navigation '+site,async({page})=>{
+  const errors=[];page.on('pageerror',error=>errors.push(error.message));
+  await page.addInitScript(()=>{for(const key of ['localStorage','sessionStorage'])Object.defineProperty(window,key,{get(){throw new DOMException('Denied','SecurityError')}})});
+  await open(page,site,'contact.html');await page.evaluate(()=>toggleLang());
+  await page.setViewportSize({width:390,height:844});await page.locator('#nav-hamburger').click();await page.locator('.nav-close-btn').click();
+  await page.locator('#ct-name').fill('Storage denied');await page.locator('#ct-phone').fill('mock');await page.locator('#ct-form button[type=submit]').click();
+  await expect(page.locator('#ct-success')).toBeVisible();expect(errors).toEqual([]);
+ });
+}

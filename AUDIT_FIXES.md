@@ -109,3 +109,13 @@ Fixed: footer links wrap with sensible spacing within their available width.
 
 Validation: all ten pages in Russian fit a 320px viewport without horizontal
 overflow.
+
+## A12 — Graceful storage failure
+
+Fixed: language, drafts, estimates, and analytics choices use one guarded
+storage adapter. Access to the storage object itself is caught, and denied
+reads/writes fall back to memory so essential interactions continue.
+
+Validation: both sites complete navigation, language changes, and a mocked
+enquiry with localStorage and sessionStorage getters throwing SecurityError.
+Persistence across reloads remains unavailable when the browser denies it.

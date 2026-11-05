@@ -1,12 +1,12 @@
 diff --git a/js/main.js b/netlify-abroad/js/main.js
-index bae9366..b92be22 100644
+index d050b54..05b49e9 100644
 --- a/js/main.js
 +++ b/netlify-abroad/js/main.js
-@@ -3,13 +3,49 @@
+@@ -3,13 +3,36 @@
     ═══════════════════════════════════════════ */
  
  /* ── LANGUAGE ─────────────────────────────── */
--let currentLang = localStorage.getItem('td_lang') || 'ru';
+-let currentLang = tdStorage.get('local', 'td_lang') || 'ru';
 +const LANG_STORAGE_KEY = 'td_lang';
 +const LANG_MANUAL_KEY = 'td_lang_manual';
 +const LANG_GEO_SESSION_KEY = 'td_geo_lang';
@@ -15,48 +15,35 @@ index bae9366..b92be22 100644
 +  'https://get.geojs.io/v1/ip/country.json'
 +];
 +
-+function storageGet(storage, key) {
-+  try {
-+    return storage.getItem(key);
-+  } catch (error) {
-+    return null;
-+  }
-+}
-+
-+function storageSet(storage, key, value) {
-+  try {
-+    storage.setItem(key, value);
-+  } catch (error) {
-+    // Ignore storage failures in private browsing or locked-down browsers.
-+  }
-+}
++function storageGet(area, key) { return tdStorage.get(area, key); }
++function storageSet(area, key, value) { tdStorage.set(area, key, value); }
 +
 +function validLang(lang) {
 +  return T[lang] ? lang : null;
 +}
-+
-+function getManualLang() {
-+  if (storageGet(localStorage, LANG_MANUAL_KEY) !== 'true') return null;
-+  return validLang(storageGet(localStorage, LANG_STORAGE_KEY));
-+}
  
 -function applyLang(lang) {
 -  if (!T[lang]) lang = 'ru';
++function getManualLang() {
++  if (storageGet('local', LANG_MANUAL_KEY) !== 'true') return null;
++  return validLang(storageGet('local', LANG_STORAGE_KEY));
++}
++
 +let currentLang = getManualLang() || 'en';
 +
 +function applyLang(lang, options = {}) {
 +  if (!T[lang]) lang = 'en';
    saveLeadChatDraft();
    currentLang = lang;
--  localStorage.setItem('td_lang', lang);
+-  tdStorage.set('local', 'td_lang', lang);
 +  if (options.persist) {
-+    storageSet(localStorage, LANG_STORAGE_KEY, lang);
-+    storageSet(localStorage, LANG_MANUAL_KEY, 'true');
++    storageSet('local', LANG_STORAGE_KEY, lang);
++    storageSet('local', LANG_MANUAL_KEY, 'true');
 +  }
    document.documentElement.lang = lang;
  
    const t = T[lang];
-@@ -23,11 +59,11 @@ function applyLang(lang) {
+@@ -23,11 +46,11 @@ function applyLang(lang) {
                  : 'home';
    const titleKey = 'meta_' + pageKey + '_title';
    const descKey  = 'meta_' + pageKey + '_desc';
@@ -71,7 +58,7 @@ index bae9366..b92be22 100644
  
    const metaValues = {
      'og:description': t[descKey], 'og:locale': lang === 'ru' ? 'ru_RU' : 'en_US',
-@@ -71,7 +107,50 @@ function applyLang(lang) {
+@@ -71,7 +94,50 @@ function applyLang(lang) {
  }
  
  function toggleLang() {
@@ -108,11 +95,11 @@ index bae9366..b92be22 100644
 +}
 +
 +async function detectGeoLang() {
-+  const cached = validLang(storageGet(sessionStorage, LANG_GEO_SESSION_KEY));
++  const cached = validLang(storageGet('session', LANG_GEO_SESSION_KEY));
 +  if (cached) return cached;
 +  const country = await fetchCountryCode();
 +  const lang = country === 'RU' ? 'ru' : 'en';
-+  storageSet(sessionStorage, LANG_GEO_SESSION_KEY, lang);
++  storageSet('session', LANG_GEO_SESSION_KEY, lang);
 +  return lang;
 +}
 +
@@ -123,7 +110,7 @@ index bae9366..b92be22 100644
  }
  
  function _lockBodyScroll() {
-@@ -174,8 +253,7 @@ function initProgress() {
+@@ -174,8 +240,7 @@ function initProgress() {
  }
  
  /* ── LEFT NAV ─────────────────────────────── */
@@ -133,7 +120,7 @@ index bae9366..b92be22 100644
  
  function initLeftNav() {
    const items = document.querySelectorAll('.lnav-item');
-@@ -258,14 +336,14 @@ function filterProj(cat, btn) {
+@@ -258,14 +323,14 @@ function filterProj(cat, btn) {
  
  /* ── CALCULATOR ───────────────────────────── */
  const CALC_SERVICES = [
@@ -154,8 +141,8 @@ index bae9366..b92be22 100644
 +const ESTIMATE_STORAGE_KEY = 'td_estimate_international';
  const selectedCalc = new Set();
  try {
-   const saved = JSON.parse(sessionStorage.getItem(ESTIMATE_STORAGE_KEY));
-@@ -309,7 +387,9 @@ function clearEstimate() {
+   const saved = JSON.parse(tdStorage.get('session', ESTIMATE_STORAGE_KEY));
+@@ -309,7 +374,9 @@ function clearEstimate() {
  }
  
  
@@ -166,7 +153,7 @@ index bae9366..b92be22 100644
  
  function renderCalcTiers(s, t) {
    const tiers = s.tiersKey ? t[s.tiersKey] : null;
-@@ -420,7 +500,7 @@ function initTilt() {
+@@ -420,7 +487,7 @@ function initTilt() {
  const EJ_PUBLIC  = '87_f2ZcU4pQ0LZlpc';
  const EJ_SERVICE = 'service_8xs6t0i';
  const EJ_TMPL    = 'template_u3fwuan';
@@ -175,7 +162,7 @@ index bae9366..b92be22 100644
  
  const leadSubmissions = new Map();
  let emailQueue = Promise.resolve();
-@@ -616,7 +696,7 @@ let leadChatOpen = false;
+@@ -616,7 +683,7 @@ let leadChatOpen = false;
  let leadChatStep = 'type';
  let leadChatData = {};
  let leadChatSubmitting = false;
@@ -184,7 +171,7 @@ index bae9366..b92be22 100644
  
  function saveLeadChatDraft() {
    const fields = { 'chat-note': 'note', 'chat-name': 'name', 'chat-contact': 'contact' };
-@@ -830,7 +910,6 @@ function initParallax() {
+@@ -830,7 +897,6 @@ function initParallax() {
  
  /* ── INIT ─────────────────────────────────── */
  document.addEventListener('DOMContentLoaded', () => {
@@ -192,7 +179,7 @@ index bae9366..b92be22 100644
    if (window.emailjs) emailjs.init({ publicKey: EJ_PUBLIC });
    initMenuBreakpoint();
    initProgress();
-@@ -842,6 +921,7 @@ document.addEventListener('DOMContentLoaded', () => {
+@@ -842,6 +908,7 @@ document.addEventListener('DOMContentLoaded', () => {
    initLeadChat();
    renderCalc();
    applyLang(currentLang);
