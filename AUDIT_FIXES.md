@@ -137,3 +137,13 @@ versions. Added a pretest translation check that validates every HTML binding
 and dictionary parity, including keys missing from both languages.
 
 Validation: all used keys and both dictionaries pass the completeness check.
+
+## A15 — Package public files only
+
+Fixed: deployment uses an explicit list of public site inputs. Test files,
+internal reports, and changelogs are excluded. ZIP verification compares exact
+file names, detects duplicates, and checks every file length and SHA-256 hash.
+Removal of generated output is guarded to the expected project paths.
+
+Validation: a rebuilt archive passes the full hash check; regression cases
+reject missing hidden media, disguised names, modified bytes, and duplicates.

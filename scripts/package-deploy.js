@@ -1,111 +1,57 @@
 #!/usr/bin/env node
-/*
- * Builds dist/ as an exact copy of everything the live site needs, then
- * zips it for upload. Copies the whole repo minus a small exclude list
- * (rather than an include whitelist) so a new file never has to be
- * remembered separately here — the failure mode that once shipped a
- * deploy zip missing js/main.js and js/analytics.js.
- */
 const fs = require('fs');
 const path = require('path');
-const { execFileSync } = require('child_process');
-
+const crypto = require('crypto');
+const {execFileSync} = require('child_process');
 const ROOT = path.resolve(__dirname, '..');
 const DIST = path.join(ROOT, 'dist');
-
-const EXCLUDE = new Set([
-  'node_modules', '.git', '.netlify', 'dist', 'scripts',
-  'test-results', 'playwright-report',
-  'netlify-abroad',
-  'package.json', 'package-lock.json',
-  'email-form-smoke.spec.js', 'ANALYTICS.md', '.gitignore',
-]);
-
-const REQUIRED_FILES = [
-  'index.html', 'projects.html', 'contact.html', 'faq.html', 'pricing.html',
-  'robots.txt', 'sitemap.xml', 'site.webmanifest',
-  'yandex_3d97a29ea20ba61d.html',
-  'css/style.css',
-  'js/analytics.js', 'js/i18n.js', 'js/main.js',
-];
-
-function rmrf(target) {
-  fs.rmSync(target, { recursive: true, force: true });
+const INCLUDE = ['index.html','projects.html','pricing.html','faq.html','contact.html','robots.txt','sitemap.xml','site.webmanifest','yandex_3d97a29ea20ba61d.html','assets','css','js'];
+const REQUIRED_FILES = ['index.html','projects.html','pricing.html','faq.html','contact.html','robots.txt','sitemap.xml','site.webmanifest','yandex_3d97a29ea20ba61d.html','css/style.css','js/main.js','js/i18n.js','js/analytics.js','js/storage.js'];
+const quote = value => "'" + value.replace(/'/g,"''") + "'";
+function removeGenerated(target) {
+ const resolved=path.resolve(target);
+ const isZip=path.dirname(resolved)===ROOT && /^spaceweb-upload-tech-dolphin-\d{4}-\d{2}-\d{2}\.zip$/.test(path.basename(resolved));
+ if(resolved!==DIST && !isZip)throw new Error('Refusing to remove an unexpected generated path: '+resolved);
+ fs.rmSync(resolved,{recursive:true,force:true});
 }
-
+function listFiles(dir,base=dir) {
+ return fs.readdirSync(dir,{withFileTypes:true}).flatMap(entry=>{
+  const full=path.join(dir,entry.name);
+  return entry.isDirectory()?listFiles(full,base):[path.relative(base,full).split(path.sep).join('/')];
+ });
+}
+function validateArchive(actual,expected) {
+ const names=new Set(actual.map(entry=>entry.name));
+ if(names.size!==actual.length)throw new Error('Archive contains duplicate file names');
+ const wanted=new Map(expected.map(entry=>[entry.name,entry]));
+ for(const entry of actual){
+  const source=wanted.get(entry.name);
+  if(!source)throw new Error('Unexpected archive file: '+entry.name);
+  if(source.length!==entry.length || source.sha256!==entry.sha256)throw new Error('Archive content differs: '+entry.name);
+ }
+ for(const entry of expected)if(!names.has(entry.name))throw new Error('Missing archive file: '+entry.name);
+}
 function build() {
-  rmrf(DIST);
-  fs.mkdirSync(DIST, { recursive: true });
-
-  for (const entry of fs.readdirSync(ROOT)) {
-    if (EXCLUDE.has(entry) || entry.endsWith('.zip')) continue;
-    fs.cpSync(path.join(ROOT, entry), path.join(DIST, entry), { recursive: true });
-  }
-
-  // Some source files (several under assets/, apparently from an earlier
-  // sync/download tool) carry the Windows Hidden attribute. Compress-Archive
-  // respects -Force for files passed to it directly, but not for hidden
-  // files it discovers itself while recursing into a piped-in folder — so
-  // anything hidden and nested more than one level deep silently vanishes
-  // from the zip even though it's sitting right there in dist/. dist/ is a
-  // throwaway build output, so just strip the attribute here rather than
-  // fighting Compress-Archive's recursion behavior.
-  execFileSync('powershell.exe', [
-    '-NoProfile', '-Command',
-    `Get-ChildItem -Path '${DIST}' -Recurse -Force | ForEach-Object { $_.Attributes = $_.Attributes -band (-bnot [System.IO.FileAttributes]::Hidden) }`
-  ]);
+ removeGenerated(DIST);fs.mkdirSync(DIST,{recursive:true});
+ for(const entry of INCLUDE){
+  const source=path.join(ROOT,entry);
+  if(!fs.existsSync(source))throw new Error('Missing deploy input: '+entry);
+  fs.cpSync(source,path.join(DIST,entry),{recursive:true});
+ }
+ for(const required of REQUIRED_FILES)if(!fs.existsSync(path.join(DIST,required)))throw new Error('Missing deploy file: '+required);
+ execFileSync('powershell.exe',['-NoProfile','-Command','Get-ChildItem -LiteralPath '+quote(DIST)+' -Recurse -Force | ForEach-Object { $_.Attributes = $_.Attributes -band (-bnot [System.IO.FileAttributes]::Hidden) }']);
 }
-
-function listFilesRecursive(dir, base = dir) {
-  const out = [];
-  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    const full = path.join(dir, entry.name);
-    if (entry.isDirectory()) out.push(...listFilesRecursive(full, base));
-    else out.push(path.relative(base, full).split(path.sep).join('/'));
-  }
-  return out;
+function packageSite() {
+ build();
+ const zipPath=path.join(ROOT,'spaceweb-upload-tech-dolphin-'+new Date().toISOString().slice(0,10)+'.zip');
+ removeGenerated(zipPath);
+ execFileSync('powershell.exe',['-NoProfile','-Command','Get-ChildItem -LiteralPath '+quote(DIST)+' -Force | Compress-Archive -DestinationPath '+quote(zipPath)+' -Force']);
+ const command='Add-Type -AssemblyName System.IO.Compression.FileSystem; $archive=[System.IO.Compression.ZipFile]::OpenRead('+quote(zipPath)+'); try { $rows=@(foreach($entry in $archive.Entries) { if(-not $entry.Name) {continue}; $stream=$entry.Open(); $sha=[System.Security.Cryptography.SHA256]::Create(); try { [PSCustomObject]@{name=$entry.FullName.Replace([char]92,[char]47);length=$entry.Length;sha256=[BitConverter]::ToString($sha.ComputeHash($stream)).Replace("-", "").ToLowerInvariant()} } finally {$stream.Dispose();$sha.Dispose()} }); ConvertTo-Json -InputObject $rows -Compress } finally {$archive.Dispose()}';
+ const actual=JSON.parse(execFileSync('powershell.exe',['-NoProfile','-Command',command],{encoding:'utf8'}).replace(/^\uFEFF/,''));
+ const expected=listFiles(DIST).map(name=>{const bytes=fs.readFileSync(path.join(DIST,name));return {name,length:bytes.length,sha256:crypto.createHash('sha256').update(bytes).digest('hex')};});
+ validateArchive(actual,expected);
+ console.log('Verified '+expected.length+' exact file names and SHA-256 hashes: '+zipPath);
+ return zipPath;
 }
-
-function verify() {
-  const missing = REQUIRED_FILES.filter(f => !fs.existsSync(path.join(DIST, f)));
-  if (missing.length) {
-    throw new Error(`Deploy bundle is missing required files:\n  ${missing.join('\n  ')}`);
-  }
-}
-
-function zip() {
-  const zipName = `spaceweb-upload-tech-dolphin-${new Date().toISOString().slice(0, 10)}.zip`;
-  const zipPath = path.join(ROOT, zipName);
-  rmrf(zipPath);
-  // Get-ChildItem -Force (not a bare '*' glob) so top-level files with the
-  // Hidden attribute still get zipped. build() already stripped Hidden
-  // recursively, so this is now just belt-and-suspenders for the top level.
-  execFileSync('powershell.exe', [
-    '-NoProfile', '-Command',
-    `Get-ChildItem -Path '${DIST}' -Force | Compress-Archive -DestinationPath '${zipPath}' -Force`
-  ]);
-  return zipPath;
-}
-
-function verifyZip(zipPath) {
-  const listing = execFileSync('powershell.exe', [
-    '-NoProfile', '-Command',
-    `Add-Type -A System.IO.Compression.FileSystem; ` +
-    `[System.IO.Compression.ZipFile]::OpenRead('${zipPath}').Entries.FullName`
-  ]).toString();
-
-  // Check every file actually in dist/, not just REQUIRED_FILES — that
-  // narrower list is exactly what let assets/* silently go missing before,
-  // since no asset path was ever in it.
-  const expected = listFilesRecursive(DIST);
-  const missing = expected.filter(f => !listing.includes(f.replace(/\//g, '\\')) && !listing.includes(f));
-  if (missing.length) {
-    throw new Error(`Zip is missing files that dist/ has:\n  ${missing.join('\n  ')}`);
-  }
-}
-
-build();
-verify();
-const zipPath = zip();
-verifyZip(zipPath);
-console.log(`Deploy bundle verified and zipped: ${zipPath}`);
+if(require.main===module)packageSite();
+module.exports={packageSite,validateArchive,INCLUDE};
