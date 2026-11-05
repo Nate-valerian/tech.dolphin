@@ -1,42 +1,42 @@
 {
   "index.html": {
-    "hash": "af1d05a16ccb73f9821b20ab904c2bb1518e4312d0d38b72627ec16f19ca6d5a",
+    "hash": "3f02bd0e844bed613b7d31cf08bc953ddc8fb57f3d051fd6e784366496f7db5d",
     "date": "2026-11-05"
   },
   "projects.html": {
-    "hash": "fb20233343aa0ffa308e0783ae638edf20cbe87143626c10f3916c6f1ddfcd6c",
+    "hash": "c9bd4e61f2abfb813a3a923ef0ecef1bdacab9263a9d00935e025232d815dc80",
     "date": "2026-11-05"
   },
   "pricing.html": {
-    "hash": "14599c4fbd1c776ff0382a0866562a202bdafedcce8a1b6e8d7e91f71e5ede34",
+    "hash": "6d6eb29db92611d8ad96799fcbe61f8163321e40b9e093a589333e7888a5ef25",
     "date": "2026-11-05"
   },
   "faq.html": {
-    "hash": "e5fd7867dd566af9f66b7f531adf58d39ce8966d6016159affca73a4977adb1d",
+    "hash": "a2e60513f12f7246ffa13571f8ca03e6ceb31bcc80fd2c028b88f4629dc2291d",
     "date": "2026-11-05"
   },
   "contact.html": {
-    "hash": "21631449696f8411d7b3fe99595f91ce5ad90188138d4913c0754de6104807c6",
+    "hash": "b87ade8cbd2e578210a9d8c57dc657bef23dd7fe19ef582d23e96f402f46a69c",
     "date": "2026-11-05"
   },
   "netlify-abroad/index.html": {
-    "hash": "220b5d8f63c5545d96309d8a40799ed9a2c0a785bbea009e33ec5b540cb000da",
+    "hash": "c23c789776d528988a38ed4f6163642c0c4daca9a97106025a60be43fb1169d7",
     "date": "2026-11-05"
   },
   "netlify-abroad/projects.html": {
-    "hash": "ff113eeef3d9b8133d7a9269155ae4386e8afdb075117281c3765d74f1d31b57",
+    "hash": "101a77627b4cc237f9e95a34455e9ff58fd68d33f4c12a4652a44749a566eb87",
     "date": "2026-11-05"
   },
   "netlify-abroad/pricing.html": {
-    "hash": "da7d97b0875d0d0eaf95a7b55aa1f52c0b7e4392da3155b86aeacc6b2467fd35",
+    "hash": "3e45fc40b9fa71cd4e11bd5cf0f15e38c191aafbc6b4f4a2fb1aedfe86fe0441",
     "date": "2026-11-05"
   },
   "netlify-abroad/faq.html": {
-    "hash": "6a3e68e6984c3667ffbe3031599ae387e97ff567193556fbc2d298a0ba9b00eb",
+    "hash": "af5b2b8842d48b562e25e5c792df448d86dadcfe451d873cafc7af62f96b8222",
     "date": "2026-11-05"
   },
   "netlify-abroad/contact.html": {
-    "hash": "bba588b37932991c23c3d417d4d46b0f1e0623b6b721f8b258ef45f337db9023",
+    "hash": "8638ac3482a44bf9d0fd1734552ba7a0f3c9d4beb49b2895ab366faa93d9814d",
     "date": "2026-11-05"
   }
 }

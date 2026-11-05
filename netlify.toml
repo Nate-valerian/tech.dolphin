@@ -3,3 +3,7 @@
   base = "."
   command = "npm run build:international"
   publish = "dist-international"
+
+# Keep navigation, canonicals, and generated redirect targets in the same format.
+[build.processing.html]
+  pretty_urls = false

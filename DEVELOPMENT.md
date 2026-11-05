@@ -21,4 +21,6 @@ Netlify uses the root `netlify.toml`: base `.`, command `npm run build:internati
 
 For a manual Netlify upload, run `npm run package:international` on Windows and upload the resulting ZIP, or upload the contents of `dist-international` after `npm run build:international`. Both use the same public-file allowlist. These commands prepare files without deploying.
 
+International URL aliases are generated into `netlify-abroad/_redirects` and included in the publish folder and upload ZIP. `/pricing` and `/pricing/`, for example, redirect to the canonical `/pricing.html`, preserving query parameters. `netlify.toml` disables Pretty URLs to keep that format consistent; use the same setting for a manually configured Netlify site. Language-dependent metadata also recognizes clean URLs when a host serves them directly.
+
 The compatibility command `npm run check-drift -- --update` regenerates outputs from the canonical source. It no longer accepts arbitrary differences between hand-edited copies.

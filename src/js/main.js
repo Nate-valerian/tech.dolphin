@@ -45,12 +45,8 @@ function applyLang(lang, options = {}) {
   const t = T[lang];
 
   // Update per-page meta
-  const path = window.location.pathname;
-  const pageKey = path.endsWith('projects.html') ? 'projects'
-                : path.endsWith('pricing.html')  ? 'pricing'
-                : path.endsWith('faq.html')      ? 'faq'
-                : path.endsWith('contact.html')  ? 'contact'
-                : 'home';
+  const pageName = window.location.pathname.replace(/\/+$/, '').split('/').pop().replace(/\.html$/, '');
+  const pageKey = ['projects', 'pricing', 'faq', 'contact'].includes(pageName) ? pageName : 'home';
   const titleKey = 'meta_' + pageKey + '_title';
   const descKey  = 'meta_' + pageKey + '_desc';
   document.title = t[titleKey] || t.meta_home_title;

@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-11-05 — Repair international URL aliases and translated metadata
+
+Clean URLs such as `/projects` previously caused the language script to replace
+the page's title and social metadata with the homepage values. Page detection
+now accepts both clean URLs and `.html` URLs. Generated Netlify redirects bring
+clean and trailing-slash aliases to the existing canonical `.html` pages,
+preserving queries and keeping relative assets and navigation valid. Netlify's
+Pretty URLs setting is explicitly disabled to match that URL format.
+
+Validation: reproduced the metadata failure before the fix; browser regressions
+cover all four inner pages in both languages and all five page aliases with
+and without trailing slashes. Redirects ship only in the international output.
+All 37 tests pass. Both deployment ZIPs were rebuilt and verified by exact file
+name, size, and SHA-256 hash (42 files each). Changes remain local and committed.
+
 ## 2026-11-05 — Correct the international Netlify publish output
 
 Added tracked Netlify settings that build and publish `dist-international`
