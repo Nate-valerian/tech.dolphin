@@ -1,0 +1,16 @@
+<div class="lead-chat" id="lead-chat" aria-live="polite">
+  <button class="lead-chat-toggle" id="lead-chat-toggle" type="button" onclick="toggleLeadChat()" aria-label="Chat">
+    <span class="lead-chat-dot"></span>
+    <span data-i18n="chat_toggle">Быстрый бриф</span>
+  </button>
+  <div class="lead-chat-panel" id="lead-chat-panel" role="dialog" aria-labelledby="lead-chat-title" aria-hidden="true">
+    <div class="lead-chat-head">
+      <div>
+        <div class="lead-chat-kicker" data-i18n="chat_kicker">Tech Dolphin</div>
+        <div class="lead-chat-title" id="lead-chat-title" data-i18n="chat_title">Подберём формат проекта</div>
+      </div>
+      <button class="lead-chat-close" type="button" onclick="toggleLeadChat(false)" aria-label="Close">×</button>
+    </div>
+    <div class="lead-chat-body" id="lead-chat-body"></div>
+  </div>
+</div>

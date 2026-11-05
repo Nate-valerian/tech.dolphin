@@ -157,3 +157,47 @@ the headline and removed comparative-price language from the process FAQ.
 
 Validation: translated content renders successfully; all translation keys pass;
 sitemap generation is repeatable without changing unchanged-page dates.
+
+## A17 — One source and checks for both regions
+
+Fixed: both static sites are generated from shared page templates, navigation,
+footer, brief, CSS, and JavaScript. Regional identity, contacts, prices, currency,
+domain, and language defaults live in config/regions.json. Distinct portfolio
+selections are preserved as content fragments. Public media has one canonical
+source. Generated cache versions change with file contents.
+
+Replaced the accepted-diff snapshots with generated-output validation. Checks
+now enforce regional operator/currency/contact invariants, complete translations,
+local assets and fragments, labels, headings, and shared behavior. Added source
+reproducibility tests and documented the workflow in DEVELOPMENT.md.
+
+Validation: all 34 tests passed. A further 100 browser layout/language states
+passed without overflow, missing translations, local resource failures, or page
+errors. Both deployment archives passed exact-name, size, and SHA-256 checks
+(42 Russian files, 41 international files). The final navigation polish also
+passed targeted mobile and keyboard regressions.
+
+All 17 audit issues are addressed in separate commits. No real enquiries were
+sent, no account settings were changed, and the work has not been pushed or
+deployed. Browser validation used Chromium; production mailbox delivery and
+physical-device Safari behavior are not claimed as verified.
+
+## Commit index
+
+- 554abfc Fix A1: serialize lead delivery and handle partial success
+- 2a72ac9 Fix A2: keep international identity and currencies consistent
+- c13218a Fix A3: preserve enquiry drafts across chat and language changes
+- 377b044 Fix A4: recover mobile menus across viewport changes
+- 1297757 Fix A5: keep brief controls within the visual viewport
+- 126acf7 Fix A6: add native keyboard controls and accessible enquiry forms
+- 25dbd3a Fix A7: carry pricing selections into project enquiries
+- aeaa84f Fix A8: track complete enquiry journeys and submission timing
+- 3c0c186 Fix A9: honor analytics permission and withdrawal
+- 590aac0 Fix A10: align regional metadata and render translated initial HTML
+- 9605f97 Fix A11: wrap footer navigation on narrow screens
+- fadebff Fix A12: keep essential flows working without browser storage
+- 0d746e1 Fix A13: lazy-load previews and respect motion preferences
+- 3560ed5 Fix A14: complete project labels and validate translation coverage
+- b837628 Fix A15: package public assets and verify archive hashes
+- 92378d9 Fix A16: refresh editorial claims and generate accurate dates
+- A17: the commit containing this shared-source change.

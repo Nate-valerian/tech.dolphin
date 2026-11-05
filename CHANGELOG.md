@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-11-05 — Complete the project audit fixes
+
+Addressed audit items A1–A17 in separate commits. Fixes cover enquiry delivery,
+regional business details, draft preservation, responsive and keyboard access,
+connected estimates, analytics permission and tracking, metadata, storage
+fallbacks, media loading, translation coverage, deployment integrity, and dates.
+Both sites now build from shared templates, behavior, and explicit regional
+settings. See AUDIT_FIXES.md for the issue-by-issue validation and commit index,
+and DEVELOPMENT.md for the source and build workflow.
+
+All 34 tests and 100 browser layout/language states passed. Both deployment ZIPs
+were rebuilt and verified by file name, size, and SHA-256 hash. Changes remain
+local: committed, but not pushed or deployed.
+
 ## 2026-11-05 — Give the headline a more positive tone
 
 Replaced the 30%-below-market comparison with "and built to help your

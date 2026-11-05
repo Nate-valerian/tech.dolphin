@@ -2,9 +2,13 @@
   "private": true,
   "scripts": {
     "test": "playwright test",
-    "pretest": "node scripts/check-drift.js && node scripts/check-translations.js",
+    "pretest": "npm run check",
     "check-drift": "node scripts/check-drift.js",
-    "package": "node scripts/package-deploy.js"
+    "package": "node scripts/package-deploy.js",
+    "build": "node scripts/build.js",
+    "check-generated": "node scripts/build.js --check",
+    "check": "node scripts/build.js --check && node scripts/check-site.js",
+    "package:all": "node scripts/package-deploy.js --all"
   },
   "devDependencies": {
     "@playwright/test": "^1.60.0"

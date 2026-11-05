@@ -1,0 +1,288 @@
+[
+  {
+    "id": "ru",
+    "directory": ".",
+    "domain": "https://techdolphin.ru",
+    "language": "ru",
+    "geoLanguage": false,
+    "currency": "RUB",
+    "locale": "ru-RU",
+    "analyticsId": 109873573,
+    "operatorTokens": {
+      "ru": "Молева",
+      "en": "Moleva"
+    },
+    "leadRecipients": [
+      "n.nate1544@gmail.com",
+      "m.moleva@mail.ru"
+    ],
+    "prices": [
+      30000,
+      150000,
+      300000,
+      50000,
+      150000,
+      700000
+    ],
+    "contacts": [
+      {
+        "id": "phone",
+        "href": "tel:+79653932841",
+        "label": {
+          "ru": "+7 (965) 393-28-41",
+          "en": "+7 (965) 393-28-41"
+        },
+        "kind": "phone",
+        "primary": true
+      },
+      {
+        "id": "max",
+        "href": "https://max.ru/+79653932841",
+        "label": {
+          "ru": "MAX",
+          "en": "MAX"
+        },
+        "kind": "max",
+        "header": true
+      },
+      {
+        "id": "telegram",
+        "href": "https://t.me/+79653932841",
+        "label": {
+          "ru": "Telegram",
+          "en": "Telegram"
+        },
+        "kind": "telegram",
+        "header": true
+      },
+      {
+        "id": "whatsapp",
+        "href": "https://wa.me/79653932841",
+        "label": {
+          "ru": "WhatsApp",
+          "en": "WhatsApp"
+        },
+        "kind": "whatsapp",
+        "header": true
+      },
+      {
+        "id": "email",
+        "href": "mailto:m.moleva@mail.ru",
+        "label": {
+          "ru": "m.moleva@mail.ru",
+          "en": "m.moleva@mail.ru"
+        },
+        "kind": "email"
+      }
+    ],
+    "localized": {
+      "ru": {
+        "nav_call": "📞 Позвонить",
+        "chat_budget_1": "до 100 тыс ₽",
+        "chat_budget_2": "100–300 тыс ₽",
+        "chat_budget_3": "300–700 тыс ₽",
+        "chat_budget_4": "700 тыс ₽+",
+        "meta_home_desc": "Создаём сайты, мобильные приложения, AI продукты под ключ по всей России.",
+        "faq1_a": "Стоимость зависит от логики, интеграций и сроков. Ориентиры: сайт — от 30 000 ₽, мобильное приложение — от 300 000 ₽, сложная платформа — от 700 000 ₽. Точную смету готовим после короткого созвона.",
+        "faq6_a": "Да, работаем удалённо по всей России и за рубежом.",
+        "ct_note": "* Telegram и WhatsApp могут работать нестабильно на территории России",
+        "footer_copy": "© {year} Tech Dolphin — Разработка сайтов, приложений и AI продуктов",
+        "cities_label": "Работаем по всей России",
+        "city_moscow": "Москва",
+        "city_spb": "Санкт-Петербург",
+        "city_novosibirsk": "Новосибирск",
+        "city_ekaterinburg": "Екатеринбург",
+        "city_kazan": "Казань",
+        "city_nizhny": "Нижний Новгород",
+        "city_chelyabinsk": "Челябинск",
+        "city_samara": "Самара",
+        "city_omsk": "Омск",
+        "city_rostov": "Ростов-на-Дону",
+        "city_ufa": "Уфа",
+        "city_krasnoyarsk": "Красноярск",
+        "city_perm": "Пермь",
+        "city_voronezh": "Воронеж",
+        "city_volgograd": "Волгоград",
+        "city_all_russia": "и вся Россия",
+        "privacy_p1": "<strong style=\"color:var(--white);\">1. Общие положения.</strong> ИП Молева Марианна Владимировна (ИНН 502984920107, ОГРНИП 321508100437464).",
+        "privacy_p4": "<strong style=\"color:var(--white);\">4. Защита данных.</strong> В соответствии с ФЗ №152 «О персональных данных».",
+        "privacy_p6": "<strong style=\"color:var(--white);\">6. Контакты.</strong> <a href=\"mailto:m.moleva@mail.ru\" style=\"color:var(--cyan);\">m.moleva@mail.ru</a> · <a href=\"tel:+79653932841\" style=\"color:var(--cyan);\">+7 (965) 393-28-41</a>"
+      },
+      "en": {
+        "nav_call": "📞 Call Us",
+        "chat_budget_1": "under ₽100k",
+        "chat_budget_2": "₽100k–300k",
+        "chat_budget_3": "₽300k–700k",
+        "chat_budget_4": "₽700k+",
+        "meta_home_desc": "We build websites, mobile apps and AI products end-to-end.",
+        "faq1_a": "The cost depends on logic, integrations, and timeline. Benchmarks: website from ₽30,000, mobile app from ₽300,000, complex platform from ₽700,000. We prepare the exact estimate after a short call.",
+        "faq6_a": "Yes, we work remotely across Russia and internationally.",
+        "ct_note": "* Telegram and WhatsApp may be unstable in Russia",
+        "footer_copy": "© {year} Tech Dolphin — Website, App & AI Product Development",
+        "cities_label": "Working worldwide",
+        "city_moscow": "Moscow",
+        "city_spb": "Saint Petersburg",
+        "city_novosibirsk": "Novosibirsk",
+        "city_ekaterinburg": "Yekaterinburg",
+        "city_kazan": "Kazan",
+        "city_nizhny": "Nizhny Novgorod",
+        "city_chelyabinsk": "Chelyabinsk",
+        "city_samara": "Samara",
+        "city_omsk": "Omsk",
+        "city_rostov": "Rostov-on-Don",
+        "city_ufa": "Ufa",
+        "city_krasnoyarsk": "Krasnoyarsk",
+        "city_perm": "Perm",
+        "city_voronezh": "Voronezh",
+        "city_volgograd": "Volgograd",
+        "city_all_russia": "and all Russia",
+        "privacy_p1": "<strong style=\"color:var(--white);\">1. General provisions.</strong> Individual Entrepreneur Marianna Moleva (TIN 502984920107, OGRNIP 321508100437464).",
+        "privacy_p4": "<strong style=\"color:var(--white);\">4. Data protection.</strong> Processed in accordance with Russian Federal Law No. 152-FZ on personal data.",
+        "privacy_p6": "<strong style=\"color:var(--white);\">6. Contacts.</strong> <a href=\"mailto:m.moleva@mail.ru\" style=\"color:var(--cyan);\">m.moleva@mail.ru</a> · <a href=\"tel:+79653932841\" style=\"color:var(--cyan);\">+7 (965) 393-28-41</a>"
+      }
+    }
+  },
+  {
+    "id": "international",
+    "directory": "netlify-abroad",
+    "domain": "https://nate-web3.com",
+    "language": "en",
+    "geoLanguage": true,
+    "currency": "USD",
+    "locale": "en-US",
+    "analyticsId": 0,
+    "operatorTokens": {
+      "ru": "Datvida LLC",
+      "en": "Datvida LLC"
+    },
+    "leadRecipients": [
+      "n.nate1544@gmail.com"
+    ],
+    "prices": [
+      1200,
+      4500,
+      9000,
+      2500,
+      3500,
+      20000
+    ],
+    "contacts": [
+      {
+        "id": "phone",
+        "href": "tel:+19725598555",
+        "label": {
+          "ru": "Телефон США: +1 972 559 8555",
+          "en": "USA Phone: +1 972 559 8555"
+        },
+        "kind": "phone",
+        "primary": true,
+        "header": true
+      },
+      {
+        "id": "whatsapp",
+        "href": "https://wa.me/19725598555",
+        "label": {
+          "ru": "WhatsApp США",
+          "en": "WhatsApp USA"
+        },
+        "kind": "whatsapp",
+        "header": true
+      },
+      {
+        "id": "sms",
+        "href": "sms:+19725598555",
+        "label": {
+          "ru": "SMS США",
+          "en": "USA SMS"
+        },
+        "kind": "sms",
+        "header": true
+      },
+      {
+        "id": "whatsapp_tr",
+        "href": "https://wa.me/905438762750",
+        "label": {
+          "ru": "WhatsApp Турция: +90 543 876 2750",
+          "en": "WhatsApp Turkiye: +90 543 876 2750"
+        },
+        "kind": "whatsapp",
+        "header": true
+      },
+      {
+        "id": "email",
+        "href": "mailto:n.nate1544@gmail.com",
+        "label": {
+          "ru": "n.nate1544@gmail.com",
+          "en": "n.nate1544@gmail.com"
+        },
+        "kind": "email"
+      }
+    ],
+    "localized": {
+      "ru": {
+        "nav_call": "📞 Позвонить",
+        "chat_budget_1": "до $3 тыс.",
+        "chat_budget_2": "$3–10 тыс.",
+        "chat_budget_3": "$10–25 тыс.",
+        "chat_budget_4": "от $25 тыс.",
+        "meta_home_desc": "Создаём сайты, мобильные приложения и AI-продукты для клиентов по всему миру.",
+        "faq1_a": "Стоимость зависит от логики, интеграций и сроков. Ориентиры: сайт — от $1 200, мобильное приложение — от $9 000, сложная платформа — от $20 000. Точную смету готовим после короткого созвона.",
+        "faq6_a": "Да, работаем удалённо с клиентами по всему миру.",
+        "ct_note": "Свяжитесь с нами по телефону, WhatsApp, SMS или электронной почте.",
+        "footer_copy": "© {year} Tech Dolphin by Datvida LLC — Сайты, приложения и AI-продукты",
+        "cities_label": "Работаем по всему миру",
+        "city_moscow": "США",
+        "city_spb": "Турция",
+        "city_novosibirsk": "Европа",
+        "city_ekaterinburg": "Великобритания",
+        "city_kazan": "Ближний Восток",
+        "city_nizhny": "Азиатско-Тихоокеанский регион",
+        "city_chelyabinsk": "Латинская Америка",
+        "city_samara": "Канада",
+        "city_omsk": "Германия",
+        "city_rostov": "Нидерланды",
+        "city_ufa": "ОАЭ",
+        "city_krasnoyarsk": "Саудовская Аравия",
+        "city_perm": "Австралия",
+        "city_voronezh": "Удалённые команды",
+        "city_volgograd": "Стартапы",
+        "city_all_russia": "Весь мир",
+        "privacy_p1": "<strong style=\"color:var(--white);\">1. Общие положения.</strong> Международный сайт работает от имени Datvida LLC. Владелец: N BAHADIR.",
+        "privacy_p4": "<strong style=\"color:var(--white);\">4. Защита данных.</strong> Мы применяем разумные меры защиты переданных контактных данных и информации о проекте.",
+        "privacy_p6": "<strong style=\"color:var(--white);\">6. Контакты.</strong> <a href=\"mailto:n.nate1544@gmail.com\" style=\"color:var(--cyan);\">n.nate1544@gmail.com</a> · <a href=\"tel:+19725598555\" style=\"color:var(--cyan);\">+1 972 559 8555</a>"
+      },
+      "en": {
+        "nav_call": "✉️ Email Us",
+        "chat_budget_1": "under $3k",
+        "chat_budget_2": "$3k-10k",
+        "chat_budget_3": "$10k-25k",
+        "chat_budget_4": "$25k+",
+        "meta_home_desc": "We build websites, mobile apps and AI products for international clients.",
+        "faq1_a": "The cost depends on logic, integrations, and timeline. International benchmarks: website from $1,200, mobile app from $9,000, complex platform from $20,000. We prepare the exact estimate after a short call.",
+        "faq6_a": "Yes, we work remotely with international clients across the US, Turkiye, Europe, and beyond.",
+        "ct_note": "International contacts: 📞 USA Phone, 🟢 WhatsApp USA, 💬 USA SMS, and 🟢 WhatsApp Turkiye.",
+        "footer_copy": "© {year} Tech Dolphin by Datvida LLC — Website, App & AI Product Development",
+        "cities_label": "Working worldwide",
+        "city_moscow": "United States",
+        "city_spb": "Turkiye",
+        "city_novosibirsk": "Europe",
+        "city_ekaterinburg": "United Kingdom",
+        "city_kazan": "Middle East",
+        "city_nizhny": "Asia-Pacific",
+        "city_chelyabinsk": "Latin America",
+        "city_samara": "Canada",
+        "city_omsk": "Germany",
+        "city_rostov": "Netherlands",
+        "city_ufa": "UAE",
+        "city_krasnoyarsk": "Saudi Arabia",
+        "city_perm": "Australia",
+        "city_voronezh": "Remote teams",
+        "city_volgograd": "Startup projects",
+        "city_all_russia": "Worldwide",
+        "privacy_p1": "<strong style=\"color:var(--white);\">1. General provisions.</strong> This international site is operated by Datvida LLC. Owner: N BAHADIR.",
+        "privacy_p4": "<strong style=\"color:var(--white);\">4. Data protection.</strong> We use reasonable safeguards to protect submitted contact details and project information.",
+        "privacy_p6": "<strong style=\"color:var(--white);\">6. Contacts.</strong> 📞 USA Phone: <a href=\"tel:+19725598555\" style=\"color:var(--cyan);\">+1 972 559 8555</a> · 🟢 WhatsApp USA: <a href=\"https://wa.me/19725598555\" style=\"color:var(--cyan);\">message us</a> · 💬 USA SMS: <a href=\"sms:+19725598555\" style=\"color:var(--cyan);\">text us</a> · 🟢 WhatsApp Turkiye: <a href=\"https://wa.me/905438762750\" style=\"color:var(--cyan);\">+90 543 876 2750</a> · <a href=\"mailto:n.nate1544@gmail.com\" style=\"color:var(--cyan);\">n.nate1544@gmail.com</a>"
+      }
+    }
+  }
+]

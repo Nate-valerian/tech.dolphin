@@ -76,6 +76,7 @@ for(const site of ['', 'netlify-abroad']) {
   await expect(links).not.toHaveClass(/open/);
   await page.locator('#nav-hamburger').click();await page.setViewportSize({width:1440,height:900});
   await expect(links).not.toHaveClass(/open/);
+  await expect(page.locator('.nav-close-btn')).toBeHidden();
   expect(await page.evaluate(()=>getComputedStyle(document.body).position)).not.toBe('fixed');
   expect(await links.evaluate(el=>!!el.closest('.nav'))).toBe(true);
   await page.evaluate(()=>scrollTo({top:1200,behavior:'instant'}));await page.keyboard.press('Escape');

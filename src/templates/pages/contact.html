@@ -1,0 +1,67 @@
+<!-- ═══════════════════════════════════════════ CONTACT -->
+<section id="contact" style="padding-top:120px;">
+  <div class="contact-card">
+    <div class="contact-glow"></div>
+    <div class="section-label" data-i18n="contact_label">Написать нам</div>
+    <h1 class="section-title" id="page-title" style="font-size:clamp(26px,4vw,42px);">
+      <span data-i18n="contact_title">Есть идея?</span><br><em data-i18n="contact_title_em">Давайте обсудим</em>
+    </h1>
+    <p class="section-sub" style="margin:16px auto 32px;text-align:center;" data-i18n="contact_sub">Расскажите, что хотите сделать. Мы оценим задачу, предложим план и честно скажем, с чего лучше начать.</p>
+
+    <aside id="estimate-summary" class="estimate-summary" hidden aria-labelledby="estimate-title">
+      <h2 id="estimate-title" data-i18n="estimate_title">Выбранный проект</h2>
+      <p id="estimate-details"></p>
+      <div class="estimate-actions"><a href="pricing.html" data-i18n="estimate_edit">Изменить услуги</a><button type="button" onclick="clearEstimate()" data-i18n="estimate_clear">Убрать расчёт</button></div>
+    </aside>
+    <form id="ct-form" class="contact-form" onsubmit="sendContact(event)">
+      <input type="text" name="hp_website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="contact-form-row">
+        <div class="form-field"><label class="field-label" for="ct-name" data-i18n="ct_name">Ваше имя</label><input id="ct-name"  class="form-input" type="text"  data-i18n="ct_name"  placeholder="Ваше имя"  required></div>
+        <div class="form-field"><label class="field-label" for="ct-phone" data-i18n="ct_phone">Телефон</label><input id="ct-phone" class="form-input" type="tel"   data-i18n="ct_phone" placeholder="Телефон"    required></div>
+      </div>
+      <div class="form-field"><label class="field-label" for="ct-email" data-i18n="ct_email">Email</label><input id="ct-email" class="form-input" type="email" data-i18n="ct_email" placeholder="Email"></div>
+      <div class="form-field"><label class="field-label" for="ct-message" data-i18n="ct_message">Опишите ваш проект</label><textarea id="ct-message" class="form-input" rows="4" data-i18n="ct_message" placeholder="Опишите ваш проект"></textarea></div>
+      <p class="form-promise contact-promise" data-i18n="ct_promise">Изучим вашу задачу, зададим уточняющие вопросы и предложим формат работы и примерный бюджет.</p>
+      <button type="submit" class="form-btn" data-i18n="ct_submit">Отправить заявку →</button>
+      <div class="form-error" role="alert" id="ct-error"></div>
+      <p class="form-consent"><span data-i18n="ct_consent">Нажимая кнопку, вы соглашаетесь с</span> <a href="#privacy" data-i18n="ct_privacy">политикой конфиденциальности</a></p>
+    </form>
+    <div class="form-success" role="status" id="ct-success" data-i18n="ct_success">✅ Заявка отправлена! Мы свяжемся с вами в ближайшее время.</div>
+
+    <div class="contact-links">{{CONTACT_LINKS}}</div>
+    <p style="font-size:11px;color:var(--muted);margin-top:16px;" data-i18n="ct_note">* Telegram и WhatsApp могут работать нестабильно на территории России</p>
+  </div>
+</section>
+
+<!-- PRIVACY -->
+<div id="privacy" style="background:var(--card2);border-top:1px solid var(--csft);padding:80px 20px;">
+  <div style="max-width:800px;margin:0 auto;">
+    <div class="section-label" data-i18n="privacy_label">Документы</div>
+    <h2 style="font-size:clamp(22px,3vw,34px);font-weight:800;color:var(--white);margin-bottom:32px;" data-i18n="privacy_title">Политика конфиденциальности</h2>
+    <div style="font-size:15px;color:var(--muted2);line-height:1.9;">
+      <p style="margin-bottom:16px;" data-i18n="privacy_p1"><strong style="color:var(--white);">1. Общие положения.</strong> ИП Молева Марианна Владимировна (ИНН 502984920107, ОГРНИП 321508100437464).</p>
+      <p style="margin-bottom:16px;" data-i18n="privacy_p2"><strong style="color:var(--white);">2. Какие данные мы собираем.</strong> Имя, телефон, email — только при добровольном заполнении форм.</p>
+      <p style="margin-bottom:16px;" data-i18n="privacy_p3"><strong style="color:var(--white);">3. Цель сбора данных.</strong> Исключительно для связи с вами. Не передаём третьим лицам.</p>
+      <p style="margin-bottom:16px;" data-i18n="privacy_p4"><strong style="color:var(--white);">4. Защита данных.</strong> В соответствии с ФЗ №152 «О персональных данных».</p>
+      <p style="margin-bottom:16px;" data-i18n="privacy_p5"><strong style="color:var(--white);">5. Хранилище и аналитика.</strong> Настройки и черновики хранятся в браузере. Необязательная аналитика включается только с вашего разрешения. Изменить выбор можно через настройки cookie.</p>
+      <p data-i18n="privacy_p6"><strong style="color:var(--white);">6. Контакты.</strong> <a href="mailto:m.moleva@mail.ru" style="color:var(--cyan);">m.moleva@mail.ru</a> · <a href="tel:+79653932841" style="color:var(--cyan);">+7 (965) 393-28-41</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- CITIES -->
+<div class="cities-wrap">
+  <div class="cities-label" id="cities-label">Работаем по всей России</div>
+  <div class="cities-list">
+    <span class="city-tag" data-i18n="city_moscow">Москва</span><span class="city-tag" data-i18n="city_spb">Санкт-Петербург</span>
+    <span class="city-tag" data-i18n="city_novosibirsk">Новосибирск</span><span class="city-tag" data-i18n="city_ekaterinburg">Екатеринбург</span>
+    <span class="city-tag" data-i18n="city_kazan">Казань</span><span class="city-tag" data-i18n="city_nizhny">Нижний Новгород</span>
+    <span class="city-tag" data-i18n="city_chelyabinsk">Челябинск</span><span class="city-tag" data-i18n="city_samara">Самара</span>
+    <span class="city-tag" data-i18n="city_omsk">Омск</span><span class="city-tag" data-i18n="city_rostov">Ростов-на-Дону</span>
+    <span class="city-tag" data-i18n="city_ufa">Уфа</span><span class="city-tag" data-i18n="city_krasnoyarsk">Красноярск</span>
+    <span class="city-tag" data-i18n="city_perm">Пермь</span><span class="city-tag" data-i18n="city_voronezh">Воронеж</span>
+    <span class="city-tag" data-i18n="city_volgograd">Волгоград</span><span class="city-tag" data-i18n="city_all_russia">и вся Россия</span>
+  </div>
+</div>
+
+<!-- FOOTER -->

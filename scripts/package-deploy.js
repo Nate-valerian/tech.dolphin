@@ -4,14 +4,15 @@ const path = require('path');
 const crypto = require('crypto');
 const {execFileSync} = require('child_process');
 const ROOT = path.resolve(__dirname, '..');
-const DIST = path.join(ROOT, 'dist');
+const SITES = require('../config/regions.json');
+const OUTPUT_DIRS = SITES.map(site => path.join(ROOT, site.id==='ru'?'dist':'dist-international'));
 const INCLUDE = ['index.html','projects.html','pricing.html','faq.html','contact.html','robots.txt','sitemap.xml','site.webmanifest','yandex_3d97a29ea20ba61d.html','assets','css','js'];
-const REQUIRED_FILES = ['index.html','projects.html','pricing.html','faq.html','contact.html','robots.txt','sitemap.xml','site.webmanifest','yandex_3d97a29ea20ba61d.html','css/style.css','js/main.js','js/i18n.js','js/analytics.js','js/storage.js'];
+const REQUIRED_FILES = ['index.html','projects.html','pricing.html','faq.html','contact.html','robots.txt','sitemap.xml','site.webmanifest','yandex_3d97a29ea20ba61d.html','css/style.css','js/main.js','js/i18n.js','js/analytics.js','js/storage.js','js/region.js'];
 const quote = value => "'" + value.replace(/'/g,"''") + "'";
 function removeGenerated(target) {
  const resolved=path.resolve(target);
- const isZip=path.dirname(resolved)===ROOT && /^spaceweb-upload-tech-dolphin-\d{4}-\d{2}-\d{2}\.zip$/.test(path.basename(resolved));
- if(resolved!==DIST && !isZip)throw new Error('Refusing to remove an unexpected generated path: '+resolved);
+ const isZip=path.dirname(resolved)===ROOT && /^(?:spaceweb-upload-tech-dolphin|netlify-abroad-upload-tech-dolphin)-\d{4}-\d{2}-\d{2}\.zip$/.test(path.basename(resolved));
+ if(!OUTPUT_DIRS.includes(resolved) && !isZip)throw new Error('Refusing to remove an unexpected generated path: '+resolved);
  fs.rmSync(resolved,{recursive:true,force:true});
 }
 function listFiles(dir,base=dir) {
@@ -31,19 +32,24 @@ function validateArchive(actual,expected) {
  }
  for(const entry of expected)if(!names.has(entry.name))throw new Error('Missing archive file: '+entry.name);
 }
-function build() {
+function buildBundle(site, DIST) {
+ const sourceRoot=path.resolve(ROOT,site.directory);
  removeGenerated(DIST);fs.mkdirSync(DIST,{recursive:true});
  for(const entry of INCLUDE){
-  const source=path.join(ROOT,entry);
+  if(site.id!=='ru' && entry.startsWith('yandex_'))continue;
+  const source=path.join(sourceRoot,entry);
   if(!fs.existsSync(source))throw new Error('Missing deploy input: '+entry);
   fs.cpSync(source,path.join(DIST,entry),{recursive:true});
  }
- for(const required of REQUIRED_FILES)if(!fs.existsSync(path.join(DIST,required)))throw new Error('Missing deploy file: '+required);
+ for(const required of REQUIRED_FILES.filter(file=>site.id==='ru'||!file.startsWith('yandex_')))if(!fs.existsSync(path.join(DIST,required)))throw new Error('Missing deploy file: '+required);
  execFileSync('powershell.exe',['-NoProfile','-Command','Get-ChildItem -LiteralPath '+quote(DIST)+' -Recurse -Force | ForEach-Object { $_.Attributes = $_.Attributes -band (-bnot [System.IO.FileAttributes]::Hidden) }']);
 }
-function packageSite() {
- build();
- const zipPath=path.join(ROOT,'spaceweb-upload-tech-dolphin-'+new Date().toISOString().slice(0,10)+'.zip');
+function packageSite(id='ru') {
+ const site=SITES.find(candidate=>candidate.id===id);
+ if(!site)throw Error('Unknown site '+id);
+ const DIST=path.join(ROOT,site.id==='ru'?'dist':'dist-international');
+ buildBundle(site,DIST);
+ const zipPath=path.join(ROOT,(site.id==='ru'?'spaceweb-upload-tech-dolphin-':'netlify-abroad-upload-tech-dolphin-')+new Date().toISOString().slice(0,10)+'.zip');
  removeGenerated(zipPath);
  execFileSync('powershell.exe',['-NoProfile','-Command','Get-ChildItem -LiteralPath '+quote(DIST)+' -Force | Compress-Archive -DestinationPath '+quote(zipPath)+' -Force']);
  const command='Add-Type -AssemblyName System.IO.Compression.FileSystem; $archive=[System.IO.Compression.ZipFile]::OpenRead('+quote(zipPath)+'); try { $rows=@(foreach($entry in $archive.Entries) { if(-not $entry.Name) {continue}; $stream=$entry.Open(); $sha=[System.Security.Cryptography.SHA256]::Create(); try { [PSCustomObject]@{name=$entry.FullName.Replace([char]92,[char]47);length=$entry.Length;sha256=[BitConverter]::ToString($sha.ComputeHash($stream)).Replace("-", "").ToLowerInvariant()} } finally {$stream.Dispose();$sha.Dispose()} }); ConvertTo-Json -InputObject $rows -Compress } finally {$archive.Dispose()}';
@@ -53,5 +59,10 @@ function packageSite() {
  console.log('Verified '+expected.length+' exact file names and SHA-256 hashes: '+zipPath);
  return zipPath;
 }
-if(require.main===module)packageSite();
+if(require.main===module){
+ require('./build').build();
+ require('./check-site').check();
+ if(process.argv.includes('--all'))SITES.forEach(site=>packageSite(site.id));
+ else {const index=process.argv.indexOf('--site');packageSite(index>=0?process.argv[index+1]:'ru');}
+}
 module.exports={packageSite,validateArchive,INCLUDE};

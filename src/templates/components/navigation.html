@@ -1,0 +1,19 @@
+<nav class="nav">
+  <div class="nav-logo">
+    <a href="index.html" aria-label="Tech Dolphin">
+      <img src="assets/logo.png" alt="Tech Dolphin" width="36" height="36" decoding="async">
+    </a>
+  </div>
+  <div class="nav-links" id="primary-nav">
+<button type="button" class="nav-close-btn" onclick="closeMobileMenu()" data-i18n="menu_close" aria-label="{{MENU_CLOSE}}">Close</button>
+{{NAV_LINKS}}
+<button class="nav-language" type="button" data-lang-toggle onclick="toggleLang()">{{LANGUAGE_LONG}}</button>
+<div class="nav-mobile-contacts" aria-label="{{QUICK_CONTACTS}}">{{MENU_CONTACTS}}</div>
+</div>
+  <button id="lang-toggle" onclick="toggleLang()">{{LANGUAGE_SHORT}}</button>
+  <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileMenu()" aria-label="{{MENU_LABEL}}" aria-controls="primary-nav" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-contact-actions" aria-label="{{QUICK_CONTACTS}}">{{HEADER_CONTACTS}}</div>
+  <a data-contact-cta href="contact.html" class="nav-cta" data-i18n="nav_cta">Обсудить проект →</a>
+</nav>

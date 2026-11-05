@@ -1,0 +1,329 @@
+<!-- ═══════════════════════════════════════════ HERO -->
+<section id="hero">
+  <div class="particles">
+    <div class="particle" style="left:10%;width:3px;height:3px;animation-duration:8s;animation-delay:0s"></div>
+    <div class="particle" style="left:25%;width:2px;height:2px;animation-duration:12s;animation-delay:2s"></div>
+    <div class="particle" style="left:40%;width:4px;height:4px;animation-duration:9s;animation-delay:4s"></div>
+    <div class="particle" style="left:60%;width:2px;height:2px;animation-duration:11s;animation-delay:1s"></div>
+    <div class="particle" style="left:75%;width:3px;height:3px;animation-duration:7s;animation-delay:3s"></div>
+    <div class="particle" style="left:88%;width:2px;height:2px;animation-duration:10s;animation-delay:5s"></div>
+  </div>
+
+  <div class="hero-layout">
+
+    <!-- LEFT SIDE — DOM media videos -->
+    <div class="hero-side hero-media-column">
+      <video data-preview controls class="hero-side-video" muted loop playsinline preload="none" poster="assets/dom-sessions.jpg">
+        <source data-src="assets/dom_video.mp4" type="video/mp4">
+        <img src="assets/dom-sessions.jpg" alt="DOM App" class="hero-side-video">
+      </video>
+      <video data-preview controls class="hero-side-video" muted loop playsinline preload="none" poster="assets/dom-sessions.jpg">
+        <source data-src="assets/dom-short-01.mp4" type="video/mp4">
+        <img src="assets/dom-sessions.jpg" alt="DOM immersive video" class="hero-side-video">
+      </video>
+    </div>
+
+    <!-- CENTER — main content -->
+    <div class="hero-inner">
+      <!-- Logo video -->
+      <video data-preview controls class="hero-logo-video" muted loop playsinline preload="none">
+        <source data-src="assets/logo_video.mp4" type="video/mp4">
+        <img src="assets/logo.png" alt="Tech Dolphin" class="hero-logo-video">
+      </video>
+
+      <div class="badges-row">
+        <div class="badge"><div class="badge-dot"></div><span data-i18n="badge1">Принимаем новые проекты</span></div>
+        <div class="badge" style="background:var(--csft);border-color:var(--accent-border);color:var(--cyan);" data-i18n="badge2">От идеи до запуска</div>
+        <div class="badge" style="background:var(--csft);border-color:var(--accent-border);color:var(--cyan);" data-i18n="badge3">Понятный процесс</div>
+      </div>
+
+      <h1 class="hero-title">
+        <span class="hero-line" data-i18n="hero_t1">Сайты, приложения и AI</span>
+        <span class="hero-line grad" data-i18n="hero_t2">для вашего бизнеса —</span>
+        <span class="hero-line hero-line-soft"><span class="soft" data-i18n="hero_t3">от идеи до запуска</span> <span data-i18n="hero_t4">с фокусом на ваш рост.</span></span>
+      </h1>
+
+      <p class="hero-sub" data-i18n="hero_sub">Создаём сайты, приложения и AI-системы, которые помогают бизнесу быстрее отвечать, принимать решения и работать.</p>
+
+      <div class="hero-btns">
+        <a data-contact-cta href="contact.html" class="btn-main" data-i18n="hero_btn1">Обсудить проект</a>
+        <a href="projects.html" class="btn-sec" data-i18n="hero_btn2">Посмотреть работы</a>
+      </div>
+
+      <div class="callback-form">
+        <div class="callback-title" data-i18n="cb_title">📞 Перезвоним вам бесплатно</div>
+        <p class="form-promise" data-i18n="cb_promise">Оставьте телефон — мы свяжемся с вами, уточним задачу и предложим следующий шаг.</p>
+        <form id="cb-form" onsubmit="sendCallback(event)">
+          <input type="text" name="hp_website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <div class="form-field"><label class="field-label" for="cb-name" data-i18n="cb_name">Ваше имя</label><input id="cb-name"  class="form-input" type="text" data-i18n="cb_name"  placeholder="Ваше имя"    required></div>
+          <div class="form-field"><label class="field-label" for="cb-phone" data-i18n="cb_phone">Ваш телефон</label><input id="cb-phone" class="form-input" type="tel"  data-i18n="cb_phone" placeholder="Ваш телефон" required></div>
+          <button type="submit" class="form-btn" data-i18n="cb_btn">Перезвоните мне →</button>
+          <div class="form-error" role="alert" id="cb-error"></div>
+          <p class="form-consent"><span data-i18n="cb_consent">Нажимая кнопку, вы соглашаетесь с</span> <a href="contact.html#privacy" data-i18n="cb_privacy">политикой конфиденциальности</a></p>
+        </form>
+        <div class="form-success" role="status" id="cb-success" data-i18n="cb_success">✅ Спасибо! Мы перезвоним вам в ближайшее время.</div>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-pill"><div class="num"><span class="count-num" data-target="5">5</span>+</div><div class="lbl" data-i18n="stat1">Лет опыта</div></div>
+        <div class="stat-pill"><div class="num"><span class="count-num" data-target="30">30</span>+</div><div class="lbl" data-i18n="stat2">Готовых проектов</div></div>
+        <div class="stat-pill"><div class="num">7</div><div class="lbl" data-i18n="stat3">Направлений</div></div>
+        <div class="stat-pill"><div class="num">∞</div><div class="lbl" data-i18n="stat4">Идея</div></div>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE — media grid -->
+    <div class="hero-media-grid" aria-label="Tech Dolphin project visuals">
+      <video data-preview controls class="hero-side-video" muted loop playsinline preload="none" poster="assets/dom-sessions.jpg">
+        <source data-src="assets/dom_video.mp4" type="video/mp4">
+        <img src="assets/dom-sessions.jpg" alt="DOM App" class="hero-side-video">
+      </video>
+      <video data-preview controls class="hero-side-video" muted loop playsinline preload="none" poster="assets/dom-sessions.jpg">
+        <source data-src="assets/dom-short-01.mp4" type="video/mp4">
+        <img src="assets/dom-sessions.jpg" alt="DOM Immersive Projection" class="hero-side-video">
+      </video>
+      <video data-preview controls class="hero-side-video" muted loop playsinline preload="none" poster="assets/dom-sessions.jpg">
+        <source data-src="assets/domspace.mp4" type="video/mp4">
+        <img src="assets/dom-sessions.jpg" alt="DOM Space" class="hero-side-video">
+      </video>
+    </div>
+
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="tick-item"><span data-i18n="tick1">Мобильные приложения</span><span>✦</span></span>
+    <span class="tick-item"><span data-i18n="tick2">Сайты и интернет-магазины</span><span>✦</span></span>
+    <span class="tick-item"><span data-i18n="tick3">Умные AI продукты</span><span>✦</span></span>
+    <span class="tick-item"><span data-i18n="tick4">Голосовые помощники</span><span>✦</span></span>
+    <span class="tick-item"><span data-i18n="tick5">Видео и фото контент</span><span>✦</span></span>
+    <span class="tick-item"><span data-i18n="tick6">Банковские приложения</span><span>✦</span></span>
+    <span class="tick-item"><span data-i18n="tick7">Медицинские платформы</span><span>✦</span></span>
+    <span class="tick-item"><span data-i18n="tick8">3D и иммерсивный опыт</span><span>✦</span></span>
+    <!-- duplicate for seamless loop -->
+    <span class="tick-item"><span data-i18n="tick1">Мобильные приложения</span><span>✦</span></span>
+    <span class="tick-item"><span data-i18n="tick2">Сайты и интернет-магазины</span><span>✦</span></span>
+    <span class="tick-item"><span data-i18n="tick3">Умные AI продукты</span><span>✦</span></span>
+    <span class="tick-item"><span data-i18n="tick4">Голосовые помощники</span><span>✦</span></span>
+    <span class="tick-item"><span data-i18n="tick5">Видео и фото контент</span><span>✦</span></span>
+    <span class="tick-item"><span data-i18n="tick6">Банковские приложения</span><span>✦</span></span>
+    <span class="tick-item"><span data-i18n="tick7">Медицинские платформы</span><span>✦</span></span>
+    <span class="tick-item"><span data-i18n="tick8">3D и иммерсивный опыт</span><span>✦</span></span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ SERVICES -->
+<div class="services-wrap" id="services">
+  <div class="services-inner">
+    <div class="section-label" data-i18n="svc_label">Что мы делаем</div>
+    <h2 class="section-title"><span data-i18n="svc_title">Наши</span> <em data-i18n="svc_title_em">услуги</em></h2>
+    <p class="section-sub" data-i18n="svc_sub">Всё что нужно для вашего продукта — в одном месте.</p>
+
+    <div class="svc-grid">
+      <div class="svc-card">
+        <div class="svc-icon">AI</div>
+        <div class="svc-name" data-i18n="svc1_name">AI-системы для бизнеса</div>
+        <div class="svc-items">
+          <div class="svc-item" data-i18n="svc1_1">Ответы клиентам и чат-боты для сайта</div>
+          <div class="svc-item" data-i18n="svc1_2">Голосовые помощники для бизнеса</div>
+          <div class="svc-item" data-i18n="svc1_3">Автоматизация рутинных задач</div>
+          <div class="svc-item" data-i18n="svc1_4">Поддержка решений и анализ запросов</div>
+          <div class="svc-item" data-i18n="svc1_5">Умный поиск и рекомендации</div>
+        </div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-icon">APP</div>
+        <div class="svc-name" data-i18n="svc2_name">Мобильные приложения</div>
+        <div class="svc-items">
+          <div class="svc-item" data-i18n="svc2_1">Приложения для iPhone и Android</div>
+          <div class="svc-item" data-i18n="svc2_2">Публикация в App Store и Google Play</div>
+          <div class="svc-item" data-i18n="svc2_3">Чат, звонки и уведомления</div>
+          <div class="svc-item" data-i18n="svc2_4">Красивый и удобный дизайн</div>
+          <div class="svc-item" data-i18n="svc2_5">Работает быстро на любом телефоне</div>
+        </div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-icon">WEB</div>
+        <div class="svc-name" data-i18n="svc3_name">Сайты и платформы</div>
+        <div class="svc-items">
+          <div class="svc-item" data-i18n="svc3_1">Сайты-визитки и лендинги</div>
+          <div class="svc-item" data-i18n="svc3_2">Интернет-магазины</div>
+          <div class="svc-item" data-i18n="svc3_3">Личные кабинеты и панели управления</div>
+          <div class="svc-item" data-i18n="svc3_4">Сложные платформы и сервисы</div>
+          <div class="svc-item" data-i18n="svc3_5">Быстрый хостинг и запуск</div>
+        </div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-icon">VID</div>
+        <div class="svc-name" data-i18n="svc4_name">Видео и визуальный контент</div>
+        <div class="svc-items">
+          <div class="svc-item" data-i18n="svc4_1">Кинематографические видео и ролики</div>
+          <div class="svc-item" data-i18n="svc4_2">Цифровые персонажи и аватары</div>
+          <div class="svc-item" data-i18n="svc4_3">Рекламные ролики и презентации</div>
+          <div class="svc-item" data-i18n="svc4_4">Визуальные истории</div>
+          <div class="svc-item" data-i18n="svc4_5">Интерактивные видеосистемы</div>
+        </div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-icon">BIZ</div>
+        <div class="svc-name" data-i18n="svc5_name">Бизнес-платформы</div>
+        <div class="svc-items">
+          <div class="svc-item" data-i18n="svc5_1">Интернет-магазины и маркетплейсы</div>
+          <div class="svc-item" data-i18n="svc5_2">Банковские и финансовые приложения</div>
+          <div class="svc-item" data-i18n="svc5_3">Медицинские сервисы и запись к врачу</div>
+          <div class="svc-item" data-i18n="svc5_4">Стриминг и кино-платформы</div>
+          <div class="svc-item" data-i18n="svc5_5">Системы управления для компаний</div>
+        </div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-icon">3D</div>
+        <div class="svc-name" data-i18n="svc6_name">3D и иммерсивный опыт</div>
+        <div class="svc-items">
+          <div class="svc-item" data-i18n="svc6_1">Трёхмерные интерактивные сцены</div>
+          <div class="svc-item" data-i18n="svc6_2">Проекции на большие экраны и купол</div>
+          <div class="svc-item" data-i18n="svc6_3">Виртуальные пространства и туры</div>
+          <div class="svc-item" data-i18n="svc6_4">Визуальные шоу и инсталляции</div>
+          <div class="svc-item" data-i18n="svc6_5">Захватывающий опыт для зрителей</div>
+        </div>
+      </div>
+
+      <div class="svc-card wide">
+        <div class="svc-icon">360</div>
+        <div class="svc-name" data-i18n="svc7_name">Цифровые шоу и иммерсивный контент</div>
+        <div class="svc-items">
+          <div class="svc-item" data-i18n="svc7_1">AI персонажи, которые говорят и реагируют вживую</div>
+          <div class="svc-item" data-i18n="svc7_2">270°–360° видеопространство — как будто вы внутри</div>
+          <div class="svc-item" data-i18n="svc7_3">Интерактивные проекции и шоу</div>
+          <div class="svc-item" data-i18n="svc7_4">Синхронизация голоса и картинки</div>
+          <div class="svc-item" data-i18n="svc7_5">Медитации и ритуальные цифровые пространства</div>
+          <div class="svc-item" data-i18n="svc7_6">Цифровые нарративы</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ ABOUT -->
+<section class="section" id="about">
+  <div class="section-label" data-i18n="about_label">О нас</div>
+  <h2 class="section-title"><span data-i18n="about_title">Кто мы и</span> <em data-i18n="about_title_em">чем занимаемся</em></h2>
+
+  <div class="about-grid">
+    <div class="about-text-card">
+      <p data-i18n="about_p1">Мы собираем небольшие <strong>senior-команды</strong> под конкретную задачу: сайт, приложение, AI-ассистент или платформу.</p>
+      <p data-i18n="about_p2">Берём на себя <strong>архитектуру, дизайн, разработку и запуск</strong> — без лишней бюрократии и раздутых агентских процессов.</p>
+      <p data-i18n="about_p3">Вы приходите с идеей или задачей. Мы переводим её в понятный план, сроки, стоимость и готовый цифровой продукт.</p>
+      <div class="about-promo" data-i18n="about_promo">Продуманный дизайн, надёжная разработка и понятный путь от идеи до запуска.</div>
+      <div class="about-tags">
+        <span class="chip">React</span><span class="chip">JavaScript</span>
+        <span class="chip">Java</span><span class="chip">Python</span>
+        <span class="chip">React Native</span><span class="chip">Next.js</span>
+        <span class="chip">FastAPI</span><span class="chip">PostgreSQL</span>
+        <span class="chip">Voice AI</span><span class="chip">Unreal Engine</span>
+        <span class="chip">Docker / AWS</span><span class="chip">Figma</span>
+        <span class="chip">WebSocket</span><span class="chip">Expo Router</span>
+        <span class="chip">3D Projection</span><span class="chip">API Design</span>
+        <span class="chip">Smart Video & Image Production</span><span class="chip">OpenAI API</span>
+        <span class="chip">GraphQL</span><span class="chip">MongoDB</span>
+        <span class="chip">Firebase / Supabase</span><span class="chip">CI/CD</span>
+      </div>
+    </div>
+
+    <div class="about-exp-card">
+      <div class="exp-big">5+</div>
+      <div class="exp-label" data-i18n="exp_label">Лет международного опыта</div>
+      <div class="exp-desc"  data-i18n="exp_desc">Работаем с клиентами из разных стран и отраслей — от стартапов до крупных компаний.</div>
+      <div class="exp-list">
+        <div class="exp-row" data-i18n="exp1">Создаём и запускаем мобильные приложения</div>
+        <div class="exp-row" data-i18n="exp2">Строим умные системы с AI</div>
+        <div class="exp-row" data-i18n="exp3">Разрабатываем сайты и платформы</div>
+        <div class="exp-row" data-i18n="exp4">Делаем 3D и иммерсивные проекты</div>
+        <div class="exp-row" data-i18n="exp5">Работаем с e-commerce, банками, медициной</div>
+        <div class="exp-row" data-i18n="exp6">Создаём видео, фото и визуальный контент</div>
+        <div class="exp-row" data-i18n="exp_scope_frontend">Frontend</div>
+        <div class="exp-row" data-i18n="exp_scope_backend">Backend</div>
+        <div class="exp-row" data-i18n="exp_scope_ai">AI</div>
+        <div class="exp-row" data-i18n="exp_scope_databases">Databases</div>
+        <div class="exp-row" data-i18n="exp_scope_cloud">Cloud / DevOps</div>
+        <div class="exp-row" data-i18n="exp_scope_infra">Production Infrastructure</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-eng-focus">
+    <div class="about-eng-label" data-i18n="eng_focus_label">Технологии в деталях</div>
+    <div class="about-eng-grid">
+      <div class="about-eng-col">
+        <div class="about-eng-col-title" data-i18n="eng_backend_title">Backend</div>
+        <div class="about-eng-col-items">C#, .NET, ASP.NET Core, EF Core, MediatR, CQRS, DDD, Python, FastAPI, Django, Java</div>
+      </div>
+      <div class="about-eng-col">
+        <div class="about-eng-col-title" data-i18n="eng_frontend_title">Frontend</div>
+        <div class="about-eng-col-items">Angular, TypeScript, PrimeNG, Tailwind CSS, HTML/CSS, GSAP</div>
+      </div>
+      <div class="about-eng-col">
+        <div class="about-eng-col-title" data-i18n="eng_mobile_title">Mobile</div>
+        <div class="about-eng-col-items">Kotlin Multiplatform, Compose, Ktor, Expo, React Native</div>
+      </div>
+      <div class="about-eng-col">
+        <div class="about-eng-col-title" data-i18n="eng_ai_title">AI и интеграции</div>
+        <div class="about-eng-col-items">AI agents, LLM memory systems, MCP, Stripe, Mapbox, Firebase, SignalR, ELD APIs, SSE, WebSocket automation</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ PROJECTS -->
+<section class="section" id="projects">
+  <div class="section-label" data-i18n="proj_label">Наши работы</div>
+  <h2 class="section-title"><span data-i18n="proj_title">Что мы</span> <em data-i18n="proj_title_em">уже сделали</em></h2>
+  <p class="section-sub" data-i18n="proj_sub">Не демо-экраны, а рабочие продукты с логикой, интеграциями и понятной задачей.</p>
+
+  <div class="home-projects-toolbar">
+    <div class="proj-tabs home-projects-tabs">
+      <button class="ptab active" onclick="filterProj('all',this)"    data-i18n="tab_all">Все работы</button>
+      <button class="ptab"        onclick="filterProj('mobile',this)" data-i18n="tab_mobile">Мобильные</button>
+      <button class="ptab"        onclick="filterProj('web',this)"    data-i18n="tab_web">Веб</button>
+      <button class="ptab"        onclick="filterProj('ai',this)"     data-i18n="tab_ai">AI</button>
+    </div>
+    <a href="projects.html" class="proj-view-all" data-i18n="view_all">Смотреть все проекты →</a>
+  </div>
+
+    {{HOME_PROJECTS}}
+</section>
+
+<!-- ═══════════════════════════════════════════ STACK -->
+<section class="section" id="stack">
+  <div class="section-label" data-i18n="stack_label">Tech Stack</div>
+  <h2 class="section-title"><span data-i18n="stack_title">На чём мы</span> <em data-i18n="stack_title_em">это делаем</em></h2>
+  <p class="section-sub" data-i18n="stack_sub">Современные инструменты — ваш продукт работает быстро, надёжно и не устареет.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:48px;">
+    <span class="chip">React</span><span class="chip">JavaScript</span>
+    <span class="chip">Java</span><span class="chip">Python</span>
+    <span class="chip">React Native</span><span class="chip">Next.js</span>
+    <span class="chip">FastAPI</span><span class="chip">PostgreSQL</span>
+    <span class="chip">Voice AI</span><span class="chip">Unreal Engine</span>
+    <span class="chip">Docker / AWS</span><span class="chip">Figma</span>
+    <span class="chip">WebSocket</span><span class="chip">Expo Router</span>
+    <span class="chip">3D Projection</span><span class="chip">API Design</span>
+    <span class="chip">Smart Video & Image Production</span><span class="chip">OpenAI API</span>
+    <span class="chip">GraphQL</span><span class="chip">MongoDB</span>
+    <span class="chip">Firebase / Supabase</span><span class="chip">CI/CD</span>
+    <span class="chip">Kubernetes</span><span class="chip">Nginx</span>
+    <span class="chip">TypeScript</span><span class="chip">Node.js</span>
+    <span class="chip">Redis</span><span class="chip">React.js</span>
+    <span class="chip">Stripe Payments</span><span class="chip">App Store / Play</span>
+  </div>
+  <div style="text-align:center;margin-top:60px;">
+    <a href="pricing.html" class="btn-main" data-i18n="nav_cta">Обсудить проект →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->

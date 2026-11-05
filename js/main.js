@@ -3,13 +3,43 @@
    ═══════════════════════════════════════════ */
 
 /* ── LANGUAGE ─────────────────────────────── */
-let currentLang = tdStorage.get('local', 'td_lang') || 'ru';
+const REGION = window.TechDolphinRegion;
+const LANG_STORAGE_KEY = 'td_lang_' + REGION.id;
+const LANG_MANUAL_KEY = 'td_lang_manual_' + REGION.id;
+const LANG_GEO_SESSION_KEY = 'td_geo_lang_' + REGION.id;
+const GEO_COUNTRY_ENDPOINTS = [
+  'https://ipapi.co/country/',
+  'https://get.geojs.io/v1/ip/country.json'
+];
 
-function applyLang(lang) {
-  if (!T[lang]) lang = 'ru';
+function storageGet(area, key) { return tdStorage.get(area, key); }
+function storageSet(area, key, value) { tdStorage.set(area, key, value); }
+
+function validLang(lang) {
+  return T[lang] ? lang : null;
+}
+
+function getManualLang() {
+  if (storageGet('local', LANG_MANUAL_KEY) !== 'true') {
+    const legacy = validLang(storageGet('local', 'td_lang'));
+    if (legacy && (storageGet('local', 'td_lang_manual') === 'true' || REGION.id === 'ru')) {
+      storageSet('local', LANG_STORAGE_KEY, legacy);
+      storageSet('local', LANG_MANUAL_KEY, 'true');
+    } else return null;
+  }
+  return validLang(storageGet('local', LANG_STORAGE_KEY));
+}
+
+let currentLang = getManualLang() || REGION.language;
+
+function applyLang(lang, options = {}) {
+  if (!T[lang]) lang = REGION.language;
   saveLeadChatDraft();
   currentLang = lang;
-  tdStorage.set('local', 'td_lang', lang);
+  if (options.persist) {
+    storageSet('local', LANG_STORAGE_KEY, lang);
+    storageSet('local', LANG_MANUAL_KEY, 'true');
+  }
   document.documentElement.lang = lang;
 
   const t = T[lang];
@@ -23,11 +53,11 @@ function applyLang(lang) {
                 : 'home';
   const titleKey = 'meta_' + pageKey + '_title';
   const descKey  = 'meta_' + pageKey + '_desc';
-  if (t[titleKey]) document.title = t[titleKey];
+  document.title = t[titleKey] || t.meta_home_title;
   const metaDesc = document.querySelector('meta[name="description"]');
-  if (metaDesc && t[descKey]) metaDesc.content = t[descKey];
+  if (metaDesc) metaDesc.content = t[descKey] || t.meta_home_desc;
   const ogTitle = document.querySelector('meta[property="og:title"]');
-  if (ogTitle && t[titleKey]) ogTitle.content = t[titleKey];
+  if (ogTitle) ogTitle.content = pageKey === 'home' ? t.meta_home_og_title : (t[titleKey] || t.meta_home_og_title);
 
   const metaValues = {
     'og:description': t[descKey], 'og:locale': lang === 'ru' ? 'ru_RU' : 'en_US',
@@ -59,6 +89,8 @@ function applyLang(lang) {
   // Accessible labels
   const menuBtn = document.getElementById('nav-hamburger');
   if (menuBtn) menuBtn.setAttribute('aria-label', t.menu_label);
+  document.querySelectorAll('.nav-close-btn').forEach(control => control.setAttribute('aria-label',t.menu_close));
+  document.querySelectorAll('[data-contact-key]').forEach(link => link.setAttribute('aria-label',t[link.dataset.contactKey]));
 
   // Cities label
   const cl = document.getElementById('cities-label');
@@ -71,7 +103,50 @@ function applyLang(lang) {
 }
 
 function toggleLang() {
-  applyLang(currentLang === 'ru' ? 'en' : 'ru');
+  applyLang(currentLang === 'ru' ? 'en' : 'ru', { persist: true });
+}
+
+function fetchWithTimeout(url, timeoutMs = 2500) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+  return fetch(url, {
+    cache: 'no-store',
+    signal: controller.signal
+  }).finally(() => clearTimeout(timeout));
+}
+
+async function fetchCountryCode() {
+  for (const endpoint of GEO_COUNTRY_ENDPOINTS) {
+    try {
+      const response = await fetchWithTimeout(endpoint);
+      if (!response.ok) continue;
+      if (endpoint.includes('geojs.io')) {
+        const data = await response.json();
+        if (data && data.country) return String(data.country).toUpperCase();
+      } else {
+        const text = await response.text();
+        if (text) return text.trim().slice(0, 2).toUpperCase();
+      }
+    } catch (error) {
+      // Try the next provider, then fall back to English.
+    }
+  }
+  return '';
+}
+
+async function detectGeoLang() {
+  const cached = validLang(storageGet('session', LANG_GEO_SESSION_KEY));
+  if (cached) return cached;
+  const country = await fetchCountryCode();
+  const lang = country === 'RU' ? 'ru' : 'en';
+  storageSet('session', LANG_GEO_SESSION_KEY, lang);
+  return lang;
+}
+
+async function initGeoLanguage() {
+  if (!REGION.geoLanguage || getManualLang()) return;
+  const lang = await detectGeoLang();
+  if (!getManualLang()) applyLang(lang);
 }
 
 function _lockBodyScroll() {
@@ -175,7 +250,7 @@ function initProgress() {
 
 /* ── LEFT NAV ─────────────────────────────── */
 const ALL_NAV_SECTIONS = ['hero','about','services','projects','calc','stack','why','faq','how','contact'];
-let NAV_SECTIONS = ALL_NAV_SECTIONS;
+let NAV_SECTIONS = [];
 
 function initLeftNav() {
   const items = document.querySelectorAll('.lnav-item');
@@ -195,7 +270,7 @@ function initLeftNav() {
       if (el && window.scrollY >= el.offsetTop - 300) { current = id; idx = i; }
     });
     items.forEach(item => item.classList.toggle('active', item.dataset.section === current));
-    if (line) line.style.height = (idx / (NAV_SECTIONS.length - 1) * 100) + '%';
+    if (line) line.style.height = (idx / Math.max(1, NAV_SECTIONS.length - 1) * 100) + '%';
   });
 }
 
@@ -244,28 +319,15 @@ function initFaq() {
 
 /* ── PROJECT FILTER ───────────────────────── */
 function filterProj(cat, btn) {
-  document.querySelectorAll('.ptab').forEach(t => t.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.pcard').forEach(card => {
-    if (cat === 'all') {
-      card.classList.remove('hidden');
-    } else {
-      const cats = card.dataset.cat || '';
-      cats.includes(cat) ? card.classList.remove('hidden') : card.classList.add('hidden');
-    }
-  });
+  document.querySelectorAll('.ptab').forEach(tab => {tab.classList.toggle('active',tab===btn);tab.setAttribute('aria-pressed',String(tab===btn));});
+  document.querySelectorAll('[data-cat]').forEach(card => {card.style.display = cat==='all' || (card.dataset.cat || '').split(/\s+/).includes(cat) ? '' : 'none';});
 }
 
 /* ── CALCULATOR ───────────────────────────── */
-const CALC_SERVICES = [
-  { icon:'WEB', nKey:'c1n', dKey:'c1d', min:30000,   max:150000,  id:'c1' },
-  { icon:'SHOP', nKey:'c2n', dKey:'c2d', min:150000,  max:500000,  id:'c2' },
-  { icon:'APP', nKey:'c3n', dKey:'c3d', min:300000,  max:800000,  id:'c3' },
-  { icon:'AI', nKey:'c4n', dKey:'c4d', min:50000,   max:600000,  id:'c4', tiersKey:'c4tiers' },
-  { icon:'3D', nKey:'c5n', dKey:'c5d', min:150000,  max:400000,  id:'c5' },
-  { icon:'SYS', nKey:'c6n', dKey:'c6d', min:700000,  max:5000000, id:'c6' },
-];
-const ESTIMATE_STORAGE_KEY = 'td_estimate_ru';
+const CALC_SERVICES = REGION.prices.map((min,index) => ({
+  icon:['WEB','SHOP','APP','AI','3D','SYS'][index], nKey:'c'+(index+1)+'n', dKey:'c'+(index+1)+'d', min, id:'c'+(index+1), ...(index===3?{tiersKey:'c4tiers'}:{})
+}));
+const ESTIMATE_STORAGE_KEY = 'td_estimate_' + REGION.id;
 const selectedCalc = new Set();
 try {
   const saved = JSON.parse(tdStorage.get('session', ESTIMATE_STORAGE_KEY));
@@ -309,7 +371,9 @@ function clearEstimate() {
 }
 
 
-function fmt(n) { return n.toLocaleString('ru-RU') + ' ₽'; }
+function fmt(n) {
+  return n.toLocaleString(REGION.locale, { style: 'currency', currency: REGION.currency, maximumFractionDigits: 0 });
+}
 
 function renderCalcTiers(s, t) {
   const tiers = s.tiersKey ? t[s.tiersKey] : null;
@@ -423,7 +487,7 @@ function initTilt() {
 const EJ_PUBLIC  = '87_f2ZcU4pQ0LZlpc';
 const EJ_SERVICE = 'service_8xs6t0i';
 const EJ_TMPL    = 'template_u3fwuan';
-const EJ_TO_EMAILS = ['n.nate1544@gmail.com', 'm.moleva@mail.ru'];
+const EJ_TO_EMAILS = REGION.leadRecipients;
 
 const leadSubmissions = new Map();
 let emailQueue = Promise.resolve();
@@ -619,7 +683,7 @@ let leadChatOpen = false;
 let leadChatStep = 'type';
 let leadChatData = {};
 let leadChatSubmitting = false;
-const BRIEF_STORAGE_KEY = 'td_brief_ru';
+const BRIEF_STORAGE_KEY = 'td_brief_' + REGION.id;
 
 function saveLeadChatDraft() {
   const fields = { 'chat-note': 'note', 'chat-name': 'name', 'chat-contact': 'contact' };
@@ -819,18 +883,6 @@ async function sendLeadChat(e) {
   }
 }
 
-/* ── MOUSE PARALLAX ───────────────────────── */
-function initParallax() {
-  document.addEventListener('mousemove', e => {
-    const x = (e.clientX / window.innerWidth  - 0.5) * 2;
-    const y = (e.clientY / window.innerHeight - 0.5) * 2;
-    document.querySelectorAll('.aurora-1,.aurora-2').forEach((a, i) => {
-      const f = [0.015, 0.025][i];
-      a.style.transform += ` translate(${x*f*100}px,${y*f*100}px)`;
-    });
-  });
-}
-
 function initPreviewMedia() {
   const videos = [...document.querySelectorAll('video[data-preview]')];
   const visible = new Set();
@@ -867,7 +919,7 @@ function initPreviewMedia() {
 
 /* ── INIT ─────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
-  NAV_SECTIONS = ALL_NAV_SECTIONS.filter(id => !!document.getElementById(id));
+  NAV_SECTIONS = [...document.querySelectorAll('main [id]')].map(el=>el.id).filter(id=>ALL_NAV_SECTIONS.includes(id));
   if (window.emailjs) emailjs.init({ publicKey: EJ_PUBLIC });
   initMenuBreakpoint();
   initProgress();
@@ -880,6 +932,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initLeadChat();
   renderCalc();
   applyLang(currentLang);
+  initGeoLanguage();
   document.querySelectorAll('.nav-links a').forEach(a => {
     a.addEventListener('click', closeMobileMenu);
   });

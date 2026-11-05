@@ -1,0 +1,385 @@
+<!-- HERO -->
+<div class="page-hero">
+  <div class="page-hero-glow"></div>
+  <div class="page-hero-layout">
+    <div class="page-hero-side">
+      <video data-preview controls class="page-hero-video" muted loop playsinline preload="none" poster="assets/dom-sessions.jpg">
+        <source data-src="assets/dom_video.mp4" type="video/mp4">
+        <img src="assets/dom-sessions.jpg" alt="DOM App" class="page-hero-video">
+      </video>
+    </div>
+    <div class="page-hero-center">
+      <div class="section-label" data-i18n="proj_page_label">Все проекты</div>
+      <h1 class="page-hero-title">
+        <span data-i18n="proj_page_t1">Реальные продукты</span><br>
+        <span class="page-hero-grad" data-i18n="proj_page_t2">которые мы создали</span>
+      </h1>
+      <p class="page-hero-sub" data-i18n="proj_page_sub">От мобильных приложений до веб-платформ — каждый проект собран под конкретную задачу, аудиторию и сценарий использования.</p>
+    </div>
+    <div class="page-hero-side">
+      <video data-preview controls class="page-hero-video" muted loop playsinline preload="none" poster="assets/dom-login.jpg">
+        <source data-src="assets/domspace.mp4" type="video/mp4">
+        <img src="assets/dom-login.jpg" alt="DOM Space" class="page-hero-video">
+      </video>
+    </div>
+  </div>
+</div>
+
+<!-- FILTER TABS -->
+<div class="projects-filterbar">
+  <div class="proj-tabs projects-filtertabs">
+    <button class="ptab active" onclick="filterProj('all',this)"    data-i18n="tab_all">Все работы</button>
+    <button class="ptab"        onclick="filterProj('mobile',this)" data-i18n="tab_mobile">Мобильные</button>
+    <button class="ptab"        onclick="filterProj('web',this)"    data-i18n="tab_web">Веб</button>
+    <button class="ptab"        onclick="filterProj('ai',this)"     data-i18n="tab_ai">AI</button>
+  </div>
+</div>
+
+<!-- ------------------- PROJECT 01: DOMSTUDIO -------------- -->
+<div class="project-section project-section-featured" data-cat="web ai">
+
+  <div class="proj-section-hdr">
+    <span class="proj-section-num">01</span>
+    <span class="proj-section-title" data-i18n="domstudio_section">DomStudio — AI-фотостудия товаров</span>
+    <span class="proj-section-badge" data-i18n="domstudio_tag">SaaS · Маркетплейсы · AI</span>
+  </div>
+
+  <div class="video-feature domstudio-feature">
+    <div class="domstudio-before-after" aria-label="DomStudio perfume before and after">
+      <figure class="domstudio-shot domstudio-shot-before">
+        <img src="assets/example-perfume-catalog.webp" alt="Perfume product photo before DomStudio generation" loading="lazy" decoding="async">
+        <figcaption data-i18n="domstudio_before_label">До</figcaption>
+      </figure>
+      <figure class="domstudio-shot domstudio-shot-after">
+        <video data-preview controls muted loop playsinline preload="none" poster="assets/example-perfume-product.webp">
+          <source data-src="assets/perfume-product-5s.mp4" type="video/mp4">
+        </video>
+        <figcaption data-i18n="domstudio_after_label">После — видео</figcaption>
+      </figure>
+    </div>
+    <div class="video-feature-info">
+      <div class="video-badge"><div class="video-badge-dot"></div><span data-i18n="domstudio_status">Live продукт · 2026</span></div>
+      <div class="video-title" data-i18n="domstudio_title">DomStudio</div>
+      <div class="video-desc" data-i18n="domstudio_desc">Самостоятельная AI-платформа для продавцов: из одного фото товара делает визуалы для маркетплейсов, каталога, lifestyle, креативов и соцсетей, а AdPilot AI помогает с продающим текстом.</div>
+      <div class="video-chips">
+        <span class="video-chip">Before/After</span>
+        <span class="video-chip">Video</span>
+        <span class="video-chip">ComfyUI</span>
+        <span class="video-chip">AdPilot AI</span>
+        <span class="video-chip">Payments</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="case-proof-grid">
+    <div class="case-proof-item">
+      <span data-i18n="domstudio_p1_label">Продукт</span>
+      <strong data-i18n="domstudio_p1_value">Визуалы для продаж</strong>
+      <p data-i18n="domstudio_p1_desc">Режимы генерации для product, catalog, lifestyle, creative, fitting, stories и коротких video preview.</p>
+    </div>
+    <div class="case-proof-item">
+      <span data-i18n="domstudio_p2_label">AI-слой</span>
+      <strong data-i18n="domstudio_p2_value">AdPilot AI</strong>
+      <p data-i18n="domstudio_p2_desc">Инструменты текста и чат для карточек товаров, объявлений Avito, постов, ответов покупателям и launch-идей.</p>
+    </div>
+    <div class="case-proof-item">
+      <span data-i18n="domstudio_p3_label">Платформа</span>
+      <strong data-i18n="domstudio_p3_value">Workflow продавца</strong>
+      <p data-i18n="domstudio_p3_desc">Авторизация, подписки, токены, быстрые image tools, контактная форма и production packaging.</p>
+    </div>
+  </div>
+
+  <div class="screen-grid">
+    <div class="screen-card">
+      <img src="assets/example-perfume-catalog.webp" alt="DomStudio perfume before" loading="lazy" decoding="async">
+      <div class="screen-card-body">
+        <div class="screen-card-name" data-i18n="domstudio_s1n">Product mode</div>
+        <div class="screen-card-desc" data-i18n="domstudio_s1d">Чистые визуалы с сохранением товара для продаж и рекламы.</div>
+      </div>
+    </div>
+    <div class="screen-card">
+      <video data-preview controls muted loop playsinline preload="none" poster="assets/example-perfume-product.webp">
+        <source data-src="assets/perfume-product-5s.mp4" type="video/mp4">
+      </video>
+      <div class="screen-card-body">
+        <div class="screen-card-name" data-i18n="domstudio_s2n">Catalog mode</div>
+        <div class="screen-card-desc" data-i18n="domstudio_s2d">Готовые ассеты для маркетплейса с аккуратной композицией.</div>
+      </div>
+    </div>
+    <div class="screen-card">
+      <img src="assets/example-perfume-creative.webp" alt="DomStudio perfume creative" loading="lazy" decoding="async">
+      <div class="screen-card-body">
+        <div class="screen-card-name" data-i18n="domstudio_s3n">Creative mode</div>
+        <div class="screen-card-desc" data-i18n="domstudio_s3d">Рекламные визуальные концепты для соцсетей и продвижения.</div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ═══════════════════ PROJECT 02: DOM ════════════════════ -->
+<div class="project-section project-section-featured" data-cat="mobile ai">
+
+  <div class="proj-section-hdr">
+    <span class="proj-section-num">02</span>
+    <span class="proj-section-title" data-i18n="dom_section">DOM — Приложение для внутренней практики</span>
+    <span class="proj-section-badge" data-i18n="dom_tag">iOS · Android · AI</span>
+  </div>
+
+  <!-- Video + info -->
+  <div class="video-feature">
+    <video data-preview controls muted loop playsinline preload="none" poster="assets/dom-sessions.jpg">
+      <source data-src="assets/dom_video.mp4" type="video/mp4">
+      <img src="assets/dom-sessions.jpg" alt="DOM App">
+    </video>
+    <div class="video-feature-info">
+      <div class="video-badge"><div class="video-badge-dot"></div><span data-i18n="dom_badge">В разработке · 2025</span></div>
+      <div class="video-title" data-i18n="dom_vtitle">DOM — Женское пространство</div>
+      <div class="video-desc"  data-i18n="dom_vdesc">Мобильное приложение с голосовыми AI-проводниками, личным пространством, медитациями, чайными ритуалами и иммерсивными путешествиями. React Native · FastAPI · PostgreSQL · Voice AI.</div>
+      <div class="video-chips">
+        <span class="video-chip">React Native</span>
+        <span class="video-chip">Expo Router</span>
+        <span class="video-chip">FastAPI</span>
+        <span class="video-chip">PostgreSQL</span>
+        <span class="video-chip">Voice AI</span>
+        <span class="video-chip">App Store</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="case-proof-grid">
+    <div class="case-proof-item">
+      <span data-i18n="dom_proof1_label">Фокус</span>
+      <strong data-i18n="dom_proof1_value">Личный мобильный опыт</strong>
+      <p data-i18n="dom_proof1_desc">Путь пользователя собран вокруг практик, профиля и регулярного возвращения в приложение.</p>
+    </div>
+    <div class="case-proof-item">
+      <span data-i18n="dom_proof2_label">AI слой</span>
+      <strong data-i18n="dom_proof2_value">Голосовые проводники</strong>
+      <p data-i18n="dom_proof2_desc">Архитектура поддерживает сценарии общения, медитации и персональные подсказки.</p>
+    </div>
+    <div class="case-proof-item">
+      <span data-i18n="dom_proof3_label">Контент</span>
+      <strong data-i18n="dom_proof3_value">Ритуалы и путешествия</strong>
+      <p data-i18n="dom_proof3_desc">Система разделов готова к росту библиотеки сессий, церемоний и иммерсивных маршрутов.</p>
+    </div>
+  </div>
+
+  <!-- Completed immersive media -->
+  <div class="media-reel">
+    <div class="media-reel-head">
+      <div>
+        <span class="pcard-tag pcard-tag-done" data-i18n="dom_media_badge">Завершено · Иммерсивный контент</span>
+        <h3 data-i18n="dom_media_title">Видео-сцены DOM для медитаций и 270–360° проекций</h3>
+      </div>
+      <p data-i18n="dom_media_desc">Отдельно завершённый медиа-пакет: атмосферные видео для практик, студийной подачи и проекционных пространств.</p>
+    </div>
+    <div class="media-reel-grid">
+      <article class="media-reel-card">
+        <video data-preview controls muted loop playsinline preload="none" poster="assets/dom-sessions.jpg">
+          <source data-src="assets/domspace.mp4" type="video/mp4">
+        </video>
+        <div class="media-reel-body">
+          <strong data-i18n="dom_media_space_name">DOM Space</strong>
+          <span data-i18n="dom_media_space_desc">Медитативная среда для экрана и проекции.</span>
+        </div>
+      </article>
+      <article class="media-reel-card">
+        <img src="assets/dom-space-web.png" alt="DOM web experience" loading="lazy" decoding="async">
+        <div class="media-reel-body">
+          <strong data-i18n="dom_media_studio_name">DOM visual space</strong>
+          <span data-i18n="dom_media_studio_desc">Интерфейс и атмосфера для контента практик DOM.</span>
+        </div>
+      </article>
+      <article class="media-reel-card media-reel-card-wide">
+        <video data-preview controls muted loop playsinline preload="none" poster="assets/dom-sessions.jpg">
+          <source data-src="assets/dom-short-01.mp4" type="video/mp4">
+        </video>
+        <div class="media-reel-body">
+          <strong data-i18n="dom_media_projection_name">270–360° meditation projection</strong>
+          <span data-i18n="dom_media_projection_desc">Иммерсивное видео для медитационного пространства и круговой проекции.</span>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <!-- Screenshots -->
+  <div class="screen-grid">
+    <div class="screen-card">
+      <img src="assets/dom-sessions.jpg" alt="DOM Sessions" loading="lazy" decoding="async">
+      <div class="screen-card-body">
+        <div class="screen-card-name" data-i18n="dom_s1n">Сессии и практики</div>
+        <div class="screen-card-desc" data-i18n="dom_s1d">Контентная библиотека для регулярных практик: медитации, чайные церемонии, ритуалы и иммерсивные сценарии.</div>
+      </div>
+    </div>
+    <div class="screen-card">
+      <img src="assets/dom-login.jpg" alt="DOM Login" loading="lazy" decoding="async">
+      <div class="screen-card-body">
+        <div class="screen-card-name" data-i18n="dom_s2n">Вход и профиль</div>
+        <div class="screen-card-desc" data-i18n="dom_s2d">Авторизация через Apple, Google или email, профиль пользователя и защищённый доступ к личному пространству.</div>
+      </div>
+    </div>
+    <div class="screen-card">
+      <img src="assets/dom-journey.jpg" alt="DOM Journey" loading="lazy" decoding="async">
+      <div class="screen-card-body">
+        <div class="screen-card-name" data-i18n="dom_s3n">Священные путешествия</div>
+        <div class="screen-card-desc" data-i18n="dom_s3d">Модуль виртуальных путешествий с направлениями, визуальными маршрутами и 3D-проекциями.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ PROJECT 03: MYDISPATCH ══════════════ -->
+<div class="project-section project-section-featured" data-cat="mobile web ai">
+
+  <div class="proj-section-hdr">
+    <span class="proj-section-num">03</span>
+    <span class="proj-section-title" data-i18n="mydispatch_section">MyDispatch — AI-логистика для грузоперевозчиков</span>
+    <span class="proj-section-badge" data-i18n="mydispatch_tag">SaaS · Trucking · AI</span>
+  </div>
+
+  <div class="video-feature">
+    <img src="assets/mydispatch.png" alt="MyDispatch Driver" style="object-fit:contain;background:var(--card2);">
+    <div class="video-feature-info">
+      <div class="video-badge"><div class="video-badge-dot"></div><span data-i18n="mydispatch_status">Завершено · 2025</span></div>
+      <div class="video-title" data-i18n="mydispatch_title">MyDispatch</div>
+      <div class="video-desc" data-i18n="mydispatch_desc">AI-платформа для транспортных компаний: диспетчеризация, управление парком, живое отслеживание, рабочие процессы водителей, выставление счетов, платежи, соответствие требованиям и AI-решения.</div>
+      <div class="video-chips">
+        <span class="video-chip">.NET</span>
+        <span class="video-chip">Angular</span>
+        <span class="video-chip">PostgreSQL</span>
+        <span class="video-chip">Kotlin</span>
+        <span class="video-chip">SignalR</span>
+        <span class="video-chip">Stripe</span>
+        <span class="video-chip">AI Agents</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="case-proof-grid">
+    <div class="case-proof-item">
+      <span data-i18n="mydispatch_p1_label">Диспетчер & Парк</span>
+      <strong data-i18n="mydispatch_p1_value">Полная логистика</strong>
+      <p data-i18n="mydispatch_p1_desc">Диспетчеризация, отслеживание парка, процессы водителей и соответствие требованиям — всё в одной платформе.</p>
+    </div>
+    <div class="case-proof-item">
+      <span data-i18n="mydispatch_p2_label">Платежи</span>
+      <strong data-i18n="mydispatch_p2_value">Счета и Stripe</strong>
+      <p data-i18n="mydispatch_p2_desc">Полный цикл выставления счетов, обработка платежей через Stripe и финансовая отчётность для перевозчиков.</p>
+    </div>
+    <div class="case-proof-item">
+      <span data-i18n="mydispatch_p3_label">AI-слой</span>
+      <strong data-i18n="mydispatch_p3_value">AI-решения</strong>
+      <p data-i18n="mydispatch_p3_desc">AI-агенты предлагают грузы, выявляют риски соответствия и автоматизируют рутинные диспетчерские решения.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ OTHER PROJECTS ═════════════════════ -->
+<div class="project-section">
+
+  <div class="proj-section-hdr">
+    <span class="proj-section-num" data-i18n="other_num">04 — 08</span>
+    <span class="proj-section-title" data-i18n="other_title">Другие проекты</span>
+  </div>
+
+  <div class="proj-grid">
+
+    <div class="pcard span2" data-cat="web">
+      <img class="pcard-img pcard-img-feature" src="assets/movie-app.jpg" alt="Movie App" loading="lazy" decoding="async">
+      <div class="pcard-body">
+        <span class="pcard-tag" data-i18n="movie_tag">Веб-платформа</span>
+        <div class="pcard-name" data-i18n="movie_name">Movie App</div>
+        <div class="pcard-desc" data-i18n="movie_desc">Каталог фильмов с поиском, фильтрами, рейтингами и watchlist-логикой для сохранённых подборок.</div>
+        <div class="pcard-facts">
+          <span data-i18n="movie_fact1">Каталог и поиск</span>
+          <span data-i18n="movie_fact2">Watchlist логика</span>
+        </div>
+        <div class="pcard-chips">
+          <span class="pcard-chip">React.js</span>
+          <span class="pcard-chip">REST API</span>
+          <span class="pcard-chip">Watchlist</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard" data-cat="web">
+      <img class="pcard-img" src="assets/travel-advisor.jpg" alt="Travel Advisor" loading="lazy" decoding="async">
+      <div class="pcard-body">
+        <span class="pcard-tag" data-i18n="travel_tag">Веб · Карты</span>
+        <div class="pcard-name" data-i18n="travel_name">Travel Advisor</div>
+        <div class="pcard-desc" data-i18n="travel_desc">Сервис подбора мест с картами, рейтингами, геолокацией и рекомендациями рядом с пользователем.</div>
+        <div class="pcard-facts">
+          <span data-i18n="travel_fact1">Карты и рейтинг</span>
+          <span data-i18n="travel_fact2">Места рядом</span>
+        </div>
+        <div class="pcard-chips">
+          <span class="pcard-chip">Google Maps API</span>
+          <span class="pcard-chip" data-i18n="chip_geolocation">Геолокация</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard" data-cat="web">
+      <img class="pcard-img" src="assets/realtor.jpg" alt="Realtor" loading="lazy" decoding="async">
+      <div class="pcard-body">
+        <span class="pcard-tag" data-i18n="re_tag">Веб · Недвижимость</span>
+        <div class="pcard-name" data-i18n="re_name">Realtor Platform</div>
+        <div class="pcard-desc" data-i18n="re_desc">Каталог объектов с фото, фильтрами по цене и площади, сценариями аренды и покупки.</div>
+        <div class="pcard-facts">
+          <span data-i18n="re_fact1">Фильтры объектов</span>
+          <span data-i18n="re_fact2">Карточки недвижимости</span>
+        </div>
+        <div class="pcard-chips">
+          <span class="pcard-chip">React.js</span>
+          <span class="pcard-chip" data-i18n="chip_catalog">Каталог</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard" data-cat="web">
+      <img class="pcard-img" src="assets/fitness-club.jpg" alt="Fitness Club" loading="lazy" decoding="async">
+      <div class="pcard-body">
+        <span class="pcard-tag" data-i18n="gym_tag">Веб · Фитнес</span>
+        <div class="pcard-name" data-i18n="gym_name">Fitness Club</div>
+        <div class="pcard-desc" data-i18n="gym_desc">Фитнес-веб-приложение с базой упражнений, персональными тренировками и live-публикацией.</div>
+        <div class="pcard-facts">
+          <span data-i18n="gym_fact1">База упражнений</span>
+          <span data-i18n="gym_fact2">Готовый деплой</span>
+        </div>
+        <div class="pcard-chips">
+          <span class="pcard-chip">React.js</span>
+          <span class="pcard-chip">Live · Netlify</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard" data-cat="ai">
+      <img class="pcard-img" src="assets/ai-business-assistant.jpg" alt="AI Assistant" loading="lazy" decoding="async">
+      <div class="pcard-body">
+        <span class="pcard-tag" data-i18n="ai_tag">AI · Личное & Бизнес</span>
+        <div class="pcard-name" data-i18n="ai_name">AI Ассистент для задач и решений</div>
+        <div class="pcard-desc" data-i18n="ai_desc">AI-помощник для жизни и бизнеса: анализирует запросы, помогает с решениями, напоминает и автоматизирует рутину.</div>
+        <div class="pcard-facts">
+          <span data-i18n="ai_fact1">Голосовой сценарий</span>
+          <span data-i18n="ai_fact2">Автоматизация рутины</span>
+        </div>
+        <div class="pcard-chips">
+          <span class="pcard-chip">Voice AI</span>
+          <span class="pcard-chip">GPT-4</span>
+          <span class="pcard-chip" data-i18n="chip_voice_autofill">Голос. автодополнение</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-banner">
+  <div class="cta-banner-inner">
+    <h2><span data-i18n="cta_t1">Хотите такой же</span> <em data-i18n="cta_em">продукт?</em></h2>
+    <p data-i18n="cta_sub">Расскажите об идее — мы обсудим, спланируем и сделаем.</p>
+    <a data-contact-cta href="contact.html" class="btn-main" data-i18n="cta_btn">Обсудить проект →</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
